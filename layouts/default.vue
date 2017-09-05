@@ -2,11 +2,19 @@
   b-container(:fluid="true")
     b-row
       b-col(cols="2")
-        nav
+        blue-nav
       b-col(cols="10")
-        header
+        blue-header
         nuxt
 </template>
+
+<script>
+  import BlueNav from '~/components/Nav'
+  import BlueHeader from '~/components/Header'
+  export default {
+    components: { BlueNav, BlueHeader }
+  }
+</script>
 
 <style>
   *:hover {
