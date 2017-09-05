@@ -18,6 +18,7 @@ module.exports = {
   mode: 'spa',
   modules: [
     '@nuxtjs/bootstrap-vue',
+    '@nuxtjs/font-awesome'
   ],
   /*
   ** Customize the progress-bar color
