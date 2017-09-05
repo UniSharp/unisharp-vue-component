@@ -1,5 +1,5 @@
 <template lang="pug">
-  b-container(fluid="true")
+  b-container(:fluid="true")
     b-row
       b-col(cols="4")
         nav
