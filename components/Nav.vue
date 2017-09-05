@@ -5,15 +5,12 @@
         a.img-logo(href="#"): img(src="../assets/img/logo_img.png")
     nav
       ul
-        li
+        li(v-b-toggle.collapse-component)
           i.fa.fa-file-text-o(aria-hidden="true")
-          nuxt-link(to="/form") 表單元件
-        li(v-b-toggle.collapse-manager)
-          i.fa.fa-file-text-o(aria-hidden="true")
-          span 管理員管理
-        b-collapse#collapse-manager(tag="ul")
-          li: a(href="#") 管理員列表
-          li: a(href="#") 新增管理員
+          span 元件範例
+        b-collapse#collapse-component(tag="ul")
+          li: nuxt-link(to="/form") 表單元件
+          li: nuxt-link(to="/form") 表單元件
         li(v-b-toggle.collapse-member)
           i.fa.fa-file-text-o(aria-hidden="true")
           span 會員管理
