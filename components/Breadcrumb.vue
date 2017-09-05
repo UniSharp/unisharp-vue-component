@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-breadcrumb
-    b-breadcrumb(:items="items")
+    b-breadcrumb.bg-transparent.m-0(:items="items")
 </template>
 
 <script>
