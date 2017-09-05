@@ -28,7 +28,8 @@ module.exports = {
   ** Global css
   */
   css: [
-    { src: '~/assets/scss/main.scss', lang: 'scss' }
+    { src: '~/assets/scss/main.scss', lang: 'scss' },
+    { src: '~/assets/scss/_admin_variables.scss', lang: 'scss' }
   ],
   /*
   ** Build configuration

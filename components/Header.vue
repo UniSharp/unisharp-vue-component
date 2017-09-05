@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-header
-    b-navbar(fixed, toggleable="md", type="dark", variant="info")
+    b-navbar(fixed, toggleable="md", type="dark", variant="top-block-bg")
       b-nav-toggle(target="nav_collapse")
       b-collapse(is-nav, id="nav_collapse")
         u-breadcrumb

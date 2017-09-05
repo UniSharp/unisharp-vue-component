@@ -1,0 +1,129 @@
+// 自訂變數
+$page-bg: #e2e9eb;
+$aside-bg: #3c4350;
+$top-block-bg: #4d535e;
+$top-block-bg-dark: darken ($top-block-bg,5%);
+$title-block-bg: #f8f8f8;
+
+$font-default: #5e676b;
+$font-weight-normal:300;
+$font-weight-bold:400;
+$font-weight-heavy:500;
+
+$yellow:#ebcd24;
+$green:#00ccc5;
+$red:#eb6886;
+$white:#f8f8f8;
+
+$input-bg:#ebf3f3;
+$input-border:#d4dada;
+$input-height:40px;
+$input-border-danger:#eb6886;
+
+// 複寫bootstrap
+$font-family-sans-serif: 'Roboto','Noto Sans TC',"Microsoft Jhenghei","微軟正黑體",sans-serif;
+
+$gray-dark:                 #373a3c;
+$gray:                      #55595c;
+$gray-light:                #818a91;
+$gray-lighter:              #eceeef;
+$gray-lightest:             #f7f7f9;
+
+$brand-primary: #ebcd24;
+$brand-success:             #5cb85c;
+$brand-info: #00ccc5;
+$brand-warning:             #f0ad4e;
+$brand-danger: #eb6886;
+$brand-inverse:             $gray-dark;
+
+$line-height-lg:         (4 / 3) !default;
+$line-height-sm:         1.5 !default;
+
+$border-radius: 4px;
+$border-radius-lg:       .3rem !default;
+$border-radius-sm:       .2rem !default;
+
+$component-active-color: #fff !default;
+$component-active-bg:    $brand-primary !default;
+
+$caret-width:            .3em !default;
+$caret-width-lg:         $caret-width !default;
+
+$btn-padding-x:                  1rem;
+$btn-padding-y:                  .5rem;
+$btn-line-height:                1.25;
+$btn-font-weight:                normal;
+$btn-box-shadow:                 inset 0 1px 0 rgba (255,255,255,.15), 0 1px 1px rgba (0,0,0,.075);
+$btn-active-box-shadow:          inset 0 3px 5px rgba (0,0,0,.125);
+
+$btn-primary-color:              #fff;
+$btn-primary-bg:                 $brand-primary;
+$btn-primary-border:             $btn-primary-bg;
+
+$btn-secondary-color:            $gray-dark;
+$btn-secondary-bg:               #f8f8f8;
+$btn-secondary-border:           #ccc;
+
+$btn-info-color:                 #fff;
+$btn-info-bg:                    $brand-info;
+$btn-info-border:                $btn-info-bg;
+
+$btn-danger-color:               #fff;
+$btn-danger-bg:                  $brand-danger;
+$btn-danger-border:              $btn-danger-bg;
+
+$btn-padding-x-sm:               .5rem;
+$btn-padding-y-sm:               .25rem;
+
+$btn-padding-x-lg:               1.5rem;
+$btn-padding-y-lg:               .75rem;
+
+$btn-block-spacing-y:            .5rem;
+$btn-toolbar-margin:             .5rem;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius:              $border-radius;
+$btn-border-radius-lg:           $border-radius-lg;
+$btn-border-radius-sm:           $border-radius-sm;
+
+$enable-flex: true;
+$enable-transitions: true;
+
+$body-bg: $aside-bg;
+$body-color: $font-default;
+
+$link-color: #337ab7;
+
+$font-size-root: 16px;
+
+$font-size-base: .875rem;
+$font-size-lg:   1.25rem;
+$font-size-sm:   .875rem;
+$font-size-xs:   .75rem;
+
+$line-height-base: 1.5;
+
+$font-size-h1: 1.875rem;
+$font-size-h2: 1.375rem;
+$font-size-h3: 1.25rem;
+$font-size-h4: 1.125rem;
+$font-size-h5: 1rem;
+$font-size-h6: .875rem;
+
+$alert-padding-x:             14px;
+$alert-padding-y:             8px;
+// $alert-border-radius:         $border-radius !default;
+// $alert-link-font-weight:      bold !default;
+// $alert-border-width:          $border-width !default;
+$alert-success-bg: #c6f1e7;
+$alert-success-text: #188978;
+$alert-success-border:  darken(#c6f1e7, 5%);
+// $alert-info-bg:               $state-info-bg ;
+// $alert-info-text:             $state-info-text ;
+// $alert-info-border:           $state-info-border ;
+$alert-warning-bg:#faf6e1;
+$alert-warning-text: #5e676b;
+$alert-warning-border: darken(#faf6e1, 5%);
+$alert-danger-bg:#f6e4e8;
+$alert-danger-text: #d45773;
+$alert-danger-border: darken(#f6e4e8, 2%);
