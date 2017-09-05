@@ -10,9 +10,9 @@
 
 <script>
   import UNav from '~/components/Nav'
-  import UBLUEHeader from '~/components/Header'
+  import UHeader from '~/components/Header'
   export default {
-    components: { UNav, UBLUEHeader }
+    components: { UNav, UHeader }
   }
 </script>
 
