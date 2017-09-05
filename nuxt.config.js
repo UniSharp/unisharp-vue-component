@@ -15,6 +15,7 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  mode: 'spa',
   modules: [
     '@nuxtjs/bootstrap-vue',
   ],
