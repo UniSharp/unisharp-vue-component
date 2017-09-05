@@ -2,17 +2,17 @@
   b-container(:fluid="true")
     b-row
       b-col(cols="2")
-        blue-nav
+        u-nav
       b-col(cols="10")
-        blue-header
+        u-header
         nuxt
 </template>
 
 <script>
-  import BlueNav from '~/components/Nav'
-  import BlueHeader from '~/components/Header'
+  import UNav from '~/components/Nav'
+  import UBLUEHeader from '~/components/Header'
   export default {
-    components: { BlueNav, BlueHeader }
+    components: { UNav, UBLUEHeader }
   }
 </script>
 
