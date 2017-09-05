@@ -17,8 +17,8 @@ module.exports = {
   },
   mode: 'spa',
   modules: [
-    '@nuxtjs/bootstrap-vue',
-    '@nuxtjs/font-awesome'
+    { src: '@nuxtjs/bootstrap-vue', css: false }
+    // '@nuxtjs/font-awesome'
   ],
   /*
   ** Customize the progress-bar color
@@ -28,8 +28,7 @@ module.exports = {
   ** Global css
   */
   css: [
-    { src: '~/assets/scss/main.scss', lang: 'scss' },
-    { src: '~/assets/scss/_admin_variables.scss', lang: 'scss' }
+    { src: '~/assets/scss/main.scss', lang: 'scss' }
   ],
   /*
   ** Build configuration

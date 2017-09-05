@@ -1,9 +1,9 @@
 <template lang="pug">
   b-container(:fluid="true")
     b-row
-      b-col(cols="2")
+      b-col.p-0.sidebar
         u-nav
-      b-col(cols="10")
+      b-col.p-0
         u-header
         nuxt
 </template>
@@ -16,8 +16,12 @@
   }
 </script>
 
-<style>
+<style scoped>
   *:hover {
     outline: 1px solid rgba(255, 0, 0, .5);
+  }
+
+  .sidebar {
+    flex: 0 0 260px;
   }
 </style>
