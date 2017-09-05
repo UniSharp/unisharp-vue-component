@@ -5,6 +5,9 @@
         a.img-logo(href="#"): img(src="../assets/img/logo_img.png")
     nav
       ul
+        li
+          i.fa.fa-file-text-o(aria-hidden="true")
+          nuxt-link(to="/form") 表單元件
         li(v-b-toggle.collapse-manager)
           i.fa.fa-file-text-o(aria-hidden="true")
           span 管理員管理
