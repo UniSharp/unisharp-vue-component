@@ -1,6 +1,6 @@
 <template lang="pug">
   nuxt-link.logo(:to="to")
-    img(src="~assets/img/logo.png")
+    img(src="~assets/img/logo.png", :width="width")
 </template>
 
 <script>
@@ -9,6 +9,10 @@
       to: {
         type: String,
         default: '/'
+      },
+      width: {
+        type: Number,
+        default: 170
       }
     }
   }
@@ -19,8 +23,7 @@
     display: block;
 
     img {
-      width: 170px;
-      height: 32px;
+      height: auto;
     }
   }
 </style>
