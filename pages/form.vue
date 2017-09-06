@@ -18,9 +18,11 @@
         b-form-group(label='Food:', label-for='exampleInput3')
           b-form-select#exampleInput3(:options='foods', required='', v-model='form.food')
         //- Checkbox
-        b-form-group
-          b-form-checkbox#exampleInput4(v-model='form.checked')
-            | Check me out
+        .form-group.row
+          label.col-md-2
+            span.title Checkbox：
+          .col-md-10.form-control
+            u-checkbox(v-model='form.checked', :checked="true")
         //- Textarea
         b-form-group(label='Textarea:', label-for='exampleInput5')
           b-form-textarea#exampleInput5(placeholder='Enter something', :rows='3', :max-rows='6')
@@ -36,9 +38,10 @@
   // import Logo from '~/components/Logo.vue'
   import UAdmin from '~/components/Admin'
   import UBreadcrumb from '~/components/Breadcrumb'
+  import UCheckbox from '~/components/Checkbox'
 
   export default {
-    components: { UAdmin, UBreadcrumb },
+    components: { UAdmin, UBreadcrumb, UCheckbox },
     data () {
       return {
         form: {
