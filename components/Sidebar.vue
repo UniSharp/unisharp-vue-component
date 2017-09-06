@@ -31,12 +31,10 @@
   @import "~assets/scss/variables";
   @import "node_modules/bootstrap/scss/mixins/breakpoints";
 
-  $sidebar-width: 260px;
-
   .u-sidebar {
     .u-sidebar-content {
       height: 100vh;
-      background-color: $indigo;
+      background-color: $sidebar-bg;
 
       .u-sidebar-body {
         overflow-x: hidden;

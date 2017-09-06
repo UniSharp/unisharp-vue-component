@@ -45,7 +45,8 @@
     }
 
     .navbar {
-      background-color: lighten($indigo, 5%);
+      flex: 0 0 $navbar-height;
+      background-color: $navbar-bg;
     }
 
     header {
