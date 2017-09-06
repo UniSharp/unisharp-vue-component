@@ -1,8 +1,8 @@
 <template lang="pug">
   .u-checkbox
-    label.custom-control.custom-checkbox
-      input.custom-control-input(type="checkbox", :value="value", :checked="checked", :disabled="disabled", :required="required", @change="handleChange")
-      span.custom-control-indicator
+    label
+      input(type="checkbox", :value="value", :checked="checked", :disabled="disabled", :required="required", @change="handleChange")
+      span
 </template>
 
 <script>

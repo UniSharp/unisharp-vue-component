@@ -8,11 +8,11 @@
           label.col-md-2
             span.title Label：
           .col-md-10.form-control-static I'm label text.
-        //- Label
+        //- Input
         .form-group.row
           label.col-md-2
             span.title Email address：
-          .col-md-10.form-control
+          .col-md-10
             input.form-control(type='email', v-model='form.email', required='', placeholder='Enter email')
         //- Select
         b-form-group(label='Food:', label-for='exampleInput3')
@@ -21,8 +21,9 @@
         .form-group.row
           label.col-md-2
             span.title Checkbox：
-          .col-md-10.form-control
+          .col-md-10.form-inline
             u-checkbox(v-model='form.checked', :checked="true")
+            | I'm checkbox
         //- Textarea
         b-form-group(label='Textarea:', label-for='exampleInput5')
           b-form-textarea#exampleInput5(placeholder='Enter something', :rows='3', :max-rows='6')
