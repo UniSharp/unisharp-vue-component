@@ -1,20 +1,20 @@
 <template lang="pug">
   nav.u-sidenav
     ul.list-unstyled
-      li(v-b-toggle.collapse-component)
+      li
         a(href="#")
           i.fa.fa-file-text-o(aria-hidden="true")
           | 元件範例
         ul.list-unstyled.u-sidenav-nested
           li: nuxt-link(to="/form") 表單元件
-      li(v-b-toggle.collapse-member)
+      li
         a(href="#")
           i.fa.fa-file-text-o(aria-hidden="true")
           | 會員管理
         ul.list-unstyled.u-sidenav-nested
           li: a(href="#") 會員列表
           li: a(href="#") 新增會員
-      li(v-b-toggle.collapse-setting)
+      li
         a(href="#")
           i.fa.fa-file-text-o(aria-hidden="true")
           | 全站設定
@@ -41,22 +41,28 @@
     }
 
     a {
-      display: block;
+      display: flex;
+      align-items: center;
       height: $item-height;
-      line-height: $item-height;
+      transition: color .3s ease;
+
+      .fa {
+        margin-top: 1px;
+      }
 
       &:hover {
-        color: $link-color;
         text-decoration: none;
       }
     }
 
     :not(.u-sidenav-nested) > li {
-      background-color: darken($sidebar-bg, 5%);
-      border-bottom: 1px solid lighten($sidebar-bg, 7.5%);
+      display: flex;
+      flex-direction: column;
+      background-color: $sidebar-bg;
+      border-bottom: 1px solid $navbar-bg;
 
       &:first-child {
-        border-top: 1px solid lighten($sidebar-bg, 7.5%);
+        border-top: 1px solid $navbar-bg;
       }
 
       a:hover .fa {
@@ -68,11 +74,8 @@
     .u-sidenav-nested {
       li {
         padding-left: 2.5rem;
-        transition: background-color .5s ease;
-
-        &:hover, &.active {
-          background-color: $navbar-bg;
-        }
+        background-color: darken($sidebar-bg, 5%);
+        transition: background-color .3s ease;
 
         & + li {
           margin-top: 1px;
@@ -80,7 +83,10 @@
 
         a {
           height: $item-height - 10px;
-          line-height: $item-height - 10px;
+        }
+
+        &:hover, &.active {
+          background-color: $navbar-bg;
         }
       }
     }

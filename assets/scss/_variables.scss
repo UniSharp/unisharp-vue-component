@@ -127,9 +127,9 @@ $navbar-bg: #4d535e;
 //
 // Style anchor elements.
 
-$link-color: theme-color("light");
+$link-color: $gray-400;
 // $link-decoration: none;
-// $link-hover-color: darken($link-color, 15%);
+$link-hover-color: lighten($link-color, 10%);
 // $link-hover-decoration: underline;
 
 // Paragraphs
@@ -758,15 +758,15 @@ $font-size-sm: .75rem;
 
 // Breadcrumbs
 
-// $breadcrumb-padding-y: .75rem;
-// $breadcrumb-padding-x: 1rem;
+$breadcrumb-padding-y: 0;
+$breadcrumb-padding-x: 0;
 // $breadcrumb-item-padding: .5rem;
 
-// $breadcrumb-margin-bottom: 1rem;
+$breadcrumb-margin-bottom: 0;
 
-// $breadcrumb-bg: $gray-200;
-// $breadcrumb-divider-color: $gray-600;
-// $breadcrumb-active-color: $gray-600;
+$breadcrumb-bg: transparent;
+$breadcrumb-divider-color: rgba($white, .5);
+$breadcrumb-active-color: rgba($white, 1);
 $breadcrumb-divider: ">";
 
 

@@ -5,12 +5,11 @@
         u-logo(slot="header")
         u-sidenav
       .u-content.col.p-0.d-flex.flex-column
-        .navbar.navbar-dark.px-4.py-3
-          b-btn.u-sidebar-toggle.mr-3.d-lg-none(variant="outline-secondary", @click.prevent="$refs.sidebar.show")
+        .navbar.px-4.py-0
+          button.btn.btn-outline-light.bg-transparent.u-sidebar-toggle.mr-3.d-lg-none(@click.prevent="$refs.sidebar.show")
            i.fa.fa-bars
           slot(name="breadcrumb")
-          b-nav(is-nav-bar, class="ml-auto")
-            u-user-dropdown
+          u-user-dropdown.h-100.ml-auto
         header.p-4.bg-white
           h1.m-0 {{ title }}
         main.p-4
@@ -40,11 +39,12 @@
   .u-content {
     height: 100vh;
 
-    .u-sidebar-toggle {
+    .u-sidebar-toggle, {
       cursor: pointer;
     }
 
     .navbar {
+      position: relative;
       flex: 0 0 $navbar-height;
       background-color: $navbar-bg;
     }
