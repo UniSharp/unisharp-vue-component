@@ -1,11 +1,44 @@
 <template lang="pug">
-  .u-switch
-    input(type='checkbox').d-none
-    .switch
-      .on.bg-primary.text-center ON
+  .u-switch(@click='toggleValue')
+    input(type='checkbox', :name='name', :value='checked').d-none
+    .switch(:class="checked === false ? 'off' : ''")
+      .on-side.bg-primary.text-center ON
       .toggle.bg-default
-      .off.bg-default.text-center OFF
+      .off-side.bg-default.text-center OFF
 </template>
+
+<script>
+  export default {
+    data () {
+      return {
+        checked: true
+      }
+    },
+    mounted () {
+      this.checked = this.value
+    },
+    props: {
+      value: {
+        default: true
+      },
+      name: {
+        required: true
+      },
+      disabled: {
+        default: false
+      },
+      required: {
+        default: false
+      }
+    },
+    methods: {
+      toggleValue () {
+        this.checked = !this.checked
+        this.$emit('input', this.checked).$emit('change', this.checked)
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
   $height: 38px;
@@ -14,11 +47,9 @@
   $border-color: rgba(77, 83, 94, .15);
   $input-btn-padding-y: 6px;
   $input-btn-padding-x: 12px;
-  $font-size: 16px;
 
   @mixin with-words() {
     padding: $input-btn-padding-y $input-btn-padding-x;
-    font-size: $font-size;
   }
 
   .u-switch {
@@ -39,11 +70,11 @@
     left: 0;
   }
 
-  .switch:hover {
+  .switch.off {
     left: - $width - $border-width;
   }
 
-  .on {
+  .on-side {
     height: $height;
     width: $width;
 
@@ -57,40 +88,10 @@
     border-right: $border-width solid $border-color;
   }
 
-  .off {
+  .off-side {
     height: $height;
     width: $width;
 
     @include with-words();
   }
 </style>
-
-<script>
-  export default {
-    name: 'u-switch',
-    data () {
-      return {
-        //
-      }
-    },
-    props: {
-      value: {
-        default: true
-      },
-      checked: {
-        default: false
-      },
-      disabled: {
-        default: false
-      },
-      required: {
-        default: false
-      }
-    },
-    methods: {
-      handleChange () {
-        //
-      }
-    }
-  }
-</script>

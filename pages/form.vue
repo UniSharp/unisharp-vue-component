@@ -25,7 +25,7 @@
         .form-group.row
           label.col-md-2.col-form-label Switch：
           .col-md-10
-            u-switch
+            u-switch(name='switch', v-model='form.checked', @change='showSwitchValue')
         //- Textarea
         b-form-group(label='Textarea:', label-for='exampleInput5')
           b-form-textarea#exampleInput5(placeholder='Enter something', :rows='3', :max-rows='6')
@@ -87,6 +87,9 @@
       },
       handleClick () {
         console.log('click')
+      },
+      showSwitchValue (value) {
+        console.log(value)
       }
     }
   }
