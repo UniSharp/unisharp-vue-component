@@ -1,13 +1,19 @@
 <template lang="pug">
-  b-container(:fluid="true")
+  u-admin
+    u-breadcrumb(slot="breadcrumb")
     b-card(header="Form Components", header-tag="header")
       b-form(@submit='onSubmit')
-        //- Text Input
-        b-form-group(label='Email address:', label-for='exampleInput1', description="We'll never share your email with anyone else.")
-          b-form-input#exampleInput1(type='email', v-model='form.email', required='', placeholder='Enter email')
-        //- Text Input
-        b-form-group(label='Your Name:', label-for='exampleInput2')
-          b-form-input#exampleInput2(type='text', v-model='form.name', required='', placeholder='Enter name')
+        //- Label
+        .form-group.row
+          label.col-md-2
+            span.title Label：
+          .col-md-10.form-control-static I'm label text.
+        //- Label
+        .form-group.row
+          label.col-md-2
+            span.title Email address：
+          .col-md-10.form-control
+            input.form-control(type='email', v-model='form.email', required='', placeholder='Enter email')
         //- Select
         b-form-group(label='Food:', label-for='exampleInput3')
           b-form-select#exampleInput3(:options='foods', required='', v-model='form.food')
@@ -22,13 +28,17 @@
         b-form-group(label='Food:', label-for='exampleInput6')
           b-form-radio#exampleInput6(:options='foods', v-model='form.food')
         //- Button
-        b-button(type='submit', variant='primary') Submit
-        b-button(type='reset', variant='secondary') Reset
-</template>
+        button.btn.btn-primary(type="button") Submit
+        button.btn.btn-default(type="reset") Reset
+  </template>
 
 <script>
   // import Logo from '~/components/Logo.vue'
+  import UAdmin from '~/components/Admin'
+  import UBreadcrumb from '~/components/Breadcrumb'
+
   export default {
+    components: { UAdmin, UBreadcrumb },
     data () {
       return {
         form: {
