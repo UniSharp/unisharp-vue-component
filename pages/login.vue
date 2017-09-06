@@ -2,20 +2,20 @@
   .wrapper
     .container-bg
       header
-        u-logo(to="#", width="200")
+        u-logo(to="#", :width="parseInt(200)")
         h1.m-0 客製化網站內容管理系統
 
       div.main
         b-card(header="師大十年計畫")
-          b-form(@submit='onSubmit')
+          b-form(@submit.prevent='onSubmit')
             .form-group.row
               .input-group
                 span#name.input-group-addon: i.fa.fa-user
-                input.form-control(type="text", name="name", placeholder="帳號", aria-describedby="name")
+                input.form-control(type="text", name="name", v-model='form.name', placeholder="帳號", aria-describedby="name")
             .form-group.row
               .input-group
                 span#password.input-group-addon: i.fa.fa-lock
-                input.form-control(type="password", name="password", placeholder="密碼", aria-describedby="password")
+                input.form-control(type="password", name="password", v-model='form.password', placeholder="密碼", aria-describedby="password")
             .form-group.row
               button.btn.btn-default.w-100(type="submit") 登入
             .form-group.row
@@ -34,7 +34,20 @@
   import ULogo from '~/components/Logo'
 
   export default {
-    components: { ULogo }
+    components: { ULogo },
+    data () {
+      return {
+        form: {
+          name: '',
+          password: ''
+        }
+      }
+    },
+    methods: {
+      onSubmit (e) {
+        alert(JSON.stringify(this.form))
+      }
+    }
   }
 </script>
 

@@ -2,7 +2,7 @@
   u-admin
     u-breadcrumb(slot="breadcrumb")
     b-card(header="Form Components", header-tag="header")
-      b-form(@submit='onSubmit')
+      b-form(@submit.prevent='onSubmit')
         //- Label
         .form-group.row
           label.col-md-2
@@ -60,8 +60,7 @@
       }
     },
     methods: {
-      onSubmit (evt) {
-        evt.preventDefault()
+      onSubmit (e) {
         alert(JSON.stringify(this.form))
       }
     }
