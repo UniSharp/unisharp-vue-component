@@ -12,7 +12,7 @@
           label.col-md-2.col-form-label Email address：
           .col-md-10
             input.form-control(type='email', v-model='form.email', required='', placeholder='Enter email')
-        u-select(v-model="food", :options="foods")
+        u-select(v-model="form.food", :options="foods")
         //- Select
         b-form-group(label='Food:', label-for='exampleInput3')
           b-form-select#exampleInput3(:options='foods', required='', v-model='form.food')
