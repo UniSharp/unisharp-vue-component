@@ -59,7 +59,7 @@
         border-top: 1px solid lighten($sidebar-bg, 7.5%);
       }
 
-      &:hover .fa {
+      a:hover .fa {
         transition: transform .5s cubic-bezier(.25, .8, .5, 1);
         transform: rotate(-360deg);
       }
