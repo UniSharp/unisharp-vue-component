@@ -37,7 +37,7 @@
       background-color: $sidebar-bg;
 
       .u-sidebar-header {
-        height: 92px;
+        flex: 0 0 92px;
       }
 
       .u-sidebar-body {
