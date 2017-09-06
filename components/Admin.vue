@@ -39,7 +39,7 @@
   .u-content {
     height: 100vh;
 
-    .u-sidebar-toggle, {
+    .u-sidebar-toggle {
       cursor: pointer;
     }
 
