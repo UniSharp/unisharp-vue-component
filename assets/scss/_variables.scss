@@ -207,9 +207,9 @@ $container-max-widths: (
 // $font-family-monospace: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 // $font-family-base: $font-family-sans-serif;
 
-// $font-size-base: 1rem; // Assumes the browser default, typically `16px`
-// $font-size-lg: 1.25rem;
-// $font-size-sm: .875rem;
+$font-size-base: .875rem; // Assumes the browser default, typically `16px`
+$font-size-lg: 1.125rem;
+$font-size-sm: .75rem;
 
 // $font-weight-light: 300;
 // $font-weight-normal: normal;
