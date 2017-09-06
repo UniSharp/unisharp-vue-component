@@ -1,18 +1,35 @@
 <template lang="pug">
   .u-checkbox
-    label
-      input(type="checkbox", :value="value", :checked="checked", :disabled="disabled", :required="required", @change="handleChange")
+    label.custom-control.custom-checkbox
+      input.custom-control-input(type="checkbox", :value="value", :name="name", :checked="isChecked", :disabled="disabled", :required="required", ref="check", @change="handleChange")
+      span.custom-control-indicator(:aria-hidden="true")
       span
+        slot
 </template>
 
 <script>
   export default {
     data () {
       return {
-        //
+      }
+    },
+    model: {
+      prop: 'checked',
+      event: 'change'
+    },
+    computed: {
+      isChecked () {
+        if (Array.isArray(this.checked)) {
+          return this.checked.indexOf(this.value) !== -1
+        } else {
+          return this.checked === this.value
+        }
       }
     },
     props: {
+      name: {
+        default: false
+      },
       value: {
         default: true
       },
@@ -27,8 +44,16 @@
       }
     },
     methods: {
-      handleChange () {
-        //
+      handleChange ({ target: { checked } }) {
+        if (Array.isArray(this.checked)) {
+          if (this.isChecked) {
+            this.$emit('change', this.checked.filter(x => x !== this.value))
+          } else {
+            this.$emit('change', [...this.checked, this.value])
+          }
+        } else {
+          this.$emit('change', checked ? this.value : this.uncheckedValue)
+        }
       }
     }
   }

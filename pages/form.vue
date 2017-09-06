@@ -19,8 +19,12 @@
         .form-group.row
           label.col-md-2.col-form-label Checkbox：
           .col-md-10.form-inline
-            u-checkbox(v-model='form.checked', :checked="true")
-            | I'm checkbox
+            u-checkbox(v-model="checks", value="1")
+              | Option 1
+            u-checkbox(v-model="checks", value="2")
+              | Option 2
+            u-checkbox(v-model="checks", value="3")
+              | Option 3
         //- Switch
         .form-group.row
           label.col-md-2.col-form-label Switch：
@@ -57,6 +61,7 @@
     components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, URadio },
     data () {
       return {
+        checks: ['1', '2'],
         form: {
           email: '',
           name: '',
@@ -90,6 +95,11 @@
       },
       showSwitchValue (value) {
         console.log(value)
+      }
+    },
+    watch: {
+      checks (val) {
+        console.log(val)
       }
     }
   }
