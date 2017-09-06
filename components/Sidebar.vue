@@ -3,7 +3,7 @@
     transition(name="fade")
       .u-sidebar-backdrop(v-if="shown", @click="shown = false")
     .u-sidebar-content.d-flex.flex-column
-      .u-sidebar-header.d-flex.justify-content-center.py-4
+      .u-sidebar-header.d-flex.align-items-center.justify-content-center
         slot(name="header")
       .u-sidebar-body
         slot
@@ -35,6 +35,10 @@
     .u-sidebar-content {
       height: 100vh;
       background-color: $sidebar-bg;
+
+      .u-sidebar-header {
+        height: 92px;
+      }
 
       .u-sidebar-body {
         overflow-x: hidden;
