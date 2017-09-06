@@ -5,13 +5,11 @@
       b-form(@submit.prevent='onSubmit')
         //- Label
         .form-group.row
-          label.col-md-2
-            span.title Label：
+          label.col-md-2 Label：
           .col-md-10.form-control-static I'm label text.
         //- Input
         .form-group.row
-          label.col-md-2
-            span.title Email address：
+          label.col-md-2.col-form-label Email address：
           .col-md-10
             input.form-control(type='email', v-model='form.email', required='', placeholder='Enter email')
         //- Select
@@ -19,8 +17,7 @@
           b-form-select#exampleInput3(:options='foods', required='', v-model='form.food')
         //- Checkbox
         .form-group.row
-          label.col-md-2
-            span.title Checkbox：
+          label.col-md-2.col-form-label Checkbox：
           .col-md-10.form-inline
             u-checkbox(v-model='form.checked', :checked="true")
             | I'm checkbox
