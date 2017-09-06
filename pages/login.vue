@@ -42,7 +42,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/_admin_variables";
+  @import "~assets/scss/_variables";
 
   .wrapper {
     width: 100%;
@@ -60,7 +60,7 @@
         position: absolute;
         top: 0;
         width: 100%;
-        background: $login-bg;
+        background: $indigo;
         padding: 30px 0;
         text-align: center;
 
@@ -103,7 +103,7 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        background: $login-bg;
+        background: $indigo;
         padding: 30px 0;
         text-align: center;
 
