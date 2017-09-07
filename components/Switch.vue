@@ -1,10 +1,10 @@
 <template lang="pug">
-  .u-switch(@click='toggleValue')
+  .u-switch(@click='toggleValue', :disabled='disabled')
     input(type='checkbox', :name='name', :value='checked').d-none
     .switch(:class="checked === false ? 'off' : ''")
-      .on-side.bg-primary.text-center ON
-      .toggle.bg-default
-      .off-side.bg-default.text-center OFF
+      .bg-primary.text-center ON
+      .bg-default.toggle
+      .bg-info.text-center OFF
 </template>
 
 <script>
@@ -25,14 +25,19 @@
         required: true
       },
       disabled: {
+        type: Boolean,
         default: false
       },
       required: {
+        type: Boolean,
         default: false
       }
     },
     methods: {
       toggleValue () {
+        if (this.disabled) {
+          return
+        }
         this.checked = !this.checked
         this.$emit('input', this.checked).$emit('change', this.checked)
       }
@@ -42,56 +47,47 @@
 
 <style lang="scss">
   $height: 38px;
-  $width: $height * 1.5;
+  $block-width: 60px;
   $border-width: 1px;
   $border-color: rgba(77, 83, 94, .15);
   $input-btn-padding-y: 6px;
   $input-btn-padding-x: 12px;
 
-  @mixin with-words() {
-    padding: $input-btn-padding-y $input-btn-padding-x;
-  }
-
   .u-switch {
     height: $height;
-    width: $width * 2;
+    width: $block-width * 2;
     overflow-x: hidden;
     position: relative;
     border-radius: 5px;
     border: $border-width solid $border-color;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
   .switch {
-    height: $height;
-    width: $width * 3;
+    width: $block-width * 3;
     display: flex;
     position: absolute;
     transition: all .7s;
     left: 0;
-  }
 
-  .switch.off {
-    left: - $width - $border-width;
-  }
+    &.off {
+      left: - $block-width - $border-width;
+    }
 
-  .on-side {
-    height: $height;
-    width: $width;
+    * {
+      height: $height - ($border-width * 2);
+      width: $block-width;
+      padding: $input-btn-padding-y $input-btn-padding-x;
+      line-height: $height - ($input-btn-padding-y * 2) - ($border-width * 2);
+    }
 
-    @include with-words();
-  }
-
-  .toggle {
-    height: $height;
-    width: $width;
-    border-left: $border-width solid $border-color;
-    border-right: $border-width solid $border-color;
-  }
-
-  .off-side {
-    height: $height;
-    width: $width;
-
-    @include with-words();
+    .toggle {
+      border-left: $border-width solid $border-color;
+      border-right: $border-width solid $border-color;
+    }
   }
 </style>

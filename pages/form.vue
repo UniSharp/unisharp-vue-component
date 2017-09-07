@@ -40,6 +40,11 @@
             label.col-md-2.col-form-label Switch：
             .col-md-10
               u-switch(name='switch', v-model='form.checked', @change='showSwitchValue')
+          //- Date Time Picker
+          .form-group.row
+            label.col-md-2.col-form-label Date Time：
+            .col-md-10
+              u-datetime(name='switch', v-model='form.time', @change='showTime')
           //- Textarea
           .form-group.row
             label.col-md-2.col-form-label Textarea：
@@ -78,12 +83,13 @@
   import UBreadcrumb from '~/components/Breadcrumb'
   import UCheckbox from '~/components/Checkbox'
   import USwitch from '~/components/Switch'
+  import UDatetime from '~/components/Datetime'
   import URadio from '~/components/Radio'
   import USelect from '~/components/Select'
   import UUploader from '~/components/Uploader'
 
   export default {
-    components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, URadio, USelect, UUploader },
+    components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, UDatetime, URadio, USelect, UUploader },
     data () {
       return {
         check: 'yes',
@@ -93,6 +99,7 @@
           name: '',
           food: null,
           checked: false,
+          time: '2017-09-07 12:38:59',
           secret: 'S3CR3T',
           radio: {
             value: 1
@@ -107,6 +114,9 @@
       }
     },
     methods: {
+      showTime () {
+        console.log(this.form.time)
+      },
       onSubmit (e) {
         alert(JSON.stringify(this.form))
       },
