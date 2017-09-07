@@ -1,7 +1,7 @@
 <template lang="pug">
   .u-checkbox
     label.custom-control.custom-checkbox
-      input.custom-control-input(type="checkbox", :value="value", :name="name", :checked="isChecked", :disabled="disabled", :required="required", ref="check", @change="handleChange")
+      input.custom-control-input(type="checkbox", :value="value", :name="name", :checked="isChecked", :disabled="disabled", :required="required", ref="check", @change="handleChange", @focus="$emit('focus')", @blur="$emit('blur')", @click="$emit('click')")
       span.custom-control-indicator(:aria-hidden="true")
       span
         slot
@@ -41,6 +41,9 @@
       },
       required: {
         default: false
+      },
+      uncheckedValue: {
+        default: null
       }
     },
     methods: {

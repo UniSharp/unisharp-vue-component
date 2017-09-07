@@ -20,6 +20,12 @@
         .form-group.row
           label.col-md-2.col-form-label Checkbox：
           .col-md-10.form-inline
+            u-checkbox(v-model="check", value="yes")
+              | Option 1
+        //- Checkboxes
+        .form-group.row
+          label.col-md-2.col-form-label Checkbox：
+          .col-md-10.form-inline
             u-checkbox(v-model="checks", value="1")
               | Option 1
             u-checkbox(v-model="checks", value="2")
@@ -68,6 +74,7 @@
     components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, URadio, USelect },
     data () {
       return {
+        check: 'yes',
         checks: ['1', '2'],
         form: {
           email: '',
@@ -103,6 +110,9 @@
       }
     },
     watch: {
+      check (val) {
+        console.log(val)
+      },
       checks (val) {
         console.log(val)
       }
