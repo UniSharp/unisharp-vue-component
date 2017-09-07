@@ -13,6 +13,15 @@
   import UOption from '~/components/Option'
   export default {
     components: { UOption },
+    watch: {
+      selected (value) {
+        this.options.forEach((option, key) => {
+          if (option.value === value) {
+            this.selected = option
+          }
+        })
+      }
+    },
     model: {
       prop: 'selected',
       event: 'change'
@@ -44,7 +53,7 @@
       select (selected) {
         this.selected = selected
         this.show = false
-        this.$emit('change', this.selected)
+        this.$emit('change', this.selected.value)
       }
     },
     mounted () {
