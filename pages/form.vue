@@ -58,7 +58,7 @@
               u-radio(name="food2", :options="foods", stacked="true", v-model="form.radio.value")
           .form-group.row
             label.col-md-2
-              span.title Radio Inline：
+              span.title Radio Result：
             .col-md-10
               input(type="text", :value="showRadioText(form.radio.value)")
           //- Button

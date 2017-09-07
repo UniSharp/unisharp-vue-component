@@ -3,6 +3,7 @@
     label.custom-control.form-check-inline.custom-radio(:key="option.value", v-for="(option, index) in options")
       input.custom-control-input(
         type="radio",
+        :id="id",
         :name="name",
         :value="option.value",
         :checked="option.value == value",
@@ -33,6 +34,9 @@
             { text: 'Option3', value: 3, disabled: false }
           ]
         }
+      },
+      id: {
+        default: null
       },
       name: {
         required: true,
