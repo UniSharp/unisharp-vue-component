@@ -18,6 +18,7 @@
     "axios": "^0.16.2",
     "bootstrap": "v4.0.0-beta",
     "font-awesome": "^4.7.0",
+    "moment": "^2.18.1",
     "node-sass": "^4.5.3",
     "nuxt": "^1.0.0-rc8",
     "pug": "^2.0.0-rc.3",
@@ -38,5 +39,10 @@
     "stylelint-config-standard": "^17.0.0",
     "stylelint-processor-html": "^1.0.0",
     "stylelint-webpack-plugin": "^0.9.0"
+  },
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0"
+    }
   }
 }
