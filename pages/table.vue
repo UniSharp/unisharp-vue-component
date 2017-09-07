@@ -60,6 +60,9 @@
           },
           age: {
             label: 'Person age'
+          },
+          operation: {
+            label: '操作'
           }
         },
         currentPage: 1,

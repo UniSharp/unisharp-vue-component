@@ -6,10 +6,12 @@
           u-checkbox(v-model="checkAlls", :value="currentPage")
         th(v-for="(value, key) in fields") {{ value.label }}
     tbody(:style="{ height: height + 'px' }")
-      tr(v-for="item in computedItems", :key="item.uIndex")
+      tr(v-for="(item, i) in computedItems", :key="item.uIndex")
         td
           u-checkbox(v-model="checks", :value="item.uIndex")
-        td(v-for="(value, key) in fields") {{ item[key] }}
+        td(v-for="(value, key) in fields")
+          slot(:index="i", :name="key", value="value")
+            | {{ item[key] }}
 </template>
 
 <script>
