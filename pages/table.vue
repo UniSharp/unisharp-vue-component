@@ -1,5 +1,6 @@
 <template lang="pug">
-  .example
+  u-admin
+    u-breadcrumb(slot="breadcrumb")
     u-table.table.table-hover(
       :items="items",
       :fields="fields",
@@ -16,6 +17,8 @@
 </template>
 
 <script>
+  import UAdmin from '~/components/Admin'
+  import UBreadcrumb from '~/components/Breadcrumb'
   import UTable from '~/components/Table.vue'
   import UPagination from '~/components/Pagination.vue'
 
@@ -46,7 +49,9 @@
   export default {
     components: {
       UTable,
-      UPagination
+      UPagination,
+      UAdmin,
+      UBreadcrumb
     },
     data () {
       return {
