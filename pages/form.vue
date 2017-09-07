@@ -61,6 +61,12 @@
               span.title Radio Result：
             .col-md-10
               input(type="text", :value="showRadioText(form.radio.value)")
+          //- File Uploader
+          .form-group.row
+            label.col-md-2
+              span.title File Uploader：
+            .col-md-10
+              u-uploader(name="uploader")
           //- Button
           button.btn.btn-primary(type="button") Submit
           button.btn.btn-default(type="reset") Reset
@@ -74,9 +80,10 @@
   import USwitch from '~/components/Switch'
   import URadio from '~/components/Radio'
   import USelect from '~/components/Select'
+  import UUploader from '~/components/Uploader'
 
   export default {
-    components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, URadio, USelect },
+    components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, URadio, USelect, UUploader },
     data () {
       return {
         check: 'yes',

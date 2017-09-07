@@ -30,6 +30,7 @@ module.exports = {
   css: [
     { src: '~/assets/scss/main.scss', lang: 'scss' }
   ],
+  plugins: ['~/plugins/vue-clip'],
   /*
   ** Build configuration
   */
@@ -51,6 +52,8 @@ module.exports = {
           syntax: 'scss'
         }))
       }
-    }
+      config.resolve.alias['vue'] = 'vue/dist/vue.common'
+    },
+    vendor: ['vue-clip']
   }
 }
