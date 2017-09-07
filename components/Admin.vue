@@ -50,6 +50,8 @@
     }
 
     header {
+      z-index: 10;
+
       h1 {
         font-weight: 400;
         font-size: 1.875rem;
