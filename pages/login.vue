@@ -6,20 +6,23 @@
         h1.m-0 客製化網站內容管理系統
 
       div.main
-        b-card(header="師大十年計畫")
-          b-form(@submit.prevent='onSubmit')
-            .form-group.row
-              .input-group
-                span#name.input-group-addon: i.fa.fa-user
-                input.form-control(type="text", name="name", v-model='form.name', placeholder="帳號", aria-describedby="name")
-            .form-group.row
-              .input-group
-                span#password.input-group-addon: i.fa.fa-lock
-                input.form-control(type="password", name="password", v-model='form.password', placeholder="密碼", aria-describedby="password")
-            .form-group.row
-              button.btn.btn-default.w-100(type="submit") 登入
-            .form-group.row
-              a(href="#") 忘記密碼
+        .card
+          .card-header
+            h2 師大十年計畫
+          .card-body
+            form(@submit.prevent="onSubmit")
+              .form-group.row
+                .input-group
+                  span#name.input-group-addon: i.fa.fa-user
+                  input.form-control(type="text", name="name", v-model="form.name", placeholder="帳號", aria-describedby="name")
+              .form-group.row
+                .input-group
+                  span#password.input-group-addon: i.fa.fa-lock
+                  input.form-control(type="password", name="password", v-model="form.password", placeholder="密碼", aria-describedby="password")
+              .form-group.row
+                button.btn.btn-default.w-100(type="submit") 登入
+              .form-group.row
+                a(href="#") 忘記密碼
 
       footer
         p.mb-0 BACKEND - Content Management System
