@@ -1,29 +1,49 @@
 <template lang="pug">
   nav.u-sidenav
     ul.list-unstyled
-      li
-        a(href="#")
-          i.fa.fa-file-text-o(aria-hidden="true")
-          | 元件範例
-        ul.list-unstyled.u-sidenav-nested
-          li: nuxt-link(to="/form") 表單元件
-          li: nuxt-link(to="/table") 表格
-      li
-        a(href="#")
-          i.fa.fa-file-text-o(aria-hidden="true")
-          | 會員管理
-        ul.list-unstyled.u-sidenav-nested
-          li: a(href="#") 會員列表
-          li: a(href="#") 新增會員
-      li
-        a(href="#")
-          i.fa.fa-file-text-o(aria-hidden="true")
-          | 全站設定
+      li(:key="index", v-for="(item, index) in list")
+        nuxt-link(:to="item.to", v-if="item.to !== undefined")
+          i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
+          | {{ item.title }}
+        a(@click.prevent, href="#", v-else)
+          i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
+          | {{ item.title }}
+        ul.list-unstyled.u-sidenav-nested(v-if="item.children")
+          li(:key="index", v-for="(child, index) in item.children")
+            nuxt-link(:to="child.to") {{ child.title }}
 </template>
 
 <script>
   export default {
-    //
+    data () {
+      return {
+        list: [{
+          icon: 'file-text-o',
+          title: '元件範例',
+          children: [{
+            title: '表單元件',
+            to: '/form'
+          }, {
+            title: '表格',
+            to: '/table'
+          }]
+        }, {
+          icon: 'file-text-o',
+          title: '會員管理',
+          children: [{
+            title: '會員列表',
+            to: ''
+          }, {
+            title: '新增會員',
+            to: ''
+          }]
+        }, {
+          icon: 'file-text-o',
+          title: '全站設定',
+          to: ''
+        }]
+      }
+    }
   }
 </script>
 
