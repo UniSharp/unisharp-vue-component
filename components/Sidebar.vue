@@ -74,12 +74,12 @@
         z-index: 10002;
         left: $sidebar-width * -1;
         width: $sidebar-width;
-        box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2), 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12);
         transition: left .3s cubic-bezier(.25, .8, .5, 1);
       }
 
       &.show .u-sidebar-content {
         left: 0;
+        box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2), 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12);
       }
     }
 
