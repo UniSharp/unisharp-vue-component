@@ -7,6 +7,7 @@
           | 元件範例
         ul.list-unstyled.u-sidenav-nested
           li: nuxt-link(to="/form") 表單元件
+          li: nuxt-link(to="/table") 表格
       li
         a(href="#")
           i.fa.fa-file-text-o(aria-hidden="true")

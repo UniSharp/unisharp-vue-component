@@ -3,7 +3,7 @@
     thead
       tr
         th
-          u-checkbox(v-model="isCheckAll", :value="true")
+          u-checkbox(v-model="checkAlls", :value="currentPage")
         th(v-for="(value, key) in fields") {{ value.label }}
     tbody(:style="{ height: height + 'px' }")
       tr(v-for="item in computedItems", :key="item.uIndex")
@@ -17,7 +17,7 @@
 
   export default {
     components: {
-      'u-checkbox': UCheckbox
+      UCheckbox
     },
     props: {
       items: {
@@ -44,14 +44,17 @@
         type: Boolean,
         default: false
       },
-      checkAll: {
+      isCheckAll: {
         type: Boolean,
         default: false
       }
     },
     data () {
       return {
-        isCheckAll: this.checkAll
+        checkAlls: this.isCheckAll
+          ? this._arrayRange(Math.ceil(this.items.length / this.perPage)).map(v => v + 1)
+          : [],
+        checks: this.isCheckAll ? this._arrayRange(this.items.length) : []
       }
     },
     computed: {
@@ -68,18 +71,52 @@
         }
 
         return items
-      },
-      checks: {
-        get () {
-          return this.isCheckAll ? Array.from(Array(this.items.length).keys()) : []
-        },
-        set () {
-        }
       }
     },
     watch: {
-      checks (v) {
-        console.log(v)
+      checkAlls (newValue, oldValue) {
+        let removePage = this._arrayDiff(oldValue, newValue)[0]
+        let addPage = this._arrayDiff(newValue, oldValue)[0]
+        let checkItems = this._getPageItemIndexes(addPage)
+        let uncheckItems = this._getPageItemIndexes(removePage)
+        this._updateChecks(checkItems, true)
+        this._updateChecks(uncheckItems, false)
+      }
+    },
+    methods: {
+      _arrayRange (length) {
+        return Array.from(Array(length).keys())
+      },
+      _arrayDiff (mainArray, filerArray) {
+        return mainArray.filter(x => filerArray.indexOf(x) === -1)
+      },
+      _getPageItemIndexes (page) {
+        if (page === undefined) {
+          return []
+        }
+
+        let indexes = []
+        for (let i = this.perPage * (page - 1); i < this.perPage * page; i++) {
+          indexes.push(i)
+        }
+
+        return indexes
+      },
+      _updateChecks (itemIndexes, isSetCheck) {
+        if (isSetCheck) {
+          itemIndexes.forEach(itemIndex => {
+            if (this.checks.indexOf(itemIndex) === -1) {
+              this.checks.push(itemIndex)
+            }
+          })
+        } else {
+          itemIndexes.forEach(itemIndex => {
+            let index = this.checks.indexOf(itemIndex)
+            if (index !== -1) {
+              this.checks.splice(index, 1)
+            }
+          })
+        }
       }
     }
   }

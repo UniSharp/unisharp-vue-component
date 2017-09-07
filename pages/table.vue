@@ -6,7 +6,7 @@
       :per-page="perPage",
       :current-page="currentPage",
       :height="100",
-      checkAll
+      isCheckAll
     )
     u-pagination(
       :total-rows="totalRows",
@@ -45,8 +45,8 @@
 
   export default {
     components: {
-      'u-table': UTable,
-      'u-pagination': UPagination
+      UTable,
+      UPagination
     },
     data () {
       return {
