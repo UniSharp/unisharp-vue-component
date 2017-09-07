@@ -45,12 +45,13 @@
     },
     data () {
       return {
-        files: []
+        files: [],
+        uploader: null
       }
     },
     methods: {
-      init (uploader) {
-        //
+      init (clip) {
+        this.uploader = clip.uploader._uploader
       },
       addedFile (file) {
         this.files.push(file)
@@ -78,6 +79,9 @@
       },
       maxFilesReached (file) {
         // The event is called when maxFiles upload limit has been reached.
+      },
+      upload () {
+        this.uploader.processQueue()
       }
     },
     watch: {
