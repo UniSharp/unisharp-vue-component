@@ -1,15 +1,21 @@
 <template lang="pug">
   table
-    thead
+    thead(:style="styleObject.thead")
       tr
-        th
+        th(v-if="selection")
           u-checkbox(v-model="checkAlls", :value="currentPage")
-        th(v-for="(value, key) in fields") {{ value.label }}
-    tbody(:style="{ height: height + 'px' }")
+        th(
+          v-for="(value, key) in fields",
+          :style="getCeilWidth(key)"
+        ) {{ value.label }}
+    tbody(:style="styleObject.tbody")
       tr(v-for="(item, i) in computedItems", :key="item.uIndex")
-        td
+        td(v-if="selection")
           u-checkbox(v-model="checks", :value="item.uIndex")
-        td(v-for="(value, key) in fields")
+        td(
+          v-for="(value, key) in fields",
+          :style="getCeilWidth(key)"
+        )
           slot(:index="i", :name="key", value="value")
             | {{ item[key] }}
 </template>
@@ -46,6 +52,10 @@
         type: Boolean,
         default: false
       },
+      selection: {
+        type: Boolean,
+        default: false
+      },
       isCheckAll: {
         type: Boolean,
         default: false
@@ -73,6 +83,25 @@
         }
 
         return items
+      },
+      styleObject () {
+        let thead = {}
+        let tbody = {}
+
+        if (this.height) {
+          thead = {
+            float: 'left',
+            width: '100%'
+          }
+          tbody = {
+            height: this.height + 'px',
+            overflow: 'auto',
+            float: 'left',
+            width: '100%'
+          }
+        }
+
+        return {thead, tbody}
       }
     },
     watch: {
@@ -119,6 +148,11 @@
             }
           })
         }
+      },
+      getCeilWidth (key) {
+        return this.height
+          ? { width: this.fields[key].width || '30%' }
+          : null
       }
     }
   }
