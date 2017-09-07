@@ -39,12 +39,17 @@
           label.col-md-2
             span.title Radio Inline：
           .col-md-10
-            u-radio(name="food4", :options="foods", defaultValue="3")
+            u-radio(name="food1", :options="foods", v-model="form.radio.value")
         .form-group.row
           label.col-md-2
             span.title Radio Stacked：
           .col-md-10
-            u-radio(name="food5", :options="foods", stacked="true")
+            u-radio(name="food2", :options="foods", stacked="true", v-model="form.radio.value")
+        .form-group.row
+          label.col-md-2
+            span.title Radio Inline：
+          .col-md-10
+            input(type="text", :value="showRadioText(form.radio.value)")
         //- Button
         button.btn.btn-primary(type="button") Submit
         button.btn.btn-default(type="reset") Reset
@@ -69,7 +74,10 @@
           name: '',
           food: null,
           checked: false,
-          secret: 'S3CR3T'
+          secret: 'S3CR3T',
+          radio: {
+            value: 1
+          }
         },
         foods: [
           { text: 'Select One', value: null },
@@ -83,20 +91,15 @@
       onSubmit (e) {
         alert(JSON.stringify(this.form))
       },
-      handleChange () {
-        console.log('change')
-      },
-      handleFocus () {
-        console.log('focus')
-      },
-      handleBlur () {
-        console.log('blur')
-      },
-      handleClick () {
-        console.log('click')
-      },
       showSwitchValue (value) {
         console.log(value)
+      },
+      showRadioText (value) {
+        return this.foods.find((food) => {
+          if (food.value === value) {
+            return food
+          }
+        }).text
       }
     },
     watch: {

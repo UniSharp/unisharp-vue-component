@@ -5,13 +5,13 @@
         type="radio",
         :name="name",
         :value="option.value",
-        :checked="defaultValue == option.value",
+        :checked="option.value == value",
         :disabled="disabled ? disabled : option.disabled",
         :required="required",
-        @change="$emit('change')",
-        @focus="$emit('focus')",
-        @blur="$emit('blur')",
-        @click="$emit('click')"
+        @change="$emit('change', option.value)",
+        @focus="$emit('focus', option.value)",
+        @blur="$emit('blur', option.value)",
+        @click="$emit('click', option.value)"
       )
       span.custom-control-indicator
       span.custom-control-description {{ option.text }}
@@ -38,8 +38,8 @@
         required: true,
         default: null
       },
-      defaultValue: {
-        default: 1
+      value: {
+        default: null
       },
       disabled: {
         default: false
@@ -50,6 +50,10 @@
       stacked: {
         default: false
       }
+    },
+    model: {
+      prop: 'value',
+      event: 'change'
     }
   }
 </script>
