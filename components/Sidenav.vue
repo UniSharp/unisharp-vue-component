@@ -1,22 +1,25 @@
 <template lang="pug">
   nav.u-sidenav
     ul.list-unstyled
-      li(:key="index", v-for="(item, index) in list")
+      li(:class="{ active: item.to === $route.path || active == index }", :key="index", v-for="(item, index) in list")
         nuxt-link(:to="item.to", v-if="item.to !== undefined")
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
           | {{ item.title }}
-        a(@click.prevent, href="#", v-else)
+        a(@click.prevent="active = index", href="#", v-else)
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
           | {{ item.title }}
-        ul.list-unstyled.u-sidenav-nested(v-if="item.children")
-          li(:key="index", v-for="(child, index) in item.children")
+        ul.list-unstyled.u-sidenav-nested(v-if="item.children && active == index")
+          li(:class="{ active: child.to === $route.path }", :key="index", v-for="(child, index) in item.children")
             nuxt-link(:to="child.to") {{ child.title }}
 </template>
 
 <script>
+  import _ from 'lodash'
+
   export default {
     data () {
       return {
+        active: null,
         list: [{
           icon: 'file-text-o',
           title: '元件範例',
@@ -42,6 +45,18 @@
           title: '全站設定',
           to: ''
         }]
+      }
+    },
+    computed: {
+      _: () => _
+    },
+    created () {
+      for (let index in this.list) {
+        if (_.find(this.list[index].children, {to: this.$route.path})) {
+          this.active = index
+
+          break
+        }
       }
     }
   }
@@ -81,9 +96,14 @@
       flex-direction: column;
       background-color: $sidebar-bg;
       border-bottom: 1px solid $navbar-bg;
+      transition: background-color .3s ease;
 
       &:first-child {
         border-top: 1px solid $navbar-bg;
+      }
+
+      &:hover, &.active {
+        background-color: darken($sidebar-bg, 5%);
       }
 
       a:hover .fa {
