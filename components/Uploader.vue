@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-uploader
-    vue-clip(:options="options", :on-init="init", :on-added-file="addedFile", :on-removed-file="removedFile", :on-sending="sending", :on-complete="complete", :on-drag-leave="stoppedDragging", :on-drop="drop", :on-total-progress="totalProgress", :on-queue-complete="queueCompleted", :on-max-files="maxFilesReached")
+    vue-clip(:id="id", :name="name",:options="options", :on-init="init", :on-added-file="addedFile", :on-removed-file="removedFile", :on-sending="sending", :on-complete="complete", :on-drag-leave="stoppedDragging", :on-drop="drop", :on-total-progress="totalProgress", :on-queue-complete="queueCompleted", :on-max-files="maxFilesReached")
       template(slot="clip-uploader-action", scope='params')
         div
           .dz-message
@@ -30,31 +30,22 @@
 <script>
   // Refference: http://vueclip.adonisjs.com
   export default {
+    props: {
+      id: {
+        default: null
+      },
+      name: {
+        default: null
+      },
+      options: {
+        type: Object,
+        required: true,
+        default: null
+      }
+    },
     data () {
       return {
-        files: [],
-        options: {
-          url: 'http://mockbin.org/bin/323cf903-c2c8-4cb4-a257-10ee8597d3f0',
-          method: 'post',
-          paramName: 'files',
-          uploadMultiple: true,
-          // acceptedFiles: {
-          //   extensions: ['image/*'],
-          //   message: 'You are uploading an invalid file'
-          // },
-          headers: {},
-          maxFiles: {
-            limit: 5,
-            message: 'You can only upload a max of 5 files'
-          },
-          maxFilesize: {
-            // size in MB
-            limit: 20,
-            message: '{{ filesize }} is greater than the {{ maxFilesize }}'
-          },
-          // Number of files to be uploaded in parallel.
-          parallelUploads: 5
-        }
+        files: []
       }
     },
     methods: {
@@ -77,7 +68,7 @@
         // user stopped dragging the file.
       },
       drop () {
-        // user stopped dragging the file.
+        // This event is invoked when the user drops a file on the vue-clip area.
       },
       totalProgress (progress, totalBytes, bytesSent) {
         // This event returns the total upload progress for all the files. Think of it as the global progress indicator for multiple files uploaded together.
@@ -87,6 +78,11 @@
       },
       maxFilesReached (file) {
         // The event is called when maxFiles upload limit has been reached.
+      }
+    },
+    watch: {
+      files () {
+        // console.log(this.files)
       }
     }
   }

@@ -71,7 +71,7 @@
             label.col-md-2
               span.title File Uploader：
             .col-md-10
-              u-uploader(name="uploader")
+              u-uploader(name="uploader", :options="uploadOptions")
           //- Button
           button.btn.btn-primary(type="button") Submit
           button.btn.btn-default(type="reset") Reset
@@ -110,7 +110,29 @@
           { text: 'Carrots', value: 1 },
           { text: 'Beans', value: 2 },
           { text: 'Corn', value: 3 }
-        ]
+        ],
+        uploadOptions: {
+          url: 'http://mockbin.org/bin/323cf903-c2c8-4cb4-a257-10ee8597d3f0',
+          method: 'post',
+          paramName: 'files',
+          uploadMultiple: true,
+          // acceptedFiles: {
+          //   extensions: ['image/*'],
+          //   message: 'You are uploading an invalid file'
+          // },
+          headers: {},
+          maxFiles: {
+            limit: 5,
+            message: 'You can only upload a max of 5 files'
+          },
+          maxFilesize: {
+            // size in MB
+            limit: 20,
+            message: '{{ filesize }} is greater than the {{ maxFilesize }}'
+          },
+          // Number of files to be uploaded in parallel.
+          parallelUploads: 5
+        }
       }
     },
     methods: {
