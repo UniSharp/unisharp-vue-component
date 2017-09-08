@@ -1,6 +1,7 @@
 <template lang="pug">
   .u-user-dropdown(:class="{ active }")
-    button.btn.btn-link.d-flex.align-items-center.h-100.px-4.u-user-toggle(@click.prevent="active = !active")
+    .u-user-dropdown-backdrop(@click="active = false")
+    button.btn.btn-link.d-flex.align-items-center.h-100.px-4.u-user-toggle(@click.prevent="active = true")
       i.fa.fa-user.mr-2(aria-hidden="true")
       | User
       i.fa.fa-caret-down.ml-2(aria-hidden="true")
@@ -25,6 +26,20 @@
 
 <style lang="scss" scoped>
   @import "~assets/scss/variables";
+
+  .u-user-dropdown-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10000;
+
+    .active & {
+      display: block;
+    }
+  }
 
   .u-user-toggle {
     cursor: pointer;
@@ -57,7 +72,7 @@
     }
 
     .active & {
-      z-index: 1000;
+      z-index: 10002;
       opacity: 1;
 
       a {
