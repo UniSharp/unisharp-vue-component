@@ -71,7 +71,7 @@
             label.col-md-2
               span.title File Uploader：
             .col-md-10
-              u-uploader(name="uploader", :options="uploadOptions")
+              u-uploader(name="uploader", :options="uploadOptions", v-model="files")
           //- Button
           button.btn.btn-primary(type="button") Submit
           button.btn.btn-default(type="reset") Reset
@@ -94,6 +94,7 @@
       return {
         check: 'yes',
         checks: ['1', '2'],
+        files: [],
         form: {
           email: '',
           name: '',
@@ -111,6 +112,7 @@
           { text: 'Beans', value: 2 },
           { text: 'Corn', value: 3 }
         ],
+        // Refference: http://www.dropzonejs.com/#config-url
         uploadOptions: {
           url: 'http://mockbin.org/bin/323cf903-c2c8-4cb4-a257-10ee8597d3f0',
           method: 'post',
@@ -120,6 +122,7 @@
           //   extensions: ['image/*'],
           //   message: 'You are uploading an invalid file'
           // },
+          autoProcessQueue: false,
           headers: {},
           maxFiles: {
             limit: 5,
@@ -159,6 +162,9 @@
       },
       checks (val) {
         console.log(val)
+      },
+      files (files) {
+        console.log(files)
       }
     }
   }
