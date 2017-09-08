@@ -35,7 +35,7 @@
                     .progress-bar(role="progressbar", :style="{width: file.progress + '%'}", :aria-valuenow="file.progress", aria-valuemin="0", aria-valuemax="100")
                 .file-meta
                   .file-size
-                    | Size: {{file.size}} Bytes
+                    | Size: {{convertBytes(file.size)}}
                   .file-status
                     | Status: {{file.status}}
                 .file-remove
@@ -105,7 +105,7 @@
         // The event is called when all files in the queue have been uploaded to the server.
         this.uploading = false
         this.finish = true
-        this.$emit('completed')
+        this.$emit('finish')
       },
       maxFilesReached (file) {
         // The event is called when maxFiles upload limit has been reached.
@@ -122,6 +122,19 @@
       },
       removedFile (file) {
         this.$emit('removedFile', file)
+      },
+      reset () {
+        this.files = []
+        this.uploading = false
+        this.finish = false
+      },
+      convertBytes (bytes) {
+        let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
+        if (bytes === 0) {
+          return '0 Byte'
+        }
+        let i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i]
       }
     },
     watch: {
