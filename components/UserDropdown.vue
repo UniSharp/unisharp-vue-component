@@ -1,6 +1,6 @@
 <template lang="pug">
-  .u-user-dropdown
-    button.btn.btn-link.d-flex.align-items-center.h-100.px-4.u-user-toggle
+  .u-user-dropdown(:class="{ active }")
+    button.btn.btn-link.d-flex.align-items-center.h-100.px-4.u-user-toggle(@click.prevent="active = !active")
       i.fa.fa-user.mr-2(aria-hidden="true")
       | User
       i.fa.fa-caret-down.ml-2(aria-hidden="true")
@@ -15,6 +15,11 @@
 
 <script>
   export default {
+    data () {
+      return {
+        active: false
+      }
+    }
   }
 </script>
 
@@ -23,23 +28,41 @@
 
   .u-user-toggle {
     cursor: pointer;
-  }
-
-  .u-user-toggle {
     border: 0 solid rgba(255, 255, 255, .1);
     border-width: 0 1px;
     background-color: $navbar-bg;
     transition: color .3s ease, background-color .3s ease;
     text-decoration: none;
+
+    &:hover, .active & {
+      background-color: $sidebar-bg;
+    }
   }
 
-  .u-user-toggle:hover + .dropdown-menu, .dropdown-menu:hover {
-    display: block;
+  .dropdown-menu {
     left: inherit;
     right: 1.5rem;
     top: 100%;
     border-top: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    display: block;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity .3s ease;
+
+    a {
+      transform: translateY(-10px);
+      transition: transform .3s cubic-bezier(.25, .8, .5, 1);
+    }
+
+    .active & {
+      z-index: 1000;
+      opacity: 1;
+
+      a {
+        transform: translateY(0);
+      }
+    }
   }
 </style>

@@ -1,6 +1,6 @@
 <template lang="pug">
   nav.u-sidenav
-    ul.list-unstyled
+    ul.list-unstyled.mb-0
       li(:class="{ active: item.to === $route.path || active === index }", :key="index", v-for="(item, index) in list")
         nuxt-link(:to="item.to", v-if="item.to !== undefined")
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
