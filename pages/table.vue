@@ -10,8 +10,6 @@
       selection,
       isCheckAll
     )
-      template(slot="operation")
-        button
     u-pagination(
       :total-rows="totalRows",
       :per-page="perPage",
@@ -26,7 +24,7 @@
   import UPagination from '~/components/Pagination.vue'
 
   const items = [
-    { isActive: true, age: 1, first_name: 'Dickerson', last_name: 'Macdonald', button: 'button' },
+    { isActive: true, age: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
     { isActive: false, age: 2, first_name: 'Larsen', last_name: 'Shaw' },
     { isActive: false, age: 3, first_name: 'Geneva', last_name: 'Wilson' },
     { isActive: true, age: 4, first_name: 'Jami', last_name: 'Carney' },
