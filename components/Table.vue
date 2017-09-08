@@ -64,9 +64,9 @@
     data () {
       return {
         checkAlls: this.isCheckAll
-          ? this._arrayRange(Math.ceil(this.items.length / this.perPage)).map(v => v + 1)
+          ? this.arrayRange(Math.ceil(this.items.length / this.perPage)).map(v => v + 1)
           : [],
-        checks: this.isCheckAll ? this._arrayRange(this.items.length) : []
+        checks: this.isCheckAll ? this.arrayRange(this.items.length) : []
       }
     },
     computed: {
@@ -106,12 +106,12 @@
     },
     methods: {
       changeCheckAll () {
-        let checkItems = this._getPageItemIndexes(this.currentPage)
+        let checkItems = this.getPageItemIndexes(this.currentPage)
         let checkOrNot = this.checkAlls.indexOf(this.currentPage) > -1
-        this._updateChecks(checkItems, checkOrNot)
+        this.updateChecks(checkItems, checkOrNot)
       },
       changeCheck () {
-        let itemIndexes = this._getPageItemIndexes(this.currentPage)
+        let itemIndexes = this.getPageItemIndexes(this.currentPage)
         let isAllItemsCheck = itemIndexes.every((itemIndex) => {
           return this.checks.indexOf(itemIndex) > -1
         })
@@ -128,13 +128,13 @@
           ? { width: this.fields[key].width || '30%' }
           : null
       },
-      _arrayRange (length) {
+      arrayRange (length) {
         return Array.from(Array(length).keys())
       },
-      _arrayDiff (mainArray, filerArray) {
+      arrayDiff (mainArray, filerArray) {
         return mainArray.filter(x => filerArray.indexOf(x) === -1)
       },
-      _getPageItemIndexes (page) {
+      getPageItemIndexes (page) {
         if (page === undefined) {
           return []
         }
@@ -148,7 +148,7 @@
 
         return indexes
       },
-      _updateChecks (itemIndexes, isSetCheck) {
+      updateChecks (itemIndexes, isSetCheck) {
         if (isSetCheck) {
           itemIndexes.forEach(itemIndex => {
             if (this.checks.indexOf(itemIndex) === -1) {
