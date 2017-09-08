@@ -1,14 +1,15 @@
 <template lang="pug">
   nav.u-sidenav
     ul.list-unstyled
-      li(:class="{ active: item.to === $route.path || active == index }", :key="index", v-for="(item, index) in list")
+      li(:class="{ active: item.to === $route.path || active === index }", :key="index", v-for="(item, index) in list")
         nuxt-link(:to="item.to", v-if="item.to !== undefined")
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
-          | {{ item.title }}
-        a(@click.prevent="active = index", href="#", v-else)
+          span {{ item.title }}
+        a(@click.prevent="active = active === index ? -1 : index", href="#", v-else)
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
-          | {{ item.title }}
-        ul.list-unstyled.u-sidenav-nested(v-if="item.children && active == index")
+          span.mr-auto {{ item.title }}
+          i.fa.fa-angle-left(aria-hidden="true")
+        ul.list-unstyled.u-sidenav-nested(:style="`height: ${35 * item.children.length - 1}px`", v-if="item.children")
           li(:class="{ active: child.to === $route.path }", :key="index", v-for="(child, index) in item.children")
             nuxt-link(:to="child.to") {{ child.title }}
 </template>
@@ -19,7 +20,7 @@
   export default {
     data () {
       return {
-        active: null,
+        active: -1,
         list: [{
           icon: 'file-text-o',
           title: '元件範例',
@@ -51,9 +52,9 @@
       _: () => _
     },
     created () {
-      for (let index in this.list) {
-        if (_.find(this.list[index].children, {to: this.$route.path})) {
-          this.active = index
+      for (let i = 0; i < this.list.length; i++) {
+        if (_.find(this.list[i].children, {to: this.$route.path})) {
+          this.active = i
 
           break
         }
@@ -73,7 +74,7 @@
     .fa {
       width: 1rem;
       text-align: center;
-      margin: 0 .5rem 0 1rem;
+      margin-right: .5rem;
     }
 
     a {
@@ -98,23 +99,40 @@
       border-bottom: 1px solid $navbar-bg;
       transition: background-color .3s ease;
 
+      > a {
+        padding: 0 .5rem 0 1rem;
+      }
+
       &:first-child {
         border-top: 1px solid $navbar-bg;
+      }
+
+      .fa:last-child, a:hover .fa:first-child {
+        transition: transform .5s cubic-bezier(.25, .8, .5, 1);
       }
 
       &:hover, &.active {
         background-color: darken($sidebar-bg, 5%);
       }
 
-      a:hover .fa {
-        transition: transform .5s cubic-bezier(.25, .8, .5, 1);
+      &:not(.active) .u-sidenav-nested {
+        height: 0 !important;
+      }
+
+      &.active .fa:last-child {
+        transform: rotate(-90deg);
+      }
+
+      a:hover .fa:first-child {
         transform: rotate(-360deg);
       }
     }
 
     .u-sidenav-nested {
+      overflow: hidden;
+      transition: height .5s cubic-bezier(.25, .8, .5, 1);
+
       li {
-        padding-left: 2.5rem;
         background-color: darken($sidebar-bg, 5%);
         transition: background-color .3s ease;
 
@@ -123,6 +141,7 @@
         }
 
         a {
+          padding-left: 2.5rem;
           height: $item-height - 10px;
         }
 
