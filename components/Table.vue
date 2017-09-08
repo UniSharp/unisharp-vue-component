@@ -15,7 +15,7 @@
     tbody(:style="styleObject.tbody")
       tr(v-for="(item, i) in rows", :key="item.uIndex")
         td(v-if="selection")
-          u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck()")
+          u-checkbox(v-model="checks", :value="i", @change="changeCheck")
         td(
           v-for="(value, key) in fields",
           :style="getCeilWidth(key)"
@@ -68,8 +68,14 @@
       orderBy: {
         type: String
       },
-      orderDesc: false,
-      sortable: true
+      orderDesc: {
+        type: Boolean,
+        default: false
+      },
+      sortable: {
+        type: Boolean,
+        default: false
+      }
     },
     data () {
       return {
