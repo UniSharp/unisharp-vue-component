@@ -5,11 +5,15 @@
         th(v-if="selection")
           u-checkbox(v-model="checkAlls", :value="currentPage", @change="changeCheckAll")
         th(
+          class="{ sortable }",
           v-for="(value, key) in fields",
-          :style="getCeilWidth(key)"
-        ) {{ value.label }}
+          :style="getCeilWidth(key)",
+          @click="order = key; desc = !desc"
+        )
+          | {{ value.label }}
+          i.fa(:class="{'fa-angle-down': !desc, 'fa-angle-up': desc}", v-if="order === key")
     tbody(:style="styleObject.tbody")
-      tr(v-for="(item, i) in computedItems", :key="item.uIndex")
+      tr(v-for="(item, i) in rows", :key="item.uIndex")
         td(v-if="selection")
           u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck()")
         td(
@@ -22,6 +26,7 @@
 
 <script>
   import UCheckbox from '~/components/Checkbox'
+  import _ from 'lodash'
 
   export default {
     components: {
@@ -59,27 +64,30 @@
       isCheckAll: {
         type: Boolean,
         default: false
-      }
+      },
+      orderBy: {
+        type: String
+      },
+      orderDesc: false,
+      sortable: true
     },
     data () {
       return {
         checkAlls: this.isCheckAll
           ? this.arrayRange(Math.ceil(this.items.length / this.perPage)).map(v => v + 1)
           : [],
-        checks: this.isCheckAll ? this.arrayRange(this.items.length) : []
+        checks: this.isCheckAll ? this.arrayRange(this.items.length) : [],
+        order: this.orderBy,
+        desc: this.orderDesc
       }
     },
     computed: {
-      computedItems () {
-        let items = this.items
-
+      rows () {
+        let items = _.orderBy(this.items, [this.order], [this.desc ? 'desc' : 'asc'])
         if (this.perPage) {
           let start = (this.currentPage - 1) * this.perPage
           let end = start + this.perPage
           items = items.slice(start, end)
-          items.forEach((item, index) => {
-            item.uIndex = start + index
-          })
         }
 
         return items
@@ -168,13 +176,23 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
   table {
     width: 100%;
 
     tbody {
       overflow: auto;
       height: 100%;
+    }
+  }
+
+  .sortable {
+    cursor: pointer;
+
+    i {
+      margin-left: .25em;
+      margin-right: .25em;
     }
   }
 </style>

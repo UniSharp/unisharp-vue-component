@@ -7,6 +7,7 @@
       :per-page="perPage",
       :current-page="currentPage",
       :height="100",
+      order-by="last_name"
       selection,
       isCheckAll
     )
