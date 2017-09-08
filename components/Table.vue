@@ -20,7 +20,7 @@
           v-for="(value, key) in fields",
           :style="getCeilWidth(key)"
         )
-          slot(:index="i", :name="key", value="value")
+          slot(:index="i", :name="key", :value="value")
             | {{ item[key] }}
 </template>
 
