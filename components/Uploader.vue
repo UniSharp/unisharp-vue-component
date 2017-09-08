@@ -118,7 +118,6 @@
       },
       remove (key) {
         this.files.splice(key, 1)
-        this.$emit('change', this.files)
       },
       removedFile (file) {
         this.$emit('removedFile', file)
