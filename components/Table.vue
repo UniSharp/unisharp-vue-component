@@ -15,7 +15,7 @@
     tbody(:style="styleObject.tbody")
       tr(v-for="(item, i) in rows", :key="item.uIndex")
         td(v-if="selection")
-          u-checkbox(v-model="checks", :value="i", @change="changeCheck")
+          u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck")
         td(
           v-for="(value, key) in fields",
           :style="getCeilWidth(key)"
@@ -94,6 +94,10 @@
           let start = (this.currentPage - 1) * this.perPage
           let end = start + this.perPage
           items = items.slice(start, end)
+
+          items.forEach((item, index) => {
+            item.uIndex = start + index
+          })
         }
 
         return items
@@ -139,7 +143,7 @@
       },
       getCeilWidth (key) {
         return this.height
-          ? { width: this.fields[key].width || '30%' }
+          ? { width: this.fields[key].width || '200px' }
           : null
       },
       arrayRange (length) {
@@ -177,6 +181,11 @@
             }
           })
         }
+      },
+      showCheckItems () {
+        return this.items.filter((item, index) => {
+          return this.checks.indexOf(index) !== -1
+        })
       }
     }
   }
