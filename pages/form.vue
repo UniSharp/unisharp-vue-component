@@ -73,8 +73,8 @@
             .col-md-10
               u-uploader(name="uploader", :options="uploadOptions", v-model="files")
           //- Button
-          button.btn.btn-primary(type="button") Submit
-          button.btn.btn-default(type="reset") Reset
+          input.btn.btn-primary.mr-2(type="button", value="Submit")
+          input.btn.btn-default(type="button", value="Reset")
   </template>
 
 <script>
