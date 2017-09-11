@@ -8,7 +8,7 @@
           h4.card-title Special title treatment
           p.card-text With supporting text below as a natural lead-in to additional content.
           .card-actions
-            a.btn.btn-secondary.btn-lg(href="#") Secondary Button
+            a.btn.btn-info.btn-lg(href="#") Info Button
             a.btn.btn-primary.btn-lg(href="#") Primary Button
       form.card.w-100
         h4.card-header Form
@@ -22,7 +22,7 @@
             .col-sm-10
               input#inputPassword.form-control(type="password", placeholder="Password")
           .card-actions
-            button.btn.btn-secondary.btn-lg Cancel
+            button.btn.btn-info.btn-lg Cancel
             button.btn.btn-primary.btn-lg Submit
 </template>
 
