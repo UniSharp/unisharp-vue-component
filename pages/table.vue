@@ -17,7 +17,7 @@
       :per-page="perPage",
       v-model="currentPage"
     )
-    button.btn.btn-primary(type="button", @click.stop="showCheckItems") Get Checked Items
+    button.btn.btn-primary(type="button", @click.stop="showCheckItems") Get Checked Items of Current Page
 </template>
 
 <script>
