@@ -5,6 +5,15 @@
 .card-body {
   padding: $card-spacer-y $card-spacer-x;
 
+  .card-text:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .card-actions {
+    text-align: center;
+    padding-top: $card-spacer-x;
+  }
+
   .card-link + .card-link {
     margin-left: 1rem;
   }

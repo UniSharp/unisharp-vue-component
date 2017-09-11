@@ -7,15 +7,17 @@
         .card-body
           h4.card-title Special title treatment
           p.card-text With supporting text below as a natural lead-in to additional content.
-          a.btn.btn-secondary(href="#") Go somewhere
-          a.btn.btn-primary(href="#") Go somewhere
+          .card-actions
+            a.btn.btn-secondary(href="#") Secondary Button
+            a.btn.btn-primary(href="#") Primary Button
       .card.w-100
         .card-body
           h4.card-title Card title
           h6.card-subtitle.mb-2.text-muted Card subtitle
           p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-          a.card-link(href="#") Card link
-          a.card-link(href="#") Another link
+          .card-actions
+            a.card-link(href="#") Card link
+            a.card-link(href="#") Another link
 </template>
 
 <script>
