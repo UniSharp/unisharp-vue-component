@@ -35,6 +35,7 @@
       UCheckbox
     },
     props: {
+      filter: {},
       items: {
         type: Array,
         default: []
@@ -99,6 +100,12 @@
         items.forEach((item, index) => {
           item.uIndex = index
         })
+
+        if (typeof this.filter !== 'undefined') {
+          console.log('filtered')
+          items = _.filter(items, this.filter)
+          this.$emit('filtered', items)
+        }
 
         if (this.perPage) {
           let start = (this.currentPage - 1) * this.perPage

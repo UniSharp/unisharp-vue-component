@@ -10,7 +10,9 @@
       :height="100",
       order-by="last_name"
       selection,
-      isCheckAll
+      isCheckAll,
+      :filter="filter",
+      @filtered="onFiltered"
     )
       template(slot="operation", scope="data")
         button.btn(type="button", @click.stop="showClickButton(data.value.age)") {{ data.value.age }}
@@ -28,7 +30,7 @@
   import UTable from '~/components/Table.vue'
   import UPagination from '~/components/Pagination.vue'
 
-  const items = [
+  let items = [
     { age: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
     { age: 2, first_name: 'Larsen', last_name: 'Shaw' },
     { age: 3, first_name: 'Geneva', last_name: 'Wilson' },
@@ -76,7 +78,8 @@
         },
         currentPage: 1,
         perPage: 5,
-        totalRows: items.length
+        totalRows: items.length,
+        filter: { age: 1 }
       }
     },
     methods: {
@@ -85,6 +88,12 @@
       },
       showClickButton (age) {
         alert(age)
+        console.log(this.$refs.table.showCheckItems())
+      },
+      onFiltered (items) {
+        // console.log(items)
+        this.totalRows = items.length
+        this.currentPage = 1
       }
     }
   }
