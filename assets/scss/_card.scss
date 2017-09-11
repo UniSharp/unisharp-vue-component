@@ -1,0 +1,15 @@
+.card {
+  border: none;
+}
+
+.card-body {
+  padding: $card-spacer-y $card-spacer-x;
+
+  .card-link + .card-link {
+    margin-left: 1rem;
+  }
+
+  .btn + .btn {
+    margin-left: 1rem;
+  }
+}
