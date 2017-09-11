@@ -21,7 +21,7 @@
             v-for="(value, key) in fields",
             :style="getCeilStyle(key)"
           )
-            slot(:index="i", :name="key", :value="value")
+            slot(:index="i", :name="key", :value="item[key]")
               | {{ item[key] }}
 </template>
 
