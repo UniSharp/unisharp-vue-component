@@ -9,9 +9,18 @@
     margin-bottom: 0;
   }
 
+  .form-group + .card-actions {
+    margin-top: $form-group-margin-bottom * -1;
+  }
+
   .card-actions {
     text-align: center;
     padding-top: $card-spacer-x;
+
+    .btn.btn-primary.btn-lg {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
   }
 
   .card-link + .card-link {

@@ -8,16 +8,22 @@
           h4.card-title Special title treatment
           p.card-text With supporting text below as a natural lead-in to additional content.
           .card-actions
-            a.btn.btn-secondary(href="#") Secondary Button
-            a.btn.btn-primary(href="#") Primary Button
-      .card.w-100
+            a.btn.btn-secondary.btn-lg(href="#") Secondary Button
+            a.btn.btn-primary.btn-lg(href="#") Primary Button
+      form.card.w-100
+        h4.card-header Form
         .card-body
-          h4.card-title Card title
-          h6.card-subtitle.mb-2.text-muted Card subtitle
-          p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+          .form-group.row
+            label.col-sm-2.col-form-label(for="staticEmail") Email
+            .col-sm-10
+              input#staticEmail.form-control-plaintext(type="text", value="email@example.com", readonly)
+          .form-group.row
+            label.col-sm-2.col-form-label(for="inputPassword") Password
+            .col-sm-10
+              input#inputPassword.form-control(type="password", placeholder="Password")
           .card-actions
-            a.card-link(href="#") Card link
-            a.card-link(href="#") Another link
+            button.btn.btn-secondary.btn-lg Cancel
+            button.btn.btn-primary.btn-lg Submit
 </template>
 
 <script>
