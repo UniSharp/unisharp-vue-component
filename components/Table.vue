@@ -1,27 +1,28 @@
 <template lang="pug">
-  table
-    thead(:style="styleObject.thead")
-      tr
-        th(v-if="selection")
-          u-checkbox(v-model="checkAlls", :value="currentPage", @change="changeCheckAll")
-        th(
-          class="{ sortable }",
-          v-for="(value, key) in fields",
-          :style="getCeilWidth(key)",
-          @click="order = key; desc = !desc"
-        )
-          | {{ value.label }}
-          i.fa(:class="{'fa-angle-down': !desc, 'fa-angle-up': desc}", v-if="order === key")
-    tbody(:style="styleObject.tbody")
-      tr(v-for="(item, i) in rows", :key="item.uIndex")
-        td(v-if="selection")
-          u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck")
-        td(
-          v-for="(value, key) in fields",
-          :style="getCeilWidth(key)"
-        )
-          slot(:index="i", :name="key", :value="value")
-            | {{ item[key] }}
+  .u-table(:style="styleObject.div")
+    table
+      thead(:style="styleObject.thead")
+        tr
+          th(v-if="selection", :style="getCheckboxStyel()")
+            u-checkbox(v-model="checkAlls", :value="currentPage", @change="changeCheckAll")
+          th(
+            class="{ sortable }",
+            v-for="(value, key) in fields",
+            :style="getCeilStyle(key)",
+            @click="sortColumn(key)"
+          )
+            | {{ value.label }}
+            i.fa(:class="{'fa-angle-down': !desc, 'fa-angle-up': desc}", v-if="order === key")
+      tbody(:style="styleObject.tbody")
+        tr(v-for="(item, i) in rows", :key="item.uIndex")
+          td(v-if="selection", :style="getCheckboxStyel()")
+            u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck")
+          td(
+            v-for="(value, key) in fields",
+            :style="getCeilStyle(key)"
+          )
+            slot(:index="i", :name="key", :value="value")
+              | {{ item[key] }}
 </template>
 
 <script>
@@ -53,6 +54,10 @@
         type: Number,
         default: null
       },
+      width: {
+        type: Number,
+        default: null
+      },
       fiexedFirstColumn: {
         type: Boolean,
         default: false
@@ -79,9 +84,9 @@
     },
     data () {
       return {
-        checkAlls: this.isCheckAll
+        checkAlls: (this.isCheckAll && this.perPage)
           ? this.arrayRange(Math.ceil(this.items.length / this.perPage)).map(v => v + 1)
-          : [],
+          : [1],
         checks: this.isCheckAll ? this.arrayRange(this.items.length) : [],
         order: this.orderBy,
         desc: this.orderDesc
@@ -90,21 +95,32 @@
     computed: {
       rows () {
         let items = _.orderBy(this.items, [this.order], [this.desc ? 'desc' : 'asc'])
+        items.forEach((item, index) => {
+          item.uIndex = index
+        })
+
         if (this.perPage) {
           let start = (this.currentPage - 1) * this.perPage
           let end = start + this.perPage
           items = items.slice(start, end)
-
-          items.forEach((item, index) => {
-            item.uIndex = start + index
-          })
         }
 
         return items
       },
       styleObject () {
+        let div = {}
         let thead = {}
         let tbody = {}
+
+        if (this.width) {
+          div = {
+            width: `${this.width}px`,
+            'overflow-x': 'scroll',
+            'margin-left': this.fields[Object.keys(this.fields)[0]].width,
+            'overflow-y': 'visible',
+            padding: 0
+          }
+        }
 
         if (this.height) {
           thead = {
@@ -119,7 +135,7 @@
           }
         }
 
-        return {thead, tbody}
+        return {div, thead, tbody}
       }
     },
     methods: {
@@ -141,10 +157,32 @@
           this.checkAlls.splice(index, 1)
         }
       },
-      getCeilWidth (key) {
-        return this.height
-          ? { width: this.fields[key].width || '200px' }
-          : null
+      getCheckboxStyel () {
+        if (this.width) {
+          return {
+            position: 'absolute',
+            left: 0,
+            'border-bottom': 0
+          }
+        }
+      },
+      getCeilStyle (key) {
+        if (this.width && key === Object.keys(this.fields)[0]) {
+          return {
+            position: 'absolute',
+            width: this.fields[key].width,
+            left: this.selection ? '64px' : 0
+          }
+        }
+
+        if (this.height || this.width) {
+          return {
+            width: this.fields[key].width || '200px',
+            'white-space': 'nowrap'
+          }
+        }
+
+        return null
       },
       arrayRange (length) {
         return Array.from(Array(length).keys())
@@ -157,10 +195,14 @@
           return []
         }
 
+        if (this.perPage === null) {
+          return this.arrayRange(this.items.length)
+        }
+
         let indexes = []
-        let i = this.perPage * (page - 1)
-        let length = (this.perPage * page) < this.items.length ? (this.perPage * page) : this.items.length
-        for (; i < length; i++) {
+        let start = this.perPage * (page - 1)
+        let end = (this.perPage * page) < this.items.length ? (this.perPage * page) : this.items.length
+        for (let i = start; i < end; i++) {
           indexes.push(i)
         }
 
@@ -183,25 +225,23 @@
         }
       },
       showCheckItems () {
-        return this.items.filter((item, index) => {
+        let items = _.orderBy(this.items, [this.order], [this.desc ? 'desc' : 'asc'])
+        return items.filter((item, index) => {
           return this.checks.indexOf(index) !== -1
         })
+      },
+      sortColumn (key) {
+        this.order = key
+        this.desc = !this.desc
+        // clear all checked items when sort
+        this.checks = []
+        this.checkAlls = []
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-
-  table {
-    width: 100%;
-
-    tbody {
-      overflow: auto;
-      height: 100%;
-    }
-  }
-
   .sortable {
     cursor: pointer;
 
