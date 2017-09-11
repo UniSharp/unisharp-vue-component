@@ -109,6 +109,7 @@
       },
       maxFilesReached (file) {
         // The event is called when maxFiles upload limit has been reached.
+        this.remove(this.files.length - 1)
         this.$emit('maxFilesReached', file)
       },
       upload () {
