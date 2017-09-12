@@ -3,19 +3,20 @@
     table
       thead(:style="styleObject.thead")
         tr
-          th(v-if="selection", :style="getCheckboxStyel()")
+          th(v-if="selection", :style="getCheckboxStyle()")
             u-checkbox(v-model="checkAlls", :value="currentPage", @change="changeCheckAll")
           th(
-            class="{ sortable }",
+            :class="{ sortable }",
             v-for="(value, key) in fields",
             :style="getCeilStyle(key)",
             @click="sortColumn(key)"
           )
             | {{ value.label }}
-            i.fa(:class="{'fa-angle-down': !desc, 'fa-angle-up': desc}", v-if="order === key")
+            i.fa(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="order === key")
+            i.fa(:class="{'fa-sort': true}", v-if="order !==key")
       tbody(:style="styleObject.tbody")
         tr(v-for="(item, i) in rows", :key="item.uIndex")
-          td(v-if="selection", :style="getCheckboxStyel()")
+          td(v-if="selection", :style="getCheckboxStyle()")
             u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck")
           td(
             v-for="(value, key) in fields",
@@ -79,7 +80,7 @@
       },
       sortable: {
         type: Boolean,
-        default: false
+        default: true
       }
     },
     data () {
@@ -157,7 +158,7 @@
           this.checkAlls.splice(index, 1)
         }
       },
-      getCheckboxStyel () {
+      getCheckboxStyle () {
         if (this.width) {
           return {
             position: 'absolute',
