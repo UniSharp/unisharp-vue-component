@@ -1,29 +1,11 @@
 <template lang="pug">
   u-admin
     u-breadcrumb(slot="breadcrumb")
-    .container.d-flex.flex-column.align-items-center.justify-content-center
-      .card.w-100
-        h4.card-header Featured
-        .card-body
-          h4.card-title Special title treatment
-          p.card-text With supporting text below as a natural lead-in to additional content.
-          .card-actions
-            a.btn.btn-info.btn-lg(href="#") Info Button
-            a.btn.btn-primary.btn-lg(href="#") Primary Button
-      form.card.w-100
-        h4.card-header Form
-        .card-body
-          .form-group.row
-            label.col-sm-2.col-form-label(for="staticEmail") Email
-            .col-sm-10
-              input#staticEmail.form-control-plaintext(type="text", value="email@example.com", readonly)
-          .form-group.row
-            label.col-sm-2.col-form-label(for="inputPassword") Password
-            .col-sm-10
-              input#inputPassword.form-control(type="password", placeholder="Password")
-          .card-actions
-            button.btn.btn-info.btn-lg Cancel
-            button.btn.btn-primary.btn-lg Submit
+    .container.d-flex.align-items-center.justify-content-center
+      .logo
+      .text.d-flex.flex-column.justify-content-center
+        h1 BLUE
+        h1 ADMIN
 </template>
 
 <script>
@@ -36,7 +18,52 @@
 </script>
 
 <style lang="scss" scoped>
-  .card + .card {
-    margin-top: 2rem;
+  $logo-size: 5.5rem;
+  $square-size: $logo-size * .34375;
+  $trangle-size: $logo-size * .28125;
+  $square-position: ($logo-size - $square-size) / 2;
+  $trangle-position: ($logo-size - $trangle-size) / 2;
+
+  .logo {
+    position: relative;
+    width: $logo-size;
+    height: $logo-size;
+    border-radius: 50%;
+    background-color: #7ac5c1;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: $square-size;
+      height: $square-size;
+      top: $square-position;
+      left: $square-position;
+      background-color: #e1e9eb;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: $trangle-position;
+      right: $square-position;
+      border-top: $trangle-size / 2 solid transparent;
+      border-bottom: $trangle-size / 2 solid transparent;
+      border-right: $trangle-size / 2 solid #7ac5c1;
+    }
+  }
+
+  h1 {
+    margin-bottom: 0;
+    margin-left: 1.5rem;
+    font-size: 2.5rem;
+    letter-spacing: .2rem;
+    font-family: Arial;
+  }
+
+  .container {
+    margin: -1.5rem;
+    height: calc(100vh - 153px);
   }
 </style>
