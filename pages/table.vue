@@ -83,6 +83,13 @@
       }
     },
     methods: {
+      provider (context) {
+        console.log(context)
+        return [
+          { age: 7, first_name: 'Mitzi', last_name: 'Navarro' },
+          { age: 8, first_name: 'Genevive', last_name: 'Wilson' }
+        ]
+      },
       showCheckItems () {
         alert(JSON.stringify(this.$refs.table.showCheckItems()))
       },

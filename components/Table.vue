@@ -40,6 +40,9 @@
         type: Array,
         default: []
       },
+      provider: {
+        default: null
+      },
       fields: {
         type: Object,
         default: null
@@ -96,6 +99,15 @@
     },
     computed: {
       rows () {
+        if (this.provider !== null) {
+          return this.provider({
+            currentPage: this.currentPage,
+            perPage: this.perPage,
+            filter: this.filter,
+            orderBy: this.order,
+            orderDesc: this.desc
+          })
+        }
         let items = _.orderBy(this.items, [this.order], [this.desc ? 'desc' : 'asc'])
         items.forEach((item, index) => {
           item.uIndex = index
