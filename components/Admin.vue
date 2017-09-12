@@ -62,7 +62,7 @@
 
     main {
       overflow-x: hidden;
-      overflow-y: scroll;
+      overflow-y: auto;
     }
   }
 </style>
