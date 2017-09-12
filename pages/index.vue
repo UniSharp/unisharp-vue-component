@@ -63,7 +63,7 @@
   }
 
   .container {
-    margin: -1.5rem;
+    margin: -1.5rem auto;
     height: calc(100vh - 153px);
   }
 </style>
