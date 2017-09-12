@@ -114,7 +114,7 @@
         })
 
         if (typeof this.filter !== 'undefined') {
-          console.log('filtered')
+          // console.log('filtered')
           items = _.filter(items, this.filter)
           this.$emit('filtered', items)
         }

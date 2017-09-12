@@ -1,6 +1,11 @@
 <template lang="pug">
   u-admin
     u-breadcrumb(slot="breadcrumb")
+    form
+      .form-group.row
+        label.col-md-1.col-form-label Filter：
+        .col-md-2
+          input.form-control.pull-left(type='text', placeholder='Type to filter', v-model="filterText")
     u-table.table.table-hover(
       ref="table",
       :items="items",
@@ -25,6 +30,7 @@
 </template>
 
 <script>
+  // import _ from 'lodash'
   import UAdmin from '~/components/Admin'
   import UBreadcrumb from '~/components/Breadcrumb'
   import UTable from '~/components/Table.vue'
@@ -60,6 +66,7 @@
     data () {
       return {
         items: items,
+        filterText: '',
         fields: {
           last_name: {
             label: 'Person last name',
@@ -78,8 +85,7 @@
         },
         currentPage: 1,
         perPage: 5,
-        totalRows: items.length,
-        filter: { age: 1 }
+        totalRows: items.length
       }
     },
     methods: {
@@ -98,9 +104,13 @@
         console.log(this.$refs.table.showCheckItems())
       },
       onFiltered (items) {
-        // console.log(items)
+        console.log(items)
         this.totalRows = items.length
-        this.currentPage = 1
+        // TODO: fix current page while filtering
+        // this.currentPage = 1
+      },
+      filter (item) {
+        return item.last_name.indexOf(this.filterText) !== -1
       }
     }
   }
