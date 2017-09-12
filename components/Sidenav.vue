@@ -30,6 +30,9 @@
           }, {
             title: 'Card',
             to: '/guide/card'
+          }, {
+            title: 'Table',
+            to: '/guide/table'
           }]
         }, {
           icon: 'file-text-o',
@@ -79,8 +82,6 @@
   $item-height: 44px;
 
   .u-sidenav {
-    font-weight: 300;
-
     .fa {
       width: 1rem;
       text-align: center;

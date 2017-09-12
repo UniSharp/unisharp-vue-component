@@ -213,7 +213,7 @@ $font-size-md: 1rem;
 $font-size-sm: .875rem;
 
 // $font-weight-light: 300;
-// $font-weight-normal: normal;
+$font-weight-normal: 300;
 // $font-weight-bold: bold;
 
 // $font-weight-base: $font-weight-normal;
@@ -272,19 +272,19 @@ $font-size-sm: .875rem;
 //
 // Customizes the `.table` component with basic values, each used across all table variations.
 
-// $table-cell-padding: .75rem;
+$table-cell-padding: 1rem;
 // $table-cell-padding-sm: .3rem;
 
-// $table-bg: transparent;
-// $table-accent-bg: rgba($black,.05);
+$table-bg: $gray-100;
+$table-accent-bg: #eef2f3;
 // $table-hover-bg: rgba($black,.075);
 // $table-active-bg: $table-hover-bg;
 
 // $table-border-width: $border-width;
-// $table-border-color: $gray-200;
+$table-border-color: $gray-300;
 
-// $table-head-bg: $gray-200;
-// $table-head-color: $gray-700;
+$table-head-bg: $gray-100;
+$table-head-color: $body-color;
 
 // $table-inverse-bg: $gray-900;
 // $table-inverse-accent-bg: rgba($white, .05);

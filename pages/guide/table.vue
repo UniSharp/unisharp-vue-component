@@ -1,0 +1,43 @@
+<template lang="pug">
+  u-admin
+    u-breadcrumb(slot="breadcrumb")
+    .container
+      table.table.table-bordered.table-striped.text-center
+        thead
+          tr
+            th #
+            th First Name
+            th Last Name
+            th Username
+        tbody
+          tr
+            th(scope="row") 1
+            td Mark
+            td Otto
+            td @mdo
+          tr
+            th(scope="row") 2
+            td Jacob
+            td Thornton
+            td @fat
+          tr
+            th(scope="row") 3
+            td Larry
+            td the Bird
+            td @twitter
+</template>
+
+<script>
+  import UAdmin from '~/components/Admin'
+  import UBreadcrumb from '~/components/Breadcrumb'
+
+  export default {
+    components: { UAdmin, UBreadcrumb }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .table {
+    margin-bottom: 0;
+  }
+</style>
