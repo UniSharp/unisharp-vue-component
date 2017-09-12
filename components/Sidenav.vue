@@ -23,6 +23,13 @@
         active: -1,
         list: [{
           icon: 'file-text-o',
+          title: 'Style Guide',
+          children: [{
+            title: 'Buttons',
+            to: '/button'
+          }]
+        }, {
+          icon: 'file-text-o',
           title: '元件範例',
           children: [{
             title: '表單元件',
