@@ -59,7 +59,7 @@
     margin-left: 1.5rem;
     font-size: 2.5rem;
     letter-spacing: .2rem;
-    font-family: Arial;
+    font-weight: 500;
   }
 
   .container {
