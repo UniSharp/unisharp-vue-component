@@ -26,7 +26,10 @@
           title: 'Style Guide',
           children: [{
             title: 'Buttons',
-            to: '/button'
+            to: '/guide/buttons'
+          }, {
+            title: 'Card',
+            to: '/guide/card'
           }]
         }, {
           icon: 'file-text-o',
