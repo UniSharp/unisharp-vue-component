@@ -12,12 +12,14 @@
       selection,
       isCheckAll
     )
+      template(slot="operation", scope="data")
+        button.btn(type="button", @click.stop="showClickButton(data.value.age)") {{ data.value.age }}
     u-pagination(
       :total-rows="totalRows",
       :per-page="perPage",
       v-model="currentPage"
     )
-    button.btn.btn-primary(type="button", @click.stop="showCheckItems") Get Checked Items
+    button.btn.btn-primary(type="button", @click.stop="showCheckItems") Get Checked Items of Current Page
 </template>
 
 <script>
@@ -58,12 +60,10 @@
         items: items,
         fields: {
           last_name: {
-            // label: 'Person last name'
             label: 'Person last name',
             width: '30%'
           },
           first_name: {
-            // label: 'Person first name'
             label: 'Person first name',
             width: '30%'
           },
@@ -81,7 +81,10 @@
     },
     methods: {
       showCheckItems () {
-        console.log(this.$refs.table.showCheckItems())
+        alert(JSON.stringify(this.$refs.table.showCheckItems()))
+      },
+      showClickButton (age) {
+        alert(age)
       }
     }
   }

@@ -22,7 +22,7 @@
             v-for="(value, key) in fields",
             :style="getCeilStyle(key)"
           )
-            slot(:index="i", :name="key", :value="item[key]")
+            slot(:index="i", :name="key", :value="item")
               | {{ item[key] }}
 </template>
 
@@ -227,8 +227,9 @@
       },
       showCheckItems () {
         let items = _.orderBy(this.items, [this.order], [this.desc ? 'desc' : 'asc'])
+        let itemIndexes = this.getPageItemIndexes(this.currentPage)
         return items.filter((item, index) => {
-          return this.checks.indexOf(index) !== -1
+          return (itemIndexes.indexOf(index) !== -1) && (this.checks.indexOf(index) !== -1)
         })
       },
       sortColumn (key) {
