@@ -13,7 +13,7 @@
           )
             | {{ value.label }}
             i.fa(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="order === key")
-            i.fa(:class="{'fa-sort': true}", v-if="order !==key")
+            i.fa(:class="{'fa-sort': true}", v-else)
       tbody(:style="styleObject.tbody")
         tr(v-for="(item, i) in rows", :key="item.uIndex")
           td(v-if="selection", :style="getCheckboxStyle()")
