@@ -17,8 +17,9 @@
       template(slot="clip-uploader-action", scope='params')
         div
           .dz-message
-            .alert.alert-warning(role="alert", :class="{'is-dragging': params.dragging}")
-              h2 Click or Drag and Drop files here
+            slot(name="dz-message")
+              .alert.alert-warning(role="alert", :class="{'is-dragging': params.dragging}")
+                h2 Click or Drag and Drop files here
 
       template(slot="clip-uploader-body", scope="props")
         div(:key="key", v-for="(file, key) in files")
