@@ -6,7 +6,6 @@
       :options="options",
       :on-init="init",
       :on-added-file="addedFile",
-      :on-removed-file="removedFile",
       :on-sending="sending",
       :on-complete="complete",
       :on-drag-leave="stoppedDragging",
@@ -118,10 +117,8 @@
         this.$emit('upload')
       },
       remove (key) {
+        this.$emit('removedFile', this.files[key])
         this.files.splice(key, 1)
-      },
-      removedFile (file) {
-        this.$emit('removedFile', file)
       },
       reset () {
         this.files = []
