@@ -1,10 +1,12 @@
 .btn {
   font-size: $font-size-md;
   cursor: pointer;
+  min-width: 4.125rem;
 }
 
 .btn-sm {
   font-size: $font-size-sm;
+  box-shadow: none;
 }
 
 .btn-lg {
@@ -13,4 +15,8 @@
 
 .btn-secondary {
   color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
 }
