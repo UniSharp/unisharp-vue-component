@@ -12,15 +12,18 @@
       :fields="fields",
       :per-page="perPage",
       :current-page="currentPage",
-      :height="100",
       order-by="last_name"
       selection,
       isCheckAll,
       :filter="filter",
       @filtered="onFiltered"
     )
+      template(slot="hiddenRow", scope="data")
+        tr(v-show="data.index === detail")
+          | hi
       template(slot="operation", scope="data")
-        button.btn(type="button", @click.stop="showClickButton(data.value.age)") {{ data.value.age }}
+        button.btn.mr-1(type="button", @click.stop="detail=data.index") 展開
+        button.btn(type="button", @click.stop="showClickButton(data.value.age)") alert
     u-pagination(
       :total-rows="totalRows",
       :per-page="perPage",
@@ -84,6 +87,7 @@
             label: '操作'
           }
         },
+        detail: null,
         currentPage: 1,
         perPage: 5,
         totalRows: items.length

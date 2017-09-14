@@ -15,15 +15,17 @@
             i.fa(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="order === key")
             i.fa(:class="{'fa-sort': true}", v-else)
       tbody(:style="styleObject.tbody")
-        tr(v-for="(item, i) in rows", :key="item.uIndex")
-          td(v-if="selection", :style="getCheckboxStyle()")
-            u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck")
-          td(
-            v-for="(value, key) in fields",
-            :style="getCeilStyle(key)"
-          )
-            slot(:index="i", :name="key", :value="item")
-              | {{ item[key] }}
+        template(v-for="(item, i) in rows")
+          tr(:key="item.uIndex")
+            td(v-if="selection", :style="getCheckboxStyle()")
+              u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck")
+            td(
+              v-for="(value, key) in fields",
+              :style="getCeilStyle(key)"
+            )
+              slot(:index="i", :name="key", :value="item")
+                | {{ item[key] }}
+          slot(name="hiddenRow", :value="item", :index="i")
 </template>
 
 <script>
