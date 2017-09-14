@@ -28,8 +28,11 @@
 
 <script>
   import UCheckbox from '~/components/Checkbox'
+  import Vue from 'vue'
+  import AsyncComputed from 'vue-async-computed'
   import _ from 'lodash'
 
+  Vue.use(AsyncComputed)
   export default {
     components: {
       UCheckbox
@@ -97,19 +100,34 @@
         desc: this.orderDesc
       }
     },
+    asyncComputed: {
+      pured: {
+        get () {
+          console.log('hahaha')
+          let info = {
+            currentPage: this.currentPage,
+            perPage: this.perPage,
+            filter: this.filter,
+            orderBy: this.order,
+            orderDesc: this.desc
+          }
+
+          if (this.provider) {
+            if (this.provider.hasOwnProperty('then')) {
+              return this.provider(info)
+            }
+            return Promise.resolve(this.provider(info))
+          }
+          return Promise.resolve(this.items)
+        },
+        default: []
+      }
+    },
     computed: {
-      pured () {
-        return this.provider ? this.provider({
-          currentPage: this.currentPage,
-          perPage: this.perPage,
-          filter: this.filter,
-          orderBy: this.order,
-          orderDesc: this.desc
-        }) : this.items
-      },
       filtered () {
         let items = this.filter ? _.filter(this.pured, this.filter) : this.pured
         this.$emit('filtered', items)
+        console.log(items)
         return items
       },
       sorted () {

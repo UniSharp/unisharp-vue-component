@@ -17,7 +17,8 @@
       selection,
       isCheckAll,
       :filter="filter",
-      @filtered="onFiltered"
+      @filtered="onFiltered",
+      :provider="provider"
     )
       template(slot="operation", scope="data")
         button.btn(type="button", @click.stop="showClickButton(data.value.age)") {{ data.value.age }}
@@ -35,6 +36,7 @@
   import UBreadcrumb from '~/components/Breadcrumb'
   import UTable from '~/components/Table.vue'
   import UPagination from '~/components/Pagination.vue'
+  import axios from 'axios'
 
   let items = [
     { age: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
@@ -90,11 +92,11 @@
     },
     methods: {
       provider (context) {
-        console.log(context)
-        return [
-          { age: 7, first_name: 'Mitzi', last_name: 'Navarro' },
-          { age: 8, first_name: 'Genevive', last_name: 'Wilson' }
-        ]
+        return new Promise((resolve, reject) => {
+          axios.get('https://beta.json-generator.com/api/json/get/4yxjYQ79X').then(res => {
+            resolve(res.data)
+          })
+        })
       },
       showCheckItems () {
         alert(JSON.stringify(this.$refs.table.showCheckItems()))
@@ -104,7 +106,7 @@
         console.log(this.$refs.table.showCheckItems())
       },
       onFiltered (items) {
-        console.log(items)
+        console.log('filtered')
         this.totalRows = items.length
         // TODO: fix current page while filtering
         // this.currentPage = 1
