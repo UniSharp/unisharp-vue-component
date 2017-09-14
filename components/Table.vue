@@ -98,8 +98,17 @@
       }
     },
     computed: {
+      pured () {
+        return this.provider ? this.provider({
+          currentPage: this.currentPage,
+          perPage: this.perPage,
+          filter: this.filter,
+          orderBy: this.order,
+          orderDesc: this.desc
+        }) : this.items
+      },
       filtered () {
-        let items = this.filter ? _.filter(this.items, this.filter) : this.items
+        let items = this.filter ? _.filter(this.pured, this.filter) : this.pured
         this.$emit('filtered', items)
         return items
       },
@@ -112,15 +121,6 @@
         return this.perPage ? this.sorted.slice(start, end) : this.sorted
       },
       rows () {
-        if (this.provider !== null) {
-          return this.provider({
-            currentPage: this.currentPage,
-            perPage: this.perPage,
-            filter: this.filter,
-            orderBy: this.order,
-            orderDesc: this.desc
-          })
-        }
         let items = this.sliced
         items.forEach((item, index) => {
           item.uIndex = index
