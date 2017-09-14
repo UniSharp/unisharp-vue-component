@@ -106,8 +106,7 @@
       },
       onFiltered (items) {
         this.totalRows = items.length
-        // TODO: fix current page while filtering
-        // this.currentPage = 1
+        this.currentPage = 1
       },
       filter (item) {
         return item.last_name.indexOf(this.filterText) !== -1

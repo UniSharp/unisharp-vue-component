@@ -103,7 +103,6 @@
     asyncComputed: {
       pured: {
         get () {
-          console.log('hahaha')
           let info = {
             currentPage: this.currentPage,
             perPage: this.perPage,
@@ -127,7 +126,6 @@
       filtered () {
         let items = this.filter ? _.filter(this.pured, this.filter) : this.pured
         this.$emit('filtered', items)
-        console.log(items)
         return items
       },
       sorted () {
