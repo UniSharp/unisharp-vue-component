@@ -21,6 +21,10 @@
             label.col-sm-2.col-form-label(for="inputPassword") Password
             .col-sm-10
               input#inputPassword.form-control(type="password", placeholder="Password")
+          .form-group.row
+            label.col-sm-2.col-form-label(for="exampleSelect") Example select
+            .col-sm-10
+              u-select#exampleSelect(v-model="selected", :options="options")
           .card-actions
             button.btn.btn-info.btn-lg Cancel
             button.btn.btn-primary.btn-lg Submit
@@ -29,9 +33,31 @@
 <script>
   import UAdmin from '~/components/Admin'
   import UBreadcrumb from '~/components/Breadcrumb'
+  import USelect from '~/components/Select'
 
   export default {
-    components: { UAdmin, UBreadcrumb }
+    components: { UAdmin, UBreadcrumb, USelect },
+    data () {
+      return {
+        options: [{
+          text: 'One',
+          value: 1
+        }, {
+          text: 'Two',
+          value: 2
+        }, {
+          text: 'Three',
+          value: 3
+        }, {
+          text: 'Four',
+          value: 4
+        }, {
+          text: 'Five',
+          value: 5
+        }],
+        selected: null
+      }
+    }
   }
 </script>
 

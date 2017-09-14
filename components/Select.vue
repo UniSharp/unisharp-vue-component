@@ -1,63 +1,90 @@
 <template lang="pug">
-.mod_select
-  .select
-    .select-styled(@click.blur="show = !show", :class="{ active: show }")
-      | {{selected.text}}
-    ul.select-options(:class="{ 'd-block': show }", ref="options")
-      u-option(:value="defaults.value") {{ defaults.text }}
-      u-option(@change="select", v-for="(option, key) in options", :key="key", :value="option.value")
-        | {{ option.text }}
+  u-dropdown.u-select(ref="dropdown")
+    .u-select-current(slot="toggle").form-control {{ current }}
+    .dropdown-menu.u-select-options
+      u-option(@change="select", v-for="(option, key) in options", :key="key", :text="option.text", :value="option.value")
 </template>
 
 <script>
+  import _ from 'lodash'
+  import UDropdown from '~/components/Dropdown'
   import UOption from '~/components/Option'
+
   export default {
-    components: { UOption },
-    watch: {
-      selected (value) {
-        this.options.forEach((option, key) => {
-          if (option.value === value) {
-            this.selected = option
-          }
-        })
-      }
-    },
+    components: { UDropdown, UOption },
     model: {
       prop: 'selected',
       event: 'change'
     },
     props: {
-      defaults: {
-        type: Object,
-        default: () => {
-          return {
-            'text': '請選擇',
-            'value': null
-          }
-        }
+      placeholder: {
+        type: String,
+        default: '請選擇'
       },
       options: {
-        type: Array
+        type: Array,
+        required: true
+      },
+      selected: {
+        required: true
       }
     },
-    data () {
-      return {
-        show: false,
-        selected: {
-          'text': '',
-          'value': null
-        }
+    computed: {
+      current () {
+        let current = _.find(this.options, { value: this.selected })
+
+        return current ? current.text : this.placeholder
       }
     },
     methods: {
       select (selected) {
-        this.selected = selected
-        this.show = false
-        this.$emit('change', this.selected.value)
+        this.$refs.dropdown.hide()
+        this.$emit('change', selected)
       }
-    },
-    mounted () {
-      this.selected = this.defaults
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  @import "~assets/scss/variables";
+
+  $hover-bg: theme-color("primary");
+  $hover-fg: #fff;
+
+  @if (((red($hover-bg) * 299) + (green($hover-bg) * 587) + (blue($hover-bg) * 114)) / 1000 >= 150) {
+    $hover-fg: #111;
+  }
+
+  .u-select {
+    .u-select-current {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: $input-placeholder-color;
+      transition: all .2s ease;
+
+      &:after {
+        content: "";
+        margin-right: -.5rem;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid $input-placeholder-color;
+        transition: border-top-color .2s ease;
+      }
+    }
+
+    .u-select-options {
+      width: calc(100% - #{$grid-gutter-width});
+    }
+
+    &.active .u-select-current, .u-select-current:hover {
+      background-color: $hover-bg;
+      border-color: $hover-bg;
+      color: $hover-fg;
+
+      &:after {
+        border-top-color: $hover-fg;
+      }
+    }
+  }
+</style>
