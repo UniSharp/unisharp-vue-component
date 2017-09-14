@@ -63,7 +63,7 @@
     main {
       overflow-x: hidden;
       overflow-y: auto;
-      height: calc(100vh - 153px);
+      min-height: calc(100vh - 153px);
     }
   }
 </style>

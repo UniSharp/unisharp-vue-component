@@ -1,7 +1,7 @@
 <template lang="pug">
   u-admin
     u-breadcrumb(slot="breadcrumb")
-    .container.d-flex.align-items-center.justify-content-center.h-100
+    .container.d-flex.align-items-center.justify-content-center
       .logo
       .text.d-flex.flex-column.justify-content-center
         h1 BLUE
@@ -60,5 +60,10 @@
     font-size: 2.5rem;
     letter-spacing: .2rem;
     font-weight: 500;
+  }
+
+  .container {
+    margin: -1.5rem auto;
+    height: calc(100vh - 153px);
   }
 </style>
