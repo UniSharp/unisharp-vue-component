@@ -18,20 +18,20 @@
             .col-sm-10
               u-select#select(v-model="selected", :options="options")
           .form-group.row
-            label.col-sm-2.col-form-label(for="radio") Radio
+            label.col-sm-2.col-form-label Radio
             .col-sm-10
-              u-radio#radio(v-model="selected", :options="options")
+              u-radio(v-model="selected", :options="options")
           .form-group.row
-            label.col-sm-2.col-form-label(for="radio") Radio
+            label.col-sm-2.col-form-label Radio Stacked
             .col-sm-10
-              u-radio#radio(v-model="selected", :options="options", stacked)
+              u-radio(v-model="selected", :options="options", stacked)
           .form-group.row
-            label.col-sm-2.col-form-label(for="checkbox") Checkbox
+            label.col-sm-2.col-form-label Checkbox
             .col-sm-10
               .col-form-label
                 u-checkbox(v-model="checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
           .form-group.row
-            label.col-sm-2.col-form-label(for="checkbox") Checkbox
+            label.col-sm-2.col-form-label Checkbox Stacked
             .col-sm-10
               .col-form-label.custom-controls-stacked
                 u-checkbox(v-model="checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
