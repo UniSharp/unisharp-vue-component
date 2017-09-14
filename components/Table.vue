@@ -106,6 +106,11 @@
       sorted () {
         return _.orderBy(this.filtered, [this.order], [this.desc ? 'desc' : 'asc'])
       },
+      sliced () {
+        let start = (this.currentPage - 1) * this.perPage
+        let end = start + this.perPage
+        return this.perPage ? this.sorted.slice(start, end) : this.sorted
+      },
       rows () {
         if (this.provider !== null) {
           return this.provider({
@@ -116,16 +121,10 @@
             orderDesc: this.desc
           })
         }
-        let items = this.sorted
+        let items = this.sliced
         items.forEach((item, index) => {
           item.uIndex = index
         })
-
-        if (this.perPage) {
-          let start = (this.currentPage - 1) * this.perPage
-          let end = start + this.perPage
-          items = items.slice(start, end)
-        }
 
         return items
       },
