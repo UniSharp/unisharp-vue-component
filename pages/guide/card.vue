@@ -14,13 +14,18 @@
             .col-sm-10
               input#inputPassword.form-control(type="password", placeholder="Password")
           .form-group.row
-            label.col-sm-2.col-form-label(for="exampleSelect") Example select
+            label.col-sm-2.col-form-label(for="select") Select
             .col-sm-10
-              u-select#exampleSelect(v-model="selected", :options="options")
+              u-select#select(v-model="selected", :options="options")
           .form-group.row
-            label.col-sm-2.col-form-label(for="exampleRadio") Example radio
+            label.col-sm-2.col-form-label(for="radio") Radio
             .col-sm-10
-              u-radio#exampleRadio(v-model="selected", :options="options")
+              u-radio#radio(v-model="selected", :options="options")
+          .form-group.row
+            label.col-sm-2.col-form-label(for="checkbox") Checkbox
+            .col-sm-10
+              .col-form-label
+                u-checkbox(v-model="checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
           .card-actions
             button.btn.btn-info.btn-lg Cancel
             button.btn.btn-primary.btn-lg Submit
@@ -39,9 +44,10 @@
   import UBreadcrumb from '~/components/Breadcrumb'
   import USelect from '~/components/Select'
   import URadio from '~/components/Radio'
+  import UCheckbox from '~/components/Checkbox'
 
   export default {
-    components: { UAdmin, UBreadcrumb, USelect, URadio },
+    components: { UAdmin, UBreadcrumb, USelect, URadio, UCheckbox },
     data () {
       return {
         options: [{
@@ -60,7 +66,8 @@
           text: 'Five',
           value: 5
         }],
-        selected: null
+        selected: null,
+        checked: []
       }
     }
   }
