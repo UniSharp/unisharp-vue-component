@@ -1,5 +1,5 @@
 <template lang="pug">
-  label.u-checkbox.custom-control.form-check-inline.custom-checkbox.mb-0
+  label.u-checkbox.custom-control.form-check-inline.custom-checkbox
     input.custom-control-input(
       type="checkbox",
       :value="value",

@@ -1,6 +1,6 @@
 <template lang="pug">
-  .u-radio.col-form-label(:class="{ 'custom-controls-stacked': stacked }")
-    label.custom-control.form-check-inline.custom-radio.mb-0(:key="key", v-for="(option, key) in options")
+  .u-radio.col-form-label(:class="{ 'custom-controls-stacked': stacked !== undefined }")
+    label.custom-control.form-check-inline.custom-radio(:key="key", v-for="(option, key) in options")
       input.custom-control-input(
         type="radio",
         :id="id",
@@ -41,7 +41,6 @@
         default: false
       },
       stacked: {
-        default: false
       }
     },
     model: {

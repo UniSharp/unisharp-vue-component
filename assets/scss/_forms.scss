@@ -2,6 +2,10 @@
   background: transparent;
 }
 
+:not(.custom-controls-stacked) > .custom-control {
+  margin-bottom: 0;
+}
+
 .custom-control {
   cursor: pointer;
 
