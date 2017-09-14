@@ -10,6 +10,10 @@
             .col-sm-10
               input#staticEmail.form-control-plaintext(type="text", value="email@example.com", readonly)
           .form-group.row
+            label.col-sm-2.col-form-label(for="inputName") Name
+            .col-sm-10
+              input#inputName.form-control(placeholder="Name")
+          .form-group.row
             label.col-sm-2.col-form-label(for="inputPassword") Password
             .col-sm-10
               input#inputPassword.form-control(type="password", placeholder="Password")
