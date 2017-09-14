@@ -17,8 +17,7 @@
       selection,
       isCheckAll,
       :filter="filter",
-      @filtered="onFiltered",
-      :provider="provider"
+      @filtered="onFiltered"
     )
       template(slot="operation", scope="data")
         button.btn(type="button", @click.stop="showClickButton(data.value.age)") {{ data.value.age }}
@@ -106,7 +105,6 @@
         console.log(this.$refs.table.showCheckItems())
       },
       onFiltered (items) {
-        console.log('filtered')
         this.totalRows = items.length
         // TODO: fix current page while filtering
         // this.currentPage = 1
