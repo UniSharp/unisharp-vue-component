@@ -1,6 +1,6 @@
 <template lang="pug">
-  .u-radio(:class="{ 'custom-controls-stacked': stacked }")
-    label.custom-control.form-check-inline.custom-radio(:key="option.value", v-for="(option, index) in options")
+  .u-radio.col-form-label(:class="{ 'custom-controls-stacked': stacked }")
+    label.custom-control.form-check-inline.custom-radio.mb-0(:key="key", v-for="(option, key) in options")
       input.custom-control-input(
         type="radio",
         :id="id",
@@ -20,26 +20,15 @@
 
 <script>
   export default {
-    data () {
-      return {
-        //
-      }
-    },
     props: {
       options: {
-        default: () => {
-          return [
-            { text: 'Option1', value: 1, disabled: false },
-            { text: 'Option2', value: 2, disabled: true },
-            { text: 'Option3', value: 3, disabled: false }
-          ]
-        }
+        type: Array,
+        required: true
       },
       id: {
         default: null
       },
       name: {
-        required: true,
         default: null
       },
       value: {

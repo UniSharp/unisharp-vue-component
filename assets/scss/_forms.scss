@@ -1,3 +1,17 @@
 .form-control-plaintext {
   background: transparent;
 }
+
+.custom-control {
+  cursor: pointer;
+
+  .custom-control-indicator {
+    background-position: 0 0;
+    transition: all .2s ease;
+  }
+
+  .custom-control-input:checked ~ .custom-control-indicator {
+    transform: scale(1.2);
+    background-position: center center;
+  }
+}
