@@ -265,6 +265,7 @@
   $button-width: 68px;
   $padding-y: 8px;
   $highlight-color: #ddd;
+  $border-width: 2px;
 
   input::-webkit-inner-spin-button,
   input::-webkit-calendar-picker-indicator,
@@ -280,9 +281,9 @@
   .picker {
     position: absolute;
     top: 40px;
-    width: $button-width * 7 + 4px;
+    width: $button-width * 7 + $border-width * 2;
     z-index: 999;
-    border: 2px solid gray;
+    border: $border-width solid gray;
   }
 
   .scroll {
@@ -305,14 +306,14 @@
     }
 
     &.today, &.today:hover {
-      font-weight: 900;
+      font-weight: bold;
       text-decoration: underline;
     }
 
     &.selected {
-      border: 2px solid $highlight-color;
-      height: $height - 3px;
-      line-height: $height - 6px - ($padding-y * 2);
+      border: $border-width solid $highlight-color;
+      height: $height - ($border-width + 1px);
+      line-height: $height - ($border-width + 1px) * 2 - ($padding-y * 2);
       vertical-align: center;
     }
 
