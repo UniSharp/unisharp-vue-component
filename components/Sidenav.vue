@@ -31,11 +31,17 @@
             title: 'Buttons',
             to: '/guide/buttons'
           }, {
+            title: 'Typography',
+            to: '/guide/typography'
+          }, {
             title: 'Card',
             to: '/guide/card'
           }, {
             title: 'Table',
             to: '/guide/table'
+          }, {
+            title: 'Alerts',
+            to: '/guide/alerts'
           }]
         }, {
           icon: 'file-text-o',
