@@ -25,6 +25,9 @@
           icon: 'file-text-o',
           title: 'Style Guide',
           children: [{
+            title: 'Colors',
+            to: '/guide/colors'
+          }, {
             title: 'Buttons',
             to: '/guide/buttons'
           }, {
