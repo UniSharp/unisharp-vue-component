@@ -66,6 +66,12 @@
               span.title Radio Result：
             .col-md-10
               input(type="text", :value="showRadioText(form.radio.value)")
+          //- Radio
+          .form-group.row
+            label.col-md-2
+              span.title Tag Input：
+            .col-md-10
+              u-input-tag(v-model="selectedTags", placeholder="Add Tag", :tags="tags")
           //- File Uploader
           .form-group.row
             label.col-md-2
@@ -87,9 +93,10 @@
   import URadio from '~/components/Radio'
   import USelect from '~/components/Select'
   import UUploader from '~/components/Uploader'
+  import UInputTag from '~/components/InputTag'
 
   export default {
-    components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, UDatetime, URadio, USelect, UUploader },
+    components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, UDatetime, URadio, USelect, UUploader, UInputTag },
     data () {
       return {
         check: 'yes',
@@ -112,6 +119,8 @@
           { text: 'Beans', value: 2 },
           { text: 'Corn', value: 3 }
         ],
+        selectedTags: ['Teach'],
+        tags: ['Done', 'Doing', 'Doc', 'Reopen', 'Complete', 'Blocked', 'Teach'],
         // Refference: http://www.dropzonejs.com/#config-url
         uploadOptions: {
           url: 'http://mockbin.org/bin/323cf903-c2c8-4cb4-a257-10ee8597d3f0',
@@ -165,6 +174,9 @@
       },
       files (files) {
         console.log(files)
+      },
+      selectedTags (tags) {
+        console.log(tags)
       }
     }
   }
