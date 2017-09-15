@@ -1,5 +1,5 @@
 <template lang="pug">
-  .u-radio.col-form-label(:class="{ 'custom-controls-stacked': stacked }")
+  .u-radio.col-form-label(:class="{ 'custom-controls-stacked': !!stacked || stacked === '' }")
     label.custom-control.form-check-inline.custom-radio(:key="key", v-for="(option, key) in options")
       input.custom-control-input(
         type="radio",
@@ -7,8 +7,8 @@
         :name="name",
         :value="option.value",
         :checked="option.value == value",
-        :disabled="!!disabled",
-        :required="!!required",
+        :disabled="!!disabled || disabled === ''",
+        :required="!!required || required === ''",
         @change="$emit('change', option.value)",
         @focus="$emit('focus', option.value)",
         @blur="$emit('blur', option.value)",
