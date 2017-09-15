@@ -6,8 +6,8 @@
       p 名稱即為對應的 variables 變數名稱
       .d-flex
         .color-box
-          .square.green
-          p $green
+          .square.blue
+          p $blue
         .color-box
           .square.yellow
           p $yellow
@@ -92,8 +92,8 @@
     }
   }
 
-  .green {
-    background-color: $green;
+  .blue {
+    background-color: $blue;
   }
 
   .yellow {
