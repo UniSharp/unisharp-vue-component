@@ -96,7 +96,7 @@
       $bg-color: theme-color("primary");
 
       @include color-yiq($bg-color);
-      @include border-left-radius($input-border-radius);
+      @include border-left-radius(calc(#{$input-border-radius} - #{$input-btn-border-width}));
 
       background-color: $bg-color;
     }
