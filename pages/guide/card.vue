@@ -43,6 +43,11 @@
             label.col-sm-2.col-form-label Switch
             .col-sm-10
               u-switch(v-model="form.switch")
+          .form-group.row
+            label.col-sm-2.col-form-label Checkbox
+            .col-sm-10
+              .col-form-label
+                u-checkbox(v-model="form.switch") {{ Checkbox }}
           .card-actions
             button.btn.btn-info.btn-lg Cancel
             button.btn.btn-primary.btn-lg Submit
