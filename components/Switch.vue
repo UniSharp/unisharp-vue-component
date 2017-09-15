@@ -1,36 +1,38 @@
 <template lang="pug">
-  .u-switch(@click='toggleValue', :disabled='disabled')
-    input(type='checkbox', :name='name', :value='checked').d-none
-    .switch(:class="checked === false ? 'off' : ''")
-      .bg-primary.text-center ON
-      .bg-default.toggle
-      .bg-info.text-center OFF
+  .u-switch(@click="toggleValue", :class="{ disabled }")
+    input.d-none(type="checkbox", :name="name", :value="value", :checked="checked")
+    .u-switch-control(:class="{ off: !checked }")
+      .u-switch-control-on {{ onText }}
+      .u-switch-control-toggle
+      .u-switch-control-off {{ offText }}
 </template>
 
 <script>
   export default {
-    data () {
-      return {
-        checked: true
-      }
-    },
-    mounted () {
-      this.checked = this.value
+    model: {
+      prop: 'checked',
+      event: 'change'
     },
     props: {
+      checked: {
+        required: true
+      },
       value: {
         default: true
       },
       name: {
-        required: true
       },
       disabled: {
-        type: Boolean,
         default: false
       },
       required: {
-        type: Boolean,
         default: false
+      },
+      onText: {
+        default: 'ON'
+      },
+      offText: {
+        default: 'OFF'
       }
     },
     methods: {
@@ -38,56 +40,70 @@
         if (this.disabled) {
           return
         }
-        this.checked = !this.checked
-        this.$emit('input', this.checked).$emit('change', this.checked)
+
+        this.$emit('change', !this.checked)
       }
     }
   }
 </script>
 
 <style lang="scss">
-  $height: 38px;
-  $block-width: 60px;
-  $border-width: 1px;
-  $border-color: rgba(77, 83, 94, .15);
-  $input-btn-padding-y: 6px;
-  $input-btn-padding-x: 12px;
+  @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/border-radius";
+
+  $switch-height: 2.375rem;
+  $switch-block-width: 3.75rem;
 
   .u-switch {
-    height: $height;
-    width: $block-width * 2;
+    @include border-radius($input-border-radius);
+
+    height: $switch-height;
+    width: $switch-block-width * 2;
     overflow-x: hidden;
     position: relative;
-    border-radius: 5px;
-    border: $border-width solid $border-color;
+    border: $input-btn-border-width solid $input-border-color;
     cursor: pointer;
 
-    &:disabled {
+    &.disabled {
       cursor: not-allowed;
     }
   }
 
-  .switch {
-    width: $block-width * 3;
+  .u-switch-control {
+    width: $switch-block-width * 3;
     display: flex;
     position: absolute;
-    transition: all .7s;
+    transition: left .5s cubic-bezier(.25, .8, .5, 1);
     left: 0;
 
+    &, * {
+      height: 100%;
+    }
+
     &.off {
-      left: - $block-width - $border-width;
+      left: $switch-block-width * -1;
+      margin-left: $input-btn-border-width * -1;
     }
 
     * {
-      height: $height - ($border-width * 2);
-      width: $block-width;
-      padding: $input-btn-padding-y $input-btn-padding-x;
-      line-height: $height - ($input-btn-padding-y * 2) - ($border-width * 2);
+      width: $switch-block-width;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .toggle {
-      border-left: $border-width solid $border-color;
-      border-right: $border-width solid $border-color;
+    .u-switch-control-on {
+      $bg-color: theme-color("primary");
+
+      @include color-yiq($bg-color);
+      @include border-left-radius($input-border-radius);
+
+      background-color: $bg-color;
+    }
+
+    .u-switch-control-toggle {
+      border-left: $input-btn-border-width solid $input-border-color;
+      border-right: $input-btn-border-width solid $input-border-color;
     }
   }
 </style>

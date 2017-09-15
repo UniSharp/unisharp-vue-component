@@ -74,7 +74,7 @@ $theme-colors: (
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-// $enable-rounded: true;
+$enable-rounded: true;
 $enable-shadows: true;
 // $enable-gradients: false;
 // $enable-transitions: true;
@@ -182,10 +182,10 @@ $grid-gutter-width: 30px;
 $line-height-lg: 1;
 $line-height-sm: 1;
 
-// $border-width: 1px;
+$border-width: 1px;
 // $border-color: $gray-200;
 
-// $border-radius: .25rem;
+$border-radius: .25rem;
 // $border-radius-lg: .3rem;
 // $border-radius-sm: .2rem;
 
@@ -299,7 +299,7 @@ $table-head-color: $body-color;
 
 $input-btn-padding-y: .5rem;
 $input-btn-padding-x: 1.3rem;
-// $input-btn-line-height: 1.25;
+$input-btn-line-height: 1.25;
 
 $input-btn-padding-y-sm: .375rem;
 $input-btn-padding-x-sm: .75rem;
@@ -332,11 +332,11 @@ $input-bg: $gray-200;
 $input-disabled-bg: $gray-100;
 
 $input-color: $gray-900;
-// $input-border-color: rgba($black,.15);
-// $input-btn-border-width: $border-width; // For form controls and buttons
+$input-border-color: rgba($black,.15);
+$input-btn-border-width: $border-width; // For form controls and buttons
 // $input-box-shadow: inset 0 1px 1px rgba($black,.075);
 
-// $input-border-radius: $border-radius;
+$input-border-radius: $border-radius;
 // $input-border-radius-lg: $border-radius-lg;
 // $input-border-radius-sm: $border-radius-sm;
 

@@ -20,25 +20,29 @@
           .form-group.row
             label.col-sm-2.col-form-label(for="select") Select
             .col-sm-10
-              u-select#select(v-model="selected", :options="options")
+              u-select#select(v-model="form.selected", :options="options")
           .form-group.row
             label.col-sm-2.col-form-label Radio
             .col-sm-10
-              u-radio(v-model="selected", :options="options")
+              u-radio(v-model="form.selected", :options="options")
           .form-group.row
             label.col-sm-2.col-form-label Radio Stacked
             .col-sm-10
-              u-radio(v-model="selected", :options="options", stacked)
+              u-radio(v-model="form.selected", :options="options", stacked)
           .form-group.row
             label.col-sm-2.col-form-label Checkbox
             .col-sm-10
               .col-form-label
-                u-checkbox(v-model="checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
+                u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
           .form-group.row
             label.col-sm-2.col-form-label Checkbox Stacked
             .col-sm-10
               .col-form-label.custom-controls-stacked
-                u-checkbox(v-model="checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
+                u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
+          .form-group.row
+            label.col-sm-2.col-form-label Switch
+            .col-sm-10
+              u-switch(v-model="form.switch")
           .card-actions
             button.btn.btn-info.btn-lg Cancel
             button.btn.btn-primary.btn-lg Submit
@@ -58,9 +62,10 @@
   import USelect from '~/components/Select'
   import URadio from '~/components/Radio'
   import UCheckbox from '~/components/Checkbox'
+  import USwitch from '~/components/Switch'
 
   export default {
-    components: { UAdmin, UBreadcrumb, USelect, URadio, UCheckbox },
+    components: { UAdmin, UBreadcrumb, USelect, URadio, UCheckbox, USwitch },
     data () {
       return {
         options: [{
@@ -79,8 +84,11 @@
           text: 'Five',
           value: 5
         }],
-        selected: null,
-        checked: []
+        form: {
+          selected: 3,
+          checked: [1, 3, 5],
+          switch: false
+        }
       }
     }
   }
