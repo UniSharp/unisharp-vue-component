@@ -15,11 +15,12 @@
       :on-max-files="maxFilesReached"
     )
       template(slot="clip-uploader-action", scope="params")
-        .u-uploader-action.col(role="alert", :class="{ dragging: params.dragging }", ref="action")
-          .u-uploader-action-icon(@click="$refs.action.click()")
-            img.cloud(src="~assets/img/upload-cloud.png")
-            img.arrow(src="~assets/img/upload-arrow.png")
-          p Click or Drag and Drop files here
+        slot(name="dz-message")
+          .dz-message.u-uploader-action.col(role="alert", :class="{ dragging: params.dragging }", ref="action")
+            .u-uploader-action-icon(@click="$refs.action.click()")
+              img.cloud(src="~assets/img/upload-cloud.png")
+              img.arrow(src="~assets/img/upload-arrow.png")
+            p Click or Drag and Drop files here
       template(slot="clip-uploader-body", scope="props")
         ul.list-unstyled.u-uploader-body.col
           li.media.u-uploader-file(:key="key", v-for="(file, key) in files")
