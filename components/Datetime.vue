@@ -7,7 +7,7 @@
           li.nav-item(v-for='(month, index) in months'): a.nav-link(@click='setMonth(index)') {{ month }}
       .scroll(v-else-if='showYearScroll' ref='yearScroll')
         ul.nav.nav-pills
-          li.nav-item(v-for='year in 3000'): a.nav-link(@click='setYear(year - 1)', :class='{ selected: year - 1 === picker_year }') {{ year - 1 }}
+          li.nav-item(v-for='year in 3000'): a.nav-link(@click='setYear(year - 1)', :class='{ selected: year - 1 === picker.year }') {{ year - 1 }}
       .scroll(v-else-if='showHourScroll')
         ul.nav.nav-pills
           li.nav-item(v-for='hour in 12'): a.nav-link(@click='setHour(hour - 1)') {{ hour - 1 }}
@@ -17,9 +17,9 @@
       .main(v-else)
         ul.nav.nav-pills
           li.nav-item: a.nav-link(@click='subMonth'): i.fa.fa-arrow-left
-          li.nav-item: a.nav-link.scrollable(@click='toggleMonthScroll') {{ months[picker_month - 1] }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleMonthScroll') {{ months[picker.month - 1] }}
           li.nav-item: a.nav-link.text-center(@click='resetMonth'): i.fa.fa-calendar-o
-          li.nav-item: a.nav-link.scrollable(@click='toggleYearScroll') {{ picker_year }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleYearScroll') {{ picker.year }}
           li.nav-item: a.nav-link(@click='addMonth'): i.fa.fa-arrow-right
         ul.nav.nav-pills
           li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
@@ -31,7 +31,7 @@
           li.nav-item: a.nav-link.unclickable: i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleHourScroll') {{ picker_hour }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
-          li.nav-item: a.nav-link.scrollable(@click='toggleMinuteScroll') {{ picker_minute }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleMinuteScroll') {{ picker.minute }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon')
             div(v-if='beforeNoon') A.M.
             div(v-else) P.M.
@@ -43,6 +43,14 @@
   import moment from 'moment'
   export default {
     data () {
+      var currentTime = {
+        year: moment().year(),
+        month: moment().month() + 1,
+        day: moment().date(),
+        hour: moment().hour(),
+        minute: moment().minute()
+      }
+
       return {
         showPicker: false,
         showMonthScroll: false,
@@ -51,29 +59,19 @@
         showMinuteScroll: false,
         weekdays: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
         months: moment.months(),
-        current_year: moment().year(),
-        current_month: moment().month() + 1,
-        current_day: moment().date(),
-        picker_year: moment().year(),
-        picker_month: moment().month() + 1,
-        picker_day: moment().date(),
-        selected_year: moment().year(),
-        selected_month: moment().month() + 1,
-        selected_day: moment().date(),
-        current_hour: moment().hour(),
-        current_minute: moment().minute(),
-        selected_hour: 1,
-        selected_minute: 2,
+        current: this.clone(currentTime),
+        picker: this.clone(currentTime),
+        selected: this.clone(currentTime),
         scroll: null
       }
     },
     computed: {
       datetime () {
-        return this.selected_year +
-          '-' + this.prependZero(this.selected_month) +
-          '-' + this.prependZero(this.selected_day) +
-          ' ' + this.prependZero(this.selected_hour) +
-          ':' + this.prependZero(this.selected_minute) +
+        return this.selected.year +
+          '-' + this.prependZero(this.selected.month) +
+          '-' + this.prependZero(this.selected.day) +
+          ' ' + this.prependZero(this.selected.hour) +
+          ':' + this.prependZero(this.selected.minute) +
           ':00'
       },
       isMobile () {
@@ -85,23 +83,20 @@
         return time.substr(0, time.lastIndexOf(':'))
       },
       monthDays () {
-        return this.getDaysWithinMonth(this.picker_year, this.picker_month)
+        return this.getDaysWithinMonth(this.picker.year, this.picker.month)
       },
       offsetDays () {
         var firstDay = this.monthDays[0]
         return new Array(this.weekdays.indexOf(firstDay.weekday))
       },
       isCurrentMonth () {
-        return this.picker_month === this.selected_month && this.picker_year === this.selected_year
+        return this.picker.month === this.selected.month && this.picker.year === this.selected.year
       },
       picker_hour () {
-        return this.selected_hour - (this.beforeNoon ? 0 : 12)
-      },
-      picker_minute () {
-        return this.selected_minute
+        return this.selected.hour - (this.beforeNoon ? 0 : 12)
       },
       beforeNoon () {
-        return this.selected_hour < 12
+        return this.selected.hour < 12
       },
       yearScroll () {
         return this.$refs.yearScroll
@@ -124,25 +119,25 @@
       }
     },
     watch: {
-      selected_day () {
-        this.updateSelectedDay()
+      selected: {
+        handler: function () {
+          this.updateSelectedDay()
+        },
+        deep: true
       },
-      picker_month () {
-        this.updateSelectedDay()
-      },
-      picker_year () {
-        this.updateSelectedDay()
-      // },
-      // showYearScroll () {
-      //   this.scroll = this.$refs.yearScroll
+      picker: {
+        handler: function () {
+          this.updateSelectedDay()
+        },
+        deep: true
       }
     },
     methods: {
       togglePicker () {
         if (!this.isMobile) {
           if (!this.showPicker) {
-            this.picker_year = this.selected_year
-            this.picker_month = this.selected_month
+            this.picker.year = this.selected.year
+            this.picker.month = this.selected.month
             this.showYearScroll = false
             this.showMonthScroll = false
             this.showHourScroll = false
@@ -159,7 +154,7 @@
           result.push({
             date: today,
             weekday: this.weekdays[date.getDay()],
-            selected: this.isCurrentMonth && this.selected_day === today
+            selected: this.isCurrentMonth && this.selected.day === today
           })
           date.setDate(today + 1)
         }
@@ -167,64 +162,64 @@
         return result
       },
       addMonth () {
-        if (this.picker_month === 12) {
-          this.picker_month = 1
-          this.picker_year++
+        if (this.picker.month === 12) {
+          this.picker.month = 1
+          this.picker.year++
         } else {
-          this.picker_month++
+          this.picker.month++
         }
       },
       subMonth () {
-        if (this.picker_month === 1) {
-          this.picker_month = 12
-          this.picker_year--
+        if (this.picker.month === 1) {
+          this.picker.month = 12
+          this.picker.year--
         } else {
-          this.picker_month--
+          this.picker.month--
         }
       },
       resetMonth () {
-        this.picker_month = this.current_month
-        this.picker_year = this.current_year
+        this.picker.month = this.current.month
+        this.picker.year = this.current.year
       },
       resetMinute () {
-        this.selected_hour = moment().hour()
-        this.selected_minute = moment().minute()
+        this.selected.hour = moment().hour()
+        this.selected.minute = moment().minute()
       },
       setDate (e) {
-        this.selected_day = e.target.innerHTML
-        this.selected_month = this.picker_month
-        this.selected_year = this.picker_year
+        this.selected.day = e.target.innerHTML
+        this.selected.month = this.picker.month
+        this.selected.year = this.picker.year
         // this.showPicker = false
       },
       setMonth (monthIndex) {
-        this.picker_month = monthIndex + 1
+        this.picker.month = monthIndex + 1
         this.toggleMonthScroll()
       },
       setYear (year) {
-        this.picker_year = year
+        this.picker.year = year
         this.toggleYearScroll()
       },
       setHour (hour) {
-        this.selected_hour = hour
+        this.selected.hour = hour
         this.toggleHourScroll()
       },
       setMinute (minute) {
-        this.selected_minute = minute
+        this.selected.minute = minute
         this.toggleMinuteScroll()
       },
       isToday (date) {
-        return (date === this.current_day &&
-          this.picker_month === this.current_month &&
-          this.picker_year === this.current_year)
+        return (date === this.current.day &&
+          this.picker.month === this.current.month &&
+          this.picker.year === this.current.year)
       },
       updateSelectedDay () {
-        this.monthDays[this.selected_day - 1].selected = this.isCurrentMonth
+        this.monthDays[this.selected.day - 1].selected = this.isCurrentMonth
       },
       prependZero (str) {
         return ('00' + str).slice(-2)
       },
       toggleNoon () {
-        this.selected_hour += this.beforeNoon ? 12 : -12
+        this.selected.hour += this.beforeNoon ? 12 : -12
       },
       toggleMonthScroll () {
         this.showMonthScroll = !this.showMonthScroll
@@ -234,8 +229,7 @@
         if (this.showYearScroll) {
           this.$nextTick(function () {
             var container = this.$refs.yearScroll
-            container.scrollTop = container.scrollHeight * (this.selected_year - 2) / 3000
-            // container.scrollTop = 500
+            container.scrollTop = container.scrollHeight * (this.selected.year - 2) / 3000
           })
         }
       },
@@ -245,16 +239,8 @@
       toggleMinuteScroll () {
         this.showMinuteScroll = !this.showMinuteScroll
       },
-      scrollToEnd () {
-        // console.log('test')
-        // console.log(this.scroll)
-        // console.log(this.$refs.get())
-        // console.log(this.$refs.get())
-        // var container = this.$refs[0]
-        // console.log(container)
-        // var container = this.$el.querySelector('#year-scroll')
-        // container.scrollTop = container.scrollHeight * this.selected_year / 3000
-        // container.scrollTop = 500
+      clone (value) {
+        return JSON.parse(JSON.stringify(value))
       }
     }
   }
