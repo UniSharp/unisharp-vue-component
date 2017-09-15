@@ -48,6 +48,10 @@
             .col-sm-10
               .col-form-label
                 u-checkbox(v-model="form.switch") Checkbox
+          .form-group.row
+            label.col-sm-2.col-form-label Checkbox
+            .col-sm-10
+              u-uploader(v-model="form.files")
           .card-actions
             button.btn.btn-info.btn-lg Cancel
             button.btn.btn-primary.btn-lg Submit
@@ -68,9 +72,10 @@
   import URadio from '~/components/Radio'
   import UCheckbox from '~/components/Checkbox'
   import USwitch from '~/components/Switch'
+  import UUploader from '~/components/Uploader'
 
   export default {
-    components: { UAdmin, UBreadcrumb, USelect, URadio, UCheckbox, USwitch },
+    components: { UAdmin, UBreadcrumb, USelect, URadio, UCheckbox, USwitch, UUploader },
     data () {
       return {
         options: [{
@@ -92,7 +97,8 @@
         form: {
           selected: 3,
           checked: [1, 3, 5],
-          switch: false
+          switch: false,
+          files: []
         }
       }
     }

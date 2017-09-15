@@ -1,6 +1,6 @@
 <template lang="pug">
-  .u-uploader
-    vue-clip(
+  .u-uploader.col-form-label
+    vue-clip.u-uploader-clip.d-flex(
       :id="id",
       :name="name",
       :options="options",
@@ -14,34 +14,24 @@
       :on-queue-complete="queueCompleted",
       :on-max-files="maxFilesReached"
     )
-      template(slot="clip-uploader-action", scope='params')
-        div
-          .dz-message
-            slot(name="dz-message")
-              .alert.alert-warning(role="alert", :class="{'is-dragging': params.dragging}")
-                h2 Click or Drag and Drop files here
-
+      template(slot="clip-uploader-action", scope="params")
+        .u-uploader-action.col(role="alert", :class="{ dragging: params.dragging }", ref="action")
+          .u-uploader-action-icon(@click="$refs.action.click()")
+            img.cloud(src="~assets/img/upload-cloud.png")
+            img.arrow(src="~assets/img/upload-arrow.png")
+          p Click or Drag and Drop files here
       template(slot="clip-uploader-body", scope="props")
-        div(:key="key", v-for="(file, key) in files")
-          .card
-            .card-block
-              .file-avatar
-                img(:src="file.dataUrl")
-              .file-details
-                .file-name
-                  | File name: {{file.name}}
-                .file-progress(v-if="file.status !== 'error' && file.status !== 'success'")
-                  .progress
-                    .progress-bar(role="progressbar", :style="{width: file.progress + '%'}", :aria-valuenow="file.progress", aria-valuemin="0", aria-valuemax="100")
-                .file-meta
-                  .file-size
-                    | Size: {{convertBytes(file.size)}}
-                  .file-status
-                    | Status: {{file.status}}
-                .file-remove
-                  button.btn.btn-sm.btn-danger(type="button", v-if="file.status !== 'success'", @click="remove(key)") Delete
-        button.btn.btn-success(type="button", v-if="files.length", :disabled="uploading || finish", @click="upload") Upload
-
+        ul.list-unstyled.u-uploader-body.col
+          li.media.u-uploader-file(:key="key", v-for="(file, key) in files")
+            img.u-uploader-file-avatar.d-flex.mr-3(:src="file.dataUrl")
+            .media-body
+              p.mb-1.d-flex.align-items-center
+                span.u-uploader-file-name.font-weight-bold.mr-3 {{ file.name }}
+                span.u-uploader-file-size.mr-auto {{ convertBytes(file.size) }}
+                i.u-uploader-file-remove.fa.fa-times.fa-lg(@click="remove(key)")
+              .progress(v-if="file.status !== 'error' && file.status !== 'success'")
+                .progress-bar.bg-primary(role="progressbar", :style="{ width: file.progress + '%' }", :aria-valuenow="file.progress", aria-valuemin="0", aria-valuemax="100")
+              p.u-uploader-file-status.mb-0 {{ file.status }}
 </template>
 
 <script>
@@ -61,8 +51,24 @@
       },
       options: {
         type: Object,
-        required: true,
-        default: null
+        default: () => ({
+          url: 'http://mockbin.org/bin/323cf903-c2c8-4cb4-a257-10ee8597d3f0',
+          method: 'post',
+          paramName: 'files',
+          uploadMultiple: true,
+          autoProcessQueue: true,
+          maxFiles: {
+            limit: 5,
+            message: 'You can only upload a max of 5 files'
+          },
+          maxFilesize: {
+            // size in MB
+            limit: 20,
+            message: '{{ filesize }} is greater than the {{ maxFilesize }}'
+          },
+          // Number of files to be uploaded in parallel.
+          parallelUploads: 5
+        })
       }
     },
     data () {
@@ -142,3 +148,100 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/border-radius";
+
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-.3rem);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .u-uploader {
+    height: 20rem;
+
+    .u-uploader-clip, .u-uploader-action, .u-uploader-body {
+      height: 100%;
+    }
+
+    .u-uploader-action {
+      @include border-radius($input-border-radius);
+
+      color: $input-color;
+      background-color: $input-bg;
+      border: 2px dashed $input-border-color;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .3s ease;
+
+      .u-uploader-action-icon {
+        width: 4rem;
+        height: 4rem;
+        margin-top: -2rem;
+        margin-bottom: .5rem;
+        opacity: .6;
+        position: relative;
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      p {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+
+      &:hover, &.dragging {
+        border-color: $input-focus-border-color;
+
+        .u-uploader-action-icon .arrow {
+          animation: bounce 1s ease-in-out infinite;
+        }
+      }
+    }
+
+    .u-uploader-body {
+      padding-left: 1rem;
+      overflow-y: auto;
+
+      .u-uploader-file {
+        + .u-uploader-file {
+          border-top: 1px solid $input-border-color;
+          margin-top: 1rem;
+          padding-top: 1rem;
+        }
+
+        .u-uploader-file-avatar {
+          width: 3rem;
+          height: 3rem;
+        }
+
+        .u-uploader-file-remove {
+          cursor: pointer;
+        }
+
+        .progress {
+          height: .25rem;
+        }
+      }
+    }
+  }
+</style>
