@@ -6,6 +6,7 @@ import UDropdown from './components/Dropdown'
 import UInputTag from './components/InputTag'
 import ULogin from './components/Login'
 import ULogo from './components/Logo'
+import UModal from './components/Modal'
 import UOption from './components/Option'
 import UPagination from './components/Pagination'
 import URadio from './components/Radio'
@@ -26,6 +27,7 @@ var components = {
   UInputTag,
   ULogin,
   ULogo,
+  UModal,
   UOption,
   UPagination,
   URadio,
