@@ -11,16 +11,16 @@
           form(@submit.prevent="onSubmit")
             .form-group
               .input-group
-                span#name.input-group-addon: i.fa.fa-user
+                span.input-group-addon.px-3: i.fa.fa-user
                 input.form-control(type="text", name="name", v-model="form.name", placeholder="帳號", aria-describedby="name")
             .form-group
               .input-group
-                span#password.input-group-addon: i.fa.fa-lock
+                span.input-group-addon.px-3: i.fa.fa-lock
                 input.form-control(type="password", name="password", v-model="form.password", placeholder="密碼", aria-describedby="password")
             .form-group
               button.btn.btn-primary.btn-block.btn-lg(type="submit") 登入
             .form-group.mb-0
-              nuxt-link(to="/login") 忘記密碼
+              nuxt-link.link-dark(to="/login") 忘記密碼
 
     footer
       p.mb-1 BACKEND - Content Management System

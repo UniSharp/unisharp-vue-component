@@ -1,3 +1,11 @@
 a {
   @include transition;
+
+  &.link-dark {
+    color: $link-dark-color;
+
+    @include hover {
+      color: $link-dark-hover-color;
+    }
+  }
 }

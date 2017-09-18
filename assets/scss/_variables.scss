@@ -128,8 +128,10 @@ $navbar-bg: #4d535e;
 // Style anchor elements.
 
 $link-color: $gray-400;
-// $link-decoration: none;
 $link-hover-color: lighten($link-color, 10%);
+$link-dark-color: $black;
+$link-dark-hover-color: darken($link-dark-color, 10%);
+// $link-decoration: none;
 // $link-hover-decoration: underline;
 
 // Paragraphs
