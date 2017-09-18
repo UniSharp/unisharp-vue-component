@@ -6,7 +6,7 @@
         u-sidenav
       .u-content.col.p-0.d-flex.flex-column
         .navbar.px-4.py-0
-          button.btn.btn-outline-light.bg-transparent.u-sidebar-toggle.mr-3.d-lg-none(@click.prevent="$refs.sidebar.show")
+          .u-sidebar-toggle.text-light.px-2.mr-3.d-lg-none(@click.prevent="$refs.sidebar.show")
            i.fa.fa-bars
           slot(name="breadcrumb")
           u-user-dropdown.h-100.ml-auto
@@ -41,6 +41,7 @@
 
     .u-sidebar-toggle {
       cursor: pointer;
+      transform: scale(1.5);
     }
 
     .navbar {
