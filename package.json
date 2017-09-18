@@ -1,7 +1,7 @@
 {
   "name": "uni-admin",
   "description": "UniAdmin",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.8",
   "keywords": ["vue", "bootstrap", "admin"],
   "author": {
       "name": "UniSharp Ltd.",

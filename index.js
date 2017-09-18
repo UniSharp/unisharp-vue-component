@@ -6,7 +6,6 @@ import UDropdown from './components/Dropdown'
 import UInputTag from './components/InputTag'
 import ULogin from './components/Login'
 import ULogo from './components/Logo'
-import UModal from './components/Modal'
 import UOption from './components/Option'
 import UPagination from './components/Pagination'
 import URadio from './components/Radio'
@@ -18,7 +17,7 @@ import UTable from './components/Table'
 import UUploader from './components/Uploader'
 import UUserDropdown from './components/UserDropdown'
 
-let components = {
+var components = {
   UAdmin,
   UBreadcrumb,
   UCheckbox,
@@ -27,7 +26,6 @@ let components = {
   UInputTag,
   ULogin,
   ULogo,
-  UModal,
   UOption,
   UPagination,
   URadio,
@@ -41,8 +39,8 @@ let components = {
 }
 
 export default {
-  install (Vue) {
-    for (let component in components) {
+  install: function (Vue) {
+    for (var component in components) {
       Vue.component(component, components[component])
     }
   }
