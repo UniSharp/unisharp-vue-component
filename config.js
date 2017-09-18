@@ -20,6 +20,9 @@ export default {
     }, {
       title: 'Alerts',
       to: '/guide/alerts'
+    }, {
+      title: 'Modal',
+      to: '/guide/modal'
     }]
   }, {
     icon: 'file-text-o',
