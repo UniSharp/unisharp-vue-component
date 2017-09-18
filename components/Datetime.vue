@@ -8,7 +8,7 @@
       .main(v-else)
         ul.nav.nav-pills
           li.nav-item: a.nav-link(@click='subMonth'): i.fa.fa-arrow-left
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ this.scrollables.months[picker.month - 1] }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ this.scrollables.month[picker.month - 1] }}
           li.nav-item: a.nav-link.text-center(@click='resetMonth'): i.fa.fa-calendar-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("year")') {{ picker.year }}
           li.nav-item: a.nav-link(@click='addMonth'): i.fa.fa-arrow-right
@@ -18,13 +18,13 @@
           li.nav-item(v-for='item in offsetDays'): a.nav-link.unclickable
           li.nav-item(v-for='monthDay in monthDays'): a.nav-link(@click='setDate', :class="{ today: isToday(monthDay.date), selected: monthDay.selected }") {{ monthDay.date }}
         ul.nav.nav-pills
-          li.nav-item(v-for='item in 7'): a.nav-link.unclickable
+          li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable
           li.nav-item: a.nav-link.unclickable: i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker_hour }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.minute }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ beforeNoon ? 'A.M.' : 'P.M.' }}
-          li.nav-item(v-for='item in 7'): a.nav-link.unclickable
+          li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable
 
 </template>
 
@@ -228,6 +228,8 @@
   $padding-y: 8px;
   $highlight-color: #ddd;
   $border-width: 2px;
+  $top-offset: 40px;
+  $z-index: 999;
 
   input::-webkit-inner-spin-button,
   input::-webkit-calendar-picker-indicator,
@@ -242,9 +244,9 @@
 
   .picker {
     position: absolute;
-    top: 40px;
+    top: $top-offset;
     width: $button-width * 7 + $border-width * 2;
-    z-index: 999;
+    z-index: $z-index;
     border: $border-width solid gray;
   }
 
