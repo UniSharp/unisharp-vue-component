@@ -50,11 +50,11 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/_variables";
+  @import "../assets/scss/_variables";
 
   .wrapper {
     height: 100%;
-    background: url(~assets/img/login-bg.jpg) no-repeat center center;
+    background: url(../assets/img/login-bg.jpg) no-repeat center center;
     background-size: cover;
 
     header, footer {

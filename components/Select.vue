@@ -7,8 +7,8 @@
 
 <script>
   import _ from 'lodash'
-  import UDropdown from '~/components/Dropdown'
-  import UOption from '~/components/Option'
+  import UDropdown from './Dropdown'
+  import UOption from './Option'
 
   export default {
     components: { UDropdown, UOption },
@@ -46,7 +46,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/variables";
+  @import "../assets/scss/variables";
   @import "node_modules/bootstrap/scss/mixins/transition";
 
   $hover-bg: theme-color("primary");

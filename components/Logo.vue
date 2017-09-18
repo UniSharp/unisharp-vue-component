@@ -1,6 +1,6 @@
 <template lang="pug">
   nuxt-link.logo(:to="to")
-    img(src="~assets/img/logo.png", :width="width")
+    img(src="../assets/img/logo.png", :width="width")
 </template>
 
 <script>

@@ -25,7 +25,7 @@
 
 <script>
   // import _ from 'lodash'
-  import UDropdown from '~/components/Dropdown'
+  import UDropdown from './Dropdown'
 
   const UP = 38
   const DOWN = 40
@@ -122,7 +122,7 @@
 
 
 <style lang="scss" scoped>
-  @import "~assets/scss/variables";
+  @import "../assets/scss/variables";
 
   $hover-bg: theme-color("primary");
   $hover-fg: #fff;

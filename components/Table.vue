@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import UCheckbox from '~/components/Checkbox'
+  import UCheckbox from './Checkbox'
   import Vue from 'vue'
   import AsyncComputed from 'vue-async-computed'
   import _ from 'lodash'

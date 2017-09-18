@@ -17,10 +17,10 @@
 </template>
 
 <script>
-  import ULogo from '~/components/Logo'
-  import USidebar from '~/components/Sidebar'
-  import USidenav from '~/components/Sidenav'
-  import UUserDropdown from '~/components/UserDropdown'
+  import ULogo from './Logo'
+  import USidebar from './Sidebar'
+  import USidenav from './Sidenav'
+  import UUserDropdown from './UserDropdown'
 
   export default {
     components: { ULogo, USidebar, USidenav, UUserDropdown },
@@ -34,7 +34,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/variables";
+  @import "../assets/scss/variables";
 
   .u-content {
     height: 100vh;

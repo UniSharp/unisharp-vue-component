@@ -86,7 +86,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/variables";
+  @import "../assets/scss/variables";
   @import "node_modules/bootstrap/scss/mixins/transition";
 
   $item-height: 44px;

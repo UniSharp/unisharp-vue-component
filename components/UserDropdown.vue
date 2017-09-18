@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import UDropdown from '~/components/Dropdown'
+  import UDropdown from './Dropdown'
 
   export default {
     components: { UDropdown }
@@ -22,7 +22,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/variables";
+  @import "../assets/scss/variables";
   @import "node_modules/bootstrap/scss/mixins/transition";
 
   .u-user-toggle {

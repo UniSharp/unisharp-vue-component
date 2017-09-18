@@ -29,7 +29,7 @@
 </script>
 
 <style lang="scss">
-  @import "~assets/scss/variables";
+  @import "../assets/scss/variables";
   @import "node_modules/bootstrap/scss/mixins/transition";
 
   .u-dropdown {

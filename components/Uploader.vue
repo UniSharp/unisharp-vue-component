@@ -18,8 +18,8 @@
         slot(name="dz-message")
           .dz-message.u-uploader-action.col(role="alert", :class="{ dragging: params.dragging }", ref="action")
             .u-uploader-action-icon(@click="$refs.action.click()")
-              img.cloud(src="~assets/img/upload-cloud.png")
-              img.arrow(src="~assets/img/upload-arrow.png")
+              img.cloud(src="../assets/img/upload-cloud.png")
+              img.arrow(src="../assets/img/upload-arrow.png")
             p Click or Drag and Drop files here
       template(slot="clip-uploader-body", scope="props")
         ul.list-unstyled.u-uploader-body.col
@@ -156,7 +156,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/variables";
+  @import "../assets/scss/variables";
   @import "node_modules/bootstrap/scss/mixins/transition";
   @import "node_modules/bootstrap/scss/mixins/border-radius";
 
