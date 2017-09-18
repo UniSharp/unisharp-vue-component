@@ -25,7 +25,8 @@
             )
               slot(:index="i", :name="key", :value="item")
                 | {{ item[key] }}
-          slot(name="hiddenRow", :value="item", :index="i")
+          tr
+            slot(name="expand", :value="item", :index="i")
 </template>
 
 <script>
@@ -91,6 +92,11 @@
         type: Boolean,
         default: false
       }
+    },
+    mounted () {
+      Vue.nextTick(() => {
+        console.log(this.$slots)
+      })
     },
     data () {
       return {

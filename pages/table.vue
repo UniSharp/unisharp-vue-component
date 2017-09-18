@@ -12,14 +12,15 @@
       :fields="fields",
       :per-page="perPage",
       :current-page="currentPage",
+      :sortable="true",
       order-by="last_name"
       selection,
       isCheckAll,
       :filter="filter",
       @filtered="onFiltered"
     )
-      template(slot="hiddenRow", scope="data")
-        tr(v-show="data.index === detail")
+      template(slot="expand", scope="data")
+        td(v-show="data.index === detail", colspan="3")
           | hi
       template(slot="operation", scope="data")
         button.btn.mr-1(type="button", @click.stop="detail=data.index") 展開
