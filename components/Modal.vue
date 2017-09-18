@@ -46,12 +46,10 @@
 
   .slide-enter-active, .slide-leave-active {
     @include transition($transition-slide);
-
-    transition-duration: 105s;
   }
 
   .slide-enter, .slide-leave-to {
-    transform: translate(0, -125%);
+    margin-top: -125%;
   }
 
   .fade-enter-active, .fade-leave-active {
