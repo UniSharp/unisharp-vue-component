@@ -36,6 +36,11 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import VueClip from 'vue-clip'
+
+  Vue.use(VueClip)
+
   // Refference: http://vueclip.adonisjs.com/#-events
   // Refference: http://www.dropzonejs.com/#event-drop
   export default {

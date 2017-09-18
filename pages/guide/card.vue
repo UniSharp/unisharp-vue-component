@@ -66,16 +66,7 @@
 </template>
 
 <script>
-  import UAdmin from '~/components/Admin'
-  import UBreadcrumb from '~/components/Breadcrumb'
-  import USelect from '~/components/Select'
-  import URadio from '~/components/Radio'
-  import UCheckbox from '~/components/Checkbox'
-  import USwitch from '~/components/Switch'
-  import UUploader from '~/components/Uploader'
-
   export default {
-    components: { UAdmin, UBreadcrumb, USelect, URadio, UCheckbox, USwitch, UUploader },
     data () {
       return {
         options: [{

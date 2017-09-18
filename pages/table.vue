@@ -36,11 +36,6 @@
 </template>
 
 <script>
-  // import _ from 'lodash'
-  import UAdmin from '~/components/Admin'
-  import UBreadcrumb from '~/components/Breadcrumb'
-  import UTable from '~/components/Table.vue'
-  import UPagination from '~/components/Pagination.vue'
   import axios from 'axios'
 
   let items = [
@@ -64,12 +59,6 @@
   ]
 
   export default {
-    components: {
-      UTable,
-      UPagination,
-      UAdmin,
-      UBreadcrumb
-    },
     data () {
       return {
         items: items,

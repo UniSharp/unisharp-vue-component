@@ -16,10 +16,6 @@ module.exports = {
     ]
   },
   mode: 'spa',
-  modules: [
-    { src: '@nuxtjs/bootstrap-vue', css: false }
-    // '@nuxtjs/font-awesome'
-  ],
   /*
   ** Customize the progress-bar color
   */
@@ -28,9 +24,9 @@ module.exports = {
   ** Global css
   */
   css: [
-    { src: '~/assets/scss/main.scss', lang: 'scss' }
+    { src: '~/assets/scss/uni-admin.scss', lang: 'scss' }
   ],
-  plugins: ['~/plugins/vue-clip'],
+  plugins: ['~/plugins/uni-admin'],
   /*
   ** Build configuration
   */
@@ -54,6 +50,6 @@ module.exports = {
       }
       config.resolve.alias['vue'] = 'vue/dist/vue.common'
     },
-    vendor: ['vue-clip']
+    vendor: ['./']
   }
 }

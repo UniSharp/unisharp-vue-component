@@ -1,9 +1,14 @@
 {
-  "name": "blue-admin",
-  "version": "1.0.0",
-  "description": "A base template",
-  "author": "UniSharp",
-  "private": true,
+  "name": "uni-admin",
+  "description": "UniAdmin",
+  "version": "0.1.0-alpha",
+  "keywords": ["vue", "bootstrap", "admin"],
+  "author": {
+      "name": "UniSharp Ltd.",
+      "email": "unisharp-service@unisharp.com"
+  },
+  "license": "MIT",
+  "sass": "assets/scss/uni-admin.scss",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -13,8 +18,6 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/bootstrap-vue": "^2.0.2",
-    "@nuxtjs/font-awesome": "^1.0.2",
     "axios": "^0.16.2",
     "bootstrap": "v4.0.0-beta",
     "font-awesome": "^4.7.0",

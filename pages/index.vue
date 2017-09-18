@@ -9,11 +9,8 @@
 </template>
 
 <script>
-  import UAdmin from '~/components/Admin'
-  import UBreadcrumb from '~/components/Breadcrumb'
-
   export default {
-    components: { UAdmin, UBreadcrumb }
+    //
   }
 </script>
 

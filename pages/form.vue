@@ -84,19 +84,7 @@
   </template>
 
 <script>
-  // import Logo from '~/components/Logo.vue'
-  import UAdmin from '~/components/Admin'
-  import UBreadcrumb from '~/components/Breadcrumb'
-  import UCheckbox from '~/components/Checkbox'
-  import USwitch from '~/components/Switch'
-  import UDatetime from '~/components/Datetime'
-  import URadio from '~/components/Radio'
-  import USelect from '~/components/Select'
-  import UUploader from '~/components/Uploader'
-  import UInputTag from '~/components/InputTag'
-
   export default {
-    components: { UAdmin, UBreadcrumb, UCheckbox, USwitch, UDatetime, URadio, USelect, UUploader, UInputTag },
     data () {
       return {
         check: 'yes',

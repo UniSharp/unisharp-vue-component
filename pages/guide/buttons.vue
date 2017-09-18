@@ -59,12 +59,8 @@
 </template>
 
 <script>
-  // import Logo from '~/components/Logo.vue'
-  import UAdmin from '~/components/Admin'
-  import UBreadcrumb from '~/components/Breadcrumb'
-
   export default {
-    components: { UAdmin, UBreadcrumb }
+    //
   }
 </script>
 
