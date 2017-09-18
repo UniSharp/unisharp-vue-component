@@ -1,5 +1,5 @@
 a {
-  @include transition;
+  @include transition($transition-link);
 
   &.link-dark {
     color: $link-dark-color;

@@ -17,14 +17,12 @@
         ul.nav.nav-pills
           li.nav-item(v-for='item in offsetDays'): a.nav-link.unclickable
           li.nav-item(v-for='monthDay in monthDays'): a.nav-link(@click='setDate', :class="{ today: isToday(monthDay.date), selected: monthDay.selected }") {{ monthDay.date }}
-        ul.nav.nav-pills
-          li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable
+        ul.nav.nav-pills.my-3
           li.nav-item: a.nav-link.unclickable: i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker_hour }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.minute }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ beforeNoon ? 'A.M.' : 'P.M.' }}
-          li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable
 
 </template>
 
@@ -223,19 +221,20 @@
 </script>
 
 <style lang="scss" scoped>
-  $height: 40px;
-  $button-width: 68px;
-  $padding-y: 8px;
-  $highlight-color: #ddd;
+  @import "~assets/scss/variables";
+
+  $height: 2.5rem;
+  $button-width: 4.5rem;
+  $highlight-color: $gray-400;
   $border-width: 2px;
-  $top-offset: 40px;
+  $top-offset: 2.5rem;
   $z-index: 999;
 
   input::-webkit-inner-spin-button,
   input::-webkit-calendar-picker-indicator,
   input::-webkit-clear-button {
     display: none;
-    -webkit-appearance: none;
+    appearance: none;
   }
 
   .u-datetime {
@@ -245,9 +244,9 @@
   .picker {
     position: absolute;
     top: $top-offset;
-    width: $button-width * 7 + $border-width * 2;
+    width: calc(#{$button-width} * 7 + #{$border-width} * 2);
     z-index: $z-index;
-    border: $border-width solid gray;
+    border: $border-width solid $gray-800;
   }
 
   .scroll {
@@ -263,10 +262,16 @@
     width: $button-width;
     text-align: center;
     border-radius: 0;
+    height: $height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover:not(.unclickable) {
-      background-color: $highlight-color;
       cursor: pointer;
+      background-color: $highlight-color;
+
+      @include color-yiq($highlight-color);
     }
 
     &.today, &.today:hover {
@@ -276,9 +281,6 @@
 
     &.selected {
       border: $border-width solid $highlight-color;
-      height: $height - ($border-width + 1px);
-      line-height: $height - ($border-width + 1px) * 2 - ($padding-y * 2);
-      vertical-align: center;
     }
 
     &.scrollable {
