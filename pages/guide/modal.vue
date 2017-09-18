@@ -4,7 +4,7 @@
     .container
       button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modal.show()") Launch Modal
 
-      u-modal(ref="modal")
+      u-modal(ref="modal", size="sm")
         span(slot="title") Modal
         button.btn.btn-info(slot="actions", @click.stop.prevent="$refs.modal.hide()") NO
         button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") YES

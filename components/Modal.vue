@@ -1,29 +1,49 @@
 <template lang="pug">
-  .u-modal.modal(:class="{ show: shown }")
-    transition(name="fade")
-      .u-modal-backdrop(v-if="shown", @click="shown = false")
-    transition(name="slide")
-      .modal-dialog(v-if="shown")
-        .modal-content
-          .modal-header
-            h5.modal-title
-              slot(name="title") Modal title
-            button.close(type="button", aria-label="Close", @click.prevent.stop="shown = false")
-              span(aria-hidden="true") ×
-          .modal-body
-            slot
-              p Modal body text goes here.
-          .modal-footer
-            slot(name="actions")
-              button.btn.btn-info(type="button", @click.prevent.stop="shown = false") Close
-              button.btn.btn-primary(type="button", @click.prevent.stop="shown = false") Save changes
+  .u-modal
+    .modal(:class="{ show: shown }")
+      transition(name="fade")
+        .u-modal-backdrop(v-if="shown", @click="shown = false")
+      transition(name="slide")
+        .modal-dialog(v-if="shown", :class="modalClass")
+          .modal-content
+            .modal-header
+              h5.modal-title
+                slot(name="title") Modal title
+              button.close(type="button", aria-label="Close", @click.prevent.stop="shown = false")
+                span(aria-hidden="true") ×
+            .modal-body
+              slot
+                p Modal body text goes here.
+            .modal-footer
+              slot(name="actions")
+                button.btn.btn-info(type="button", @click.prevent.stop="shown = false") Close
+                button.btn.btn-primary(type="button", @click.prevent.stop="shown = false") Save changes
 </template>
 
 <script>
   export default {
+    props: {
+      size: {
+        type: String
+      }
+    },
     data () {
       return {
         shown: false
+      }
+    },
+    computed: {
+      modalClass () {
+        switch (this.size) {
+          case 'lg':
+            return 'modal-lg'
+
+          case 'sm':
+            return 'modal-sm'
+
+          default:
+            return ''
+        }
       }
     },
     methods: {
