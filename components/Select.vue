@@ -47,6 +47,7 @@
 
 <style lang="scss" scoped>
   @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/transition";
 
   $hover-bg: theme-color("primary");
   $hover-fg: #fff;
@@ -57,19 +58,21 @@
 
   .u-select {
     .u-select-current {
+      @include transition;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: $input-placeholder-color;
-      transition: all .2s ease;
 
       &:after {
+        @include transition;
+
         content: "";
         margin-right: -.5rem;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
         border-top: 5px solid $input-placeholder-color;
-        transition: border-top-color .2s ease;
       }
     }
 

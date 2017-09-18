@@ -23,13 +23,15 @@
 
 <style lang="scss" scoped>
   @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/transition";
 
   .u-user-toggle {
+    @include transition;
+
     cursor: pointer;
     border: 0 solid rgba(255, 255, 255, .1);
     border-width: 0 1px;
     background-color: $navbar-bg;
-    transition: color .3s ease, background-color .3s ease;
     text-decoration: none;
 
     &:hover, .active & {

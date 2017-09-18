@@ -29,6 +29,7 @@
 
 <style lang="scss" scoped>
   @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/transition";
   @import "node_modules/bootstrap/scss/mixins/breakpoints";
 
   .u-sidebar {
@@ -62,7 +63,7 @@
         background-color: rgba(0, 0, 0, .4);
 
         &.fade-enter-active, &.fade-leave-active {
-          transition: opacity .3s ease;
+          @include transition($transition-fade);
         }
 
         &.fade-enter, &.fade-leave-to {
@@ -71,10 +72,11 @@
       }
 
       .u-sidebar-content {
+        @include transition($transition-slide);
+
         z-index: 10002;
         left: $sidebar-width * -1;
         width: $sidebar-width;
-        transition: left .3s cubic-bezier(.25, .8, .5, 1);
       }
 
       &.show .u-sidebar-content {

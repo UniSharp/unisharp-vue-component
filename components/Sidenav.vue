@@ -87,6 +87,7 @@
 
 <style lang="scss" scoped>
   @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/transition";
 
   $item-height: 44px;
 
@@ -98,10 +99,11 @@
     }
 
     a {
+      @include transition;
+
       display: flex;
       align-items: center;
       height: $item-height;
-      transition: color .3s ease;
 
       .fa {
         margin-top: 1px;
@@ -113,11 +115,12 @@
     }
 
     :not(.u-sidenav-nested) > li {
+      @include transition;
+
       display: flex;
       flex-direction: column;
       background-color: $sidebar-bg;
       border-bottom: 1px solid $navbar-bg;
-      transition: background-color .3s ease;
 
       > a {
         padding: 0 .5rem 0 1rem;
@@ -128,7 +131,7 @@
       }
 
       .fa:last-child, a:hover .fa:first-child {
-        transition: transform .5s cubic-bezier(.25, .8, .5, 1);
+        @include transition($transition-slide);
       }
 
       &:hover, &.active {
@@ -149,12 +152,14 @@
     }
 
     .u-sidenav-nested {
+      @include transition($transition-slide);
+
       overflow: hidden;
-      transition: height .5s cubic-bezier(.25, .8, .5, 1);
 
       li {
+        @include transition;
+
         background-color: darken($sidebar-bg, 5%);
-        transition: background-color .3s ease;
 
         & + li {
           margin-top: 1px;

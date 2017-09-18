@@ -152,6 +152,7 @@
 
 <style lang="scss" scoped>
   @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/transition";
   @import "node_modules/bootstrap/scss/mixins/border-radius";
 
   @keyframes bounce {
@@ -176,6 +177,7 @@
     }
 
     .u-uploader-action {
+      @include transition;
       @include border-radius($input-border-radius);
 
       color: $input-color;
@@ -186,7 +188,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: border-color .3s ease;
 
       .u-uploader-action-icon {
         width: 4rem;

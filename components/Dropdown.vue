@@ -29,12 +29,15 @@
 </script>
 
 <style lang="scss">
+  @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/transition";
+
   .u-dropdown {
     .dropdown-menu.fade-enter-active, .dropdown-menu.fade-leave-active {
-      transition: opacity .2s ease;
+      @include transition($transition-fade);
 
       .dropdown-item {
-        transition: transform .2s cubic-bezier(.25, .8, .5, 1);
+        @include transition($transition-slide);
       }
     }
 

@@ -49,6 +49,7 @@
 
 <style lang="scss">
   @import "~assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/transition";
   @import "node_modules/bootstrap/scss/mixins/border-radius";
 
   $switch-height: 2.375rem;
@@ -70,10 +71,11 @@
   }
 
   .u-switch-control {
+    @include transition($transition-slide);
+
     width: $switch-block-width * 3;
     display: flex;
     position: absolute;
-    transition: left .5s cubic-bezier(.25, .8, .5, 1);
     left: 0;
 
     &, * {
