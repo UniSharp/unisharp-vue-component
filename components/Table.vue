@@ -25,8 +25,7 @@
             )
               slot(:index="i", :name="key", :value="item")
                 | {{ item[key] }}
-          tr
-            slot(name="expand", :value="item", :index="i")
+          slot(name="expand", :value="item", :index="i")
 </template>
 
 <script>

@@ -20,8 +20,10 @@
       @filtered="onFiltered"
     )
       template(slot="expand", scope="data")
-        td(v-show="data.index === detail", colspan="3")
-          | hi
+        tr(v-show="data.index === detail")
+          td
+          td(colspan="3")
+            | hi
       template(slot="operation", scope="data")
         button.btn.mr-1(type="button", @click.stop="detail=data.index") 展開
         button.btn(type="button", @click.stop="showClickButton(data.value.age)") alert
