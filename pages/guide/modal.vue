@@ -2,8 +2,9 @@
   u-admin
     u-breadcrumb(slot="breadcrumb")
     .container
+      button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modal.show()") Launch Modal
+
       u-modal(ref="modal")
-        button.btn.btn-primary(slot="launch", type="button", @click.prevent.stop="$refs.modal.show()") Launch
         span(slot="title") Modal
         button.btn.btn-info(slot="actions", @click.stop.prevent="$refs.modal.hide()") NO
         button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") YES

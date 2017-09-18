@@ -1,7 +1,5 @@
 <template lang="pug">
   .u-modal
-    slot(name="launch")
-      button.btn.btn-primary(type="button", @click.prevent.stop="shown = true") Launch Modal
     .modal(:class="{ show: shown }")
       transition(name="fade")
         .u-modal-backdrop(v-if="shown", @click="shown = false")
