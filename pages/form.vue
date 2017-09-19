@@ -17,7 +17,7 @@
           .form-group.row
             label.col-md-2.col-form-label Select：
             .col-md-10
-              u-select(v-model="form.fruit", :options="fruits")
+              u-select(v-model="form.food", :options="foods")
           //- Checkbox
           .form-group.row
             label.col-md-2.col-form-label Checkbox：
@@ -107,11 +107,15 @@
           }
         },
         foods: [
-          { text: 'Select One', value: null },
           { text: 'Carrots', value: 1 },
           { text: 'Beans', value: 2 },
           { text: 'Corn', value: 3 }
         ],
+        foods2: {
+          1: 'Carrots',
+          2: 'Beans',
+          3: 'Corn'
+        },
         fruits: ['orange', 'apple', 'banana', 'peach'],
         selectedTags: ['Teach'],
         selectedTags2: [],

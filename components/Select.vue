@@ -22,7 +22,6 @@
         default: '請選擇'
       },
       options: {
-        type: Array,
         required: true
       },
       selected: {
@@ -31,23 +30,32 @@
     },
     computed: {
       current () {
-        if (_.has(this.options[0], 'text')) {
-          let current = _.find(this.options, { value: this.selected })
+        if (_.has(this.getOptions[0], 'text')) {
+          let current = _.find(this.getOptions, { value: this.selected })
           return current ? current.text : this.placeholder
         }
-        return this.options.includes(this.selected) ? this.selected : this.placeholder
+        return this.getOptions.includes(this.selected) ? this.selected : this.placeholder
       },
       getOptions () {
-        if (_.has(this.options[0], 'text')) {
-          return [{ text: this.placeholder, value: null }].concat(this.options)
+        let options = this.options
+        if (!_.isArray(options)) {
+          let optionsArray = []
+          for (let option in options) {
+            optionsArray.push({ text: options[option], value: option })
+          }
+          options = optionsArray
         }
-        return [this.placeholder].concat(this.options)
+        if (_.has(options[0], 'text')) {
+          return [{ text: this.placeholder, value: null }].concat(options)
+        }
+        return [this.placeholder].concat(options)
       },
       _: () => _
     },
     methods: {
       select (selected) {
         this.$refs.dropdown.hide()
+        console.log(selected)
         this.$emit('change', selected)
       }
     }
