@@ -1,7 +1,7 @@
 <template lang="pug">
   nav.u-sidenav
     ul.list-unstyled.mb-0
-      li(:class="{ active: item.to === $route.path || active === index }", :key="index", v-for="(item, index) in list")
+      li(:class="{ active: isActive(item.to) || active === index }", :key="index", v-for="(item, index) in list")
         nuxt-link(:to="item.to", v-if="item.to !== undefined")
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
           span {{ item.title }}
@@ -10,7 +10,7 @@
           span.mr-auto {{ item.title }}
           i.fa.fa-angle-left(aria-hidden="true")
         ul.list-unstyled.u-sidenav-nested(:style="`height: ${35 * item.children.length - 1}px`", v-if="item.children")
-          li(:class="{ active: child.to === $route.path }", :key="index", v-for="(child, index) in item.children")
+          li(:class="{ active: isActive(child.to) }", :key="index", v-for="(child, index) in item.children")
             nuxt-link(:to="child.to") {{ child.title }}
 </template>
 
@@ -28,9 +28,16 @@
       _: () => _,
       list: () => config.menu
     },
+    methods: {
+      isActive (path) {
+        let re = new RegExp(`^${path}`)
+
+        return re.test(this.$route.path)
+      }
+    },
     created () {
       for (let i = 0; i < this.list.length; i++) {
-        if (_.find(this.list[i].children, {to: this.$route.path})) {
+        if (_.find(this.list[i].children, child => this.isActive(child.to))) {
           this.active = i
 
           break
