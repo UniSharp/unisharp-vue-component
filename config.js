@@ -34,19 +34,5 @@ export default {
       title: '表格',
       to: '/table'
     }]
-  }, {
-    icon: 'file-text-o',
-    title: '會員管理',
-    children: [{
-      title: '會員列表',
-      to: ''
-    }, {
-      title: '新增會員',
-      to: ''
-    }]
-  }, {
-    icon: 'file-text-o',
-    title: '全站設定',
-    to: ''
   }]
 }
