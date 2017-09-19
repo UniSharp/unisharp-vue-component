@@ -3,6 +3,7 @@ import UBreadcrumb from './components/Breadcrumb'
 import UCheckbox from './components/Checkbox'
 import UDatetime from './components/Datetime'
 import UDropdown from './components/Dropdown'
+import UFace from './components/Face'
 import UInputTag from './components/InputTag'
 import ULogin from './components/Login'
 import ULogo from './components/Logo'
@@ -17,6 +18,7 @@ import USwitch from './components/Switch'
 import UTable from './components/Table'
 import UUploader from './components/Uploader'
 import UUserDropdown from './components/UserDropdown'
+import UWelcome from './components/Welcome'
 
 var components = {
   UAdmin,
@@ -24,6 +26,7 @@ var components = {
   UCheckbox,
   UDatetime,
   UDropdown,
+  UFace,
   UInputTag,
   ULogin,
   ULogo,
@@ -37,7 +40,8 @@ var components = {
   USwitch,
   UTable,
   UUploader,
-  UUserDropdown
+  UUserDropdown,
+  UWelcome
 }
 
 export default {
