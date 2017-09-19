@@ -15,7 +15,7 @@
 
 .alert-success {
   background-color: rgba($green, .3);
-  border-color: rgba($green, .3);
+  border-color: none;
 
   &:before {
     background-repeat: no-repeat;
@@ -28,7 +28,7 @@
 
 .alert-danger {
   background-color: rgba($red, .15);
-  border-color: rgba($red, .2);
+  border-color: none;
 
   &:before {
     content: '!';
