@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-datetime
-    input.form-control(type="datetime-local", :value="rfcDateTime", @click='togglePicker')
+    input.form-control(:type="inputType", :value="rfcDateTime", @click='togglePicker')
     .picker.bg-white(v-if='showPicker')
       .scroll(v-if='showScroll' ref='scroll')
         ul.nav.nav-pills
@@ -16,18 +16,16 @@
               :class='{ selected: picker[timeUnitName] === index }'
             ) {{ index }}
       .main(v-else)
-        ul.nav.nav-pills
+        ul.nav.nav-pills(v-if='shouldPickDate')
           li.nav-item: a.nav-link(@click='subMonth'): i.fa.fa-arrow-left
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ this.scrollables.month[picker.month - 1] }}
           li.nav-item: a.nav-link.text-center(@click='resetMonth'): i.fa.fa-calendar-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("year")') {{ picker.year }}
           li.nav-item: a.nav-link(@click='addMonth'): i.fa.fa-arrow-right
-        ul.nav.nav-pills
           li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
-        ul.nav.nav-pills
           li.nav-item(v-for='item in offsetDays'): a.nav-link.unclickable
           li.nav-item(v-for='monthDay in monthDays'): a.nav-link(@click='setDate', :class="{ today: isToday(monthDay.date), selected: monthDay.selected }") {{ monthDay.date }}
-        ul.nav.nav-pills.my-3
+        ul.nav.nav-pills.my-3(v-if='shouldPickTime')
           li.nav-item: a.nav-link.unclickable: i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker_hour }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
@@ -42,6 +40,10 @@
     props: {
       value: {
         default: true
+      },
+      mode: {
+        type: String,
+        default: 'datetime'
       },
       disabled: {
         type: Boolean,
@@ -79,20 +81,38 @@
     },
     computed: {
       datetime () {
-        return ('000' + this.selected.year).slice(-4) +
-          '-' + this.prependZero(this.selected.month) +
-          '-' + this.prependZero(this.selected.day) +
-          ' ' + this.prependZero(this.selected.hour) +
-          ':' + this.prependZero(this.selected.minute) +
-          ':00'
+        var selectable = []
+        if (this.shouldPickDate) {
+          selectable.push(
+            ('000' + this.selected.year).slice(-4) +
+            '-' + this.prependZero(this.selected.month) +
+            '-' + this.prependZero(this.selected.day)
+          )
+        }
+
+        if (this.shouldPickTime) {
+          selectable.push(
+            this.prependZero(this.selected.hour) +
+            ':' + this.prependZero(this.selected.minute) +
+            ':00'
+          )
+        }
+
+        return selectable.join(' ')
       },
       isMobile () {
         return false
         // return /Mobi/.test(navigator.userAgent)
       },
       rfcDateTime () {
-        var time = this.datetime.replace(' ', 'T')
-        return time.substr(0, time.lastIndexOf(':'))
+        if (this.shouldPick === 'date') {
+          return this.datetime
+        } else if (this.shouldPick === 'time') {
+          return this.datetime.substr(0, this.datetime.lastIndexOf(':'))
+        } else {
+          var time = this.datetime.replace(' ', 'T')
+          return time.substr(0, time.lastIndexOf(':'))
+        }
       },
       monthDays () {
         return this.getDaysWithinMonth(this.picker.year, this.picker.month)
@@ -112,6 +132,28 @@
       },
       timeUnitRange () {
         return this.scrollables[this.timeUnitName]
+      },
+      shouldPick () {
+        if (this.mode === 'time') {
+          return 'time'
+        } else if (this.mode === 'date') {
+          return 'date'
+        } else {
+          return 'datetime'
+        }
+      },
+      shouldPickDate () {
+        return this.shouldPick === 'datetime' || this.shouldPick === 'date'
+      },
+      shouldPickTime () {
+        return this.shouldPick === 'datetime' || this.shouldPick === 'time'
+      },
+      inputType () {
+        return {
+          'time': 'time',
+          'date': 'date',
+          'datetime': 'datetime-local'
+        }[this.shouldPick]
       }
     },
     mounted () {

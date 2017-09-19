@@ -44,7 +44,7 @@
           .form-group.row
             label.col-md-2.col-form-label Date Time：
             .col-md-10
-              u-datetime(v-model='form.time', @change='showTime')
+              u-datetime(mode='datetime', v-model='form.time', @change='showTime')
           //- Textarea
           .form-group.row
             label.col-md-2.col-form-label Textarea：
