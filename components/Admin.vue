@@ -36,6 +36,10 @@
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
 
+  .u-logo {
+    margin-left: -.35rem;
+  }
+
   .u-content {
     height: 100vh;
 

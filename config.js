@@ -1,4 +1,8 @@
 export default {
+  index: {
+    title: 'Blue Admin',
+    to: '/'
+  },
   menu: [{
     icon: 'file-text-o',
     title: 'Style Guide',

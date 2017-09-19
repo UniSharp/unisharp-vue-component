@@ -1,14 +1,16 @@
 <template lang="pug">
-  nuxt-link.logo(:to="to")
+  nuxt-link.u-logo(:to="to")
     img(src="../assets/img/logo.png", :width="width")
 </template>
 
 <script>
+  import config from '~/config'
+
   export default {
     props: {
       to: {
         type: String,
-        default: '/'
+        default: () => config.index.to
       },
       width: {
         type: Number,
@@ -19,7 +21,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .logo {
+  .u-logo {
     display: block;
 
     img {
