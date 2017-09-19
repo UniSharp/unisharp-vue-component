@@ -26,6 +26,16 @@ a:not([href]):not([tabindex]) {
   }
 }
 
+a:not([href]):not([tabindex]).dropdown-item {
+  color: $dropdown-link-color;
+  text-decoration: none;
+
+  @include hover-focus-active {
+    color: $dropdown-link-hover-color;
+    text-decoration: none;
+  }
+}
+
 @each $color, $value in $theme-colors {
   a:not([href]):not([tabindex]).btn-#{$color} {
     &, &:hover {
