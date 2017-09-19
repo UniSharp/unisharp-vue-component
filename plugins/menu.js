@@ -17,7 +17,7 @@ class Menu {
   }
 
   active () {
-    return _.find(this.menu, item => (new RegExp(`^${item.to}`)).test(location.pathname))
+    return _.find(this.menu, item => (new RegExp(`^${item.to}(/(create|edit))?$`)).test(location.pathname))
   }
 }
 

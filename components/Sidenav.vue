@@ -30,7 +30,7 @@
     },
     methods: {
       isActive (path) {
-        let re = new RegExp(`^${path}`)
+        let re = new RegExp(`^${path}(/(create|edit))?$`)
 
         return re.test(this.$route.path)
       }
