@@ -1,5 +1,5 @@
 <template lang="pug">
-  a.dropdown-item(@click.stop.prevent="$emit('change', value)", href="#") {{ text }}
+  a.dropdown-item(@click.stop.prevent="$emit('change', value)") {{ text }}
 </template>
 
 <script>

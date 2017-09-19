@@ -3,10 +3,10 @@
     ul.pagination
       //- previous button
       li.page-item.disabled(v-if="isActive(1)")
-        a.page-link(href="#", aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
+        a.page-link(aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
           span(aria-hidden="true") &laquo;
       li.page-item(v-else)
-        a.page-link(href="#", aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
+        a.page-link(aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
           span(aria-hidden="true") &laquo;
           span.sr-only Previous
       //- page button
@@ -14,10 +14,10 @@
         a(:class="pageLinkClasses(page)", @click.stop.prevent="setPage(page)") {{ page }}
       //- next button
       li.page-item.disabled(v-if="isActive(pageList)")
-        a.page-link(href="#" aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
+        a.page-link(aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
           span(aria-hidden="true") &raquo;
       li.page-item(v-else)
-        a.page-link(href="#" aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
+        a.page-link(aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
           span(aria-hidden="true") &raquo;
           span.sr-only Next
 </template>

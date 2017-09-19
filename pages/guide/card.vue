@@ -61,8 +61,8 @@
           h4.card-title Special title treatment
           p.card-text With supporting text below as a natural lead-in to additional content.
           .card-actions
-            a.btn.btn-info.btn-lg(href="#") Info Button
-            a.btn.btn-primary.btn-lg(href="#") Primary Button
+            a.btn.btn-info.btn-lg Info Button
+            a.btn.btn-primary.btn-lg Primary Button
 </template>
 
 <script>

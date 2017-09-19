@@ -5,10 +5,10 @@
       | User
       i.fa.fa-caret-down.ml-2(aria-hidden="true")
     .dropdown-menu
-      a.dropdown-item(href="#")
+      a.dropdown-item
         i.fa.fa-cog.mr-2(aria-hidden="true")
         span 更改密碼
-      a.dropdown-item(href="#")
+      a.dropdown-item
         i.fa.fa-sign-out.mr-2(aria-hidden="true")
         span 登出
 </template>

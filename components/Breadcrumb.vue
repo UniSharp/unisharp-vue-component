@@ -11,10 +11,10 @@
       return {
         items: [{
           text: 'Admin',
-          href: '#'
+          href: '/'
         }, {
           text: 'Manage',
-          href: '#'
+          href: '/'
         }, {
           text: 'Library',
           active: true

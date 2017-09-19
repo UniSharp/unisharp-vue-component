@@ -6,35 +6,35 @@
         hr
         .alert.alert-primary(role="alert")
           | This is a primary alert with&nbsp;
-          a.alert-link(href="#") an example link
+          a.alert-link an example link
           | . Give it a click if you like.
         .alert.alert-secondary(role="alert")
           | This is a secondary alert with&nbsp;
-          a.alert-link(href="#") an example link
+          a.alert-link an example link
           | . Give it a click if you like.
         .alert.alert-success(role="alert")
           | This is a success alert with&nbsp;
-          a.alert-link(href="#") an example link
+          a.alert-link an example link
           | . Give it a click if you like.
         .alert.alert-danger(role="alert")
           | This is a danger alert with&nbsp;
-          a.alert-link(href="#") an example link
+          a.alert-link an example link
           | . Give it a click if you like.
         .alert.alert-warning(role="alert")
           | This is a warning alert with&nbsp;
-          a.alert-link(href="#") an example link
+          a.alert-link an example link
           | . Give it a click if you like.
         .alert.alert-info(role="alert")
           | This is a info alert with&nbsp;
-          a.alert-link(href="#") an example link
+          a.alert-link an example link
           | . Give it a click if you like.
         .alert.alert-light(role="alert")
           | This is a light alert with&nbsp;
-          a.alert-link(href="#") an example link
+          a.alert-link an example link
           | . Give it a click if you like.
         .alert.alert-dark(role="alert")
           | This is a dark alert with&nbsp;
-          a.alert-link(href="#") an example link
+          a.alert-link an example link
           | . Give it a click if you like.
       section.badges
         h1 Badges

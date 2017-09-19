@@ -5,7 +5,7 @@
         nuxt-link(:to="item.to", v-if="item.to !== undefined")
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
           span {{ item.title }}
-        a(@click.prevent="active = active === index ? -1 : index", href="#", v-else)
+        a(@click.prevent="active = active === index ? -1 : index", v-else)
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
           span.mr-auto {{ item.title }}
           i.fa.fa-angle-left(aria-hidden="true")

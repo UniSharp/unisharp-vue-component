@@ -1,11 +1,47 @@
 a {
   @include transition($transition-link);
 
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+
   &.link-dark {
     color: $link-dark-color;
 
-    @include hover {
+    @include hover-focus {
       color: $link-dark-hover-color;
+    }
+  }
+}
+
+a:not([href]):not([tabindex]) {
+  color: $link-color;
+  text-decoration: $link-decoration;
+
+  @include hover-focus {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+}
+
+@each $color, $value in $theme-colors {
+  a:not([href]):not([tabindex]).btn-#{$color} {
+    &, &:hover {
+      @include color-yiq($value);
+
+      text-decoration: none;
+    }
+  }
+
+  a:not([href]):not([tabindex]).btn-outline-#{$color} {
+    color: $value;
+    text-decoration: none;
+
+    @include hover-focus {
+      color: #fff;
+      text-decoration: none;
     }
   }
 }
