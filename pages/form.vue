@@ -17,7 +17,7 @@
           .form-group.row
             label.col-md-2.col-form-label Select：
             .col-md-10
-              u-select(v-model="form.food", :options="foods")
+              u-select(v-model="form.fruit", :options="fruits")
           //- Checkbox
           .form-group.row
             label.col-md-2.col-form-label Checkbox：
@@ -93,6 +93,7 @@
           email: '',
           name: '',
           food: null,
+          fruit: null,
           checked: false,
           time: '2017-09-07 12:38:59',
           secret: 'S3CR3T',
@@ -106,6 +107,7 @@
           { text: 'Beans', value: 2 },
           { text: 'Corn', value: 3 }
         ],
+        fruits: ['orange', 'apple', 'banana', 'peach'],
         selectedTags: ['Teach'],
         tags: ['Done', 'Doing', 'Doc', 'Reopen', 'Complete', 'Blocked', 'Teach'],
         // Refference: http://www.dropzonejs.com/#config-url

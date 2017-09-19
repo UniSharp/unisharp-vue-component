@@ -2,7 +2,7 @@
   u-dropdown.u-select(ref="dropdown")
     .u-select-current(slot="toggle").form-control {{ current }}
     .dropdown-menu.u-select-options
-      u-option(@change="select", v-for="(option, key) in options", :key="key", :text="option.text", :value="option.value")
+      u-option(@change="select", v-for="(option, key) in getOptions", :key="key", :text="_.has(option, 'text') ? option.text : option", :value="_.has(option, 'value') ? option.value : (option || null)")
 </template>
 
 <script>
@@ -31,10 +31,19 @@
     },
     computed: {
       current () {
-        let current = _.find(this.options, { value: this.selected })
-
-        return current ? current.text : this.placeholder
-      }
+        if (_.has(this.options[0], 'text')) {
+          let current = _.find(this.options, { value: this.selected })
+          return current ? current.text : this.placeholder
+        }
+        return this.options.includes(this.selected) ? this.selected : this.placeholder
+      },
+      getOptions () {
+        if (_.has(this.options[0], 'text')) {
+          return [{ text: this.placeholder, value: null }].concat(this.options)
+        }
+        return [this.placeholder].concat(this.options)
+      },
+      _: () => _
     },
     methods: {
       select (selected) {
