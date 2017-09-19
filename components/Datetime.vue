@@ -4,7 +4,17 @@
     .picker.bg-white(v-if='showPicker')
       .scroll(v-if='showScroll' ref='scroll')
         ul.nav.nav-pills
-          li.nav-item(v-for='(timeUnit, index) in timeUnitRange'): a.nav-link(@click='setTimeUnit(index + 1)', :class='{ selected: index + 1 === picker[timeUnitName] }') {{ timeUnit == index ? index + 1 : timeUnit }}
+          li.nav-item(v-for='(timeUnit, index) in timeUnitRange')
+            a.nav-link(
+              v-if='timeUnitName === "month"',
+              @click='setScrollableTimeUnit(index + 1)',
+              :class='{ selected: picker[timeUnitName] === index + 1 }'
+            ) {{ timeUnit }}
+            a.nav-link(
+              v-else,
+              @click='setScrollableTimeUnit(index)',
+              :class='{ selected: picker[timeUnitName] === index }'
+            ) {{ index }}
       .main(v-else)
         ul.nav.nav-pills
           li.nav-item: a.nav-link(@click='subMonth'): i.fa.fa-arrow-left
@@ -21,7 +31,7 @@
           li.nav-item: a.nav-link.unclickable: i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker_hour }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.minute }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ selected.minute }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ beforeNoon ? 'A.M.' : 'P.M.' }}
 
 </template>
@@ -32,9 +42,6 @@
     props: {
       value: {
         default: true
-      },
-      name: {
-        required: true
       },
       disabled: {
         type: Boolean,
@@ -62,7 +69,6 @@
           minute: 60
         },
         timeUnitName: '',
-        timeUnitRange: 0,
         showPicker: false,
         showScroll: false,
         weekdays: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
@@ -99,11 +105,24 @@
         return this.picker.month === this.selected.month && this.picker.year === this.selected.year
       },
       picker_hour () {
-        return this.selected.hour - (this.beforeNoon ? 0 : 12)
+        return this.selected.hour % 12
       },
       beforeNoon () {
         return this.selected.hour < 12
+      },
+      timeUnitRange () {
+        return this.scrollables[this.timeUnitName]
       }
+    },
+    mounted () {
+      var date = this.value.substr(0, this.value.indexOf(' ')).split('-')
+      var time = this.value.substr(this.value.indexOf(' ') + 1).split(':')
+      this.selected.year = parseInt(date[0])
+      this.selected.month = parseInt(date[1])
+      this.selected.day = parseInt(date[2])
+      this.selected.hour = parseInt(time[0])
+      this.selected.minute = parseInt(time[1])
+      this.picker = this.clone(this.selected)
     },
     watch: {
       selected: {
@@ -177,11 +196,7 @@
         this.selected.year = this.picker.year
         // this.showPicker = false
       },
-      setMonth (monthIndex) {
-        this.picker.month = monthIndex + 1
-        this.toggleMonthScroll()
-      },
-      setTimeUnit (timeUnit) {
+      setScrollableTimeUnit (timeUnit) {
         this.selected[this.timeUnitName] = timeUnit
         this.picker[this.timeUnitName] = timeUnit
         this.showScroll = !this.showScroll
@@ -202,14 +217,14 @@
       },
       toggleScroll (timeUnitName) {
         this.timeUnitName = timeUnitName
-        this.timeUnitRange = this.scrollables[timeUnitName]
         this.showScroll = !this.showScroll
         if (this.showScroll) {
           this.$nextTick(function () {
             var container = this.$refs.scroll
             var scrollItems = this.scrollables[this.timeUnitName]
             var scrollLength = Array.isArray(scrollItems) ? scrollItems.length : scrollItems
-            container.scrollTop = container.scrollHeight * (this.selected[this.timeUnitName] - 3.5) / scrollLength
+            var offset = this.timeUnitName === 'month' ? 3.5 : 2.5
+            container.scrollTop = container.scrollHeight * (this.selected[this.timeUnitName] - offset) / scrollLength
           })
         }
       },
