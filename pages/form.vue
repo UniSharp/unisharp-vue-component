@@ -1,6 +1,5 @@
 <template lang="pug">
   u-admin
-    u-breadcrumb(slot="breadcrumb")
     .card
       .card-header Form Components
       .card-body

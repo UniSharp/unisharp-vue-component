@@ -1,6 +1,5 @@
 <template lang="pug">
-  u-admin
-    u-breadcrumb(slot="breadcrumb")
+  u-admin(title="Modal")
     .container
       button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modal.show()") Launch Modal
       button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modalSm.show()") Launch Small Modal
@@ -42,9 +41,3 @@
     //
   }
 </script>
-
-<style lang="scss" scoped>
-  .component {
-    //
-  }
-</style>

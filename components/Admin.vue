@@ -9,6 +9,7 @@
           .u-sidebar-toggle.text-light.px-2.mr-3.d-lg-none(@click.prevent="$refs.sidebar.show")
            i.fa.fa-bars
           slot(name="breadcrumb")
+            u-breadcrumb
           u-user-dropdown.h-100.ml-auto
         header.p-4.bg-white
           h1.m-0 {{ title }}
@@ -17,13 +18,7 @@
 </template>
 
 <script>
-  import ULogo from './Logo'
-  import USidebar from './Sidebar'
-  import USidenav from './Sidenav'
-  import UUserDropdown from './UserDropdown'
-
   export default {
-    components: { ULogo, USidebar, USidenav, UUserDropdown },
     props: {
       title: {
         type: String,

@@ -1,6 +1,5 @@
 <template lang="pug">
   u-admin
-    u-breadcrumb(slot="breadcrumb")
     .container.d-flex.align-items-center.justify-content-center
       .logo
       .text.d-flex.flex-column.justify-content-center

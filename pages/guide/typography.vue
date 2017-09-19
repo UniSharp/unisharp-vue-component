@@ -1,6 +1,5 @@
 <template lang="pug">
   u-admin
-    u-breadcrumb(slot="breadcrumb")
     section
       .text-box
         h1 h1 - Admin heading

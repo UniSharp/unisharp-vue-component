@@ -1,6 +1,5 @@
 <template lang="pug">
-  u-admin
-    u-breadcrumb(slot="breadcrumb")
+  u-admin(title="Table")
     .container
       table.table.table-bordered.table-striped.text-center
         thead

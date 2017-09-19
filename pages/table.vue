@@ -1,6 +1,5 @@
 <template lang="pug">
   u-admin
-    u-breadcrumb(slot="breadcrumb")
     form
       .form-group.row
         label.col-md-1.col-form-label Filter：

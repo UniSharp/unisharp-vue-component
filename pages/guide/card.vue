@@ -1,6 +1,5 @@
 <template lang="pug">
-  u-admin
-    u-breadcrumb(slot="breadcrumb")
+  u-admin(title="Card")
     .container
       form.card.w-100
         h4.card-header Form

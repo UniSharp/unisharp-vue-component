@@ -1,6 +1,5 @@
 <template lang="pug">
   u-admin
-    u-breadcrumb(slot="breadcrumb")
     section
       .alert.alert-success(role="alert")
         | This is a success alert with&nbsp;

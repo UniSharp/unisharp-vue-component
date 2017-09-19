@@ -1,6 +1,5 @@
 <template lang="pug">
   u-admin
-    u-breadcrumb(slot="breadcrumb")
     section
       h3 主要顏色
       p 名稱即為對應的 variables 變數名稱
