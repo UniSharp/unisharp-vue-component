@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-switch(@click="toggleValue", :class="{ disabled: !!disabled || disabled === '' }")
-    input.d-none(type="checkbox", :name="name", :value="value", :checked="checked")
+    input.d-none(type="checkbox", :value="value", :checked="checked")
     .u-switch-control(:class="{ off: !checked }")
       .u-switch-control-on {{ onText }}
       .u-switch-control-toggle
@@ -19,8 +19,6 @@
       },
       value: {
         default: true
-      },
-      name: {
       },
       disabled: {
         default: false
