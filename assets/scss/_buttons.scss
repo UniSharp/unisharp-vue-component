@@ -1,11 +1,14 @@
 .btn {
   font-size: $font-size-md;
   cursor: pointer;
-  min-width: 4.125rem;
 
   + .btn {
     margin-left: 1rem;
   }
+}
+
+.btn:not(.btn-block) {
+  min-width: 4.125rem;
 }
 
 .btn-sm {

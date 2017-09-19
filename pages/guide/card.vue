@@ -6,17 +6,24 @@
         h4.card-header Form
         .card-body
           .form-group.row
-            label.col-sm-2.col-form-label(for="staticEmail") Email
+            label.col-sm-2.col-form-label(for="email") Email
             .col-sm-10
-              input#staticEmail.form-control-plaintext(type="text", value="email@example.com", readonly)
+              input#email.form-control-plaintext(type="text", value="email@example.com", readonly)
           .form-group.row
-            label.col-sm-2.col-form-label(for="inputName") Name
+            label.col-sm-2.col-form-label(for="name") Name
             .col-sm-10
-              input#inputName.form-control(placeholder="Name")
+              input#name.form-control(placeholder="Name")
           .form-group.row
-            label.col-sm-2.col-form-label(for="inputPassword") Password
+            label.col-sm-2.col-form-label(for="password") Password
             .col-sm-10
-              input#inputPassword.form-control(type="password", placeholder="Password")
+              input#password.form-control(v-model="form.password", type="password", placeholder="Password")
+          .form-group.row
+            label.col-sm-2.col-form-label(for="btnPassword") Password
+            .col-sm-9.pr-0
+              input#btnPassword.form-control(v-model="form.password", type="password", placeholder="Password")
+            .col-sm-1
+              .btn.btn-info.btn-block.px-0(@click.prevent="form.password = ''")
+                i.fa.fa-eraser
           .form-group.row
             label.col-sm-2.col-form-label(for="select") Select
             .col-sm-10
@@ -86,6 +93,7 @@
           value: 5
         }],
         form: {
+          password: '',
           selected: 3,
           checked: [1, 3, 5],
           switch: false,
