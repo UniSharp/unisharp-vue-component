@@ -14,7 +14,7 @@
             .modal-body
               slot
                 p Modal body text goes here.
-            .modal-footer
+            .modal-footer(v-if="!disableFooter")
               slot(name="actions")
                 button.btn.btn-info(type="button", @click.prevent.stop="shown = false") Close
                 button.btn.btn-primary(type="button", @click.prevent.stop="shown = false") Save changes
@@ -25,6 +25,10 @@
     props: {
       size: {
         type: String
+      },
+      disableFooter: {
+        type: Boolean,
+        default: false
       }
     },
     data () {

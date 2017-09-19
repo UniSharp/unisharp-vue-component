@@ -1,31 +1,37 @@
 <template lang="pug">
-  u-dropdown.u-select(ref="dropdown")
-    template(slot="toggle")
-      .d-flex
-        span.badge.badge-pill.badge-primary(v-for="(tag, index) in selectedTags")
-          | {{ tag }}
-          svg.tag-remove(height="11", width="11", @click.stop.prevent="removeTag(index)")
-            line(x1="2", y1="2", x2="9", y2="9", style="stroke:rgb(255,255,255);stroke-width:2")
-            line(x1="9", y1="2", x2="2", y2="9", style="stroke:rgb(255,255,255);stroke-width:2")
-        input.u-select-current.form-control(
-          type="text",
-          v-model="keyword",
-          :placeholder="placeholder",
-          @keydown="handleKeydown"
-        )
-    .dropdown-menu.u-select-tags
-      a.dropdown-item(
-        v-for="(tag, index) in filterTags",
-        :key="index",
-        :class="activeClass(index)"
-        @mousemove="mousemove(index)",
-        @click.stop.prevent="selection"
-      ) {{ tag }}
+  .input-tag
+    u-dropdown.u-select(ref="dropdown", :disableShow="true")
+      template(slot="toggle")
+        .d-flex
+          span.badge.badge-pill.badge-primary(v-for="(tag, index) in selectedTags")
+            | {{ tag }}
+            svg.tag-remove(height="11", width="11", @click.stop.prevent="removeTag(index)")
+              line(x1="2", y1="2", x2="9", y2="9", style="stroke:rgb(255,255,255);stroke-width:2")
+              line(x1="9", y1="2", x2="2", y2="9", style="stroke:rgb(255,255,255);stroke-width:2")
+          input.u-select-current.form-control(
+            type="text",
+            v-model="keyword",
+            :placeholder="placeholder",
+            @keydown="handleKeydown",
+            @click="handleClick"
+          )
+      .dropdown-menu.u-select-tags(v-if="!disableShowList")
+        a.dropdown-item(
+          v-for="(tag, index) in filterTags",
+          :key="index",
+          :class="activeClass(index)"
+          @mousemove="mousemove(index)",
+          @click.stop.prevent="addTage"
+        ) {{ tag }}
+
+    u-modal(ref="modal", size="sm", :disableFooter="true")
+      span(slot="title")
+      p 輸入的 tag 數目超過最大上限
 </template>
 
 <script>
-  // import _ from 'lodash'
   import UDropdown from './Dropdown'
+  import UModal from './Modal'
 
   const UP = 38
   const DOWN = 40
@@ -33,21 +39,32 @@
   const DELETE = 8
   const ESC = 27
 
+  const SELECTION_TYPE = 'selection'
+  const ADD_TYPE = 'add'
+
   export default {
-    components: { UDropdown },
+    components: { UDropdown, UModal },
     props: {
       placeholder: String,
       tags: {
-        type: Array,
-        required: true
+        type: Array
       },
-      value: Array
+      value: Array,
+      type: {
+        type: String,
+        default: 'selection'
+      },
+      limitTag: {
+        type: Number,
+        default: null
+      }
     },
     data () {
       return {
         keyword: '',
         activeIndex: -1,
-        selectedTags: this.value
+        selectedTags: this.value,
+        worker: null
       }
     },
     computed: {
@@ -55,12 +72,22 @@
         return this.tags.filter((tag) => {
           return this.keyword ? tag.includes(this.keyword) : true
         })
+      },
+      disableShowList () {
+        if (this.type === ADD_TYPE) {
+          return true
+        }
+
+        return false
       }
     },
     methods: {
       handleKeydown (e) {
+        if (!this.$refs.dropdown.active) {
+          this.$refs.dropdown.show()
+        }
+
         let keyCode = e.keyCode
-        this.$refs.dropdown.show()
 
         switch (keyCode) {
           case DOWN:
@@ -77,15 +104,24 @@
             break
           case ENTER:
             e.preventDefault()
-            this.selection()
+            this.addTag()
             break
           case DELETE:
-            this.removeTag(this.selectedTags.length - 1)
+            if (this.keyword === '') {
+              this.removeTag(this.selectedTags.length - 1)
+            }
             break
           case ESC:
             this.clear()
             break
         }
+      },
+      handleClick (e) {
+        if (this.disableShowList) {
+          return
+        }
+
+        this.$refs.dropdown.show()
       },
       mousemove (i) {
         this.activeIndex = i
@@ -97,12 +133,25 @@
           }
         }
       },
-      selection () {
-        if (this.activeIndex === -1) {
+      addTag () {
+        if (this.limitTag && this.selectedTags.length >= this.limitTag) {
+          this.$refs.modal.show()
+          this.clear()
           return
         }
 
-        this.selectedTags.push(this.filterTags[this.activeIndex])
+        switch (this.type) {
+          case SELECTION_TYPE:
+            if (this.activeIndex === -1) {
+              return
+            }
+
+            this.selectedTags.push(this.filterTags[this.activeIndex])
+            break
+          case ADD_TYPE:
+            this.selectedTags.push(this.keyword)
+            break
+        }
         this.$emit('input', this.selectedTags)
         this.clear()
       },

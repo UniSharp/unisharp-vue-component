@@ -65,12 +65,17 @@
               span.title Radio Result：
             .col-md-10
               input(type="text", :value="showRadioText(form.radio.value)")
-          //- Radio
+          //- Input Tag
           .form-group.row
             label.col-md-2
-              span.title Tag Input：
+              span.title Tag Input (Selection)：
             .col-md-10
-              u-input-tag(v-model="selectedTags", placeholder="Add Tag", :tags="tags")
+              u-input-tag(v-model="selectedTags", placeholder="Add Tag", :tags="tags", :limitTag="2")
+          .form-group.row
+            label.col-md-2
+              span.title Tag Input (Text Add)：
+            .col-md-10
+              u-input-tag(v-model="selectedTags2", placeholder="Add Tag", type="add", :limitTag="2")
           //- File Uploader
           .form-group.row
             label.col-md-2
@@ -109,6 +114,7 @@
         ],
         fruits: ['orange', 'apple', 'banana', 'peach'],
         selectedTags: ['Teach'],
+        selectedTags2: [],
         tags: ['Done', 'Doing', 'Doc', 'Reopen', 'Complete', 'Blocked', 'Teach'],
         // Refference: http://www.dropzonejs.com/#config-url
         uploadOptions: {
@@ -165,6 +171,9 @@
         console.log(files)
       },
       selectedTags (tags) {
+        console.log(tags)
+      },
+      selectedTags2 (tags) {
         console.log(tags)
       }
     }

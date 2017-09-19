@@ -1,7 +1,7 @@
 <template lang="pug">
   .u-dropdown(:class="{ active }")
     .u-dropdown-backdrop(v-if="active", @click="active = false")
-    .u-dropdown-toggle(@click.prevent="active = true")
+    .u-dropdown-toggle(@click.prevent="showList")
       slot(name="toggle")
     transition(name="fade")
       slot(v-if="active")
@@ -9,6 +9,9 @@
 
 <script>
   export default {
+    props: {
+      disableShow: false
+    },
     data () {
       return {
         active: false
@@ -23,6 +26,13 @@
       },
       toggle () {
         this.active = !this.active
+      },
+      showList () {
+        if (this.disableShow) {
+          return
+        }
+
+        this.active = true
       }
     }
   }
