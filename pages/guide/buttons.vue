@@ -2,7 +2,7 @@
   u-admin
     u-breadcrumb(slot="breadcrumb")
     section
-      h2 類型
+      h2 Type
       .row
         .col-5
           h5 Primary
@@ -12,7 +12,7 @@
       .row
         .col-5
           h5 Secondary
-          p 用於 call to action，一個頁面只能出現一個
+          p 用於「儲存」、「完成」等 call to action，一個頁面只能出現一個
         .col-7.align-self-center
           button.btn.btn-secondary(type="button") Secondary
       .row
@@ -28,7 +28,7 @@
         .col-7.align-self-center
           button.btn.btn-info(type="button") Info
     section
-      h2 尺寸
+      h2 Size
       .row
         .col-5
           h5 Medium
@@ -56,6 +56,28 @@
           button.btn.btn-secondary.btn-lg(type="button") Secondary
           button.btn.btn-danger.btn-lg(type="button") Danger
           button.btn.btn-info.btn-lg(type="button") Info
+    section
+      h2 Square
+      .row
+        .col-5
+          h5 Medium
+        .col-7.align-self-center
+          button.btn.btn-primary.btn-square(type="button")
+            i.fa.fa-plus(aria-hidden='true')
+          button.btn.btn-danger.btn-square(type="button")
+            i.fa.fa-minus(aria-hidden='true')
+          button.btn.btn-info.btn-square(type="button")
+            i.fa.fa-plus(aria-hidden='true')
+      .row
+        .col-5
+          h5 Small
+        .col-7.align-self-center
+          button.btn.btn-primary.btn-sm.btn-square(type="button")
+            i.fa.fa-plus(aria-hidden='true')
+          button.btn.btn-danger.btn-sm.btn-square(type="button")
+            i.fa.fa-minus(aria-hidden='true')
+          button.btn.btn-info.btn-sm.btn-square(type="button")
+            i.fa.fa-plus(aria-hidden='true')
 </template>
 
 <script>

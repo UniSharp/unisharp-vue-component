@@ -7,13 +7,13 @@
   }
 }
 
-.btn:not(.btn-block) {
-  min-width: 4.125rem;
-}
-
 .btn-sm {
   font-size: $font-size-sm;
   box-shadow: none;
+
+  &.btn-square {
+    width: 1.9rem;
+  }
 }
 
 .btn-lg {
@@ -26,4 +26,10 @@
   &:hover {
     color: #fff;
   }
+}
+
+.btn-square {
+  padding-left: 0;
+  padding-right: 0;
+  width: 2.5rem;
 }
