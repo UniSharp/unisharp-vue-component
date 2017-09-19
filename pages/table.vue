@@ -5,7 +5,7 @@
         label.col-md-1.col-form-label Filter：
         .col-md-2
           input.form-control.pull-left(type='text', placeholder='Type to filter', v-model="filterText")
-    u-table.table.table-hover(
+    u-table(
       ref="table",
       :items="items",
       :fields="fields",
