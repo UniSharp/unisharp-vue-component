@@ -18,11 +18,18 @@
 </template>
 
 <script>
+  import config from '~/config'
+  import menu from '../plugins/menu'
+
   export default {
     props: {
       title: {
         type: String,
-        default: '後台管理系統'
+        default: () => {
+          let active = menu.active()
+
+          return active ? active.title : config.index.title
+        }
       }
     }
   }

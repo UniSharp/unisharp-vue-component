@@ -1,5 +1,5 @@
 <template lang="pug">
-  u-admin(title="Modal")
+  u-admin
     .container
       button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modal.show()") Launch Modal
       button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modalSm.show()") Launch Small Modal

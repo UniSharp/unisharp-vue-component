@@ -1,5 +1,5 @@
 <template lang="pug">
-  u-admin(title="Table")
+  u-admin
     .container
       table.table.table-bordered.table-striped.text-center
         thead

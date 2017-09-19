@@ -8,6 +8,7 @@
 <script>
   import _ from 'lodash'
   import config from '~/config'
+  import menu from '../plugins/menu'
 
   export default {
     props: {
@@ -15,22 +16,11 @@
         type: Array,
         default: () => {
           let items = [{ text: config.index.title, to: config.index.to }]
-          let menu = []
 
-          config.menu.forEach(item => {
-            if (item.to) {
-              menu.push({ text: item.title, to: item.to })
-            }
-
-            if (item.children) {
-              item.children.forEach(child => menu.push({ text: child.title, to: child.to }))
-            }
-          })
-
-          let active = _.find(menu, item => (new RegExp(`^${item.to}`)).test(location.pathname))
+          let active = menu.active()
 
           if (active) {
-            items.push(active)
+            items.push({ text: active.title, to: active.to })
           }
 
           return items

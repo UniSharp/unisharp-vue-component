@@ -1,5 +1,5 @@
 <template lang="pug">
-  u-admin(title="Card")
+  u-admin
     .container
       form.card.w-100
         h4.card-header Form
