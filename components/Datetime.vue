@@ -27,10 +27,10 @@
           li.nav-item(v-for='monthDay in monthDays'): a.nav-link(@click='setDate', :class="{ today: isToday(monthDay.date), selected: monthDay.selected }") {{ monthDay.date }}
         ul.nav.nav-pills.my-3(v-if='shouldPickTime')
           li.nav-item: a.nav-link.unclickable: i.fa.fa-clock-o
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker_hour }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.hour }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ selected.minute }}
-          li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ beforeNoon ? 'A.M.' : 'P.M.' }}
+          li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
 
 </template>
 
@@ -73,11 +73,40 @@
         timeUnitName: '',
         showPicker: false,
         showScroll: false,
-        weekdays: ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'],
+        afterNoon: false,
         current: this.clone(currentTime),
         picker: this.clone(currentTime),
         selected: this.clone(currentTime)
       }
+    },
+    watch: {
+      selected: {
+        handler: function () {
+          this.updateSelectedDay()
+          this.afterNoon = !!(this.selected.hour >= 12)
+        },
+        deep: true
+      },
+      picker: {
+        handler: function () {
+          this.updateSelectedDay()
+        },
+        deep: true
+      }
+    },
+    mounted () {
+      var spliterIndex = this.value.indexOf(' ')
+      var date = this.value.substr(0, spliterIndex).split('-')
+      var time = this.value.substr(spliterIndex + 1).split(':')
+      this.selected = {
+        year: parseInt(date[0]),
+        month: parseInt(date[1]),
+        day: parseInt(date[2]),
+        hour: parseInt(time[0]),
+        minute: parseInt(time[1])
+      }
+      this.picker = this.clone(this.selected)
+      this.picker.hour = this.selected.hour % this.scrollables.hour
     },
     computed: {
       datetime () {
@@ -114,6 +143,11 @@
           return time.substr(0, time.lastIndexOf(':'))
         }
       },
+      weekdays () {
+        return moment.weekdays().map(function (weekday) {
+          return weekday.slice(0, 3) + '.'
+        })
+      },
       monthDays () {
         return this.getDaysWithinMonth(this.picker.year, this.picker.month)
       },
@@ -123,12 +157,6 @@
       },
       isCurrentMonth () {
         return this.picker.month === this.selected.month && this.picker.year === this.selected.year
-      },
-      picker_hour () {
-        return this.selected.hour % 12
-      },
-      beforeNoon () {
-        return this.selected.hour < 12
       },
       timeUnitRange () {
         return this.scrollables[this.timeUnitName]
@@ -154,30 +182,6 @@
           'date': 'date',
           'datetime': 'datetime-local'
         }[this.shouldPick]
-      }
-    },
-    mounted () {
-      var date = this.value.substr(0, this.value.indexOf(' ')).split('-')
-      var time = this.value.substr(this.value.indexOf(' ') + 1).split(':')
-      this.selected.year = parseInt(date[0])
-      this.selected.month = parseInt(date[1])
-      this.selected.day = parseInt(date[2])
-      this.selected.hour = parseInt(time[0])
-      this.selected.minute = parseInt(time[1])
-      this.picker = this.clone(this.selected)
-    },
-    watch: {
-      selected: {
-        handler: function () {
-          this.updateSelectedDay()
-        },
-        deep: true
-      },
-      picker: {
-        handler: function () {
-          this.updateSelectedDay()
-        },
-        deep: true
       }
     },
     methods: {
@@ -229,8 +233,8 @@
       resetMinute () {
         this.selected.hour = moment().hour()
         this.selected.minute = moment().minute()
-        this.picker.hour = moment().hour()
-        this.picker.minute = moment().minute()
+        this.picker.hour = this.selected.hour
+        this.picker.minute = this.selected.minute
       },
       setDate (e) {
         this.selected.day = e.target.innerHTML
@@ -239,7 +243,11 @@
         // this.showPicker = false
       },
       setScrollableTimeUnit (timeUnit) {
-        this.selected[this.timeUnitName] = timeUnit
+        if (this.timeUnitName === 'hour') {
+          this.selected.hour = parseInt(timeUnit) + (this.afterNoon + 0) * 12
+        } else {
+          this.selected[this.timeUnitName] = timeUnit
+        }
         this.picker[this.timeUnitName] = timeUnit
         this.showScroll = !this.showScroll
       },
@@ -255,7 +263,8 @@
         return ('00' + str).slice(-2)
       },
       toggleNoon () {
-        this.selected.hour += this.beforeNoon ? 12 : -12
+        this.afterNoon = !this.afterNoon
+        this.selected.hour += this.afterNoon ? 12 : -12
       },
       toggleScroll (timeUnitName) {
         this.timeUnitName = timeUnitName
@@ -266,7 +275,7 @@
             var scrollItems = this.scrollables[this.timeUnitName]
             var scrollLength = Array.isArray(scrollItems) ? scrollItems.length : scrollItems
             var offset = this.timeUnitName === 'month' ? 3.5 : 2.5
-            container.scrollTop = container.scrollHeight * (this.selected[this.timeUnitName] - offset) / scrollLength
+            container.scrollTop = container.scrollHeight * (this.picker[this.timeUnitName] - offset) / scrollLength
           })
         }
       },
