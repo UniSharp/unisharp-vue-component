@@ -73,6 +73,11 @@
               u-input-tag(v-model="selectedTags", placeholder="Add Tag", :tags="tags", :limitTag="2")
           .form-group.row
             label.col-md-2
+              span.title Tag Input (Can Scroll)：
+            .col-md-10
+              u-input-tag(v-model="selectedTags3", placeholder="Add Tag", :tags="tags", :maxTagsShow="5")
+          .form-group.row
+            label.col-md-2
               span.title Tag Input (Text Add)：
             .col-md-10
               u-input-tag(v-model="selectedTags2", placeholder="Add Tag", type="add", :limitTag="2")
@@ -119,7 +124,8 @@
         fruits: ['orange', 'apple', 'banana', 'peach'],
         selectedTags: ['Teach'],
         selectedTags2: [],
-        tags: ['Done', 'Doing', 'Doc', 'Reopen', 'Complete', 'Blocked', 'Teach'],
+        selectedTags3: ['Doing'],
+        tags: ['Done', 'Doing', 'Doc', 'Reopen', 'Complete', 'Blocked', 'Teach', 'Depend', 'Error', 'Success'],
         // Refference: http://www.dropzonejs.com/#config-url
         uploadOptions: {
           url: 'http://mockbin.org/bin/323cf903-c2c8-4cb4-a257-10ee8597d3f0',

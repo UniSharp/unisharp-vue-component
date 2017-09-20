@@ -15,21 +15,22 @@
             @keydown="handleKeydown",
             @click="handleClick"
           )
-      .dropdown-menu.u-select-tags(v-if="!disableShowList")
+      .dropdown-menu.u-select-tags(v-if="!disableShowList", :style="dropdownMenuStyle", ref="menu")
         a.dropdown-item(
           v-for="(tag, index) in filterTags",
           :key="index",
           :class="activeClass(index)"
           @mousemove="mousemove(index)",
-          @click.stop.prevent="addTage"
+          @click.stop.prevent="addTag"
         ) {{ tag }}
 
     u-modal(ref="modal", size="sm", :disableFooter="true")
       span(slot="title")
-      p 輸入的 tag 數目超過最大上限
+      p {{ limitTagInfo }}
 </template>
 
 <script>
+  import Vue from 'vue'
   import UDropdown from './Dropdown'
   import UModal from './Modal'
 
@@ -57,6 +58,14 @@
       limitTag: {
         type: Number,
         default: null
+      },
+      limitTagInfo: {
+        type: String,
+        default: '輸入的 tag 數已達最大上限'
+      },
+      maxTagsShow: {
+        type: Number,
+        default: null
       }
     },
     data () {
@@ -64,7 +73,8 @@
         keyword: '',
         activeIndex: -1,
         selectedTags: this.value,
-        worker: null
+        selectionHeight: null,
+        height: null
       }
     },
     computed: {
@@ -79,6 +89,15 @@
         }
 
         return false
+      },
+      dropdownMenuStyle () {
+        if (this.maxTagsShow && this.selectionHeight) {
+          this.height = this.$refs.menu.childNodes[0].clientHeight * this.maxTagsShow + 8
+          return {
+            'max-height': `${this.height}px`,
+            'overflow-y': 'scroll'
+          }
+        }
       }
     },
     methods: {
@@ -95,12 +114,14 @@
             this.activeIndex < this.filterTags.length - 1
               ? this.activeIndex++
               : this.activeIndex = 0
+            this.handleScroll(DOWN)
             break
           case UP:
             e.preventDefault()
             this.activeIndex > 0
               ? this.activeIndex--
               : this.activeIndex = this.filterTags.length - 1
+            this.handleScroll(UP)
             break
           case ENTER:
             e.preventDefault()
@@ -117,11 +138,42 @@
         }
       },
       handleClick (e) {
-        if (this.disableShowList) {
+        this.$refs.dropdown.show()
+
+        if (!this.selectionHeight) {
+          Vue.nextTick(() => {
+            this.selectionHeight = this.maxTagsShow
+              ? this.$refs.menu.childNodes[0].clientHeight
+              : 0
+          })
+        }
+      },
+      handleScroll (direction) {
+        if (!this.maxTagsShow) {
           return
         }
 
-        this.$refs.dropdown.show()
+        let tmpScrollTop = 0
+        switch (direction) {
+          case DOWN:
+            let overTags = (this.activeIndex + 1) - this.maxTagsShow
+            tmpScrollTop = overTags > 0
+              ? 8 + this.selectionHeight * overTags
+              : 0
+            break
+          case UP:
+            tmpScrollTop = this.activeIndex * this.selectionHeight + 8
+            break
+        }
+
+        let currentScrollTop = this.$refs.menu.scrollTop
+        let activeTagHeight = this.activeIndex * this.selectionHeight + 8
+        if (
+          activeTagHeight < currentScrollTop ||
+          activeTagHeight > currentScrollTop + this.selectionHeight * (this.maxTagsShow - 1)
+        ) {
+          this.$refs.menu.scrollTop = tmpScrollTop
+        }
       },
       mousemove (i) {
         this.activeIndex = i
