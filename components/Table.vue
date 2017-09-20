@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-table(:style="styleObject.div")
-    table.table.table-hover
+    table(:class="this.class")
       thead(:style="styleObject.thead")
         tr
           th(v-if="selection", :style="getCheckboxStyle()")
@@ -93,7 +93,8 @@
       },
       class: {
         default: {
-          'table': true
+          table: true,
+          'table-hover': true
         }
       }
     },
