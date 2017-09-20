@@ -1,7 +1,7 @@
 {
   "name": "uni-admin",
   "description": "UniAdmin",
-  "version": "0.1.0-beta.9",
+  "version": "0.1.0-beta.10",
   "keywords": [
     "vue",
     "bootstrap",
@@ -15,7 +15,7 @@
   "sass": "assets/scss/uni-admin.scss",
   "files": [
     "assets",
-    "componenets",
+    "components",
     "plugins",
     "index.js"
   ],
