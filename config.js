@@ -16,17 +16,17 @@ export default {
       title: 'Typography',
       to: '/guide/typography'
     }, {
-      title: 'Card',
-      to: '/guide/card'
-    }, {
-      title: 'Table',
-      to: '/guide/table'
-    }, {
       title: 'Alerts',
       to: '/guide/alerts'
     }, {
       title: 'Modal',
       to: '/guide/modal'
+    }, {
+      title: 'Card',
+      to: '/guide/card'
+    }, {
+      title: 'List',
+      to: '/guide/list'
     }]
   }, {
     icon: 'file-text-o',

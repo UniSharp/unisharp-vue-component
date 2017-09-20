@@ -1,5 +1,12 @@
 <template lang="pug">
   u-admin
+    form.form-inline(slot="functions")
+      .input-group
+        input.form-control(type="text", placeholder="Search", aria-label="Search")
+        span.input-group-btn
+          button.btn.btn-info(type="button")
+            i.fa.fa-search.mr-2
+            | Search
     .container
       table.table.table-bordered.table-striped.text-center
         thead

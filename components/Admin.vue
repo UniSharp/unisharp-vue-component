@@ -11,8 +11,9 @@
           slot(name="breadcrumb")
             u-breadcrumb
           u-user-dropdown.h-100.ml-auto
-        header.p-4.bg-white
-          h1.m-0 {{ title }}
+        header.px-4.bg-white.d-flex.align-items-center
+          h1.mb-0.mr-auto {{ title }}
+          slot(name="functions")
         main.p-4
           slot
 </template>
@@ -52,12 +53,13 @@
 
     .navbar {
       position: relative;
-      flex: 0 0 $navbar-height;
       background-color: $navbar-bg;
+      flex: 0 0 $navbar-height;
     }
 
     header {
       z-index: 10;
+      flex: 0 0 $navbar-height * 1.2;
 
       h1 {
         font-weight: 400;
@@ -70,7 +72,7 @@
     main {
       overflow-x: hidden;
       overflow-y: auto;
-      min-height: calc(100vh - 153px);
+      min-height: calc(100vh - #{$navbar-height * 2.2});
     }
   }
 </style>
