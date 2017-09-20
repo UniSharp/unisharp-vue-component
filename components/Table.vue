@@ -26,6 +26,12 @@
               slot(:index="i", :name="key", :value="item")
                 | {{ item[key] }}
           slot(name="expand", :value="item", :index="i")
+
+    u-pagination(
+      :total-rows="items.length",
+      :per-page="perPage",
+      v-model="currentPage"
+    )
 </template>
 
 <script>
