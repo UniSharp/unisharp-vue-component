@@ -100,7 +100,9 @@
       class: {
         default: {
           table: true,
-          'table-hover': true
+          'table-bordered': true,
+          'table-striped': true,
+          'text-center': true
         }
       }
     },
