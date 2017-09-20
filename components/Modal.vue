@@ -1,23 +1,23 @@
 <template lang="pug">
   .u-modal
-    .modal(:class="{ show: shown }")
+    .modal(:class="{ show: shown }", role="dialog")
       transition(name="fade")
-        .u-modal-backdrop(v-if="shown", @click="shown = false")
+        .u-modal-backdrop(v-if="shown", @click="hide")
       transition(name="slide")
         .modal-dialog(v-if="shown", :class="modalClass")
           .modal-content
             .modal-header
               h5.modal-title
                 slot(name="title") Modal title
-              button.close(type="button", aria-label="Close", @click.prevent.stop="shown = false")
+              button.close(type="button", aria-label="Close", @click.prevent.stop="hide")
                 span(aria-hidden="true") ×
             .modal-body
               slot
                 p Modal body text goes here.
             .modal-footer(v-if="!disableFooter")
               slot(name="actions")
-                button.btn.btn-info(type="button", @click.prevent.stop="shown = false") Close
-                button.btn.btn-primary(type="button", @click.prevent.stop="shown = false") Save changes
+                button.btn.btn-info(type="button", @click.prevent.stop="hide") Close
+                button.btn.btn-primary(type="button", @click.prevent.stop="hide") Save changes
 </template>
 
 <script>
@@ -50,12 +50,22 @@
         }
       }
     },
+    watch: {
+      shown (value) {
+        document[['removeEventListener', 'addEventListener'][+value]]('keyup', this.onEsc)
+      }
+    },
     methods: {
       show () {
         this.shown = true
       },
       hide () {
         this.shown = false
+      },
+      onEsc (e) {
+        if (e.keyCode === 27) {
+          this.hide()
+        }
       }
     }
   }
