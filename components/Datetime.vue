@@ -141,8 +141,8 @@
         }
       },
       isMobile () {
-        return false
-        // return /Mobi/.test(navigator.userAgent)
+        // return false
+        return /Mobi/.test(navigator.userAgent)
       },
       rfcDateTime () {
         if (this.shouldPick === 'date' || this.shouldPick === 'time') {
