@@ -15,3 +15,23 @@ a {
     }
   }
 }
+
+@each $color, $value in $theme-colors {
+  a:not([href]):not([tabindex]).btn-#{$color} {
+    &, &:hover {
+      @include color-yiq($value);
+
+      text-decoration: none;
+    }
+  }
+
+  a:not([href]):not([tabindex]).btn-outline-#{$color} {
+    color: $value;
+    text-decoration: none;
+
+    @include hover-focus {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
