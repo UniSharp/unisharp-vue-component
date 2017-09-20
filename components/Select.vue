@@ -74,6 +74,9 @@
   }
 
   .u-select {
+    min-width: 10rem;
+    position: relative;
+
     .u-select-current {
       @include transition;
 
