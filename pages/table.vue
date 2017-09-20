@@ -14,7 +14,6 @@
       :sortable="true",
       order-by="last_name"
       selection,
-      isCheckAll,
       :filter="filter",
       @filtered="onFiltered"
     )
@@ -26,11 +25,7 @@
       template(slot="operation", scope="data")
         button.btn.mr-1(type="button", @click.stop="detail=data.index") 展開
         button.btn(type="button", @click.stop="showClickButton(data.value.age)") alert
-    u-pagination(
-      :total-rows="totalRows",
-      :per-page="perPage",
-      v-model="currentPage"
-    )
+
     button.btn.btn-primary(type="button", @click.stop="showCheckItems") Get Checked Items of Current Page
 </template>
 
