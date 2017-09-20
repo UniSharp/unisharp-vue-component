@@ -105,7 +105,6 @@
     },
     data () {
       return {
-        checkAlls: false,
         checks: [],
         order: this.orderBy,
         desc: this.orderDesc
@@ -233,8 +232,6 @@
         this.order = key
         this.desc = !this.desc
         // clear all checked items when sort
-        this.checks = []
-        this.checkAlls = []
       }
     }
   }
