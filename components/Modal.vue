@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-modal
-    .modal(:class="{ show: shown }", role="dialog")
+    .modal(:class="{ open }")
       transition(name="fade")
         .u-modal-backdrop(v-if="shown", @click="hide")
       transition(name="slide")
@@ -26,7 +26,8 @@
     },
     data () {
       return {
-        shown: false
+        shown: false,
+        open: false
       }
     },
     computed: {
@@ -46,6 +47,12 @@
     watch: {
       shown (value) {
         document[['removeEventListener', 'addEventListener'][+value]]('keyup', this.onEsc)
+
+        if (value) {
+          this.open = true
+        } else {
+          setTimeout(() => { this.open = false }, 500)
+        }
       }
     },
     methods: {
@@ -66,10 +73,13 @@
 
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
+  @import "../assets/scss/mixins";
   @import "node_modules/bootstrap/scss/mixins/transition";
 
   .slide-enter-active, .slide-leave-active {
     @include transition($transition-slide);
+
+    transition-duration: .5s;
   }
 
   .slide-enter, .slide-leave-to {
@@ -84,8 +94,10 @@
     opacity: 0;
   }
 
-  .modal.show {
+  .modal.open {
     display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .u-modal-backdrop {
