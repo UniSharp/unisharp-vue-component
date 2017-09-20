@@ -37,9 +37,13 @@
 <script>
   import moment from 'moment'
   export default {
+    model: {
+      prop: 'value',
+      event: 'change'
+    },
     props: {
       value: {
-        default: true
+        default: null
       },
       mode: {
         type: String,
@@ -75,6 +79,7 @@
         handler: function () {
           this.updateSelectedDay()
           this.afterNoon = !!(this.selected.hour >= 12)
+          this.$emit('change', this.datetime)
         },
         deep: true
       },
@@ -86,7 +91,7 @@
       }
     },
     mounted () {
-      if (this.value === true) {
+      if (isNaN(Date.parse(this.value))) {
         this.selected = this.clone(this.current)
       } else {
         var spliterIndex = this.value.indexOf(' ')
