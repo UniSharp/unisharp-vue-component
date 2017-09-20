@@ -8,16 +8,13 @@
           .modal-content
             .modal-header
               h5.modal-title
-                slot(name="title") Modal title
+                slot(name="title")
               button.close(type="button", aria-label="Close", @click.prevent.stop="hide")
                 span(aria-hidden="true") ×
             .modal-body
               slot
-                p Modal body text goes here.
-            .modal-footer(v-if="!disableFooter")
+            .modal-footer(v-if="$slots.actions")
               slot(name="actions")
-                button.btn.btn-info(type="button", @click.prevent.stop="hide") Close
-                button.btn.btn-primary(type="button", @click.prevent.stop="hide") Save changes
 </template>
 
 <script>
@@ -25,10 +22,6 @@
     props: {
       size: {
         type: String
-      },
-      disableFooter: {
-        type: Boolean,
-        default: false
       }
     },
     data () {
