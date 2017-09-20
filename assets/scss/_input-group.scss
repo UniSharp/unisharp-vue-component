@@ -5,6 +5,10 @@
     box-shadow: none;
     color: $black;
     background: $white;
+
+    &:hover {
+      background: darken($white, 3%);
+    }
   }
 
   .input-group-btn:not(:first-child) {
