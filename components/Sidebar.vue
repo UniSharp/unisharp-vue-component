@@ -29,6 +29,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
+  @import "../assets/scss/mixins";
   @import "node_modules/bootstrap/scss/mixins/transition";
   @import "node_modules/bootstrap/scss/mixins/breakpoints";
 
@@ -51,14 +52,10 @@
       flex: 0 0 0;
 
       .u-sidebar-backdrop, .u-sidebar-content {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
+        @include backdrop;
       }
 
       .u-sidebar-backdrop {
-        width: 100%;
         z-index: 10000;
         background-color: rgba(0, 0, 0, .4);
 
