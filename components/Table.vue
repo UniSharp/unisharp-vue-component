@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-table(:style="styleObject.div")
-    table(:class="this.class")
+    table.table.table-bordered.table-striped.text-center
       thead(:style="styleObject.thead")
         tr
           th(v-if="selection", :style="getCheckboxStyle()")
@@ -96,14 +96,6 @@
       sortable: {
         type: Boolean,
         default: false
-      },
-      class: {
-        default: {
-          table: true,
-          'table-bordered': true,
-          'table-striped': true,
-          'text-center': true
-        }
       }
     },
     mounted () {
