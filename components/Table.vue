@@ -4,7 +4,7 @@
       thead(:style="styleObject.thead")
         tr
           th(v-if="selection", :style="getCheckboxStyle()")
-            u-checkbox(v-model="checkAlls", :value="currentPage", @change="changeCheckAll")
+            u-checkbox(@change="changeCheckAll", :checked="allChecked")
           th(
             :class="{ sortable }",
             v-for="(value, key) in fields",
@@ -18,7 +18,7 @@
         template(v-for="(item, i) in rows")
           tr(:key="item.uIndex")
             td(v-if="selection", :style="getCheckboxStyle()")
-              u-checkbox(v-model="checks", :value="item.uIndex", @change="changeCheck")
+              u-checkbox(v-model="checks", :value="item.uIndex")
             td(
               v-for="(value, key) in fields",
               :style="getCeilStyle(key)"
@@ -113,10 +113,8 @@
     },
     data () {
       return {
-        checkAlls: (this.isCheckAll && this.perPage)
-          ? this.arrayRange(Math.ceil(this.items.length / this.perPage)).map(v => v + 1)
-          : [1],
-        checks: this.isCheckAll ? this.arrayRange(this.items.length) : [],
+        checkAlls: false,
+        checks: [],
         order: this.orderBy,
         desc: this.orderDesc
       }
@@ -144,8 +142,17 @@
       }
     },
     computed: {
+      allChecked () {
+        return _.difference(this.rows.map(v => v.uIndex), this.checks).length === 0
+      },
+      indexed () {
+        return this.pured.map((item, index) => {
+          item.uIndex = index
+          return item
+        })
+      },
       filtered () {
-        let items = this.filter ? _.filter(this.pured, this.filter) : this.pured
+        let items = this.filter ? _.filter(this.indexed, this.filter) : this.indexed
         this.$emit('filtered', items)
         return items
       },
@@ -159,9 +166,6 @@
       },
       rows () {
         let items = this.sliced
-        items.forEach((item, index) => {
-          item.uIndex = index
-        })
 
         return items
       },
@@ -197,23 +201,10 @@
       }
     },
     methods: {
-      changeCheckAll () {
-        let checkItems = this.getPageItemIndexes(this.currentPage)
-        let checkOrNot = this.checkAlls.indexOf(this.currentPage) > -1
-        this.updateChecks(checkItems, checkOrNot)
-      },
-      changeCheck () {
-        let itemIndexes = this.getPageItemIndexes(this.currentPage)
-        let isAllItemsCheck = itemIndexes.every((itemIndex) => {
-          return this.checks.indexOf(itemIndex) > -1
-        })
-        let index = this.checkAlls.indexOf(this.currentPage)
-
-        if (isAllItemsCheck && index === -1) {
-          this.checkAlls.push(this.currentPage)
-        } else if (!isAllItemsCheck && index !== -1) {
-          this.checkAlls.splice(index, 1)
-        }
+      changeCheckAll (all) {
+        let sets = new Set(this.checks)
+        this.rows.forEach((item) => all ? sets.add(item.uIndex) : sets.delete(item.uIndex))
+        this.checks = Array.from(sets)
       },
       getCheckboxStyle () {
         if (this.width) {
@@ -245,48 +236,10 @@
       arrayRange (length) {
         return Array.from(Array(length).keys())
       },
-      arrayDiff (mainArray, filerArray) {
-        return mainArray.filter(x => filerArray.indexOf(x) === -1)
-      },
-      getPageItemIndexes (page) {
-        if (page === undefined) {
-          return []
-        }
-
-        if (this.perPage === null) {
-          return this.arrayRange(this.items.length)
-        }
-
-        let indexes = []
-        let start = this.perPage * (page - 1)
-        let end = (this.perPage * page) < this.items.length ? (this.perPage * page) : this.items.length
-        for (let i = start; i < end; i++) {
-          indexes.push(i)
-        }
-
-        return indexes
-      },
-      updateChecks (itemIndexes, isSetCheck) {
-        if (isSetCheck) {
-          itemIndexes.forEach(itemIndex => {
-            if (this.checks.indexOf(itemIndex) === -1) {
-              this.checks.push(itemIndex)
-            }
-          })
-        } else {
-          itemIndexes.forEach(itemIndex => {
-            let index = this.checks.indexOf(itemIndex)
-            if (index !== -1) {
-              this.checks.splice(index, 1)
-            }
-          })
-        }
-      },
       showCheckItems () {
-        let items = _.orderBy(this.items, [this.order], [this.desc ? 'desc' : 'asc'])
-        let itemIndexes = this.getPageItemIndexes(this.currentPage)
-        return items.filter((item, index) => {
-          return (itemIndexes.indexOf(index) !== -1) && (this.checks.indexOf(index) !== -1)
+        let checked = _.intersection(this.checks, this.rows.map(v => v.uIndex))
+        return this.rows.filter((item, index) => {
+          return checked.includes(item.uIndex)
         })
       },
       sortColumn (key) {
