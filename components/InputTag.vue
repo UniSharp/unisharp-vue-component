@@ -61,7 +61,7 @@
       },
       limitTagInfo: {
         type: String,
-        default: '輸入的 tag 數已超過最大上限'
+        default: '輸入的 tag 數已達最大上限'
       },
       maxTagsShow: {
         type: Number,
