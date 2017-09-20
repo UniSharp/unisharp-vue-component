@@ -233,9 +233,6 @@
 
         return null
       },
-      arrayRange (length) {
-        return Array.from(Array(length).keys())
-      },
       showCheckItems () {
         let checked = _.intersection(this.checks, this.rows.map(v => v.uIndex))
         return this.rows.filter((item, index) => {
