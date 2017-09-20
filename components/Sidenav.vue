@@ -66,6 +66,7 @@
       display: flex;
       align-items: center;
       height: $item-height;
+      color: $link-color;
 
       .fa {
         margin-top: 1px;
@@ -73,6 +74,7 @@
 
       &:hover {
         text-decoration: none;
+        color: $link-hover-color;
       }
     }
 
