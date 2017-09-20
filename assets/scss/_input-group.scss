@@ -1,0 +1,16 @@
+.input-group {
+  .btn {
+    font-size: $font-size-base;
+    padding: $input-padding-y $input-padding-x;
+    box-shadow: none;
+    color: $black;
+    background: $white;
+  }
+
+  .input-group-btn:not(:first-child) {
+    > .btn, > .btn-group {
+      margin-left: 0;
+      border-left: 0;
+    }
+  }
+}

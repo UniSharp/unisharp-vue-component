@@ -5,7 +5,7 @@
       .input-group
         input.form-control(type="text", placeholder="Search", aria-label="Search")
         span.input-group-btn
-          button.btn.btn-info(type="button")
+          button.btn(type="button")
             i.fa.fa-search.mr-2
             | Search
     table.table.table-bordered.table-striped.text-center
