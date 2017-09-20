@@ -157,9 +157,7 @@
         return this.perPage ? this.sorted.slice(start, end) : this.sorted
       },
       rows () {
-        let items = this.sliced
-
-        return items
+        return this.sliced
       },
       styleObject () {
         let div = {}
