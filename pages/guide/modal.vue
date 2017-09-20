@@ -16,8 +16,8 @@
 
     u-modal(ref="modalSm", size="sm")
       span(slot="title") Small Modal
-      button.btn.btn-info(slot="actions", @click.stop.prevent="$refs.modal.hide()") NO
-      button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") YES
+      button.btn.btn-info(slot="actions", @click.stop.prevent="$refs.modalSm.hide()") NO
+      button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modalSm.hide()") YES
       p Hello World
       p Hello World
       p Hello World
@@ -26,8 +26,8 @@
 
     u-modal(ref="modalLg", size="lg")
       span(slot="title") Large Modal
-      button.btn.btn-info(slot="actions", @click.stop.prevent="$refs.modal.hide()") NO
-      button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") YES
+      button.btn.btn-info(slot="actions", @click.stop.prevent="$refs.modalLg.hide()") NO
+      button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modalLg.hide()") YES
       p Hello World
       p Hello World
       p Hello World
