@@ -13,6 +13,12 @@
   },
   "license": "MIT",
   "sass": "assets/scss/uni-admin.scss",
+  "files": [
+    "assets",
+    "componenets",
+    "plugins",
+    "index.js"
+  ],
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
