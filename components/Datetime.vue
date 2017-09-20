@@ -1,6 +1,7 @@
 <template lang="pug">
   .u-datetime
     input.form-control(:type="inputType", :value="rfcDateTime", @click='togglePicker')
+    .overlay(v-if='showPicker', @click='togglePicker')
     .picker.bg-white(v-if='showPicker')
       .scroll(v-if='showScroll' ref='scroll')
         ul.nav.nav-pills
@@ -300,7 +301,7 @@
   $button-width: 4.5rem;
   $highlight-color: $gray-400;
   $border-width: 2px;
-  $top-offset: 2.5rem;
+  $top-offset: 3rem;
   $z-index: 999;
 
   input::-webkit-inner-spin-button,
@@ -312,6 +313,16 @@
 
   .u-datetime {
     position: relative;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    z-index: 998;
   }
 
   .picker {
