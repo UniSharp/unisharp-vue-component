@@ -3,21 +3,31 @@ import config from '~/config'
 
 class Menu {
   constructor () {
-    this.menu = []
+    this.items = this.getItems(config.menu)
+  }
 
-    config.menu.forEach(item => {
+  getItems (menu) {
+    let result = []
+
+    menu.forEach(item => {
       if (item.to) {
-        this.menu.push({ title: item.title, to: item.to })
+        result.push({ title: item.title, to: item.to })
+      }
+
+      if (item.active) {
+        item.active.forEach(active => result.push({ title: item.title, to: active }))
       }
 
       if (item.children) {
-        item.children.forEach(child => this.menu.push({ title: child.title, to: child.to }))
+        result = result.concat(this.getItems(item.children))
       }
     })
+
+    return result
   }
 
   active () {
-    return _.find(this.menu, { to: location.pathname })
+    return _.find(this.items, { to: location.pathname })
   }
 }
 
