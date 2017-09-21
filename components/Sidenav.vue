@@ -1,7 +1,7 @@
 <template lang="pug">
   nav.u-sidenav
     ul.list-unstyled.mb-0
-      li(:class="{ active: isActive(item.to) || active === index }", :key="index", v-for="(item, index) in list")
+      li(:class="{ active: isActive(item) || active === index }", :key="index", v-for="(item, index) in list")
         nuxt-link(:to="item.to", v-if="item.to !== undefined")
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
           span {{ item.title }}
@@ -10,7 +10,7 @@
           span.mr-auto {{ item.title }}
           i.fa.fa-angle-left(aria-hidden="true")
         ul.list-unstyled.u-sidenav-nested(:style="`height: ${35 * item.children.length - 1}px`", v-if="item.children")
-          li(:class="{ active: isActive(child.to) }", :key="index", v-for="(child, index) in item.children")
+          li(:class="{ active: isActive(child) }", :key="index", v-for="(child, index) in item.children")
             nuxt-link(:to="child.to") {{ child.title }}
 </template>
 
@@ -29,15 +29,13 @@
       list: () => config.menu
     },
     methods: {
-      isActive (path) {
-        let re = new RegExp(`^${path}(/(create|edit))?$`)
-
-        return re.test(this.$route.path)
+      isActive (item) {
+        return item.to === this.$route.path || _.indexOf(item.active, this.$route.path) !== -1
       }
     },
     created () {
       for (let i = 0; i < this.list.length; i++) {
-        if (_.find(this.list[i].children, child => this.isActive(child.to))) {
+        if (_.find(this.list[i].children, child => this.isActive(child))) {
           this.active = i
 
           break
