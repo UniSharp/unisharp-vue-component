@@ -38,6 +38,12 @@
         return this.getOptions.includes(this.selected) ? this.selected : this.placeholder
       },
       getOptions () {
+        // support :
+        // [{text: 'text', value: 'value'}]
+        // or
+        // { value: 'text' }
+        // or
+        // [ 'text', 'text' ] # it will use text as value
         return [{ text: this.placeholder, value: null }].concat(
           _.map(this.options, (v, k) => {
             return {
