@@ -51,7 +51,7 @@
         if (value) {
           this.open = true
         } else {
-          setTimeout(() => { this.open = false }, 500)
+          setTimeout(() => { this.open = false }, 300)
         }
       }
     },
@@ -77,13 +77,11 @@
   @import "node_modules/bootstrap/scss/mixins/transition";
 
   .slide-enter-active, .slide-leave-active {
-    @include transition($transition-slide);
-
-    transition-duration: .5s;
+    @include transition($modal-transition);
   }
 
   .slide-enter, .slide-leave-to {
-    margin-top: -125%;
+    transform: translateY(-125%);
   }
 
   .fade-enter-active, .fade-leave-active {
