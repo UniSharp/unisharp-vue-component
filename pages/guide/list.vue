@@ -12,14 +12,16 @@
     table.table.table-bordered.table-striped.text-center.mb-4
       thead
         tr
-          th #
+          th(scope="row")
+            u-checkbox(v-model="checkall", @click="setChecked")
           th First Name
           th Last Name
           th Username
           th Actions
       tbody
         tr
-          th(scope="row") 1
+          th(scope="row")
+            u-checkbox(v-model="checked[0]")
           td Mark
           td Otto
           td @mdo
@@ -31,7 +33,8 @@
               i.fa.fa-trash.mr-2
               | Remove
         tr
-          th(scope="row") 2
+          th(scope="row")
+            u-checkbox(v-model="checked[1]")
           td Jacob
           td Thornton
           td @fat
@@ -43,7 +46,8 @@
               i.fa.fa-trash.mr-2
               | Remove
         tr
-          th(scope="row") 3
+          th(scope="row")
+            u-checkbox(v-model="checked[2]")
           td Larry
           td the Bird
           td @twitter
@@ -66,7 +70,21 @@
           { text: 'Two', value: 2 },
           { text: 'Three', value: 3 }
         ],
-        filter: null
+        filter: null,
+        checkall: false,
+        checked: [false, false, false]
+      }
+    },
+    watch: {
+      checked (value) {
+        this.checkall = value.indexOf(false) === -1
+      }
+    },
+    methods: {
+      setChecked () {
+        for (let i = 0; i < this.checked.length; i++) {
+          this.checked.splice(i, 1, !this.checkall)
+        }
       }
     }
   }

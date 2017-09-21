@@ -54,7 +54,7 @@
         default: false
       },
       uncheckedValue: {
-        default: null
+        default: false
       }
     },
     methods: {

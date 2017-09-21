@@ -18,7 +18,15 @@
   }
 
   td, th {
-    vertical-align: middle;
+    vertical-align: middle !important;
+
+    .custom-control {
+      margin: 0;
+      padding: 0;
+      width: $custom-control-indicator-size;
+      height: $custom-control-indicator-size;
+      min-height: $custom-control-indicator-size;
+    }
   }
 }
 
