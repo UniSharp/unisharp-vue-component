@@ -86,7 +86,6 @@
         expand: false,
         age: null,
         detail: null,
-        currentPage: 1,
         perPage: 5,
         totalRows: items.length
       }
