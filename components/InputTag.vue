@@ -24,7 +24,7 @@
           @click.stop.prevent="addTag"
         ) {{ tag }}
 
-    u-modal(ref="modal", size="sm", :disableFooter="true")
+    u-modal(ref="modal", size="sm")
       span(slot="title")
       p {{ limitTagInfo }}
 </template>
