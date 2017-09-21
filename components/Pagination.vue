@@ -1,24 +1,21 @@
 <template lang="pug">
-  nav(aria-label="Page navigation")
-    ul.pagination
+  nav.u-pagination.d-flex.align-items-center(aria-label="Page navigation")
+    p.mb-0.mr-auto {{ totalRows.toString().replace(/(.)(?=(?:\d{3})+$)/g, '$1,') }} results
+    ul.pagination.mb-0
       //- previous button
-      li.page-item.disabled(v-if="isActive(1)")
+      li.page-item(:class="{ disabled: isActive(1) }")
         a.page-link(aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
-          span(aria-hidden="true") &laquo;
-      li.page-item(v-else)
-        a.page-link(aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
-          span(aria-hidden="true") &laquo;
+          span(aria-hidden="true"): i.fa.fa-angle-double-left
           span.sr-only Previous
       //- page button
-      li(v-for="page in pageList", :class="pageItemClasses(page)" :key="page")
-        a(:class="pageLinkClasses(page)", @click.stop.prevent="setPage(page)") {{ page }}
+      li.page-item(v-for="page in pageList", :class="{ active: isActive(page) }" :key="page")
+        span.page-link(v-if="isActive(page)") {{ page }}
+          span.sr-only (Current)
+        a.page-link(@click.stop.prevent="setPage(page)", v-else) {{ page }}
       //- next button
-      li.page-item.disabled(v-if="isActive(pageList)")
+      li.page-item(:class="{ disabled: isActive(pageList) }")
         a.page-link(aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
-          span(aria-hidden="true") &raquo;
-      li.page-item(v-else)
-        a.page-link(aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
-          span(aria-hidden="true") &raquo;
+          span(aria-hidden="true"): i.fa.fa-angle-double-right
           span.sr-only Next
 </template>
 
@@ -64,18 +61,6 @@
       isActive (page) {
         return this.currentPage === page
       },
-      pageItemClasses (page) {
-        return [
-          'page-item',
-          this.isActive(page) ? 'active' : ''
-        ]
-      },
-      pageLinkClasses (page) {
-        return [
-          'page-link',
-          this.isActive(page) ? 'active' : ''
-        ]
-      },
       setPage (page) {
         if (page < 1 || page > this.pageList) {
           return
@@ -86,3 +71,30 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .pagination {
+    box-shadow: 0 0 6px rgba(0, 0, 0, .1);
+
+    .page-item:first-child {
+      .page-link {
+        border-left: none;
+      }
+    }
+
+    .page-item:last-child {
+      .page-link {
+        border-right: none;
+      }
+    }
+
+    .page-link {
+      border-top: none;
+      border-bottom: none;
+
+      .fa {
+        transform: scale(.8);
+      }
+    }
+  }
+</style>

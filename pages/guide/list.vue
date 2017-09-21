@@ -1,5 +1,6 @@
 <template lang="pug">
   u-admin
+    button.btn.btn-primary.mb-4(@click.prevent) Create
     form.form-inline(slot="functions")
       u-select(v-model="filter", placeholder="Filter", :options="options")
       .input-group
@@ -8,7 +9,7 @@
           button.btn(type="button")
             i.fa.fa-search.mr-2
             | Search
-    table.table.table-bordered.table-striped.text-center
+    table.table.table-bordered.table-striped.text-center.mb-4
       thead
         tr
           th #
@@ -31,6 +32,7 @@
           td Larry
           td the Bird
           td @twitter
+    u-pagination(:totalRows="12345", :perPage="5000")
 </template>
 
 <script>

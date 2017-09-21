@@ -559,13 +559,13 @@ $custom-radio-indicator-icon-checked: str-replace(url("data:image/svg+xml;charse
 
 // Pagination
 
-// $pagination-padding-y: .5rem;
-// $pagination-padding-x: .75rem;
+$pagination-padding-y: .75rem;
+$pagination-padding-x: 1rem;
 // $pagination-padding-y-sm: .25rem;
 // $pagination-padding-x-sm: .5rem;
-// $pagination-padding-y-lg: .75rem;
+// $pagination-padding-y-lg: 1rem;
 // $pagination-padding-x-lg: 1.5rem;
-// $pagination-line-height: 1.25;
+$pagination-line-height: 1.25;
 
 // $pagination-color: $link-color;
 // $pagination-bg: $white;
@@ -573,12 +573,12 @@ $custom-radio-indicator-icon-checked: str-replace(url("data:image/svg+xml;charse
 // $pagination-border-color: #ddd;
 
 // $pagination-hover-color: $link-hover-color;
-// $pagination-hover-bg: $gray-200;
+$pagination-hover-bg: $gray-300;
 // $pagination-hover-border-color: #ddd;
 
 // $pagination-active-color: $white;
-// $pagination-active-bg: theme-color("primary");
-// $pagination-active-border-color: theme-color("primary");
+$pagination-active-bg: $gray-700;
+$pagination-active-border-color: $gray-700;
 
 // $pagination-disabled-color: $gray-600;
 // $pagination-disabled-bg: $white;
