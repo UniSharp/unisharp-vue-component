@@ -2,7 +2,7 @@
   u-dropdown.u-select(ref="dropdown")
     .u-select-current(slot="toggle").form-control {{ current }}
     .dropdown-menu.u-select-options
-      u-option(@change="select", v-for="(option, key) in getOptions", :key="key", :text="_.has(option, 'text') ? option.text : option", :value="_.has(option, 'value') ? option.value : (option || null)")
+      u-option(@change="select", v-for="(option, key) in getOptions", :key="key", :text="option.text", :value="option.value")
 </template>
 
 <script>
@@ -22,6 +22,7 @@
         default: '請選擇'
       },
       options: {
+        type: [Array, Object],
         required: true
       },
       selected: {
@@ -37,25 +38,20 @@
         return this.getOptions.includes(this.selected) ? this.selected : this.placeholder
       },
       getOptions () {
-        let options = this.options
-        if (!_.isArray(options)) {
-          let optionsArray = []
-          for (let option in options) {
-            optionsArray.push({ text: options[option], value: option })
-          }
-          options = optionsArray
-        }
-        if (_.has(options[0], 'text')) {
-          return [{ text: this.placeholder, value: null }].concat(options)
-        }
-        return [this.placeholder].concat(options)
+        return [{ text: this.placeholder, value: null }].concat(
+          _.map(this.options, (v, k) => {
+            return {
+              value: v.value || v.text || v || k || null,
+              text: _.toString(v.text || v)
+            }
+          })
+        )
       },
       _: () => _
     },
     methods: {
       select (selected) {
         this.$refs.dropdown.hide()
-        console.log(selected)
         this.$emit('change', selected)
       }
     }
