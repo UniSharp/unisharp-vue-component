@@ -8,7 +8,7 @@
           span(aria-hidden="true"): i.fa.fa-angle-double-left
           span.sr-only Previous
       //- page button
-      li.page-item(v-for="page in pageList", :class="{ active: isActive(page) }" :key="page")
+      li.page-item(v-for="page in pageList", :class="{ active: isActive(page) }", :key="page")
         span.page-link(v-if="isActive(page)") {{ page }}
           span.sr-only (Current)
         a.page-link(@click.stop.prevent="setPage(page)", v-else) {{ page }}
