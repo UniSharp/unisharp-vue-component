@@ -62,10 +62,6 @@
         type: Number,
         default: null
       },
-      currentPage: {
-        type: Number,
-        default: 1
-      },
       height: {
         type: Number,
         default: null
@@ -144,7 +140,7 @@
       },
       filtered () {
         let items = this.filter ? _.filter(this.indexed, this.filter) : this.indexed
-        this.$emit('filtered', items)
+        this.currentPage = 1
         return items
       },
       sorted () {

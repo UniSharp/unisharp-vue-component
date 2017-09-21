@@ -13,12 +13,10 @@
       :items="items",
       :fields="fields",
       :per-page="perPage",
-      :current-page="currentPage",
       :sortable="true",
       order-by="last_name"
       selection,
       :filter="filter",
-      @filtered="onFiltered"
     )
       template(slot="expand", scope="data")
         tr(v-show="data.index === detail && expand")
@@ -102,10 +100,6 @@
       },
       showClickButton (age) {
         alert(age)
-      },
-      onFiltered (items) {
-        this.totalRows = items.length
-        this.currentPage = 1
       },
       filter (item) {
         if (this.filterText) {
