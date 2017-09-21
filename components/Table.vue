@@ -28,7 +28,7 @@
           slot(name="expand", :value="item", :index="i")
 
     u-pagination(
-      :total-rows="items.length",
+      :total-rows="filtered.length",
       :per-page="perPage",
       v-model="currentPage"
     )
