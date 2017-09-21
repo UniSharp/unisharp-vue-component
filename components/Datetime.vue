@@ -27,7 +27,7 @@
           li.nav-item(v-for='item in offsetDays'): a.nav-link.unclickable
           li.nav-item(v-for='monthDay in monthDays'): a.nav-link(@click='setDate', :class="{ today: isToday(monthDay.date), selected: monthDay.selected }") {{ monthDay.date }}
         ul.nav.nav-pills.my-3(v-if='shouldPickTime')
-          li.nav-item: a.nav-link.unclickable: i.fa.fa-clock-o
+          li.nav-item: a.nav-link.text-center(@click='resetMinute'): i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.hour }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ selected.minute }}
