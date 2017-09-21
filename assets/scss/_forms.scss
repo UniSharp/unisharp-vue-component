@@ -4,6 +4,14 @@
 
 .form-control {
   padding: $input-padding-y $input-padding-x;
+
+  @include hover {
+    @include box-shadow($input-focus-box-shadow);
+
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    outline: none;
+  }
 }
 
 .form-control-plaintext {
