@@ -4,7 +4,7 @@ export default {
     to: '/'
   },
   menu: [{
-    icon: 'file-text-o',
+    icon: 'book',
     title: 'Style Guide',
     children: [{
       title: 'Colors',
@@ -29,8 +29,8 @@ export default {
       to: '/guide/list'
     }]
   }, {
-    icon: 'file-text-o',
-    title: '元件範例',
+    icon: 'cubes',
+    title: 'Components',
     children: [{
       title: '表單元件',
       to: '/form'
