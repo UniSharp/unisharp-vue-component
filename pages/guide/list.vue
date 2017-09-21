@@ -16,22 +16,44 @@
           th First Name
           th Last Name
           th Username
+          th Actions
       tbody
         tr
           th(scope="row") 1
           td Mark
           td Otto
           td @mdo
+          td
+            button.btn.btn-primary.btn-sm
+              i.fa.fa-pencil.mr-2
+              | Edit
+            button.btn.btn-danger.btn-sm
+              i.fa.fa-trash.mr-2
+              | Remove
         tr
           th(scope="row") 2
           td Jacob
           td Thornton
           td @fat
+          td
+            button.btn.btn-primary.btn-sm
+              i.fa.fa-pencil.mr-2
+              | Edit
+            button.btn.btn-danger.btn-sm
+              i.fa.fa-trash.mr-2
+              | Remove
         tr
           th(scope="row") 3
           td Larry
           td the Bird
           td @twitter
+          td
+            button.btn.btn-primary.btn-sm
+              i.fa.fa-pencil.mr-2
+              | Edit
+            button.btn.btn-danger.btn-sm
+              i.fa.fa-trash.mr-2
+              | Remove
     u-pagination(:totalRows="12345", :perPage="5000")
 </template>
 

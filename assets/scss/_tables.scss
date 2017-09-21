@@ -16,6 +16,10 @@
   tbody + tbody {
     border-top-width: $table-border-width;
   }
+
+  td, th {
+    vertical-align: middle;
+  }
 }
 
 .table-bordered {
