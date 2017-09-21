@@ -19,7 +19,7 @@
         a.dropdown-item(
           v-for="(tag, index) in filterTags",
           :key="index",
-          :class="activeClass(index)"
+          :class="activeClass(index)",
           @mousemove="mousemove(index)",
           @click.stop.prevent="addTag"
         ) {{ tag }}
@@ -84,11 +84,7 @@
         })
       },
       disableShowList () {
-        if (this.type === ADD_TYPE) {
-          return true
-        }
-
-        return false
+        return this.type === ADD_TYPE
       },
       dropdownMenuStyle () {
         if (this.maxTagsShow && this.selectionHeight) {
