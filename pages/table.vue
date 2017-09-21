@@ -19,9 +19,9 @@
       :filter="filter",
     )
       template(slot="expand", scope="data")
-        tr(v-show="data.index === detail && expand")
+        tr(v-if="data.index === detail && expand")
           td
-          td(colspan="3")
+          td(colspan="4")
             | hi
       template(slot="operation", scope="data")
         button.btn.mr-1(type="button", @click.stop="detail=data.index; expand = !expand") 展開
