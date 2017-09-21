@@ -1,10 +1,13 @@
 <template lang="pug">
   u-admin
-    form
-      .form-group.row
-        label.col-md-1.col-form-label Filter：
-        .col-md-2
-          input.form-control.pull-left(type='text', placeholder='Type to filter', v-model="filterText")
+    form.form-inline(slot="functions")
+      u-select(v-model="age", placeholder="Age", :options="ages")
+      .input-group
+        input.form-control(type="text", v-model="filterText", placeholder="Search", aria-label="Search")
+        span.input-group-btn
+          button.btn(type="button")
+            i.fa.fa-search.mr-2
+            | Search
     u-table(
       ref="table",
       :items="items",
@@ -18,12 +21,12 @@
       @filtered="onFiltered"
     )
       template(slot="expand", scope="data")
-        tr(v-show="data.index === detail")
+        tr(v-show="data.index === detail && expand")
           td
           td(colspan="3")
             | hi
       template(slot="operation", scope="data")
-        button.btn.mr-1(type="button", @click.stop="detail=data.index") 展開
+        button.btn.mr-1(type="button", @click.stop="detail=data.index; expand = !expand") 展開
         button.btn(type="button", @click.stop="showClickButton(data.value.age)") alert
 
     button.btn.btn-primary(type="button", @click.stop="showCheckItems") Get Checked Items of Current Page
@@ -53,6 +56,11 @@
   ]
 
   export default {
+    computed: {
+      ages () {
+        return items.map(v => v.age)
+      }
+    },
     data () {
       return {
         items: items,
@@ -73,6 +81,8 @@
             label: '操作'
           }
         },
+        expand: false,
+        age: null,
         detail: null,
         currentPage: 1,
         perPage: 5,
@@ -92,15 +102,24 @@
       },
       showClickButton (age) {
         alert(age)
-        console.log(this.$refs.table.showCheckItems())
       },
       onFiltered (items) {
         this.totalRows = items.length
         this.currentPage = 1
       },
       filter (item) {
-        return item.last_name.indexOf(this.filterText) !== -1
+        if (this.filterText) {
+          let regex = new RegExp(`.*${this.filterText}.*`)
+          return regex.test(item.last_name)
+        }
+
+        if (this.age) {
+          return item.age === this.age
+        }
+
+        return true
       }
+
     }
   }
 </script>
