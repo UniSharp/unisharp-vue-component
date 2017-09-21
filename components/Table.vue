@@ -103,7 +103,8 @@
       return {
         checks: [],
         order: this.orderBy,
-        desc: this.orderDesc
+        desc: this.orderDesc,
+        currentPage: 1
       }
     },
     asyncComputed: {
