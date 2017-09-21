@@ -352,10 +352,7 @@
     justify-content: center;
 
     &:hover:not(.unclickable) {
-      cursor: pointer;
-      background-color: $highlight-color;
-
-      @include color-yiq($highlight-color);
+      border: $border-width solid $highlight-color;
     }
 
     &.today, &.today:hover {
@@ -364,7 +361,9 @@
     }
 
     &.selected {
-      border: $border-width solid $highlight-color;
+      background-color: $highlight-color;
+
+      @include color-yiq($highlight-color);
     }
 
     &.scrollable {
