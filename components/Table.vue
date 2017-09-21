@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-table(:style="styleObject.div")
-    table.table.table-bordered.table-striped.text-center
+    table.mb-4.table.table-bordered.table-striped.text-center
       thead(:style="styleObject.thead")
         tr
           th(v-if="selection", :style="getCheckboxStyle()")
