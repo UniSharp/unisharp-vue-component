@@ -83,7 +83,7 @@
     },
     methods: {
       clamp (number) {
-        return _.clamp(number, 1, this.totalPage)
+        return _.clamp(number, 1, _.clamp(this.totalPage, 1))
       },
       isActive (page) {
         return this.currentPage === page
