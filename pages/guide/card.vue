@@ -54,7 +54,7 @@
             .col-form-label
               u-checkbox(v-model="form.switch") Checkbox
         .form-group.row
-          label.col-sm-2.col-form-label Checkbox
+          label.col-sm-2.col-form-label Uploader
           .col-sm-10
             u-uploader(v-model="form.files")
         .card-actions
