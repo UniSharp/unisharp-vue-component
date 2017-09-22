@@ -73,8 +73,7 @@
         let first = {value: 1, active: this.currentPage === 1, disabled: false}
         let more = {value: '...', active: false, disabled: true}
         let last = {value: this.totalPage, active: this.currentPage === this.totalPage, disabled: false}
-        let list = Array.from(this.pageList)
-        return _.sortBy(_.unionBy(list, [first, last], 'value'), ['value']).reduce((pre, cur) => {
+        return _.sortBy(_.unionBy(this.pageList, [first, last], 'value'), ['value']).reduce((pre, cur) => {
           if (_.last(pre) && _.last(pre).value !== cur.value - 1) {
             pre = pre.concat(more)
           }
