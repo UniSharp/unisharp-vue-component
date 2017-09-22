@@ -2,7 +2,7 @@
   nav.u-pagination.d-flex.align-items-center(aria-label="Page navigation")
     p.mb-0.mr-auto {{ totalRows.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') }} results
     ul.pagination.mb-0
-      li.page-item(:class="{ disabled: section === 0 }")
+      li.page-item(:class="{ disabled: currentPage === 1 }")
         a.page-link(aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
           span(aria-hidden="true"): i.fa.fa-angle-left
           span.sr-only Previous
@@ -12,7 +12,7 @@
           span.sr-only (Current)
         a.page-link(@click.stop.prevent="!page.disabled && setPage(page.value)", v-else) {{ page.value }}
       //- next button
-      li.page-item(:class="{ disabled: false }")
+      li.page-item(:class="{ disabled: currentPage == totalPage }")
         a.page-link(aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
           span(aria-hidden="true"): i.fa.fa-angle-right
           span.sr-only Next
