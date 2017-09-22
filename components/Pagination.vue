@@ -7,12 +7,12 @@
           span(aria-hidden="true"): i.fa.fa-angle-left
           span.sr-only Previous
       //- page button
-      li.page-item(v-for="page in pageList", :class="{ active: page.active }", :key="page.value")
+      li.page-item(v-for="page in pageListWithMore", :class="{ active: page.active, disable: page.disable }", :key="page.value")
         span.page-link(v-if="page.active") {{ page.value }}
           span.sr-only (Current)
-        a.page-link(@click.stop.prevent="setPage(page.value)", v-else) {{ page.value }}
+        a.page-link(@click.stop.prevent="!page.disabled && setPage(page.value)", v-else) {{ page.value }}
       //- next button
-      li.page-item(:class="{ disabled: isLastSection }")
+      li.page-item(:class="{ disabled: false }")
         a.page-link(aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
           span(aria-hidden="true"): i.fa.fa-angle-right
           span.sr-only Next
@@ -53,19 +53,12 @@
       totalPage () {
         return Math.ceil(this.totalRows / this.perPage)
       },
-      section () {
-        return Math.ceil(this.currentPage / this.limitPage) - 1
-      },
-      lastSection () {
-        return Math.ceil(this.totalPage / this.limitPage) - 1
-      },
-      isLastSection () {
-        return this.section === this.lastSection
-      },
       pageList () {
-        let start = this.section * this.limitPage + 1
-        let increment = (this.isLastSection ? this.totalPage % this.limitPage : this.limitPage)
-        return _.range(start, start + increment).map(
+        let start = this.currentPage - Math.floor(this.limitPage / 2)
+        let end = this.currentPage + Math.floor(this.limitPage / 2)
+        // if arrive boundary add a offset
+        let shift = start < 1 ? -start + 1 : (end >= this.totalPage ? this.totalPage - end : 0)
+        return _.range(start + shift, end + shift + 1).map(
           v => {
             return {
               value: v,
@@ -76,11 +69,21 @@
         )
       },
       pageListWithMore () {
+        let first = {value: 1, active: this.currentPage === 1, disabled: false}
         let more = {value: '...', active: false, disabled: true}
-        return this.pageList.reduce((pre, cur) => {
-          pre.push(cur)
-          return pre
-        }, this.isLastSection ? [more] : [])
+        let last = {value: this.totalPage, active: this.currentPage === this.totalPage, disabled: false}
+        let list = Array.from(this.pageList)
+        if (_.first(this.pageList).value !== 1) {
+          list = [first, more].concat(list)
+        }
+        if (_.last(this.pageList).value !== this.totalPage) {
+          if (_.last(this.pageList).value <= this.totalPage - 1) {
+            list.push(more)
+          }
+          list.push(last)
+        }
+
+        return list
       }
     },
     methods: {
@@ -88,7 +91,7 @@
         return this.currentPage === page
       },
       setPage (page) {
-        if (page < 1 || page > this.pageList) {
+        if (page < 1 || page > this.totalPage) {
           return
         }
         this.currentPage = page
