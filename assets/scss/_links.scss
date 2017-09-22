@@ -34,4 +34,17 @@ a {
       text-decoration: none;
     }
   }
+
+  a:not([href]):not([tabindex]).badge-#{$color} {
+    @include color-yiq($value);
+
+    background-color: $value;
+
+    @include hover-focus {
+      @include color-yiq($value);
+
+      text-decoration: none;
+      background-color: darken($value, 10%);
+    }
+  }
 }

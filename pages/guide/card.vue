@@ -45,6 +45,10 @@
             .col-form-label.custom-controls-stacked
               u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
         .form-group.row
+          label.col-sm-2.col-form-label Input Tag
+          .col-sm-10
+            u-input-tag(v-model="form.checked", :tags="options")
+        .form-group.row
           label.col-sm-2.col-form-label Switch
           .col-sm-10
             u-switch(v-model="form.switch")

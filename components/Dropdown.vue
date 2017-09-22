@@ -1,7 +1,7 @@
 <template lang="pug">
   .u-dropdown(:class="{ active }")
-    .u-dropdown-backdrop(v-if="active", @click="active = false")
-    .u-dropdown-toggle(@click.prevent="showList")
+    .u-dropdown-backdrop(v-if="active", @click="hide")
+    .u-dropdown-toggle(@click.prevent="show")
       slot(name="toggle")
     transition(name="fade")
       slot(v-if="active")
@@ -9,9 +9,7 @@
 
 <script>
   export default {
-    props: {
-      disableShow: false
-    },
+    props: ['disabled'],
     data () {
       return {
         active: false
@@ -19,20 +17,21 @@
     },
     methods: {
       show () {
-        this.active = true
-      },
-      hide () {
-        this.active = false
-      },
-      toggle () {
-        this.active = !this.active
-      },
-      showList () {
-        if (this.disableShow) {
+        if (!!this.disabled || this.disabled === '') {
           return
         }
 
         this.active = true
+
+        this.$emit('show')
+      },
+      hide () {
+        this.active = false
+
+        this.$emit('hide')
+      },
+      toggle () {
+        this.active = !this.active
       }
     }
   }

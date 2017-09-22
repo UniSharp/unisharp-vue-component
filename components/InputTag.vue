@@ -1,6 +1,14 @@
 <template lang="pug">
-  .input-tag
-    u-dropdown.u-select(ref="dropdown", :disableShow="true")
+  .u-input-tag.form-control.d-flex.align-items-center
+    .tags.d-flex
+      a.badge.badge-pill.badge-primary.d-flex.align-items-center.mr-2(
+        :key="index",
+        v-for="(s, index) in selected",
+        @click.prevent.stop="remove(s)"
+      ) {{ _.find(tags, { value: s }).text }}
+        i.fa.fa-times.ml-2
+    u-select.col.p-0(v-model="select", :options="tags", @change="onSelect", ref="select", no-placeholder, filterable)
+    //- u-dropdown.u-select(ref="dropdown", :disableShow="true")
       template(slot="toggle")
         .d-flex
           span.badge.badge-pill.badge-primary(v-for="(tag, index) in selectedTags")
@@ -30,9 +38,8 @@
 </template>
 
 <script>
+  import _ from 'lodash'
   import Vue from 'vue'
-  import UDropdown from './Dropdown'
-  import UModal from './Modal'
 
   const UP = 38
   const DOWN = 40
@@ -44,13 +51,16 @@
   const ADD_TYPE = 'add'
 
   export default {
-    components: { UDropdown, UModal },
+    model: {
+      prop: 'selected',
+      event: 'change'
+    },
     props: {
+      selected: Array,
       placeholder: String,
       tags: {
         type: Array
       },
-      value: Array,
       type: {
         type: String,
         default: 'selection'
@@ -70,14 +80,15 @@
     },
     data () {
       return {
+        select: null,
         keyword: '',
         activeIndex: -1,
-        selectedTags: this.value,
         selectionHeight: null,
         height: null
       }
     },
     computed: {
+      _: () => _,
       filterTags () {
         return this.tags.filter((tag) => {
           return this.keyword ? tag.includes(this.keyword) : true
@@ -97,6 +108,12 @@
       }
     },
     methods: {
+      onSelect (selected) {
+        this.$emit('change', _.uniq([...this.selected, selected]))
+      },
+      remove (value) {
+        this.$emit('change', this.selected.filter(x => x !== value))
+      },
       handleKeydown (e) {
         if (!this.$refs.dropdown.active) {
           this.$refs.dropdown.show()
@@ -200,12 +217,12 @@
             this.selectedTags.push(this.keyword)
             break
         }
-        this.$emit('input', this.selectedTags)
+        this.$emit('select', this.selectedTags)
         this.clear()
       },
       removeTag (index) {
         this.selectedTags.splice(index, 1)
-        this.$emit('input', this.selectedTags)
+        this.$emit('select', this.selectedTags)
         this.clear()
       },
       clear () {
@@ -221,47 +238,10 @@
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
 
-  $hover-bg: theme-color("primary");
-  $hover-fg: #fff;
-
-  @if (((red($hover-bg) * 299) + (green($hover-bg) * 587) + (blue($hover-bg) * 114)) / 1000 >= 150) {
-    $hover-fg: #111;
-  }
-
-  .u-select {
+  .u-input-tag {
     .badge {
-      margin-right: .5rem;
-      display: flex;
-      align-items: center;
-
-      .tag-remove {
-        border-radius: 50%;
-        margin-left: .5rem;
-
-        &:hover {
-          background-color: rgba(255, 255, 255, .6);
-        }
-      }
-    }
-
-    input {
-      border: 0;
-      outline: 0;
-      width: 100%;
-    }
-
-    .u-select-tags {
-      width: calc(100% - #{$grid-gutter-width});
-    }
-
-    &.active .u-select-current, .u-select-current:hover {
-      background-color: $hover-bg;
-      border-color: $hover-bg;
-      color: $hover-fg;
-
-      &:after {
-        border-top-color: $hover-fg;
-      }
+      cursor: pointer;
+      font-size: 85%;
     }
   }
 </style>

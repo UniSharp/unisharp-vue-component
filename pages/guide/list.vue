@@ -96,7 +96,7 @@
         filter: null,
         checkall: false,
         checked: [false, false, false],
-        expanding: [false, true, false]
+        expanding: [false, false, false]
       }
     },
     watch: {
