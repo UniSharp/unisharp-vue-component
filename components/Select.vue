@@ -99,7 +99,7 @@
     }
 
     .u-select-options {
-      width: calc(100% - #{$grid-gutter-width});
+      width: 100%;
     }
 
     &.active .u-select-current, .u-select-current:hover {
