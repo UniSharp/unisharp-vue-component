@@ -54,11 +54,12 @@
         return Math.ceil(this.totalRows / this.perPage)
       },
       pageList () {
-        let start = this.currentPage - Math.floor(this.limitPage / 2)
-        let end = this.currentPage + Math.floor(this.limitPage / 2)
+        let half = Math.floor(_.min([this.limitPage, this.totalPage]) / 2)
+        let start = this.currentPage - half
+        let end = this.currentPage + half
         // if arrive boundary add a offset
-        let shift = start < 1 ? -start + 1 : (end >= this.totalPage ? this.totalPage - end : 0)
-        return _.range(start + shift, end + shift + 1).map(
+        let shift = start < 1 ? -start + 1 : (end > this.totalPage ? this.totalPage - end : 0)
+        return _.range(this.clamp(start + shift), this.clamp(end + shift + 1)).map(
           v => {
             return {
               value: v,
@@ -73,20 +74,18 @@
         let more = {value: '...', active: false, disabled: true}
         let last = {value: this.totalPage, active: this.currentPage === this.totalPage, disabled: false}
         let list = Array.from(this.pageList)
-        if (_.first(this.pageList).value !== 1) {
-          list = [first, more].concat(list)
-        }
-        if (_.last(this.pageList).value !== this.totalPage) {
-          if (_.last(this.pageList).value <= this.totalPage - 1) {
-            list.push(more)
+        return _.sortBy(_.unionBy(list, [first, last], 'value'), ['value']).reduce((pre, cur) => {
+          if (_.last(pre) && _.last(pre).value !== cur.value - 1) {
+            pre = pre.concat(more)
           }
-          list.push(last)
-        }
-
-        return list
+          return pre.concat(cur)
+        }, [])
       }
     },
     methods: {
+      clamp (number) {
+        return _.clamp(number, 1, this.totalPage)
+      },
       isActive (page) {
         return this.currentPage === page
       },
