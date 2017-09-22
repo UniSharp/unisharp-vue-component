@@ -79,7 +79,7 @@
       selected: {
         handler: function () {
           this.updateSelectedDay()
-          this.afterNoon = !!(this.selected.hour >= 12)
+          this.afterNoon = this.selected.hour >= 12
           this.$emit('change', this.datetime)
         },
         deep: true
@@ -95,9 +95,9 @@
       if (isNaN(Date.parse(this.value))) {
         this.selected = this.clone(this.current)
       } else {
-        var spliterIndex = this.value.indexOf(' ')
-        var date = this.value.substr(0, spliterIndex).split('-')
-        var time = this.value.substr(spliterIndex + 1).split(':')
+        let spliterIndex = this.value.indexOf(' ')
+        let date = this.value.substr(0, spliterIndex).split('-')
+        let time = this.value.substr(spliterIndex + 1).split(':')
         this.selected = {
           year: parseInt(date[0]),
           month: parseInt(date[1]),
@@ -112,7 +112,7 @@
     },
     computed: {
       datetime () {
-        var selectable = []
+        let selectable = []
         if (this.shouldPickDate) {
           selectable.push(
             ('000' + this.selected.year).slice(-4) +
@@ -159,7 +159,7 @@
         return this.getDaysWithinMonth(this.picker.year, this.picker.month)
       },
       offsetDays () {
-        var firstDay = this.monthDays[0]
+        let firstDay = this.monthDays[0]
         return new Array(this.weekdays.indexOf(firstDay.weekday))
       },
       isCurrentMonth () {
@@ -203,10 +203,10 @@
         }
       },
       getDaysWithinMonth (year, month) {
-        var date = new Date(year, month - 1, 1)
-        var result = []
+        let date = new Date(year, month - 1, 1)
+        let result = []
         while (date.getMonth() === month - 1) {
-          var today = date.getDate()
+          let today = date.getDate()
           result.push({
             date: today,
             weekday: this.weekdays[date.getDay()],
@@ -279,10 +279,10 @@
         this.showScroll = !this.showScroll
         if (this.showScroll) {
           this.$nextTick(function () {
-            var container = this.$refs.scroll
-            var scrollItems = this.scrollables[this.timeUnitName]
-            var scrollLength = Array.isArray(scrollItems) ? scrollItems.length : scrollItems
-            var offset = this.timeUnitName === 'month' ? 3.5 : 2.5
+            let container = this.$refs.scroll
+            let scrollItems = this.scrollables[this.timeUnitName]
+            let scrollLength = Array.isArray(scrollItems) ? scrollItems.length : scrollItems
+            let offset = this.timeUnitName === 'month' ? 3.5 : 2.5
             container.scrollTop = container.scrollHeight * (this.picker[this.timeUnitName] - offset) / scrollLength
           })
         }
