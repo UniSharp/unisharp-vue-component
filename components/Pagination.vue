@@ -1,34 +1,21 @@
 <template lang="pug">
   nav.u-pagination.d-flex.align-items-center(aria-label="Page navigation")
-    p.mb-0.mr-auto {{ totalRows.toString().replace(/(.)(?=(?:\d{3})+$)/g, '$1,') }} results
+    p.mb-0.mr-auto {{ totalRows.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') }} results
     ul.pagination.mb-0
-      //- previous button
-      li.page-item(:class="{ disabled: isActive(1) }")
-        a.page-link(aria-label="Previous", @click.stop.prevent="setPage(1)")
-          span(aria-hidden="true"): i.fa.fa-angle-double-left
-          span.sr-only First
-      li.page-item(:class="{ disabled: isActive(1) }")
+      li.page-item(:class="{ disabled: section === 0 }")
         a.page-link(aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
           span(aria-hidden="true"): i.fa.fa-angle-left
           span.sr-only Previous
       //- page button
-      li.page-item(v-show="!isOverBottom && isOverLimit")
-        a.page-link ...
-      li.page-item(v-for="page in pageList", :class="{ active: isActive(page) }", :key="page")
-        span.page-link(v-if="isActive(page)") {{ page }}
+      li.page-item(v-for="page in pageList", :class="{ active: page.active }", :key="page.value")
+        span.page-link(v-if="page.active") {{ page.value }}
           span.sr-only (Current)
-        a.page-link(@click.stop.prevent="setPage(page)", v-else) {{ page }}
-      li.page-item(v-show="!isOverTop && isOverLimit")
-        a.page-link ...
+        a.page-link(@click.stop.prevent="setPage(page.value)", v-else) {{ page.value }}
       //- next button
-      li.page-item(:class="{ disabled: isActive(totalPage) }")
+      li.page-item(:class="{ disabled: isLastSection }")
         a.page-link(aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
           span(aria-hidden="true"): i.fa.fa-angle-right
           span.sr-only Next
-      li.page-item(:class="{ disabled: isActive(totalPage) }")
-        a.page-link(aria-label="Next", @click.stop.prevent="setPage(totalPage)")
-          span(aria-hidden="true"): i.fa.fa-angle-double-right
-          span.sr-only Last
 </template>
 
 <script>
@@ -66,30 +53,34 @@
       totalPage () {
         return Math.ceil(this.totalRows / this.perPage)
       },
-      isOverLimit () {
-        return this.totalPage > this.limitPage
+      section () {
+        return Math.ceil(this.currentPage / this.limitPage) - 1
       },
-      isOverTop () {
-        return (this.totalPage - this.currentPage) <= Math.floor(this.limitPage / 2)
+      lastSection () {
+        return Math.ceil(this.totalPage / this.limitPage) - 1
       },
-      isOverBottom () {
-        return (this.currentPage - 1) <= Math.floor(this.limitPage / 2)
+      isLastSection () {
+        return this.section === this.lastSection
       },
       pageList () {
-        if (this.isOverLimit) {
-          if (this.isOverTop) {
-            return _.range(this.totalPage - this.limitPage + 2, this.totalPage + 1)
+        let start = this.section * this.limitPage + 1
+        let increment = (this.isLastSection ? this.totalPage % this.limitPage : this.limitPage)
+        return _.range(start, start + increment).map(
+          v => {
+            return {
+              value: v,
+              active: this.currentPage === v,
+              disabled: false
+            }
           }
-
-          if (this.isOverBottom) {
-            return _.range(1, this.limitPage)
-          }
-
-          let end = this.currentPage + Math.floor(this.limitPage / 2) - 1
-          return _.range(end - this.limitPage + 3, end + 1)
-        }
-
-        return Math.ceil(this.totalRows / this.perPage)
+        )
+      },
+      pageListWithMore () {
+        let more = {value: '...', active: false, disabled: true}
+        return this.pageList.reduce((pre, cur) => {
+          pre.push(cur)
+          return pre
+        }, this.isLastSection ? [more] : [])
       }
     },
     methods: {
