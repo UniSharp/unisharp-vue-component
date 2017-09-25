@@ -12,8 +12,8 @@
             @click="sortColumn(key)"
           )
             | {{ value.label }}
-            i.fa.ml-2(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="order === key")
-            i.fa.ml-2(:class="{'fa-sort': true}", v-else)
+            i.fa.ml-2(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="sortable && order === key")
+            i.fa.ml-2(:class="{'fa-sort': true}", v-else-if="sortable")
       tbody(:style="styleObject.tbody")
         template(v-for="(item, i) in rows")
           tr(:key="item.uIndex")
@@ -226,9 +226,10 @@
         })
       },
       sortColumn (key) {
-        this.order = key
-        this.desc = !this.desc
-        // clear all checked items when sort
+        if (this.sortable) {
+          this.order = key
+          this.desc = !this.desc
+        }
       }
     }
   }
