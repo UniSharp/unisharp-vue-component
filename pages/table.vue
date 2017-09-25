@@ -24,7 +24,7 @@
           td(colspan="4")
             | hi
       template(slot="operation", scope="row")
-        button.btn.btn-primary.btn-sm.mr-1(type="button", @click.stop="row.toggle()")
+        button.btn.btn-info.btn-sm.mr-1(type="button", @click.stop="row.toggle()")
           i.fa.fa-angle-down(aria-hidden="true").mr-2
           | 展開
         button.btn.btn-primary.btn-sm(type="button", @click.stop="showClickButton(data.value.age)")
