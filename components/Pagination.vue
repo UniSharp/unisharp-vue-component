@@ -83,7 +83,6 @@
     },
     methods: {
       clamp (number) {
-        console.log(number)
         return _.clamp(number, 1, _.clamp(this.totalPage, 1, Number.MAX_SAFE_INTEGER))
       },
       isActive (page) {
