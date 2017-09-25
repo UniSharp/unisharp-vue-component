@@ -12,7 +12,7 @@
       :placeholder="placeholder",
       @keydown="onKeydown"
     )
-    .u-select-current(slot="toggle", v-else).form-control {{ current }}
+    .u-select-current(slot="toggle", :class="{ placeholder: current === placeholder }", v-else).form-control {{ current }}
     .dropdown-menu.u-select-options(ref="menu")
       .u-select-options-wrapper
         a.dropdown-item(
@@ -199,7 +199,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: $input-placeholder-color;
+      color: $input-color;
+
+      &.placeholder {
+        color: $input-placeholder-color;
+      }
 
       &:after {
         @include transition;
