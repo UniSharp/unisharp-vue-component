@@ -81,7 +81,7 @@
           td(colspan="5")
             p.font-weight-bold.mb-0 Larry the Bird
               span.small.text-muted.ml-2 @twitter
-    u-pagination(:totalRows="12345", :perPage="5000")
+    u-pagination(:totalRows="12345", :perPage="500")
 </template>
 
 <script>

@@ -41,7 +41,7 @@
       },
       limitPage: {
         type: Number,
-        default: 7
+        default: 5
       }
     },
     data () {
