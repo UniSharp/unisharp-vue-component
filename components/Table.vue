@@ -23,9 +23,9 @@
               v-for="(value, key) in fields",
               :style="getCeilStyle(key)"
             )
-              slot(:index="i", :name="key", :value="item")
+              slot(:index="i", :name="key", :value="item", :toggle="toggle(i)")
                 | {{ item[key] }}
-          slot(name="expand", :value="item", :index="i")
+          slot(name="expand", :value="item", :index="i", v-if="!!toggles[i]")
 
     u-pagination(
       :total-rows="filtered.length",
@@ -104,7 +104,8 @@
         checks: [],
         order: this.orderBy,
         desc: this.orderDesc,
-        currentPage: 1
+        currentPage: 1,
+        toggles: []
       }
     },
     asyncComputed: {
@@ -229,6 +230,11 @@
         if (this.sortable) {
           this.order = key
           this.desc = !this.desc
+        }
+      },
+      toggle (i) {
+        return () => {
+          Vue.set(this.toggles, i, !this.toggles[i])
         }
       }
     }
