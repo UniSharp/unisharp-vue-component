@@ -72,7 +72,7 @@
       pageListWithMore () {
         let first = {value: 1, active: this.currentPage === 1, disabled: false}
         let more = {value: '...', active: false, disabled: true}
-        let last = {value: this.totalPage, active: this.currentPage === this.totalPage, disabled: false}
+        let last = {value: this.clamp(this.totalPage), active: this.currentPage === this.totalPage, disabled: false}
         return _.sortBy(_.unionBy(this.pageList, [first, last], 'value'), ['value']).reduce((pre, cur) => {
           if (_.last(pre) && _.last(pre).value !== cur.value - 1) {
             pre = pre.concat(more)
@@ -83,7 +83,8 @@
     },
     methods: {
       clamp (number) {
-        return _.clamp(number, 1, _.clamp(this.totalPage, 1))
+        console.log(number)
+        return _.clamp(number, 1, _.clamp(this.totalPage, 1, Number.MAX_SAFE_INTEGER))
       },
       isActive (page) {
         return this.currentPage === page
