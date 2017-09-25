@@ -93,6 +93,8 @@
   </template>
 
 <script>
+  import debugModule from 'debug'
+  let debug = debugModule('page.form')
   export default {
     data () {
       return {
@@ -154,13 +156,13 @@
     },
     methods: {
       showTime () {
-        console.log(this.form.time)
+        debug(this.form.time)
       },
       onSubmit (e) {
         alert(JSON.stringify(this.form))
       },
       showSwitchValue (value) {
-        console.log(value)
+        debug(value)
       },
       showRadioText (value) {
         return this.foods.find((food) => {
@@ -172,19 +174,19 @@
     },
     watch: {
       check (val) {
-        console.log(val)
+        debug(val)
       },
       checks (val) {
-        console.log(val)
+        debug(val)
       },
       files (files) {
-        console.log(files)
+        debug(files)
       },
       selectedTags (tags) {
-        console.log(tags)
+        debug(tags)
       },
       selectedTags2 (tags) {
-        console.log(tags)
+        debug(tags)
       }
     }
   }

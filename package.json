@@ -30,6 +30,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "bootstrap": "v4.0.0-beta",
+    "debug": "^3.0.1",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
