@@ -98,6 +98,11 @@
     overflow-y: auto;
   }
 
+  button.close {
+    outline: 0;
+    cursor: pointer;
+  }
+
   .u-modal-backdrop {
     @include backdrop;
 
