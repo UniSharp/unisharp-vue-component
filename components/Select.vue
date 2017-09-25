@@ -28,8 +28,10 @@
 <script>
   import _ from 'lodash'
   import Vue from 'vue'
+  import Normalize from '~/mixins/normalize'
 
   export default {
+    mixins: [Normalize],
     model: {
       prop: 'selected',
       event: 'change'
@@ -62,12 +64,7 @@
         return this.filteredOptions.includes(this.selected) ? this.selected : this.placeholder
       },
       normalizedOptions () {
-        return _.map(this.options, (v, k) => {
-          return {
-            value: v.value || v.text || v || k || null,
-            text: _.toString(v.text || v)
-          }
-        })
+        return this.normalize(this.options)
       },
       filteredOptions () {
         // support :

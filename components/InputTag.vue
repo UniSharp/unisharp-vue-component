@@ -5,7 +5,7 @@
         :key="index",
         v-for="(s, index) in selected",
         @click.prevent.stop="remove(s)"
-      ) {{ _.find(tags, { value: s }).text }}
+      ) {{ _.find(normalize(tags), { value: s }).text }}
         i.fa.fa-times.ml-2
     u-select.col.p-0(v-model="select", :options="tags", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
     u-modal(ref="modal", size="sm")
@@ -15,16 +15,24 @@
 
 <script>
   import _ from 'lodash'
+  import Normalize from '~/mixins/normalize'
 
   export default {
+    mixins: [Normalize],
     model: {
       prop: 'selected',
       event: 'change'
     },
     props: {
-      selected: Array,
+      selected: {
+        type: Array,
+        required: true
+      },
       placeholder: String,
-      tags: Array,
+      tags: {
+        type: Array,
+        required: true
+      },
       limit: Number,
       limitMessage: {
         type: String,

@@ -70,17 +70,17 @@
             label.col-md-2
               span.title Tag Input (Selection)：
             .col-md-10
-              u-input-tag(v-model="selectedTags", placeholder="Add Tag", :tags="tags", :limitTag="2")
+              u-input-tag(v-model="selectedTags", placeholder="AddTag", :tags="tags", :limitTag="2")
           .form-group.row
             label.col-md-2
               span.title Tag Input (Can Scroll)：
             .col-md-10
-              u-input-tag(v-model="selectedTags3", placeholder="Add Tag", :tags="tags", :maxTagsShow="5")
+              u-input-tag(v-model="selectedTags3", placeholder="AddTag", :tags="tags", :maxTagsShow="5")
           .form-group.row
             label.col-md-2
               span.title Tag Input (Text Add)：
             .col-md-10
-              u-input-tag(v-model="selectedTags2", placeholder="Add Tag", type="add", :limitTag="2")
+              u-input-tag(v-model="selectedTags2", placeholder="AddTag", :tags="tags", type="add", :limitTag="2")
           //- File Uploader
           .form-group.row
             label.col-md-2
@@ -124,9 +124,9 @@
           3: 'Corn'
         },
         fruits: ['orange', 'apple', 'banana', 'peach'],
-        selectedTags: ['Teach'],
+        selectedTags: [],
         selectedTags2: [],
-        selectedTags3: ['Doing'],
+        selectedTags3: [],
         tags: ['Done', 'Doing', 'Doc', 'Reopen', 'Complete', 'Blocked', 'Teach', 'Depend', 'Error', 'Success'],
         // Refference: http://www.dropzonejs.com/#config-url
         uploadOptions: {
