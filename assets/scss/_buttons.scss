@@ -9,7 +9,10 @@
 
 .btn-sm {
   font-size: $font-size-sm;
-  box-shadow: none;
+
+  &:not(.btn-info) {
+    box-shadow: none;
+  }
 
   &.btn-square {
     width: 1.9rem;
