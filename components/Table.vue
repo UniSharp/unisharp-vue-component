@@ -25,7 +25,7 @@
             )
               slot(:index="i", :name="key", :value="item", :toggle="toggle(i)")
                 | {{ item[key] }}
-          slot(name="expand", :value="item", :index="i", v-if="!!toggles[i]")
+          slot(name="expand", :value="item", :index="i", :toggle="toggle(i)", v-if="!!toggles[i]")
 
     u-pagination(
       :total-rows="filtered.length",
