@@ -30,7 +30,8 @@
     u-pagination(
       :total-rows="filtered.length",
       :per-page="perPage",
-      v-model="currentPage"
+      v-model="currentPage",
+      @input="this.cleanToggles"
     )
 </template>
 
@@ -93,11 +94,6 @@
         type: Boolean,
         default: false
       }
-    },
-    mounted () {
-      Vue.nextTick(() => {
-        console.log(this.$slots)
-      })
     },
     data () {
       return {
@@ -232,9 +228,16 @@
           this.desc = !this.desc
         }
       },
+      cleanToggles () {
+        this.toggles.forEach((v, k) => {
+          Vue.set(this.toggles, k, false)
+        })
+      },
       toggle (i) {
         return () => {
-          Vue.set(this.toggles, i, !this.toggles[i])
+          let toggle = !this.toggles[i]
+          this.cleanToggles()
+          Vue.set(this.toggles, i, toggle)
         }
       }
     }

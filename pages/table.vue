@@ -18,16 +18,16 @@
       selection,
       :filter="filter",
     )
-      template(slot="expand", scope="data")
-        tr(v-if="data.index === detail && expand")
+      template(slot="expand", scope="row")
+        tr
           td
           td(colspan="4")
             | hi
-      template(slot="operation", scope="data")
-        button.btn.btn-sm.mr-1(type="button", @click.stop="detail=data.index; expand = !expand")
+      template(slot="operation", scope="row")
+        button.btn.btn-primary.btn-sm.mr-1(type="button", @click.stop="row.toggle()")
           i.fa.fa-angle-down(aria-hidden="true").mr-2
           | 展開
-        button.btn.btn-sm(type="button", @click.stop="showClickButton(data.value.age)")
+        button.btn.btn-primary.btn-sm(type="button", @click.stop="showClickButton(data.value.age)")
           i.fa.fa-bell(aria-hidden="true").mr-2
           | alert
 
@@ -83,9 +83,7 @@
             label: '操作'
           }
         },
-        expand: false,
         age: null,
-        detail: null,
         perPage: 5,
         totalRows: items.length
       }
