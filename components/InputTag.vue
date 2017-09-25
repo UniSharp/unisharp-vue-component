@@ -7,48 +7,14 @@
         @click.prevent.stop="remove(s)"
       ) {{ _.find(tags, { value: s }).text }}
         i.fa.fa-times.ml-2
-    u-select.col.p-0(v-model="select", :options="tags", @change="onSelect", ref="select", no-placeholder, filterable)
-    //- u-dropdown.u-select(ref="dropdown", :disableShow="true")
-      template(slot="toggle")
-        .d-flex
-          span.badge.badge-pill.badge-primary(v-for="(tag, index) in selectedTags")
-            | {{ tag }}
-            svg.tag-remove(height="11", width="11", @click.stop.prevent="removeTag(index)")
-              line(x1="2", y1="2", x2="9", y2="9", style="stroke:rgb(255,255,255);stroke-width:2")
-              line(x1="9", y1="2", x2="2", y2="9", style="stroke:rgb(255,255,255);stroke-width:2")
-          input.u-select-current.form-control(
-            type="text",
-            v-model="keyword",
-            :placeholder="placeholder",
-            @keydown="handleKeydown",
-            @click="handleClick"
-          )
-      .dropdown-menu.u-select-tags(v-if="!disableShowList", :style="dropdownMenuStyle", ref="menu")
-        a.dropdown-item(
-          v-for="(tag, index) in filterTags",
-          :key="index",
-          :class="activeClass(index)",
-          @mousemove="mousemove(index)",
-          @click.stop.prevent="addTag"
-        ) {{ tag }}
-
+    u-select.col.p-0(v-model="select", :options="tags", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
     u-modal(ref="modal", size="sm")
-      span(slot="title")
-      p {{ limitTagInfo }}
+      span(slot="title") Error
+      h5.mb-0 {{ limitMessage }}
 </template>
 
 <script>
   import _ from 'lodash'
-  import Vue from 'vue'
-
-  const UP = 38
-  const DOWN = 40
-  const ENTER = 13
-  const DELETE = 8
-  const ESC = 27
-
-  const SELECTION_TYPE = 'selection'
-  const ADD_TYPE = 'add'
 
   export default {
     model: {
@@ -58,177 +24,33 @@
     props: {
       selected: Array,
       placeholder: String,
-      tags: {
-        type: Array
-      },
-      type: {
+      tags: Array,
+      limit: Number,
+      limitMessage: {
         type: String,
-        default: 'selection'
-      },
-      limitTag: {
-        type: Number,
-        default: null
-      },
-      limitTagInfo: {
-        type: String,
-        default: '輸入的 tag 數已達最大上限'
-      },
-      maxTagsShow: {
-        type: Number,
-        default: null
+        default: 'Maximum tags exceeded.'
       }
     },
     data () {
       return {
-        select: null,
-        keyword: '',
-        activeIndex: -1,
-        selectionHeight: null,
-        height: null
+        select: null
       }
     },
     computed: {
-      _: () => _,
-      filterTags () {
-        return this.tags.filter((tag) => {
-          return this.keyword ? tag.includes(this.keyword) : true
-        })
-      },
-      disableShowList () {
-        return this.type === ADD_TYPE
-      },
-      dropdownMenuStyle () {
-        if (this.maxTagsShow && this.selectionHeight) {
-          this.height = this.$refs.menu.childNodes[0].clientHeight * this.maxTagsShow + 8
-          return {
-            'max-height': `${this.height}px`,
-            'overflow-y': 'scroll'
-          }
-        }
-      }
+      _: () => _
     },
     methods: {
       onSelect (selected) {
+        if (this.limit && this.selected.length >= this.limit) {
+          this.$refs.modal.show()
+
+          return
+        }
+
         this.$emit('change', _.uniq([...this.selected, selected]))
       },
       remove (value) {
         this.$emit('change', this.selected.filter(x => x !== value))
-      },
-      handleKeydown (e) {
-        if (!this.$refs.dropdown.active) {
-          this.$refs.dropdown.show()
-        }
-
-        let keyCode = e.keyCode
-
-        switch (keyCode) {
-          case DOWN:
-            e.preventDefault()
-            this.activeIndex < this.filterTags.length - 1
-              ? this.activeIndex++
-              : this.activeIndex = 0
-            this.handleScroll(DOWN)
-            break
-          case UP:
-            e.preventDefault()
-            this.activeIndex > 0
-              ? this.activeIndex--
-              : this.activeIndex = this.filterTags.length - 1
-            this.handleScroll(UP)
-            break
-          case ENTER:
-            e.preventDefault()
-            this.addTag()
-            break
-          case DELETE:
-            if (this.keyword === '') {
-              this.removeTag(this.selectedTags.length - 1)
-            }
-            break
-          case ESC:
-            this.clear()
-            break
-        }
-      },
-      handleClick (e) {
-        this.$refs.dropdown.show()
-
-        if (!this.selectionHeight) {
-          Vue.nextTick(() => {
-            this.selectionHeight = this.maxTagsShow
-              ? this.$refs.menu.childNodes[0].clientHeight
-              : 0
-          })
-        }
-      },
-      handleScroll (direction) {
-        if (!this.maxTagsShow) {
-          return
-        }
-
-        let tmpScrollTop = 0
-        switch (direction) {
-          case DOWN:
-            let overTags = (this.activeIndex + 1) - this.maxTagsShow
-            tmpScrollTop = overTags > 0
-              ? 8 + this.selectionHeight * overTags
-              : 0
-            break
-          case UP:
-            tmpScrollTop = this.activeIndex * this.selectionHeight + 8
-            break
-        }
-
-        let currentScrollTop = this.$refs.menu.scrollTop
-        let activeTagHeight = this.activeIndex * this.selectionHeight + 8
-        if (
-          activeTagHeight < currentScrollTop ||
-          activeTagHeight > currentScrollTop + this.selectionHeight * (this.maxTagsShow - 1)
-        ) {
-          this.$refs.menu.scrollTop = tmpScrollTop
-        }
-      },
-      mousemove (i) {
-        this.activeIndex = i
-      },
-      activeClass (i) {
-        if (this.activeIndex === i) {
-          return {
-            active: true
-          }
-        }
-      },
-      addTag () {
-        if (this.limitTag && this.selectedTags.length >= this.limitTag) {
-          this.$refs.modal.show()
-          this.clear()
-          return
-        }
-
-        switch (this.type) {
-          case SELECTION_TYPE:
-            if (this.activeIndex === -1) {
-              return
-            }
-
-            this.selectedTags.push(this.filterTags[this.activeIndex])
-            break
-          case ADD_TYPE:
-            this.selectedTags.push(this.keyword)
-            break
-        }
-        this.$emit('select', this.selectedTags)
-        this.clear()
-      },
-      removeTag (index) {
-        this.selectedTags.splice(index, 1)
-        this.$emit('select', this.selectedTags)
-        this.clear()
-      },
-      clear () {
-        this.activeIndex = -1
-        this.keyword = ''
-        this.$refs.dropdown.hide()
       }
     }
   }

@@ -9,17 +9,20 @@
       v-model="filter",
       ref="filter",
       v-if="!!this.filterable || this.filterable === ''",
+      :placeholder="placeholder",
       @keydown="onKeydown"
     )
     .u-select-current(slot="toggle", v-else).form-control {{ current }}
-    .dropdown-menu.u-select-options
-      a.dropdown-item(
-        @mouseenter="hover = key",
-        @click.prevent.stop="select(option.value)",
-        :class="{ hover: hover == key }",
-        v-for="(option, key) in getOptions",
-        :key="key"
-      ) {{ option.text }}
+    .dropdown-menu.u-select-options(ref="menu")
+      .u-select-options-wrapper
+        a.dropdown-item(
+          @mouseenter="hover = key",
+          @click.prevent.stop="select(option.value)",
+          :class="{ hover: hover == key }",
+          v-for="(option, key) in filteredOptions",
+          :key="key",
+          ref="options"
+        ) {{ option.text }}
 </template>
 
 <script>
@@ -52,11 +55,11 @@
     },
     computed: {
       current () {
-        if (_.has(this.getOptions[0], 'text')) {
-          let current = _.find(this.getOptions, { value: this.selected })
+        if (_.has(this.filteredOptions[0], 'text')) {
+          let current = _.find(this.filteredOptions, { value: this.selected })
           return current ? current.text : this.placeholder
         }
-        return this.getOptions.includes(this.selected) ? this.selected : this.placeholder
+        return this.filteredOptions.includes(this.selected) ? this.selected : this.placeholder
       },
       normalizedOptions () {
         return _.map(this.options, (v, k) => {
@@ -66,7 +69,7 @@
           }
         })
       },
-      getOptions () {
+      filteredOptions () {
         // support :
         // [{text: 'text', value: 'value'}]
         // or
@@ -90,7 +93,7 @@
     data () {
       return {
         filter: '',
-        hover: -1
+        hover: 0
       }
     },
     methods: {
@@ -99,7 +102,7 @@
         this.$emit('change', selected)
       },
       onDropdownShow () {
-        this.hover = -1
+        this.hover = 0
 
         if (!!this.filterable || this.filterable === '') {
           Vue.nextTick(() => this.$refs.filter.focus())
@@ -141,6 +144,21 @@
             return
         }
 
+        if (['UP', 'DOWN'].indexOf(key) !== -1) {
+          let menuRect = this.$refs.menu.getBoundingClientRect()
+          let optionRect = this.$refs.options[this.hover].getBoundingClientRect()
+
+          if (key === 'DOWN' && this.hover === 0) {
+            this.$refs.menu.scrollTop = 0
+          } else if (key === 'UP' && this.hover === this.filteredOptions.length - 1) {
+            this.$refs.menu.scrollTop = menuRect.height
+          } else if (optionRect.bottom > menuRect.bottom) {
+            this.$refs.menu.scrollTop += optionRect.height
+          } else if (optionRect.top < menuRect.top) {
+            this.$refs.menu.scrollTop -= optionRect.height
+          }
+        }
+
         e.preventDefault()
       }
     }
@@ -153,6 +171,7 @@
 
   $hover-bg: theme-color("primary");
   $hover-fg: #fff;
+  $max-items: 5;
 
   @if (((red($hover-bg) * 299) + (green($hover-bg) * 587) + (blue($hover-bg) * 114)) / 1000 >= 150) {
     $hover-fg: #111;
@@ -166,6 +185,12 @@
       border: 0;
       outline: 0;
       background: transparent;
+      color: $input-color;
+
+      &::placeholder {
+        color: $input-placeholder-color;
+        opacity: 1;
+      }
     }
 
     .u-select-current {
@@ -189,6 +214,12 @@
 
     .u-select-options {
       width: 100%;
+      max-height: ($font-size-base * $line-height-base + $dropdown-item-padding-y * 2) * $max-items + $dropdown-padding-y * 2;
+      overflow: auto;
+
+      .dropdown-item {
+        line-height: $line-height-base;
+      }
     }
 
     &.active .u-select-current, .u-select-current:hover {

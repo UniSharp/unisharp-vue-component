@@ -47,7 +47,7 @@
         .form-group.row
           label.col-sm-2.col-form-label Input Tag
           .col-sm-10
-            u-input-tag(v-model="form.checked", :tags="options")
+            u-input-tag(v-model="form.checked", :tags="options", placeholder="Tags")
         .form-group.row
           label.col-sm-2.col-form-label Switch
           .col-sm-10
@@ -79,25 +79,37 @@
     data () {
       return {
         options: [{
-          text: 'One',
+          text: 'I',
           value: 1
         }, {
-          text: 'Two',
+          text: 'II',
           value: 2
         }, {
-          text: 'Three',
+          text: 'III',
           value: 3
         }, {
-          text: 'Four',
+          text: 'IV',
           value: 4
         }, {
-          text: 'Five',
+          text: 'V',
           value: 5
+        }, {
+          text: 'VI',
+          value: 6
+        }, {
+          text: 'VII',
+          value: 7
+        }, {
+          text: 'VIII',
+          value: 8
+        }, {
+          text: 'IX',
+          value: 9
         }],
         form: {
           password: '',
-          selected: 3,
-          checked: [1, 3, 5],
+          selected: 5,
+          checked: [2, 5, 8],
           switch: false,
           files: []
         }
