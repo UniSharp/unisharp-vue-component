@@ -7,7 +7,7 @@
           span(aria-hidden="true"): i.fa.fa-angle-left
           span.sr-only Previous
       //- page button
-      li.page-item(v-for="page in pageListWithMore", :class="{ active: page.active, disable: page.disable }", :key="page.value")
+      li.page-item(v-for="page in pageListWithMore", :class="{ active: page.active, disabled: page.disabled }", :key="page.value")
         span.page-link(v-if="page.active") {{ page.value }}
           span.sr-only (Current)
         a.page-link(@click.stop.prevent="!page.disabled && setPage(page.value)", v-else) {{ page.value }}
@@ -70,9 +70,10 @@
         )
       },
       pageListWithMore () {
-        let first = {value: 1, active: this.currentPage === 1, disabled: false}
-        let more = {value: '...', active: false, disabled: true}
-        let last = {value: this.clamp(this.totalPage), active: this.currentPage === this.totalPage, disabled: false}
+        let first = { value: 1, active: this.currentPage === 1, disabled: false }
+        let more = { value: '...', active: false, disabled: true }
+        let last = { value: this.clamp(this.totalPage), active: this.currentPage === this.totalPage, disabled: false }
+
         return _.sortBy(_.unionBy(this.pageList, [first, last], 'value'), ['value']).reduce((pre, cur) => {
           if (_.last(pre) && _.last(pre).value !== cur.value - 1) {
             pre = pre.concat(more)
