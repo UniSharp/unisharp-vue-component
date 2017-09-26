@@ -5,9 +5,9 @@
         :key="index",
         v-for="(s, index) in selected",
         @click.prevent.stop="remove(s)"
-      ) {{ _.find(normalize(tags), { value: s }).text }}
+      ) {{ s }}
         i.fa.fa-times.ml-2
-    u-select.col.p-0(v-model="select", :options="tags", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
+    u-select.col.p-0(v-model="select", :options="tags", @insert="onInsert", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
     u-modal(ref="modal", size="sm")
       span(slot="title") Error
       h5.mb-0 {{ limitMessage }}
@@ -27,6 +27,10 @@
       selected: {
         type: Array,
         required: true
+      },
+      insertable: {
+        type: Boolean,
+        default: null
       },
       placeholder: String,
       tags: {
@@ -48,6 +52,17 @@
       _: () => _
     },
     methods: {
+      onInsert (inserted) {
+        if (this.limit && this.selected.length >= this.limit) {
+          this.$refs.modal.show()
+          return
+        }
+
+        if (!!this.insertable || this.insertable === '') {
+          this.$emit('update:tags', _.uniq([...this.tags, {value: null, text: inserted}]))
+          this.$emit('change', _.uniq([...this.selected, inserted]))
+        }
+      },
       onSelect (selected) {
         if (this.limit && this.selected.length >= this.limit) {
           this.$refs.modal.show()

@@ -67,12 +67,6 @@
         return this.normalize(this.options)
       },
       filteredOptions () {
-        // support :
-        // [{text: 'text', value: 'value'}]
-        // or
-        // { value: 'text' }
-        // or
-        // [ 'text', 'text' ] # it will use text as value
         let options = this.normalizedOptions
 
         if (this.filter) {
@@ -97,6 +91,10 @@
       select (selected) {
         this.$refs.dropdown.hide()
         this.$emit('change', selected)
+      },
+      insert (inserted) {
+        this.$refs.dropdown.hide()
+        this.$emit('insert', inserted)
       },
       onDropdownShow () {
         this.hover = 0
@@ -127,8 +125,12 @@
             break
 
           case 'CR':
+            if (this.filteredOptions[this.hover]) {
+              this.select(this.filteredOptions[this.hover].value)
+            } else {
+              this.insert(this.filter)
+            }
             this.filter = ''
-            this.select(this.options[this.hover].value)
             this.$refs.dropdown.show()
             break
 
