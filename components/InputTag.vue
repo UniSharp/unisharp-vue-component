@@ -7,7 +7,18 @@
         @click.prevent.stop="remove(s)"
       ) {{ _.find(normalize(tags), { value: s }).text }}
         i.fa.fa-times.ml-2
-    u-select.col.p-0(v-model="select", :options="normalizedTags", @remove="remove", @insert="onInsert", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
+    u-select.col.p-0(
+        v-model="select",
+        :options="normalizedTags",
+        :search.sync="search",
+        @keydown.delete="removeLast",
+        @insert="onInsert",
+        @change="onSelect",
+        ref="select",
+        :placeholder="placeholder",
+        no-placeholder,
+        filterable
+    )
     u-modal(ref="modal", size="sm")
       span(slot="title") Error
       h5.mb-0 {{ limitMessage }}
@@ -58,7 +69,8 @@
     data () {
       return {
         select: null,
-        normalizedTags: []
+        normalizedTags: [],
+        search: ''
       }
     },
     computed: {
@@ -84,6 +96,15 @@
         }
 
         this.$emit('change', _.uniq([...this.selected, selected]))
+      },
+      removeLast (e) {
+        if (this.search === '') {
+          let last = this.selected.pop()
+          if (last) {
+            this.search = _.find(this.normalize(this.tags), { value: last }).text
+          }
+          this.$emit('change', this.selected)
+        }
       },
       remove (value) {
         this.$emit('change', this.selected.filter(x => x !== value))

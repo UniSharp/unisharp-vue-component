@@ -10,7 +10,7 @@
       ref="filter",
       v-if="!!this.filterable || this.filterable === ''",
       :placeholder="placeholder",
-      @keydown="onKeydown"
+      @keydown="onKeydown",
     )
     .u-select-current(slot="toggle", :class="{ placeholder: current === placeholder }", v-else).form-control {{ current }}
     .dropdown-menu.u-select-options(ref="menu")
@@ -53,6 +53,18 @@
       },
       noPlaceholder: {
         default: false
+      },
+      search: {
+        type: String,
+        default: ''
+      }
+    },
+    watch: {
+      search (value) {
+        this.filter = this.search
+      },
+      filter (value) {
+        this.$emit('update:search', value)
       }
     },
     computed: {
@@ -91,14 +103,15 @@
       select (selected) {
         this.$refs.dropdown.hide()
         this.$emit('change', selected)
+        this.cleanFilter()
       },
       insert (inserted) {
         this.$refs.dropdown.hide()
         this.$emit('insert', inserted)
+        this.cleanFilter()
       },
-      remove (removed) {
-        this.$refs.dropdown.show()
-        this.$emit('remove', removed)
+      cleanFilter () {
+        this.filter = ''
       },
       onDropdownShow () {
         this.hover = 0
@@ -139,15 +152,12 @@
             break
 
           case 'BS':
-            if (this.filter === '') {
-              this.filter = _.find(this.normalize(this.options), { value: this.selected }).text
-              this.remove(this.selected)
-            } else {
-              this.filter = this.filter.slice(0, this.filter.length - 1)
-            }
+            this.filter = this.filter.slice(0, this.filter.length - 1)
+            this.$emit('keydown', e)
             break
+
           case 'ESC':
-            this.filter = ''
+            this.cleanFilter()
             this.$refs.dropdown.hide()
             break
 
