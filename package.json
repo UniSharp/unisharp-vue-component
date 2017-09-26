@@ -1,7 +1,7 @@
 {
   "name": "uni-admin",
   "description": "UniAdmin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "vue",
     "bootstrap",
@@ -17,6 +17,7 @@
     "assets",
     "components",
     "loading",
+    "mixins",
     "plugins",
     "index.js"
   ],
