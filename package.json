@@ -16,6 +16,7 @@
   "files": [
     "assets",
     "components",
+    "loading",
     "plugins",
     "index.js"
   ],
