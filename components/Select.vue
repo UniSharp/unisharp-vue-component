@@ -18,7 +18,7 @@
         a.dropdown-item(
           @mouseenter="hover = key",
           @click.prevent.stop="select(option.value)",
-          :class="{ hover: hover == key }",
+          :class="{ hover: hover == key, disabled: option.disabled }",
           v-for="(option, key) in filteredOptions",
           :key="key",
           ref="options"

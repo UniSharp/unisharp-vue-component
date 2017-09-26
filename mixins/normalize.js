@@ -11,7 +11,8 @@ export default {
       return _.map(options, (v, k) => {
         return {
           value: v.value || v.text || v || k || null,
-          text: _.toString(v.text || v)
+          text: _.toString(v.text || v),
+          disabled: v.disabled || false
         }
       })
     }

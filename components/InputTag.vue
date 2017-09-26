@@ -7,7 +7,7 @@
         @click.prevent.stop="remove(s)"
       ) {{ _.find(normalize(tags), { value: s }).text }}
         i.fa.fa-times.ml-2
-    u-select.col.p-0(v-model="select", :options="tags", @remove="remove", @insert="onInsert", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
+    u-select.col.p-0(v-model="select", :options="normalizedTags", @remove="remove", @insert="onInsert", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
     u-modal(ref="modal", size="sm")
       span(slot="title") Error
       h5.mb-0 {{ limitMessage }}
@@ -44,15 +44,21 @@
       }
     },
     watch: {
-      selected (value) {
-        if (value.length > 0) {
-          this.select = _.last(value)
+      selected (selected) {
+        if (selected.length > 0) {
+          this.select = _.last(selected)
         }
+
+        this.normalizedTags = this.normalize(this.tags).map(v => {
+          v.disabled = selected.includes(v.value)
+          return v
+        })
       }
     },
     data () {
       return {
-        select: null
+        select: null,
+        normalizedTags: []
       }
     },
     computed: {
@@ -66,7 +72,7 @@
         }
 
         if (!!this.insertable || this.insertable === '') {
-          this.$emit('update:tags', _.uniq([...this.tags, { value: inserted, text: inserted }]))
+          this.$emit('update:tags', _.uniq([...this.tags, { value: inserted, text: inserted, disabled: true }]))
           this.$emit('change', _.uniq([...this.selected, inserted]))
         }
       },
