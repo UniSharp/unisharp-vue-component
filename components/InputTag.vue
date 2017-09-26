@@ -26,7 +26,7 @@
 
 <script>
   import _ from 'lodash'
-  import Normalize from '~/mixins/normalize'
+  import Normalize from '../mixins/normalize'
 
   export default {
     mixins: [Normalize],
