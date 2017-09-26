@@ -96,6 +96,10 @@
         this.$refs.dropdown.hide()
         this.$emit('insert', inserted)
       },
+      remove (removed) {
+        this.$refs.dropdown.show()
+        this.$emit('remove', removed)
+      },
       onDropdownShow () {
         this.hover = 0
 
@@ -134,6 +138,14 @@
             this.$refs.dropdown.show()
             break
 
+          case 'BS':
+            if (this.filter === '') {
+              this.filter = _.find(this.normalize(this.options), { value: this.selected }).text
+              this.remove(this.selected)
+            } else {
+              this.filter = this.filter.slice(0, this.filter.length - 1)
+            }
+            break
           case 'ESC':
             this.filter = ''
             this.$refs.dropdown.hide()

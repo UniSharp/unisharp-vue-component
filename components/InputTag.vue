@@ -5,9 +5,9 @@
         :key="index",
         v-for="(s, index) in selected",
         @click.prevent.stop="remove(s)"
-      ) {{ s }}
+      ) {{ _.find(normalize(tags), { value: s }).text }}
         i.fa.fa-times.ml-2
-    u-select.col.p-0(v-model="select", :options="tags", @insert="onInsert", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
+    u-select.col.p-0(v-model="select", :options="tags", @remove="remove", @insert="onInsert", @change="onSelect", ref="select", :placeholder="placeholder", no-placeholder, filterable)
     u-modal(ref="modal", size="sm")
       span(slot="title") Error
       h5.mb-0 {{ limitMessage }}
@@ -43,6 +43,13 @@
         default: 'Maximum tags exceeded.'
       }
     },
+    watch: {
+      selected (value) {
+        if (value.length > 0) {
+          this.select = _.last(value)
+        }
+      }
+    },
     data () {
       return {
         select: null
@@ -59,7 +66,7 @@
         }
 
         if (!!this.insertable || this.insertable === '') {
-          this.$emit('update:tags', _.uniq([...this.tags, {value: null, text: inserted}]))
+          this.$emit('update:tags', _.uniq([...this.tags, { value: inserted, text: inserted }]))
           this.$emit('change', _.uniq([...this.selected, inserted]))
         }
       },
