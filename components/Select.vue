@@ -11,6 +11,8 @@
       v-if="!!this.filterable || this.filterable === ''",
       :placeholder="placeholder",
       @keydown="onKeydown",
+      @focus="$refs.dropdown.show()",
+      @blur="$refs.dropdown.hide()"
     )
     .u-select-current(slot="toggle", :class="{ placeholder: current === placeholder }", v-else).form-control {{ current }}
     .dropdown-menu.u-select-options(ref="menu")
@@ -79,10 +81,22 @@
         return this.normalize(this.options)
       },
       filteredOptions () {
-        let options = this.normalizedOptions
+        let options = []
 
         if (this.filter) {
-          options = _.filter(options, option => option.text.toLowerCase().indexOf(this.filter.toLowerCase()) !== -1)
+          let needle = this.filter.toLowerCase()
+
+          this.normalizedOptions.forEach(option => {
+            let haystack = option.text.toLowerCase()
+
+            if (haystack === needle) {
+              options.unshift(option)
+            } else if (haystack.indexOf(needle) !== -1) {
+              options.push(option)
+            }
+          })
+        } else {
+          options = this.normalizedOptions
         }
 
         if (!this.noPlaceholder && this.noPlaceholder !== '') {
