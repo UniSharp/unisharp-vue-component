@@ -86,9 +86,6 @@
       clamp (number) {
         return _.clamp(number, 1, _.clamp(this.totalPage, 1, Number.MAX_SAFE_INTEGER))
       },
-      isActive (page) {
-        return this.currentPage === page
-      },
       setPage (page) {
         if (page < 1 || page > this.totalPage) {
           return
