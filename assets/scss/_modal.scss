@@ -1,0 +1,19 @@
+.modal-dialog {
+  width: 100%;
+}
+
+@include media-breakpoint-up(sm) {
+  .modal-dialog {
+    width: $modal-md;
+  }
+
+  .modal-sm {
+    width: $modal-sm;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .modal-lg {
+    width: $modal-lg;
+  }
+}

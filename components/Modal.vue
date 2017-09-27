@@ -92,12 +92,6 @@
     opacity: 0;
   }
 
-  .modal.open {
-    display: block;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
   button.close {
     outline: 0;
     cursor: pointer;
@@ -107,5 +101,12 @@
     @include backdrop;
 
     background-color: rgba(0, 0, 0, .4);
+  }
+
+  .modal.open {
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 </style>
