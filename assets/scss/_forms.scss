@@ -5,12 +5,29 @@
 .form-control {
   padding: $input-padding-y $input-padding-x;
 
-  @include hover {
-    @include box-shadow($input-focus-box-shadow);
+  &.disabled, &[disabled] {
+    cursor: not-allowed;
+  }
 
-    background-color: $input-focus-bg;
-    border-color: $input-focus-border-color;
-    outline: none;
+  &:not(.disabled):not([disabled]) {
+    @include hover {
+      background-color: $input-focus-bg;
+      outline: none;
+
+      &:not(.is-invalid) {
+        @include box-shadow($input-focus-box-shadow);
+
+        border-color: $input-focus-border-color;
+      }
+    }
+
+    &.is-invalid {
+      box-shadow: none;
+
+      @include hover-focus {
+        @include box-shadow($btn-invalid-box-shadow);
+      }
+    }
   }
 }
 

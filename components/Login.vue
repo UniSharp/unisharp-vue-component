@@ -1,26 +1,46 @@
 <template lang="pug">
   .u-login.wrapper
     header
-      u-logo.mb-2(to="/login", :width="200")
+      u-logo.mb-2
       h1.mb-0.title 客製化網站內容管理系統
 
     main
-      .card
-        h3.card-header BLUE ADMIN
+      form.card(@submit.prevent="onSubmit")
+        h3.card-header.text-uppercase {{ title }}
         .card-body
-          form(@submit.prevent="onSubmit")
-            .form-group
-              .input-group
-                span.input-group-addon.px-3: i.fa.fa-user
-                input.form-control(type="text", name="name", v-model="form.name", placeholder="帳號", aria-describedby="name")
-            .form-group
-              .input-group
-                span.input-group-addon.px-3: i.fa.fa-lock
-                input.form-control(type="password", name="password", v-model="form.password", placeholder="密碼", aria-describedby="password")
-            .form-group
-              button.btn.btn-primary.btn-block.btn-lg(type="submit") 登入
-            .form-group.mb-0
-              nuxt-link.link-dark(to="/login") 忘記密碼
+          .form-group
+            i.fa.fa-user
+            input.form-control(
+              :class="{ 'is-invalid': !!errors.username }",
+              type="text",
+              name="username",
+              v-model="form.username",
+              placeholder="帳號",
+              aria-describedby="username",
+              :disabled="loading",
+              required
+            )
+            .invalid-feedback(v-if="errors.username") {{ errors.username }}
+          .form-group
+            i.fa.fa-lock
+            input.form-control(
+              :class="{ 'is-invalid': !!errors.password }",
+              type="password",
+              name="password",
+              v-model="form.password",
+              placeholder="密碼",
+              aria-describedby="password",
+              :disabled="loading",
+              required
+            )
+            .invalid-feedback(v-if="errors.username") {{ errors.password }}
+          .card-actions.mt-0.pt-0
+            button.btn.btn-primary.btn-block.btn-lg(
+              :class="{ disabled: loading, 'btn-loading': loading }",
+              type="submit"
+            ) 登入
+          //- .form-group.mb-0
+          //-   nuxt-link.link-dark(to="/login") 忘記密碼
 
     footer
       p.mb-1 BACKEND - Content Management System
@@ -32,18 +52,34 @@
 </template>
 
 <script>
+  import config from '~/config'
+
   export default {
+    props: {
+      title: {
+        type: String,
+        default: () => config.index.title
+      },
+      errors: {
+        type: Object,
+        default: () => ({})
+      },
+      loading: {
+        type: Boolean,
+        default: false
+      }
+    },
     data () {
       return {
         form: {
-          name: '',
+          username: '',
           password: ''
         }
       }
     },
     methods: {
-      onSubmit (e) {
-        alert(JSON.stringify(this.form))
+      onSubmit () {
+        this.$emit('submit', this.form)
       }
     }
   }
@@ -51,6 +87,8 @@
 
 <style lang="scss" scoped>
   @import "../assets/scss/_variables";
+
+  $icon-width: 2.75rem;
 
   .wrapper {
     height: 100%;
@@ -82,14 +120,42 @@
       height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
 
       .card {
-        min-width: 25rem;
+        margin: auto;
+        width: calc(100% - 2rem);
+        max-width: 25rem;
 
         .card-header {
           background-color: darken($gray-100, 2.5%);
           border-bottom: 0;
+        }
+
+        .card-body {
+          .form-group {
+            position: relative;
+
+            .fa {
+              position: absolute;
+              left: 0;
+              top: $input-btn-border-width;
+              width: $icon-width;
+              height: $input-height-inner;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              border-right: 1px solid $input-border-color;
+              color: $input-placeholder-color;
+
+              &:before {
+                margin-left: 1px;
+              }
+            }
+
+            .form-control {
+              padding-left: $icon-width + $input-padding-x;
+            }
+          }
         }
       }
     }

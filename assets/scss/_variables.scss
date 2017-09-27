@@ -317,6 +317,7 @@ $input-btn-padding-x-lg: 2.3rem;
 $btn-box-shadow: 0 0 6px rgba(0, 0, 0, .2);
 $btn-focus-box-shadow: 0 0 6px rgba(0, 0, 0, .2);
 $btn-active-box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+$btn-invalid-box-shadow: 0 0 6px rgba(theme-color("danger"), .2);
 
 // $btn-link-disabled-color: $gray-600;
 
@@ -354,10 +355,10 @@ $input-focus-border-color: $gray-700;
 
 $input-placeholder-color: $gray-600;
 
-// $input-height-border: $input-btn-border-width * 2;
+$input-height-border: $input-btn-border-width * 2;
 
-// $input-height-inner: ($font-size-base * $input-btn-line-height) + ($input-btn-padding-y * 2);
-// $input-height: calc(#{$input-height-inner} + #{$input-height-border});
+$input-height-inner: ($font-size-base * $input-btn-line-height) + ($input-padding-y * 2);
+$input-height: calc(#{$input-height-inner} + #{$input-height-border});
 
 // $input-height-inner-sm: ($font-size-sm * $input-btn-line-height-sm) + ($input-btn-padding-y-sm * 2);
 // $input-height-sm: calc(#{$input-height-inner-sm} + #{$input-height-border});

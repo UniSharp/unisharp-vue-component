@@ -2,6 +2,10 @@
   font-size: $font-size-md;
   cursor: pointer;
 
+  &.disabled {
+    cursor: not-allowed;
+  }
+
   + .btn {
     margin-left: 1rem;
   }
@@ -36,4 +40,25 @@
   padding-left: 0;
   padding-right: 0;
   width: 2.5rem;
+}
+
+.btn-loading {
+  &:before {
+    @include spin;
+
+    content: "";
+    display: inline-block;
+    vertical-align: text-bottom;
+    width: $font-size-md;
+    height: $font-size-md;
+    margin-right: .5rem;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, .2);
+    border-top-color: #fff;
+  }
+
+  &.btn-sm:before {
+    width: $font-size-sm;
+    height: $font-size-sm;
+  }
 }
