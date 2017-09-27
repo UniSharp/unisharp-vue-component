@@ -16,7 +16,7 @@
     )
     .u-select-current(slot="toggle", :class="{ placeholder: current === placeholder }", v-else).form-control {{ current }}
     .dropdown-menu.u-select-options(ref="menu")
-      .u-select-options-wrapper
+      .u-select-options-wrapper(v-if="filteredOptions.length")
         a.dropdown-item(
           @mouseenter="hover = key",
           @click.prevent.stop="select(option.value)",
@@ -25,6 +25,10 @@
           :key="key",
           ref="options"
         ) {{ option.text }}
+      .u-select-options-wrapper(v-else)
+        a.dropdown-item
+          | {{ empty }}
+
 </template>
 
 <script>
@@ -55,6 +59,10 @@
       },
       noPlaceholder: {
         default: false
+      },
+      empty: {
+        type: String,
+        default: 'No Options'
       },
       search: {
         type: String,
