@@ -2,22 +2,23 @@
   u-dropdown.u-user-dropdown
     button.btn.btn-link.d-flex.align-items-center.h-100.px-4.u-user-toggle(slot="toggle")
       i.fa.fa-user.mr-2(aria-hidden="true")
-      | User
+      | {{ username }}
       i.fa.fa-caret-down.ml-2(aria-hidden="true")
     .dropdown-menu
-      a.dropdown-item
-        i.fa.fa-cog.mr-2(aria-hidden="true")
-        span 更改密碼
-      a.dropdown-item
-        i.fa.fa-sign-out.mr-2(aria-hidden="true")
-        span 登出
+      slot
 </template>
 
 <script>
-  import UDropdown from './Dropdown'
-
   export default {
-    components: { UDropdown }
+    computed: {
+      username () {
+        try {
+          return this.$store.state.user.data.name
+        } catch (e) {
+          return 'User'
+        }
+      }
+    }
   }
 </script>
 

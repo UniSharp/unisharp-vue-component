@@ -11,6 +11,12 @@
           slot(name="breadcrumb")
             u-breadcrumb
           u-user-dropdown.h-100.ml-auto
+            //- nuxt-link.dropdown-item
+              i.fa.fa-cog.mr-2(aria-hidden="true")
+              span 更改密碼
+            nuxt-link.dropdown-item(to="/logout")
+              i.fa.fa-sign-out.mr-2(aria-hidden="true")
+              span 登出
         header.px-4.bg-white.d-flex.align-items-center
           h1.mb-0.mr-auto {{ title }}
           slot(name="functions")
