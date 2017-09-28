@@ -10,7 +10,7 @@
           button.btn(type="button")
             i.fa.fa-search.mr-2
             | Search
-    table.table.table-bordered.table-striped.text-center.mb-4
+    table.table.table-bordered.table-striped.table-responsive.text-center.mb-4
       thead
         tr
           th(scope="row")
