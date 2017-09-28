@@ -14,7 +14,7 @@
       @focus="$refs.dropdown.show()",
       @blur="$refs.dropdown.hide()"
     )
-    .u-select-current(slot="toggle", :class="{ placeholder: current === placeholder }", v-else).form-control {{ current }}
+    .u-select-current.form-control(slot="toggle", :class="{ placeholder: current === placeholder }", v-else) {{ current }}
     .dropdown-menu.u-select-options(ref="menu")
       .u-select-options-wrapper(v-if="filteredOptions.length")
         a.dropdown-item(
@@ -271,7 +271,7 @@
 
     &.active .u-select-current, .u-select-current:hover {
       background-color: $hover-bg;
-      border-color: $hover-bg;
+      border-color: $hover-bg !important;
       color: $hover-fg;
 
       &:after {
