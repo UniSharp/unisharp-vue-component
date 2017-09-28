@@ -12,7 +12,6 @@
       :placeholder="placeholder",
       @keydown="onKeydown",
       @focus="$refs.dropdown.show()",
-      @blur="$refs.dropdown.hide()"
     )
     .u-select-current.form-control(slot="toggle", :class="{ placeholder: current === placeholder }", v-else) {{ current }}
     .dropdown-menu.u-select-options(ref="menu")
@@ -123,6 +122,10 @@
     },
     methods: {
       select (selected) {
+        if (_.find(this.normalizedOptions, { value: selected }).disabled) {
+          return
+        }
+
         this.$refs.dropdown.hide()
         this.$emit('change', selected)
         this.cleanFilter()
@@ -169,7 +172,8 @@
             } else {
               this.insert(this.filter)
             }
-            this.filter = ''
+
+            this.cleanFilter()
             this.$refs.dropdown.show()
             break
 
