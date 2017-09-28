@@ -18,7 +18,7 @@
         :placeholder="placeholder",
         no-placeholder,
         filterable
-        :empty="`New Tag: ${search}`"
+        :empty="search ? `New Tag: ${search}` : ''"
     )
     u-modal(ref="modal", size="sm")
       span(slot="title") Error
