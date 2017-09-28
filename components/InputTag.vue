@@ -65,6 +65,7 @@
           v.disabled = selected.includes(v.value)
           return v
         })
+        console.log(this.normalizedTags)
       }
     },
     data () {
@@ -73,6 +74,9 @@
         normalizedTags: [],
         search: ''
       }
+    },
+    created () {
+      this.normalizedTags = this.normalize(this.tags)
     },
     computed: {
       _: () => _
