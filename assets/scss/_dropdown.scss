@@ -4,4 +4,10 @@
     text-decoration: none;
     background-color: $dropdown-link-hover-bg;
   }
+
+  &.disabled, &:disabled {
+    color: $dropdown-link-disabled-color !important;
+    background-color: transparent !important;
+    cursor: not-allowed;
+  }
 }
