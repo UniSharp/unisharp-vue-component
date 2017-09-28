@@ -65,7 +65,6 @@
           v.disabled = selected.includes(v.value)
           return v
         })
-        console.log(this.normalizedTags)
       }
     },
     data () {
