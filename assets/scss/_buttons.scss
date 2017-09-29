@@ -37,9 +37,22 @@
 }
 
 .btn-square {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   width: 2.5rem;
+}
+
+.btn-flat {
+  font-size: $font-size-base;
+  padding: $input-padding-y $input-padding-x;
+  box-shadow: none;
+  color: $black;
+  border: 1px solid $input-group-btn-border-color;
+  background: $white;
+
+  @include hover-focus {
+    background: darken($white, 3%);
+  }
 }
 
 .btn-loading {

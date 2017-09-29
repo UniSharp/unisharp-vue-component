@@ -2,14 +2,15 @@
   u-admin
     button.btn.btn-secondary.mb-4(@click.prevent) Create
     button.btn.btn-primary.mb-4(@click.prevent) Others
-    form.form-inline(slot="functions")
+    form.form-inline.d-none.d-sm-flex(slot="functions")
       u-select(v-model="filter", placeholder="Filter", :options="options")
       .input-group
-        input.form-control(type="text", placeholder="Search", aria-label="Search")
+        input.form-control(v-model="search", type="text", placeholder="Search", aria-label="Search")
         span.input-group-btn
-          button.btn(type="button")
+          button.btn.btn-flat(type="button")
             i.fa.fa-search.mr-2
             | Search
+    .btn.btn-square.btn-flat.d-sm-none(slot="functions", @click.prevent.stop="$refs.modal.show()"): i.fa.fa-search
     .table-responsive
       table.table.table-bordered.table-striped.text-center.mb-4
         thead
@@ -83,6 +84,12 @@
               p.font-weight-bold.mb-0 Larry the Bird
                 span.small.text-muted.ml-2 @twitter
     u-pagination(:totalRows="12345", :perPage="500")
+    u-modal(ref="modal")
+      span(slot="title") Search
+      button.btn.btn-info(slot="actions", @click.stop.prevent="$refs.modal.hide()") Cancel
+      button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") Confirm
+      u-select.mb-3(v-model="filter", placeholder="Filter", :options="options")
+      input.form-control(v-model="search", type="text", placeholder="Search", aria-label="Search")
 </template>
 
 <script>
@@ -95,6 +102,7 @@
           { text: 'Three', value: 3 }
         ],
         filter: null,
+        search: '',
         checkall: false,
         checked: [false, false, false],
         expanding: [false, false, false]
