@@ -12,6 +12,13 @@
           .col-sm-10
             input#name.form-control(placeholder="Name")
         .form-group.row
+          label.col-sm-2.col-form-label(for="name") Two columns
+          .col-sm-4
+            input#name.form-control(placeholder="Name")
+          label.col-sm-2.col-form-label.text-right(for="name") Two columns
+          .col-sm-4
+            input#name.form-control(placeholder="Name")
+        .form-group.row
           label.col-sm-2.col-form-label(for="password") Password
           .col-sm-10
             input#password.form-control(v-model="form.password", type="password", placeholder="Password")
@@ -55,6 +62,15 @@
         .form-group.row
           label.col-sm-2.col-form-label Checkbox
           .col-sm-10
+            .col-form-label
+              u-checkbox(v-model="form.switch") Checkbox
+        .form-group.row
+          label.col-sm-2.col-form-label Checkbox
+          .col-sm-4
+            .col-form-label
+              u-checkbox(v-model="form.switch") Checkbox
+          label.col-sm-2.col-form-label.text-right Checkbox
+          .col-sm-4
             .col-form-label
               u-checkbox(v-model="form.switch") Checkbox
         .form-group.row
