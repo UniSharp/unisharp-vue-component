@@ -60,11 +60,6 @@
             u-switch(v-model="form.switch")
         .form-group.row
           label.col-sm-2.col-form-label Checkbox
-          .col-sm-10
-            .col-form-label
-              u-checkbox(v-model="form.switch") Checkbox
-        .form-group.row
-          label.col-sm-2.col-form-label Checkbox
           .col-sm-4.mb-3.mb-sm-0
             .col-form-label
               u-checkbox(v-model="form.switch") Checkbox
