@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-uploader.col-form-label
-    vue-clip.u-uploader-clip.d-flex(
+    vue-clip.u-uploader-clip.row.mx-0(
       :id="id",
       :name="name",
       :options="options",
@@ -16,13 +16,13 @@
     )
       template(slot="clip-uploader-action", scope="params")
         slot(name="dz-message")
-          .dz-message.u-uploader-action.col(role="alert", :class="{ dragging: params.dragging }", ref="action")
+          .dz-message.u-uploader-action.col-md-6.mb-3.mb-md-0(role="alert", :class="{ dragging: params.dragging }", ref="action")
             .u-uploader-action-icon(@click="$refs.action.click()")
               img.cloud(src="../assets/img/upload-cloud.png")
               img.arrow(src="../assets/img/upload-arrow.png")
             p Click or Drag and Drop files here
       template(slot="clip-uploader-body", scope="props")
-        ul.list-unstyled.u-uploader-body.col
+        ul.list-unstyled.u-uploader-body.mb-0.col-md-6.px-0.pl-md-3
           li.media.u-uploader-file(:key="key", v-for="(file, key) in files")
             img.u-uploader-file-avatar.d-flex.mr-3(:src="file.dataUrl")
             .media-body
@@ -175,16 +175,11 @@
   }
 
   .u-uploader {
-    height: 20rem;
-
-    .u-uploader-clip, .u-uploader-action, .u-uploader-body {
-      height: 100%;
-    }
-
     .u-uploader-action {
       @include transition;
       @include border-radius($input-border-radius);
 
+      height: 20rem;
       color: $input-color;
       background-color: $input-bg;
       border: 2px dashed $input-border-color;
@@ -226,14 +221,17 @@
     }
 
     .u-uploader-body {
-      padding-left: 1rem;
+      max-height: 20rem;
       overflow-y: auto;
 
       .u-uploader-file {
+        height: 3rem;
+
         + .u-uploader-file {
           border-top: 1px solid $input-border-color;
           margin-top: 1rem;
           padding-top: 1rem;
+          height: calc(4rem + 1px);
         }
 
         .u-uploader-file-avatar {

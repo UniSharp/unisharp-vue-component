@@ -41,6 +41,7 @@
 
 .custom-control {
   cursor: pointer;
+  margin-left: 0 !important;
 
   .custom-control-indicator {
     @include transition($transition-slide);

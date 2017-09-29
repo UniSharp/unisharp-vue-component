@@ -10,24 +10,23 @@
         .form-group.row
           label.col-sm-2.col-form-label(for="name") Name
           .col-sm-10
-            input#name.form-control(placeholder="Name")
+            input#name.form-control(v-model="form.name", placeholder="Name")
         .form-group.row
-          label.col-sm-2.col-form-label(for="name") Two columns
+          label.col-sm-2.col-form-label(for="name-2") Two columns
+          .col-sm-4.mb-3.mb-sm-0
+            input#name-2.form-control(v-model="form.name", placeholder="Name")
+          label.col-sm-2.col-form-label.text-sm-right(for="name-3") Two columns
           .col-sm-4
-            input#name.form-control(placeholder="Name")
-          label.col-sm-2.col-form-label.text-right(for="name") Two columns
-          .col-sm-4
-            input#name.form-control(placeholder="Name")
+            input#name-3.form-control(v-model="form.name", placeholder="Name")
         .form-group.row
           label.col-sm-2.col-form-label(for="password") Password
           .col-sm-10
             input#password.form-control(v-model="form.password", type="password", placeholder="Password")
         .form-group.row
           label.col-sm-2.col-form-label(for="btnPassword") Password
-          .col-sm-9.pr-0
-            input#btnPassword.form-control(v-model="form.password", type="password", placeholder="Password")
-          .col-sm-1
-            .btn.btn-info.btn-block.px-0(@click.prevent="form.password = ''")
+          .col-sm-10.d-flex
+            input#btnPassword.form-control.mr-3.col(v-model="form.password", type="password", placeholder="Password")
+            .btn.btn-info.btn-square(@click.prevent="form.password = ''")
               i.fa.fa-eraser
         .form-group.row
           label.col-sm-2.col-form-label(for="select") Select
@@ -66,10 +65,10 @@
               u-checkbox(v-model="form.switch") Checkbox
         .form-group.row
           label.col-sm-2.col-form-label Checkbox
-          .col-sm-4
+          .col-sm-4.mb-3.mb-sm-0
             .col-form-label
               u-checkbox(v-model="form.switch") Checkbox
-          label.col-sm-2.col-form-label.text-right Checkbox
+          label.col-sm-2.col-form-label.text-sm-right Checkbox
           .col-sm-4
             .col-form-label
               u-checkbox(v-model="form.switch") Checkbox
@@ -123,6 +122,7 @@
           value: 9
         }],
         form: {
+          name: '',
           password: '',
           selected: 5,
           checked: [2, 5, 8],
