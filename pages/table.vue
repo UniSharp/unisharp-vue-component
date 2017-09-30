@@ -1,13 +1,15 @@
 <template lang="pug">
   u-admin
     form.form-inline(slot="functions")
-      u-select(v-model="age", placeholder="Age", :options="ages")
-      .input-group
-        input.form-control(type="text", v-model="filterText", placeholder="Search", aria-label="Search")
-        span.input-group-btn
-          button.btn(type="button")
-            i.fa.fa-search.mr-2
-            | Search
+      form.form-inline.d-none.d-sm-flex(slot="functions")
+        u-select(v-model="age", placeholder="Age", :options="ages")
+        .input-group
+          input.form-control(v-model="filterText", type="text", placeholder="Search", aria-label="Search")
+          span.input-group-btn
+            button.btn.btn-flat(type="button")
+              i.fa.fa-search.mr-2
+              | Search
+      .btn.btn-square.btn-flat.d-sm-none(slot="functions", @click.prevent.stop="$refs.modal.show()"): i.fa.fa-search
     u-table(
       ref="table",
       :items="items",
@@ -32,6 +34,12 @@
           | alert
 
     button.btn.btn-primary(type="button", @click.stop="showCheckItems") Get Checked Items of Current Page
+    u-modal(ref="modal")
+        span(slot="title") Search
+        button.btn.btn-info(slot="actions", @click.stop.prevent="$refs.modal.hide()") Cancel
+        button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") Confirm
+        u-select.mb-3(v-model="age", placeholder="Filter", :options="ages")
+        input.form-control(v-model="filterText", type="text", placeholder="Search", aria-label="Search")
 </template>
 
 <script>

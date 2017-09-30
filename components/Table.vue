@@ -1,5 +1,5 @@
 <template lang="pug">
-  .u-table(:style="styleObject.div")
+  .u-table.table-responsive(:style="styleObject.div")
     table.mb-4.table.table-bordered.table-striped.text-center
       thead(:style="styleObject.thead")
         tr
