@@ -11,8 +11,8 @@
             i.fa.fa-search.mr-2
             | Search
     .btn.btn-square.btn-flat.d-sm-none(slot="functions", @click.prevent.stop="$refs.modal.show()"): i.fa.fa-search
-    .table-responsive
-      table.table.table-bordered.table-striped.text-center.mb-4
+    .table-responsive.mb-4
+      table.table.table-bordered.table-striped.text-center
         thead
           tr
             th(scope="row")
@@ -131,8 +131,6 @@
   @import "node_modules/bootstrap/scss/mixins/transition";
 
   .table {
-    margin-bottom: 0;
-
     tr {
       .btn-info:after {
         content: "Expand";
