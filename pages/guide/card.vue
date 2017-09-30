@@ -12,11 +12,11 @@
           .col-sm-10
             input#name.form-control(v-model="form.name", placeholder="Name")
         .form-group.row
-          label.col-sm-2.col-form-label.text-sm-right(for="name-2") Two columns:
-          .col-sm-4.mb-3.mb-sm-0
+          label.col-sm-2.col-form-label.text-sm-right(for="name-2") Name:
+          .col-sm-10.col-md-4.mb-3.mb-md-0
             input#name-2.form-control(v-model="form.name", placeholder="Name")
-          label.col-sm-2.col-form-label.text-sm-right(for="name-3") Two columns:
-          .col-sm-4
+          label.col-sm-2.col-form-label.text-sm-right(for="name-3") Name:
+          .col-sm-10.col-md-4
             input#name-3.form-control(v-model="form.name", placeholder="Name")
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right(for="password") Password:
@@ -58,10 +58,10 @@
             u-switch(v-model="form.switch")
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Checkbox:
-          .col-sm-4.mb-3.mb-sm-0
+          .col-sm-10.col-md-4.mb-3.mb-md-0
             u-checkbox(v-model="form.switch") Checkbox
           label.col-sm-2.col-form-label.text-sm-right Checkbox:
-          .col-sm-4
+          .col-sm-10.col-md-4
             u-checkbox(v-model="form.switch") Checkbox
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Uploader:
