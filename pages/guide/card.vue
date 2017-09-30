@@ -4,71 +4,67 @@
       h4.card-header Form
       .card-body
         .form-group.row
-          label.col-sm-2.col-form-label(for="email") Email
+          label.col-sm-2.col-form-label.text-sm-right(for="email") Email:
           .col-sm-10
             input#email.form-control-plaintext(type="text", value="email@example.com", readonly)
         .form-group.row
-          label.col-sm-2.col-form-label(for="name") Name
+          label.col-sm-2.col-form-label.text-sm-right(for="name") Name:
           .col-sm-10
             input#name.form-control(v-model="form.name", placeholder="Name")
         .form-group.row
-          label.col-sm-2.col-form-label(for="name-2") Two columns
+          label.col-sm-2.col-form-label.text-sm-right(for="name-2") Two columns:
           .col-sm-4.mb-3.mb-sm-0
             input#name-2.form-control(v-model="form.name", placeholder="Name")
-          label.col-sm-2.col-form-label.text-sm-right(for="name-3") Two columns
+          label.col-sm-2.col-form-label.text-sm-right(for="name-3") Two columns:
           .col-sm-4
             input#name-3.form-control(v-model="form.name", placeholder="Name")
         .form-group.row
-          label.col-sm-2.col-form-label(for="password") Password
+          label.col-sm-2.col-form-label.text-sm-right(for="password") Password:
           .col-sm-10
             input#password.form-control(v-model="form.password", type="password", placeholder="Password")
         .form-group.row
-          label.col-sm-2.col-form-label(for="btnPassword") Password
+          label.col-sm-2.col-form-label.text-sm-right(for="btnPassword") Password:
           .col-sm-10.d-flex
             input#btnPassword.form-control.mr-3.col(v-model="form.password", type="password", placeholder="Password")
             .btn.btn-info.btn-square(@click.prevent="form.password = ''")
               i.fa.fa-eraser
         .form-group.row
-          label.col-sm-2.col-form-label(for="select") Select
+          label.col-sm-2.col-form-label.text-sm-right(for="select") Select:
           .col-sm-10
             u-select#select(v-model="form.selected", :options="options")
         .form-group.row
-          label.col-sm-2.col-form-label Radio
+          label.col-sm-2.col-form-label.text-sm-right Radio:
           .col-sm-10
             u-radio(v-model="form.selected", :options="options")
         .form-group.row
-          label.col-sm-2.col-form-label Radio Stacked
+          label.col-sm-2.col-form-label.text-sm-right Radio Stacked:
           .col-sm-10
             u-radio(v-model="form.selected", :options="options", stacked)
         .form-group.row
-          label.col-sm-2.col-form-label Checkbox
+          label.col-sm-2.col-form-label.text-sm-right Checkbox:
           .col-sm-10
-            .col-form-label
-              u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
+            u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
         .form-group.row
-          label.col-sm-2.col-form-label Checkbox Stacked
-          .col-sm-10
-            .col-form-label.custom-controls-stacked
-              u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
+          label.col-sm-2.col-form-label.text-sm-right Checkbox Stacked:
+          .col-sm-10.custom-controls-stacked
+            u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
         .form-group.row
-          label.col-sm-2.col-form-label Input Tag
+          label.col-sm-2.col-form-label.text-sm-right Input Tag:
           .col-sm-10
             u-input-tag(v-model="form.checked", :tags="options", placeholder="Tags")
         .form-group.row
-          label.col-sm-2.col-form-label Switch
+          label.col-sm-2.col-form-label.text-sm-right Switch:
           .col-sm-10
             u-switch(v-model="form.switch")
         .form-group.row
-          label.col-sm-2.col-form-label Checkbox
+          label.col-sm-2.col-form-label.text-sm-right Checkbox:
           .col-sm-4.mb-3.mb-sm-0
-            .col-form-label
-              u-checkbox(v-model="form.switch") Checkbox
-          label.col-sm-2.col-form-label.text-sm-right Checkbox
+            u-checkbox(v-model="form.switch") Checkbox
+          label.col-sm-2.col-form-label.text-sm-right Checkbox:
           .col-sm-4
-            .col-form-label
-              u-checkbox(v-model="form.switch") Checkbox
+            u-checkbox(v-model="form.switch") Checkbox
         .form-group.row
-          label.col-sm-2.col-form-label Uploader
+          label.col-sm-2.col-form-label.text-sm-right Uploader:
           .col-sm-10
             u-uploader(v-model="form.files")
         .card-actions
