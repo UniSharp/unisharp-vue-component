@@ -27,7 +27,7 @@
     margin-left: 1rem;
   }
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(xs) {
     .card-actions .btn, .card-link {
       display: block;
       width: 100%;
