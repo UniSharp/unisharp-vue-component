@@ -1,5 +1,5 @@
 <template lang="pug">
-  .u-table(:style="styleObject.div")
+  .u-table.table-responsive(:style="styleObject.div")
     table.mb-4.table.table-bordered.table-striped.text-center
       thead(:style="styleObject.thead")
         tr
@@ -28,7 +28,7 @@
           slot(name="expand", :value="item", :index="i", :toggle="toggle(i)", v-if="!!toggles[i]")
 
     u-pagination(
-      :total-rows="filtered.length",
+      :total-rows="this.totalRows || filtered.length",
       :per-page="perPage",
       v-model="currentPage",
       @input="this.cleanToggles"
@@ -60,6 +60,10 @@
         default: null
       },
       perPage: {
+        type: Number,
+        default: null
+      },
+      totalRows: {
         type: Number,
         default: null
       },
