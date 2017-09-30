@@ -26,4 +26,16 @@
   .card-link + .card-link {
     margin-left: 1rem;
   }
+
+  @include media-breakpoint-down(sm) {
+    .card-actions .btn, .card-link {
+      display: block;
+      width: 100%;
+    }
+
+    .card-actions .btn + .btn, .card-link + .card-link {
+      margin-left: 0;
+      margin-top: .75rem;
+    }
+  }
 }

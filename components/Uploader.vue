@@ -1,5 +1,5 @@
 <template lang="pug">
-  .u-uploader.col-form-label
+  .u-uploader
     vue-clip.u-uploader-clip.row.mx-0(
       :id="id",
       :name="name",
@@ -20,7 +20,7 @@
             .u-uploader-action-icon(@click="$refs.action.click()")
               img.cloud(src="../assets/img/upload-cloud.png")
               img.arrow(src="../assets/img/upload-arrow.png")
-            p Click or Drag and Drop files here
+            p.text-center Click or Drag and Drop files here
       template(slot="clip-uploader-body", scope="props")
         ul.list-unstyled.u-uploader-body.mb-0.col-md-6.px-0.pl-md-3
           li.media.u-uploader-file(:key="key", v-for="(file, key) in files")
@@ -175,6 +175,9 @@
   }
 
   .u-uploader {
+    padding-top: calc(#{$input-padding-y} + #{$input-btn-border-width});
+    padding-bottom: calc(#{$input-padding-y} + #{$input-btn-border-width});
+
     .u-uploader-action {
       @include transition;
       @include border-radius($input-border-radius);
