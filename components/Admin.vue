@@ -8,8 +8,9 @@
         .navbar.px-4.py-0
           .u-sidebar-toggle.text-light.px-2.mr-3.d-lg-none(@click.prevent="$refs.sidebar.show")
            i.fa.fa-bars
-          slot(name="breadcrumb")
-            u-breadcrumb
+          .d-none.d-sm-block
+            slot(name="breadcrumb")
+              u-breadcrumb
           u-user-dropdown.h-100.ml-auto
             //- nuxt-link.dropdown-item
               i.fa.fa-cog.mr-2(aria-hidden="true")
@@ -44,6 +45,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/breakpoints";
 
   .u-logo {
     margin-left: -.35rem;
@@ -60,12 +62,12 @@
     .navbar {
       position: relative;
       background-color: $navbar-bg;
-      flex: 0 0 $navbar-height;
+      flex: 0 0 map-get($navbar-heights, 'xs');
     }
 
     header {
       z-index: 10;
-      flex: 0 0 $navbar-height * 1.2;
+      flex: 0 0 map-get($navbar-heights, 'xs') * 1.2;
 
       h1 {
         font-weight: 400;
@@ -78,7 +80,21 @@
     main {
       overflow-x: hidden;
       overflow-y: auto;
-      min-height: calc(100vh - #{$navbar-height * 2.2});
+      min-height: calc(100vh - #{map-get($navbar-heights, 'xs') * 2.2});
+    }
+
+    @include media-breakpoint-up(sm) {
+      .navbar {
+        flex: 0 0 map-get($navbar-heights, 'sm');
+      }
+
+      header {
+        flex: 0 0 map-get($navbar-heights, 'sm') * 1.2;
+      }
+
+      main {
+        min-height: calc(100vh - #{map-get($navbar-heights, 'sm') * 2.2});
+      }
     }
   }
 </style>

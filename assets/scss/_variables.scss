@@ -118,10 +118,13 @@ $body-color: $black;
 //
 // Style menu elements.
 
-$sidebar-width: 260px;
 $sidebar-bg: #3c4350;
-$navbar-height: 72px;
+$sidebar-width: 260px;
 $navbar-bg: #4d535e;
+$navbar-heights: (
+  xs: 60px,
+  sm: 72px
+);
 
 // Links
 //
