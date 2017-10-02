@@ -50,7 +50,7 @@
 .custom-control {
   cursor: pointer;
   align-items: center;
-  margin-top: calc(#{$input-padding-y - $font-size-base * ($line-height-base - $input-btn-line-height)} + #{$input-btn-border-width});
+  margin-top: calc(#{$input-padding-y - $font-size-base * ($line-height-base - $input-btn-line-height)} + #{$input-btn-border-width + 1px});
   margin-bottom: 0 !important;
   margin-left: 0 !important;
 
