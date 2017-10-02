@@ -16,13 +16,13 @@
     )
       template(slot="clip-uploader-action", scope="params")
         slot(name="dz-message")
-          .dz-message.u-uploader-action.col-md-6.mb-3.mb-md-0(role="alert", :class="{ dragging: params.dragging }", ref="action")
+          .dz-message.u-uploader-action.col-md-6(role="alert", :class="{ dragging: params.dragging }", ref="action")
             .u-uploader-action-icon(@click="$refs.action.click()")
               img.cloud(src="../assets/img/upload-cloud.png")
               img.arrow(src="../assets/img/upload-arrow.png")
             p.text-center Click or Drag and Drop files here
       template(slot="clip-uploader-body", scope="props")
-        ul.list-unstyled.u-uploader-body.mb-0.col-md-6.px-0.pl-md-3
+        ul.list-unstyled.u-uploader-body.mb-0.mt-3.mb-mt-0.col-md-6.px-0.pl-md-3(v-if="files.length")
           li.media.u-uploader-file(:key="key", v-for="(file, key) in files")
             img.u-uploader-file-avatar.d-flex.mr-3(:src="file.dataUrl")
             .media-body
@@ -175,8 +175,8 @@
   }
 
   .u-uploader {
-    padding-top: calc(#{$input-padding-y} + #{$input-btn-border-width});
-    padding-bottom: calc(#{$input-padding-y} + #{$input-btn-border-width});
+    // padding-top: calc(#{$input-padding-y} + #{$input-btn-border-width});
+    // padding-bottom: calc(#{$input-padding-y} + #{$input-btn-border-width});
 
     .u-uploader-action {
       @include transition;
