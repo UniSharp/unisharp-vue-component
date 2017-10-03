@@ -18,7 +18,8 @@
               placeholder="帳號",
               aria-describedby="username",
               :disabled="loading",
-              required
+              required,
+              v-focus
             )
             .invalid-feedback(v-if="errors.username") {{ errors.username }}
           .form-group

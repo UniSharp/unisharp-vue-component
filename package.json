@@ -16,6 +16,7 @@
   "files": [
     "assets",
     "components",
+    "directives",
     "loading",
     "mixins",
     "plugins",

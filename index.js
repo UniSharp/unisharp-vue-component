@@ -20,7 +20,9 @@ import UUploader from './components/Uploader'
 import UUserDropdown from './components/UserDropdown'
 import UWelcome from './components/Welcome'
 
-var components = {
+import VFocus from './directives/Focus'
+
+let components = {
   UAdmin,
   UAlert,
   UBreadcrumb,
@@ -44,10 +46,18 @@ var components = {
   UWelcome
 }
 
+let directives = {
+  VFocus
+}
+
 export default {
   install: function (Vue) {
-    for (var component in components) {
+    for (let component in components) {
       Vue.component(component, components[component])
+    }
+
+    for (let directive in directives) {
+      directives[directive](Vue)
     }
   }
 }
