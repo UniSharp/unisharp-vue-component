@@ -19,6 +19,7 @@
       order-by="last_name"
       selection,
       :filter="filter",
+      @filtered="onFiltered"
     )
       template(slot="expand", scope="row")
         tr

@@ -1,5 +1,7 @@
 <template lang="pug">
   .u-table.table-responsive(:style="styleObject.div")
+    .loading.d-flex.align-items-center.justify-content-center(v-if="finishLoading === false")
+      i.fa.fa-spin.fa-refresh.fa-5x
     table.mb-4.table.table-bordered.table-striped.text-center
       thead(:style="styleObject.thead")
         tr
@@ -226,5 +228,16 @@
 <style lang="scss" scoped>
   .sortable {
     cursor: pointer;
+  }
+
+  .loading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // background-color: black;
+    // opacity: .3;
+    z-index: 3;
   }
 </style>
