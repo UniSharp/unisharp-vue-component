@@ -50,7 +50,7 @@
       filter: {},
       items: {
         type: Array,
-        default: []
+        default: () => []
       },
       provider: {
         default: null
