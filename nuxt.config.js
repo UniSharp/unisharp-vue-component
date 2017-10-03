@@ -49,6 +49,7 @@ module.exports = {
           syntax: 'scss'
         }))
       }
+
       config.resolve.alias['vue'] = 'vue/dist/vue.common'
     },
     vendor: ['./']

@@ -1,13 +1,24 @@
 import _ from 'lodash'
-import config from '~/config'
 
 class Menu {
-  constructor () {
-    this.items = this.getItems(config.menu)
+  constructor (menu) {
+    this.menu = menu
   }
 
-  getItems (menu) {
+  getCurrent ($route) {
+    return _.find(Menu.normalize(this.menu), { to: $route.matched[0].path })
+  }
+
+  static isActive (item, $route) {
+    return _.find(Menu.normalize(item), { to: $route.matched[0].path })
+  }
+
+  static normalize (menu) {
     let result = []
+
+    if (!_.isArray(menu)) {
+      menu = [menu]
+    }
 
     menu.forEach(item => {
       if (item.to) {
@@ -19,18 +30,12 @@ class Menu {
       }
 
       if (item.children) {
-        result = result.concat(this.getItems(item.children))
+        result = result.concat(Menu.normalize(item.children))
       }
     })
 
     return result
   }
-
-  active () {
-    return _.find(this.items, { to: location.pathname })
-  }
 }
 
-const menu = new Menu()
-
-export default menu
+export default Menu

@@ -1,7 +1,7 @@
 <template lang="pug">
   nav.u-sidenav
     ul.list-unstyled.mb-0
-      li(:class="{ active: isActive(item) || active === index }", :key="index", v-for="(item, index) in list")
+      li(:class="{ active: active === index }", :key="index", v-for="(item, index) in list")
         nuxt-link(:to="item.to", v-if="item.to !== undefined")
           i.fa(:class="`fa-${item.icon}`", aria-hidden="true")
           span {{ item.title }}
@@ -10,13 +10,14 @@
           span.mr-auto {{ item.title }}
           i.fa.fa-angle-left(aria-hidden="true")
         ul.list-unstyled.u-sidenav-nested(:style="`height: ${35 * item.children.length - 1}px`", v-if="item.children")
-          li(:class="{ active: isActive(child) }", :key="index", v-for="(child, index) in item.children")
+          li(:class="{ active: Menu.isActive(child, $route) }", :key="index", v-for="(child, index) in item.children")
             nuxt-link(:to="child.to") {{ child.title }}
 </template>
 
 <script>
   import _ from 'lodash'
   import config from '~/config'
+  import Menu from '../plugins/Menu'
 
   export default {
     data () {
@@ -26,7 +27,8 @@
     },
     computed: {
       _: () => _,
-      list: () => config.menu
+      list: () => config.menu,
+      Menu: () => Menu
     },
     methods: {
       isActive (item) {
@@ -34,13 +36,13 @@
       }
     },
     created () {
-      for (let i = 0; i < this.list.length; i++) {
-        if (_.find(this.list[i].children, child => this.isActive(child))) {
+      _.each(this.list, (item, i) => {
+        if (Menu.isActive(item, this.$route)) {
           this.active = i
 
-          break
+          return false
         }
-      }
+      })
     }
   }
 </script>

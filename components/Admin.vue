@@ -19,7 +19,7 @@
               i.fa.fa-sign-out.mr-2(aria-hidden="true")
               span 登出
         header.px-4.bg-white.d-flex.align-items-center
-          h1.mb-0.mr-auto {{ title }}
+          h1.mb-0.mr-auto {{ title || defaultTitle }}
           slot(name="functions")
         main.p-4
           slot
@@ -27,17 +27,20 @@
 
 <script>
   import config from '~/config'
-  import menu from '../plugins/menu'
+  import Menu from '../plugins/Menu'
 
   export default {
     props: {
       title: {
-        type: String,
-        default: () => {
-          let active = menu.active()
+        type: String
+      }
+    },
+    computed: {
+      defaultTitle () {
+        let menu = new Menu(config.menu)
+        let current = menu.getCurrent(this.$route)
 
-          return active ? active.title : config.index.title
-        }
+        return current ? current.title : config.index.title
       }
     }
   }
