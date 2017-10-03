@@ -181,10 +181,16 @@
       },
       getCeilStyle (key) {
         if (this.height) {
-          return {
-            width: this.fields[key].width || '200px',
+          var style = {
             'white-space': 'nowrap'
           }
+          if (this.fields[key].width) {
+            style['width'] = this.fields[key].width
+          } else {
+            style['max-width'] = '200px'
+            style['min-width'] = '200px'
+          }
+          return style
         }
 
         return null
