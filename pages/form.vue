@@ -1,5 +1,7 @@
 <template lang="pug">
   u-admin
+    .section
+      u-alert(type='success') 成功
     .card
       .card-header Form Components
       .card-body

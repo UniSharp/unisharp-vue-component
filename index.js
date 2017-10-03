@@ -1,4 +1,5 @@
 import UAdmin from './components/Admin'
+import UAlert from './components/Alert'
 import UBreadcrumb from './components/Breadcrumb'
 import UCheckbox from './components/Checkbox'
 import UDatetime from './components/Datetime'
@@ -21,6 +22,7 @@ import UWelcome from './components/Welcome'
 
 var components = {
   UAdmin,
+  UAlert,
   UBreadcrumb,
   UCheckbox,
   UDatetime,
