@@ -1,7 +1,7 @@
 <template lang="pug">
   .alert.alert-success(role="alert")
     slot
-      | {{defautl}}
+      | {{message}}
 </template>
 <script>
   export default {
@@ -14,7 +14,7 @@
       className () {
         return `alert-${this.type}`
       },
-      default () {
+      message () {
         switch (this.type) {
           case 'success':
             return 'Success'
