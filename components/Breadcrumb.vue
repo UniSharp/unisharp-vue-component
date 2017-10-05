@@ -12,7 +12,7 @@
 <script>
   import _ from 'lodash'
   import config from '~/config'
-  import Menu from '../plugins/Menu'
+  import Menu from '../plugins/menu'
 
   export default {
     props: {
