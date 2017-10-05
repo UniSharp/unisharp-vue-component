@@ -8,17 +8,18 @@
       ) {{ _.find(normalize(tags), { value: s }).text }}
         i.fa.fa-times.ml-2
     u-select.col.p-0(
-        v-model="select",
-        :options="normalizedTags",
-        :search.sync="search",
-        @keydown.delete="removeLast",
-        @insert="onInsert",
-        @change="onSelect",
-        ref="select",
-        :placeholder="placeholder",
-        no-placeholder,
-        filterable
-        :empty="search && (!!this.insertable || this.insertable === '') ? `New Tag: ${search}` : ''"
+      v-model="select",
+      :options="normalizedTags",
+      :search.sync="search",
+      @keydown.delete="removeLast",
+      @insert="onInsert",
+      @change="onSelect",
+      ref="select",
+      :placeholder="placeholder",
+      no-placeholder,
+      filterable
+      :empty="search && (!!this.insertable || this.insertable === '') ? `New Tag: ${search}` : ''",
+      :disabled="tags.length < 1 && search.length < 1"
     )
     u-modal(ref="modal", size="sm")
       span(slot="title") Error

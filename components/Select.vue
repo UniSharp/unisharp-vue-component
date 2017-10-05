@@ -2,7 +2,8 @@
   u-dropdown.u-select(
     :class="{ filterable: !!this.filterable || this.filterable === '' }",
     @show="onDropdownShow",
-    ref="dropdown"
+    ref="dropdown",
+    :disabled="disabled"
   )
     input.w-100.p-0.u-select-filter(
       slot="toggle",
@@ -66,6 +67,10 @@
       search: {
         type: String,
         default: ''
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {

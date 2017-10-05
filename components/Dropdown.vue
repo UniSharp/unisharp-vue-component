@@ -1,10 +1,10 @@
 <template lang="pug">
   .u-dropdown(:class="{ active }")
-    .u-dropdown-backdrop(v-if="active", @click="hide")
+    .u-dropdown-backdrop(v-if="active && !disabled", @click="hide")
     .u-dropdown-toggle(@click.prevent="show")
       slot(name="toggle")
     transition(name="fade")
-      slot(v-if="active")
+      slot(v-if="active && !disabled")
 </template>
 
 <script>
@@ -17,10 +17,6 @@
     },
     methods: {
       show () {
-        if (!!this.disabled || this.disabled === '') {
-          return
-        }
-
         this.active = true
 
         this.$emit('show')
