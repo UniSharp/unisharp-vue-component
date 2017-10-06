@@ -142,19 +142,17 @@
       },
       filtered () {
         let items = this.filter ? _.filter(this.indexed, this.filter) : this.indexed
-        this.currentPage = 1
         return items
       },
       sorted () {
         return _.orderBy(this.filtered, [this.order], [this.desc ? 'desc' : 'asc'])
       },
-      sliced () {
-        let start = (this.currentPage - 1) * this.perPage
-        let end = start + this.perPage
-        return this.perPage ? this.sorted.slice(start, end) : this.sorted
+      paged () {
+        // Pagination is done in provider. Nothing to do here.
+        return this.sorted
       },
       rows () {
-        return this.sliced
+        return this.paged
       },
       styleObject () {
         let div = {}

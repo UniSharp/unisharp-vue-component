@@ -12,13 +12,14 @@
       .btn.btn-square.btn-flat.d-sm-none(slot="functions", @click.prevent.stop="$refs.modal.show()"): i.fa.fa-search
     u-table(
       ref="table",
-      :items="items",
       :fields="fields",
       :per-page="perPage",
+      :totalRows="totalRows",
       :sortable="true",
       order-by="last_name"
       selection,
       :filter="filter",
+      :provider="provider"
     )
       template(slot="expand", scope="row")
         tr
@@ -44,6 +45,7 @@
 
 <script>
   import axios from 'axios'
+  import MockAdapter from 'axios-mock-adapter'
 
   let items = [
     { age: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
@@ -73,7 +75,6 @@
     },
     data () {
       return {
-        items: items,
         filterText: '',
         fields: {
           last_name: {
@@ -97,12 +98,29 @@
       }
     },
     methods: {
-      provider (context) {
-        return new Promise((resolve, reject) => {
-          axios.get('https://beta.json-generator.com/api/json/get/4yxjYQ79X').then(res => {
-            resolve(res.data)
-          })
+      setAxiosMock () {
+        let mock = new MockAdapter(axios)
+
+        mock.onAny().reply(config => {
+          let params = config.url.match(/page=(\d+)&perPage=(\d+)/)
+          let currentPage = parseInt(params[1])
+          let perPage = parseInt(params[2])
+          let start = (currentPage - 1) * perPage
+          let end = start + perPage
+          return [
+            200,
+            {
+              total: items.length,
+              data: items.slice(start, end)
+            }
+          ]
         })
+      },
+      async provider ({currentPage, perPage}) {
+        this.setAxiosMock()
+        let {data} = await axios.get(`/faker?page=${currentPage}&perPage=${perPage}`)
+        this.totalRows = data.total
+        return data.data
       },
       showCheckItems () {
         alert(JSON.stringify(this.$refs.table.showCheckItems()))
