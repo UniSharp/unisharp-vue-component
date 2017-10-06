@@ -95,15 +95,13 @@
       if (isNaN(Date.parse(this.value))) {
         this.selected = this.clone(this.current)
       } else {
-        let spliterIndex = this.value.indexOf(' ')
-        let date = this.value.substr(0, spliterIndex).split('-')
-        let time = this.value.substr(spliterIndex + 1).split(':')
+        let dateTime = moment(this.value)
         this.selected = {
-          year: parseInt(date[0]),
-          month: parseInt(date[1]),
-          day: parseInt(date[2]),
-          hour: parseInt(time[0]),
-          minute: parseInt(time[1])
+          year: dateTime.format('Y'),
+          month: dateTime.format('M'),
+          day: dateTime.format('D'),
+          hour: dateTime.format('H'),
+          minute: dateTime.format('m')
         }
       }
 
