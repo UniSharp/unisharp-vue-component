@@ -183,12 +183,12 @@
         this.checks = Array.from(sets)
       },
       getCeilStyle (key) {
-        var style = {
-          'white-space': 'nowrap'
-        }
+        var style = {}
+
         if (this.fields[key] && this.fields[key].width) {
           style['width'] = this.fields[key].width
         }
+
         return style
       },
       showCheckItems () {
