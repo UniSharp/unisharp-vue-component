@@ -14,7 +14,7 @@
       @click="$emit('click')"
     )
     span.custom-control-indicator
-    span.custom-control-description
+    span.custom-control-description(v-if="$slots.default")
       slot
 </template>
 
