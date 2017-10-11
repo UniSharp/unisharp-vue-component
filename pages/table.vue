@@ -18,8 +18,7 @@
       :sortable="true",
       order-by="last_name"
       selection,
-      :provider="provider",
-      :rows="3"
+      :provider="provider"
     )
       template(slot="expand", scope="row")
         tr
@@ -30,7 +29,10 @@
         button.btn.btn-info.btn-sm.mr-1(type="button", @click.stop="row.toggle()")
           i.fa.fa-angle-down(aria-hidden="true").mr-2
           | 展開
-        button.btn.btn-primary.btn-sm(type="button", @click.stop="showClickButton(data.value.age)")
+        button.btn.btn-danger.btn-sm.mr-1(type="button", @click.stop="remove(row.value.id)")
+          i.fa.fa-trash(aria-hidden="true").mr-2
+          | 刪除
+        button.btn.btn-primary.btn-sm(type="button", @click.stop="showClickButton(row.value.age)")
           i.fa.fa-bell(aria-hidden="true").mr-2
           | alert
 
@@ -48,23 +50,23 @@
   import MockAdapter from 'axios-mock-adapter'
 
   let items = [
-    { age: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
-    { age: 2, first_name: 'Larsen', last_name: 'Shaw' },
-    { age: 3, first_name: 'Geneva', last_name: 'Wilson' },
-    { age: 4, first_name: 'Jami', last_name: 'Carney' },
-    { age: 5, first_name: 'Essie', last_name: 'Dunlap' },
-    { age: 6, first_name: 'Thor', last_name: 'Macdonald' },
-    { age: 7, first_name: 'Mitzi', last_name: 'Navarro' },
-    { age: 8, first_name: 'Genevive', last_name: 'Wilson' },
-    { age: 9, first_name: 'John', last_name: 'Carney' },
-    { age: 10, first_name: 'Dick', last_name: 'Dunlap' },
-    { age: 11, first_name: 'Dickerson', last_name: 'Macdonald' },
-    { age: 12, first_name: 'Larsen', last_name: 'Shaw' },
-    { age: 13, first_name: 'Genevive', last_name: 'Wilson' },
-    { age: 14, first_name: 'John', last_name: 'Carney' },
-    { age: 15, first_name: 'Dick', last_name: 'Dunlap' },
-    { age: 16, first_name: 'Dickerson', last_name: 'Macdonald' },
-    { age: 17, first_name: 'Larsen', last_name: 'Shaw' }
+    { id: 1, age: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
+    { id: 2, age: 2, first_name: 'Larsen', last_name: 'Shaw' },
+    { id: 3, age: 3, first_name: 'Geneva', last_name: 'Wilson' },
+    { id: 4, age: 4, first_name: 'Jami', last_name: 'Carney' },
+    { id: 5, age: 5, first_name: 'Essie', last_name: 'Dunlap' },
+    { id: 6, age: 6, first_name: 'Thor', last_name: 'Macdonald' },
+    { id: 7, age: 7, first_name: 'Mitzi', last_name: 'Navarro' },
+    { id: 8, age: 8, first_name: 'Genevive', last_name: 'Wilson' },
+    { id: 9, age: 9, first_name: 'John', last_name: 'Carney' },
+    { id: 10, age: 10, first_name: 'Dick', last_name: 'Dunlap' },
+    { id: 11, age: 11, first_name: 'Dickerson', last_name: 'Macdonald' },
+    { id: 12, age: 12, first_name: 'Larsen', last_name: 'Shaw' },
+    { id: 13, age: 13, first_name: 'Genevive', last_name: 'Wilson' },
+    { id: 14, age: 14, first_name: 'John', last_name: 'Carney' },
+    { id: 15, age: 15, first_name: 'Dick', last_name: 'Dunlap' },
+    { id: 16, age: 16, first_name: 'Dickerson', last_name: 'Macdonald' },
+    { id: 17, age: 17, first_name: 'Larsen', last_name: 'Shaw' }
   ]
 
   export default {
@@ -118,7 +120,7 @@
       },
       async provider ({currentPage, perPage}) {
         this.setAxiosMock()
-        let {data} = await axios.get(`/faker?page=${currentPage}&perPage=${perPage}`)
+        let { data } = await axios.get(`/faker?page=${currentPage}&perPage=${perPage}`)
         this.totalRows = data.total
         return data.data
       },
@@ -139,6 +141,10 @@
         }
 
         return true
+      },
+      remove (id) {
+        items = items.filter(v => v.id !== id)
+        this.$refs.table.refresh()
       }
 
     }

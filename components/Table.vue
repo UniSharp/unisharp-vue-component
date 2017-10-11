@@ -105,7 +105,8 @@
         order: this.orderBy,
         desc: this.orderDesc,
         currentPage: 1,
-        toggles: []
+        toggles: [],
+        hash: _.uniqueId()
       }
     },
     asyncComputed: {
@@ -118,7 +119,8 @@
             perPage: this.perPage,
             filter: this.filter,
             orderBy: this.order,
-            orderDesc: this.desc
+            orderDesc: this.desc,
+            hash: this.hash
           }
 
           if (this.provider) {
@@ -216,6 +218,9 @@
           this.cleanToggles()
           Vue.set(this.toggles, i, toggle)
         }
+      },
+      refresh () {
+        this.hash = _.uniqueId()
       }
     }
   }
