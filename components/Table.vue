@@ -5,26 +5,22 @@
     table.mb-4.table.table-bordered.table-striped.text-center
       thead(:class="{ 'float-grid': rows }")
         tr
-          th(:style="getCeilStyle(-1)", v-if="selection")
+          th(v-if="selection")
             u-checkbox(@change="changeCheckAll", :checked="allChecked")
           th(
             :class="{ sortable }",
             v-for="(value, key) in fields",
-            :style="getCeilStyle(key)",
             @click="sortColumn(key)"
           )
             | {{ value.label }}
             i.fa.ml-2(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="sortable && order === key")
             i.fa.ml-2(:class="{'fa-sort': true}", v-else-if="sortable")
-      tbody(:class="{ 'float-grid': rows }", :style="heightWithRows")
+      tbody(:class="{ 'float-grid': rows }", :style="finalRows")
         template(v-for="(item, i) in finalRows")
           tr(:key="item.uIndex")
-            td(:style="getCeilStyle(-1)", v-if="selection")
+            td(v-if="selection")
               u-checkbox(v-model="checks", :value="item.uIndex")
-            td(
-              v-for="(value, key) in fields",
-              :style="getCeilStyle(key)"
-            )
+            td(v-for="(value, key) in fields")
               slot(:index="i", :name="key", :value="item", :toggle="toggle(i)")
                 | {{ item[key] }}
           slot(name="expand", :value="item", :index="i", :toggle="toggle(i)", v-if="!!toggles[i]")
@@ -160,20 +156,6 @@
       },
       finalRows () {
         return this.paged
-      },
-      heightWithRows () {
-        if (this.rows) {
-          if (this.finalRows.length >= this.rows) {
-            var rowsToShow = this.rows
-            if (this.finalRows.length > this.rows) {
-              rowsToShow += 0.5
-            }
-            return {
-              height: rowsToShow * this.pxPerRow + 'px',
-              overflow: 'auto'
-            }
-          }
-        }
       }
     },
     methods: {
@@ -181,15 +163,6 @@
         let sets = new Set(this.checks)
         this.finalRows.forEach((item) => all ? sets.add(item.uIndex) : sets.delete(item.uIndex))
         this.checks = Array.from(sets)
-      },
-      getCeilStyle (key) {
-        var style = {}
-
-        if (this.fields[key] && this.fields[key].width) {
-          style['width'] = this.fields[key].width
-        }
-
-        return style
       },
       showCheckItems () {
         let checked = _.intersection(this.checks, this.finalRows.map(v => v.uIndex))
