@@ -1,10 +1,12 @@
 <template lang="pug">
-  .u-switch(@click="toggleValue", :class="{ disabled: !!disabled || disabled === '' }")
-    input.d-none(type="checkbox", :value="value", :checked="checked")
-    .u-switch-control(:class="{ off: !checked }")
-      .u-switch-control-on {{ onText }}
-      .u-switch-control-toggle
-      .u-switch-control-off {{ offText }}
+  .u-switch
+    .switch(@click="toggleValue", :class="{ disabled: !!disabled || disabled === '', 'is-invalid': !!error }")
+      input.d-none(type="checkbox", :value="value", :checked="checked")
+      .u-switch-control(:class="{ off: !checked }")
+        .u-switch-control-on {{ onText }}
+        .u-switch-control-toggle
+        .u-switch-control-off {{ offText }}
+    .invalid-feedback(v-if="error") {{ error }}
 </template>
 
 <script>
@@ -31,6 +33,9 @@
       },
       offText: {
         default: 'OFF'
+      },
+      error: {
+        type: String
       }
     },
     methods: {
@@ -53,7 +58,7 @@
   $switch-height: 2.375rem;
   $switch-block-width: 3.75rem;
 
-  .u-switch {
+  .switch {
     @include border-radius($input-border-radius);
 
     height: $switch-height;
@@ -65,6 +70,15 @@
 
     &.disabled {
       cursor: not-allowed;
+    }
+
+    &.is-invalid {
+      box-shadow: none;
+      border-color: #eb6886;
+
+      + .invalid-feedback {
+        display: block;
+      }
     }
   }
 
