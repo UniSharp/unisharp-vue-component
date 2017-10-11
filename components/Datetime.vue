@@ -27,7 +27,7 @@
           li.nav-item(v-for='item in offsetDays'): a.nav-link.unclickable
           li.nav-item(v-for='monthDay in monthDays'): a.nav-link(@click='setDate', :class="{ today: isToday(monthDay.date), selected: monthDay.selected }") {{ monthDay.date }}
         ul.nav.nav-pills.my-3(v-if='shouldPickTime')
-          li.nav-item: a.nav-link.unclickable: i.fa.fa-clock-o
+          li.nav-item: a.nav-link.text-center(@click='resetMinute'): i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.hour }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ selected.minute }}
@@ -160,26 +160,21 @@
         let firstDay = this.monthDays[0]
         return new Array(this.weekdays.indexOf(firstDay.weekday))
       },
-      isCurrentMonth () {
+      isSelectedMonth () {
         return this.picker.month === this.selected.month && this.picker.year === this.selected.year
       },
-      timeUnitRange () {
-        return this.scrollables[this.timeUnitName]
-      },
       shouldPick () {
-        if (this.mode === 'time') {
-          return 'time'
-        } else if (this.mode === 'date') {
-          return 'date'
+        if (this.mode === 'time' || this.mode === 'date') {
+          return this.mode
         } else {
           return 'datetime'
         }
       },
       shouldPickDate () {
-        return this.shouldPick === 'datetime' || this.shouldPick === 'date'
+        return this.shouldPick.indexOf('date') !== -1
       },
       shouldPickTime () {
-        return this.shouldPick === 'datetime' || this.shouldPick === 'time'
+        return this.shouldPick.indexOf('time') !== -1
       },
       inputType () {
         return {
@@ -208,7 +203,7 @@
           result.push({
             date: today,
             weekday: this.weekdays[date.getDay()],
-            selected: this.isCurrentMonth && this.selected.day === today
+            selected: this.isSelectedMonth && this.selected.day === today
           })
           date.setDate(today + 1)
         }
@@ -238,7 +233,7 @@
       resetMinute () {
         this.selected.hour = moment().hour()
         this.selected.minute = moment().minute()
-        this.picker.hour = this.selected.hour
+        this.picker.hour = this.selected.hour % this.scrollables.hour
         this.picker.minute = this.selected.minute
       },
       setDate (e) {
@@ -251,7 +246,7 @@
         if (this.timeUnitName === 'hour') {
           this.selected.hour = parseInt(timeUnit) + (this.afterNoon + 0) * 12
         } else if (this.timeUnitName === 'minute') {
-          this.selected[this.timeUnitName] = timeUnit
+          this.selected.minute = timeUnit
         }
 
         this.picker[this.timeUnitName] = timeUnit
@@ -263,7 +258,7 @@
           this.picker.year === this.current.year)
       },
       updateSelectedDay () {
-        this.monthDays[this.selected.day - 1].selected = this.isCurrentMonth
+        this.monthDays[this.selected.day - 1].selected = this.isSelectedMonth
       },
       prependZero (str) {
         return ('00' + str).slice(-2)
@@ -350,10 +345,7 @@
     justify-content: center;
 
     &:hover:not(.unclickable) {
-      cursor: pointer;
-      background-color: $highlight-color;
-
-      @include color-yiq($highlight-color);
+      border: $border-width solid $highlight-color;
     }
 
     &.today, &.today:hover {
@@ -362,7 +354,9 @@
     }
 
     &.selected {
-      border: $border-width solid $highlight-color;
+      background-color: $highlight-color;
+
+      @include color-yiq($highlight-color);
     }
 
     &.scrollable {

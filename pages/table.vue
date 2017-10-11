@@ -19,7 +19,8 @@
       order-by="last_name"
       selection,
       :filter="filter",
-      :provider="provider"
+      :provider="provider",
+      @filtered="onFiltered"
     )
       template(slot="expand", scope="row")
         tr

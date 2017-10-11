@@ -1,9 +1,11 @@
 <template lang="pug">
   .u-table.table-responsive(:style="styleObject.div")
+    .loading.d-flex.align-items-center.justify-content-center(v-if="finishLoading === false")
+      i.fa.fa-spin.fa-refresh.fa-5x
     table.mb-4.table.table-bordered.table-striped.text-center
       thead(:style="styleObject.thead")
         tr
-          th(v-if="selection", :style="getCheckboxStyle()")
+          th(v-if="selection")
             u-checkbox(@change="changeCheckAll", :checked="allChecked")
           th(
             :class="{ sortable }",
@@ -17,7 +19,7 @@
       tbody(:style="styleObject.tbody")
         template(v-for="(item, i) in rows")
           tr(:key="item.uIndex")
-            td(v-if="selection", :style="getCheckboxStyle()")
+            td(v-if="selection")
               u-checkbox(v-model="checks", :value="item.uIndex")
             td(
               v-for="(value, key) in fields",
@@ -68,10 +70,6 @@
         default: null
       },
       height: {
-        type: Number,
-        default: null
-      },
-      width: {
         type: Number,
         default: null
       },
@@ -159,16 +157,6 @@
         let thead = {}
         let tbody = {}
 
-        if (this.width) {
-          div = {
-            width: `${this.width}px`,
-            'overflow-x': 'scroll',
-            'margin-left': this.fields[Object.keys(this.fields)[0]].width,
-            'overflow-y': 'visible',
-            padding: 0
-          }
-        }
-
         if (this.height) {
           thead = {
             float: 'left',
@@ -191,29 +179,18 @@
         this.rows.forEach((item) => all ? sets.add(item.uIndex) : sets.delete(item.uIndex))
         this.checks = Array.from(sets)
       },
-      getCheckboxStyle () {
-        if (this.width) {
-          return {
-            position: 'absolute',
-            left: 0,
-            'border-bottom': 0
-          }
-        }
-      },
       getCeilStyle (key) {
-        if (this.width && key === Object.keys(this.fields)[0]) {
-          return {
-            position: 'absolute',
-            width: this.fields[key].width,
-            left: this.selection ? '64px' : 0
-          }
-        }
-
-        if (this.height || this.width) {
-          return {
-            width: this.fields[key].width || '200px',
+        if (this.height) {
+          var style = {
             'white-space': 'nowrap'
           }
+          if (this.fields[key].width) {
+            style['width'] = this.fields[key].width
+          } else {
+            style['max-width'] = '200px'
+            style['min-width'] = '200px'
+          }
+          return style
         }
 
         return null
@@ -249,5 +226,16 @@
 <style lang="scss" scoped>
   .sortable {
     cursor: pointer;
+  }
+
+  .loading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // background-color: black;
+    // opacity: .3;
+    z-index: 3;
   }
 </style>
