@@ -19,7 +19,7 @@
       order-by="last_name"
       selection,
       :provider="provider",
-      :height="3"
+      :rows="3"
     )
       template(slot="expand", scope="row")
         tr

@@ -3,7 +3,7 @@
     .loading.d-flex.align-items-center.justify-content-center(v-if="isLoading")
       i.fa.fa-spin.fa-refresh.fa-5x
     table.mb-4.table.table-bordered.table-striped.text-center
-      thead(:class="{ 'float-grid': height }")
+      thead(:class="{ 'float-grid': rows }")
         tr
           th(:style="getCeilStyle(-1)", v-if="selection")
             u-checkbox(@change="changeCheckAll", :checked="allChecked")
@@ -16,8 +16,8 @@
             | {{ value.label }}
             i.fa.ml-2(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="sortable && order === key")
             i.fa.ml-2(:class="{'fa-sort': true}", v-else-if="sortable")
-      tbody(:class="{ 'float-grid': height }", :style="heightWithRows")
-        template(v-for="(item, i) in rows")
+      tbody(:class="{ 'float-grid': rows }", :style="heightWithRows")
+        template(v-for="(item, i) in finalRows")
           tr(:key="item.uIndex")
             td(:style="getCeilStyle(-1)", v-if="selection")
               u-checkbox(v-model="checks", :value="item.uIndex")
@@ -69,7 +69,7 @@
         type: Number,
         default: null
       },
-      height: {
+      rows: {
         type: Number,
         default: null
       },
@@ -138,7 +138,7 @@
     },
     computed: {
       allChecked () {
-        return _.difference(this.rows.map(v => v.uIndex), this.checks).length === 0
+        return _.difference(this.finalRows.map(v => v.uIndex), this.checks).length === 0
       },
       indexed () {
         return this.pured.map((item, index) => {
@@ -157,14 +157,14 @@
         // Pagination is done in provider. Nothing to do here.
         return this.sorted
       },
-      rows () {
+      finalRows () {
         return this.paged
       },
       heightWithRows () {
-        if (this.height) {
-          if (this.rows.length >= this.height) {
-            var rowsToShow = this.height
-            if (this.rows.length > this.height) {
+        if (this.rows) {
+          if (this.finalRows.length >= this.rows) {
+            var rowsToShow = this.rows
+            if (this.finalRows.length > this.rows) {
               rowsToShow += 0.5
             }
             return {
@@ -178,7 +178,7 @@
     methods: {
       changeCheckAll (all) {
         let sets = new Set(this.checks)
-        this.rows.forEach((item) => all ? sets.add(item.uIndex) : sets.delete(item.uIndex))
+        this.finalRows.forEach((item) => all ? sets.add(item.uIndex) : sets.delete(item.uIndex))
         this.checks = Array.from(sets)
       },
       getCeilStyle (key) {
@@ -194,8 +194,8 @@
         return style
       },
       showCheckItems () {
-        let checked = _.intersection(this.checks, this.rows.map(v => v.uIndex))
-        return this.rows.filter((item, index) => {
+        let checked = _.intersection(this.checks, this.finalRows.map(v => v.uIndex))
+        return this.finalRows.filter((item, index) => {
           return checked.includes(item.uIndex)
         })
       },
