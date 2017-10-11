@@ -20,6 +20,7 @@ import UTable from './components/Table'
 import UUploader from './components/Uploader'
 import UUserDropdown from './components/UserDropdown'
 import UWelcome from './components/Welcome'
+import UInput from './components/Input'
 
 import VFocus from './directives/Focus'
 
@@ -45,7 +46,8 @@ let components = {
   UTable,
   UUploader,
   UUserDropdown,
-  UWelcome
+  UWelcome,
+  UInput
 }
 
 let directives = {
