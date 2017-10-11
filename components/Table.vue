@@ -1,6 +1,6 @@
 <template lang="pug">
-  .u-table.table-responsive(:style="styleObject.div")
-    .loading.d-flex.align-items-center.justify-content-center(v-if="finishLoading === false")
+  .u-table.table-responsive
+    .loading.d-flex.align-items-center.justify-content-center(v-if="isLoading")
       i.fa.fa-spin.fa-refresh.fa-5x
     table.mb-4.table.table-bordered.table-striped.text-center
       thead(:style="styleObject.thead")
@@ -99,6 +99,7 @@
     },
     data () {
       return {
+        isLoading: true,
         checks: [],
         order: this.orderBy,
         desc: this.orderDesc,
@@ -109,6 +110,8 @@
     asyncComputed: {
       pured: {
         get () {
+          this.isLoading = true
+
           let info = {
             currentPage: this.currentPage,
             perPage: this.perPage,
@@ -119,10 +122,14 @@
 
           if (this.provider) {
             if (this.provider.hasOwnProperty('then')) {
-              return this.provider(info)
+              return this.provider(info).then(() => {
+                this.isLoading = false
+              })
             }
+            this.isLoading = false
             return Promise.resolve(this.provider(info))
           }
+          this.isLoading = false
           return Promise.resolve(this.items)
         },
         default: []
