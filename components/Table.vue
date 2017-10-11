@@ -149,8 +149,7 @@
         })
       },
       filtered () {
-        let items = this.filter ? _.filter(this.indexed, this.filter) : this.indexed
-        return items
+        return this.filter ? _.filter(this.indexed, this.filter) : this.indexed
       },
       sorted () {
         return _.orderBy(this.filtered, [this.order], [this.desc ? 'desc' : 'asc'])
@@ -189,9 +188,6 @@
         }
         if (this.fields[key] && this.fields[key].width) {
           style['width'] = this.fields[key].width
-        } else {
-          style['max-width'] = '200px'
-          style['min-width'] = '200px'
         }
         return style
       },
