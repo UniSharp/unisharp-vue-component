@@ -469,7 +469,7 @@ $custom-radio-indicator-icon-checked: str-replace(url("data:image/svg+xml;charse
 
 // Form validation
 // $form-feedback-valid-color: theme-color("success");
-// $form-feedback-invalid-color: theme-color("danger");
+$form-feedback-invalid-color: theme-color("danger");
 
 
 // Dropdowns

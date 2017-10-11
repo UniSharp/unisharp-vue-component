@@ -1,36 +1,41 @@
 <template lang="pug">
-  u-dropdown.u-select(
-    :class="{ filterable: !!this.filterable || this.filterable === '' }",
-    @show="onDropdownShow",
-    ref="dropdown",
-    :disabled="disabled"
-  )
-    input.w-100.p-0.u-select-filter(
-      slot="toggle",
-      v-model="filter",
-      ref="filter",
-      v-if="!!this.filterable || this.filterable === ''",
-      :placeholder="placeholder",
-      @keydown="onKeydown",
-      @focus="$refs.dropdown.show()",
-      @compositionstart="handleComposition(isComposition = true)",
-      @compositionend="handleComposition(isComposition = false)"
+  .u-select
+    u-dropdown(
+      :class="{ filterable }",
+      @show="onDropdownShow",
+      ref="dropdown",
+      :disabled="disabled"
     )
-    .u-select-current.form-control(slot="toggle", :class="{ placeholder: current === placeholder }", v-else) {{ current }}
-    .dropdown-menu.u-select-options(ref="menu")
-      .u-select-options-wrapper(v-if="filteredOptions.length")
-        a.dropdown-item(
-          @mouseenter="hover = key",
-          @click.prevent.stop="select(option.value)",
-          :class="{ hover: hover == key, disabled: option.disabled }",
-          v-for="(option, key) in filteredOptions",
-          :key="key",
-          ref="options"
-        ) {{ option.text }}
-      .u-select-options-wrapper(v-else)
-        a.dropdown-item
-          | {{ empty }}
-
+      input.w-100.p-0.u-select-filter(
+        slot="toggle",
+        v-model="filter",
+        ref="filter",
+        v-if="filterable",
+        :placeholder="placeholder",
+        @keydown="onKeydown",
+        @focus="$refs.dropdown.show()",
+        @compositionstart="handleComposition(isComposition = true)",
+        @compositionend="handleComposition(isComposition = false)"
+      )
+      .u-select-current.form-control(
+        slot="toggle",
+        :class="{ placeholder: current === placeholder, 'is-invalid': !!error }",
+        v-else
+      ) {{ current }}
+      .dropdown-menu.u-select-options(ref="menu")
+        .u-select-options-wrapper(v-if="filteredOptions.length")
+          a.dropdown-item(
+            @mouseenter="hover = key",
+            @click.prevent.stop="select(option.value)",
+            :class="{ hover: hover == key, disabled: option.disabled }",
+            v-for="(option, key) in filteredOptions",
+            :key="key",
+            ref="options"
+          ) {{ option.text }}
+        .u-select-options-wrapper(v-else)
+          a.dropdown-item
+            | {{ empty }}
+    .invalid-feedback(v-if="error") {{ error }}
 </template>
 
 <script>
@@ -57,10 +62,10 @@
         required: true
       },
       filterable: {
-        default: false
+        type: Boolean
       },
       noPlaceholder: {
-        default: false
+        type: Boolean
       },
       empty: {
         type: String,
@@ -73,6 +78,9 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      error: {
+        type: String
       }
     },
     watch: {
@@ -113,7 +121,7 @@
           options = this.normalizedOptions
         }
 
-        if (!this.noPlaceholder && this.noPlaceholder !== '') {
+        if (!this.noPlaceholder) {
           options.unshift({ text: this.placeholder, value: null })
         }
 
@@ -149,7 +157,7 @@
       onDropdownShow () {
         this.hover = 0
 
-        if (!!this.filterable || this.filterable === '') {
+        if (this.filterable) {
           Vue.nextTick(() => this.$refs.filter.focus())
         }
       },
@@ -234,6 +242,16 @@
   .u-select {
     .u-select-options {
       max-height: ($font-size-base * $line-height-base + $dropdown-item-padding-y * 2) * $max-items + $dropdown-padding-y * 2;
+    }
+
+    .u-dropdown.active .u-select-current, .u-select-current:hover {
+      &.is-invalid {
+        border-color: $form-feedback-invalid-color !important;
+
+        &:hover {
+          box-shadow: $btn-invalid-box-shadow;
+        }
+      }
     }
   }
 </style>
