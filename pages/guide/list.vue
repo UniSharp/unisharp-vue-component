@@ -4,12 +4,10 @@
     button.btn.btn-primary.mb-4(@click.prevent) Others
     form.form-inline.d-none.d-sm-flex(slot="functions")
       u-select(v-model="filter", placeholder="Filter", :options="options")
-      .input-group
-        input.form-control(v-model="search", type="text", placeholder="Search", aria-label="Search")
-        span.input-group-btn
-          button.btn.btn-flat(type="button")
-            i.fa.fa-search.mr-2
-            | Search
+      input.form-control(v-model="search", type="text", placeholder="Search", aria-label="Search")
+      button.btn.btn-flat(type="button")
+        i.fa.fa-search.mr-2
+        | Search
     .btn.btn-square.btn-flat.d-sm-none(slot="functions", @click.prevent.stop="$refs.modal.show()"): i.fa.fa-search
     .table-responsive.mb-4
       table.table.table-bordered.table-striped.text-center
