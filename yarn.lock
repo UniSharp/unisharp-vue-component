@@ -5767,6 +5767,12 @@ ultron@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.1.0.tgz#b07a2e6a541a815fc6a34ccd4533baec307ca864"
 
+uni-notification@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/uni-notification/-/uni-notification-0.0.1.tgz#b1f16691dce8264b04856ec1cdeff4bc161485c6"
+  dependencies:
+    bootstrap v4.0.0-beta
+
 uniq@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
