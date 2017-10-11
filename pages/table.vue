@@ -18,9 +18,8 @@
       :sortable="true",
       order-by="last_name"
       selection,
-      :filter="filter",
       :provider="provider",
-      @filtered="onFiltered"
+      :height="3"
     )
       template(slot="expand", scope="row")
         tr

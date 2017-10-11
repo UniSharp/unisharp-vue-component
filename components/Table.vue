@@ -3,9 +3,9 @@
     .loading.d-flex.align-items-center.justify-content-center(v-if="isLoading")
       i.fa.fa-spin.fa-refresh.fa-5x
     table.mb-4.table.table-bordered.table-striped.text-center
-      thead(:style="styleObject.thead")
+      thead(:class="{ 'float-grid': height }")
         tr
-          th(v-if="selection")
+          th(:style="getCeilStyle(-1)", v-if="selection")
             u-checkbox(@change="changeCheckAll", :checked="allChecked")
           th(
             :class="{ sortable }",
@@ -16,10 +16,10 @@
             | {{ value.label }}
             i.fa.ml-2(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="sortable && order === key")
             i.fa.ml-2(:class="{'fa-sort': true}", v-else-if="sortable")
-      tbody(:style="styleObject.tbody")
+      tbody(:class="{ 'float-grid': height }", :style="heightWithRows")
         template(v-for="(item, i) in rows")
           tr(:key="item.uIndex")
-            td(v-if="selection")
+            td(:style="getCeilStyle(-1)", v-if="selection")
               u-checkbox(v-model="checks", :value="item.uIndex")
             td(
               v-for="(value, key) in fields",
@@ -100,6 +100,7 @@
     data () {
       return {
         isLoading: true,
+        pxPerRow: 60,
         checks: [],
         order: this.orderBy,
         desc: this.orderDesc,
@@ -159,25 +160,19 @@
       rows () {
         return this.paged
       },
-      styleObject () {
-        let div = {}
-        let thead = {}
-        let tbody = {}
-
+      heightWithRows () {
         if (this.height) {
-          thead = {
-            float: 'left',
-            width: '100%'
-          }
-          tbody = {
-            height: this.height + 'px',
-            overflow: 'auto',
-            float: 'left',
-            width: '100%'
+          if (this.rows.length >= this.height) {
+            var rowsToShow = this.height
+            if (this.rows.length > this.height) {
+              rowsToShow += 0.5
+            }
+            return {
+              height: rowsToShow * this.pxPerRow + 'px',
+              overflow: 'auto'
+            }
           }
         }
-
-        return {div, thead, tbody}
       }
     },
     methods: {
@@ -187,20 +182,16 @@
         this.checks = Array.from(sets)
       },
       getCeilStyle (key) {
-        if (this.height) {
-          var style = {
-            'white-space': 'nowrap'
-          }
-          if (this.fields[key].width) {
-            style['width'] = this.fields[key].width
-          } else {
-            style['max-width'] = '200px'
-            style['min-width'] = '200px'
-          }
-          return style
+        var style = {
+          'white-space': 'nowrap'
         }
-
-        return null
+        if (this.fields[key] && this.fields[key].width) {
+          style['width'] = this.fields[key].width
+        } else {
+          style['max-width'] = '200px'
+          style['min-width'] = '200px'
+        }
+        return style
       },
       showCheckItems () {
         let checked = _.intersection(this.checks, this.rows.map(v => v.uIndex))
@@ -244,5 +235,10 @@
     // background-color: black;
     // opacity: .3;
     z-index: 3;
+  }
+
+  .float-grid {
+    float: left;
+    width: 100%;
   }
 </style>
