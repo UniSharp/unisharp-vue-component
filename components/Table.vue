@@ -191,6 +191,7 @@
       },
       refresh () {
         this.hash = _.uniqueId()
+        this.checks.splice(0, this.checks.length)
       }
     }
   }
