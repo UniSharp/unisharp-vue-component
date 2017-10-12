@@ -1,5 +1,6 @@
 <template lang="pug">
   .u-admin.container-fluid
+    notifications
     .row
       u-sidebar.col.p-0(ref="sidebar")
         u-logo(slot="header")
