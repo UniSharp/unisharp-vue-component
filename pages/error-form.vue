@@ -43,7 +43,7 @@
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right Switch：
             .col-md-10
-              u-switch(name='switch', v-model='form.checked', @change='showSwitchValue', error="欄位必填")
+              u-switch(v-model='form.checked', @change='showSwitchValue', error="欄位必填")
           //- Date Time Picker
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right Date Time：
@@ -53,18 +53,18 @@
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right Textarea：
             .col-md-10
-             u-textarea(rows="5", v-model='form.email', error="欄位必填")
+             u-input(rows="5", v-model='form.email', placeholder="Enter email", error="欄位必填")
           //- Radio
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right
               span.title Radio Inline：
             .col-md-10
-              u-radio(name="food1", :options="foods", v-model="form.radio.value", error="欄位必填")
+              u-radio(:options="foods", v-model="form.radio.value", error="欄位必填")
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right
               span.title Radio Stacked：
             .col-md-10
-              u-radio(name="food2", :options="foods", stacked="true", v-model="form.radio.value", error="欄位必填")
+              u-radio(:options="foods", stacked="true", v-model="form.radio.value", error="欄位必填")
           //- Input Tag
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right
@@ -86,7 +86,7 @@
             label.col-md-2.col-form-label.text-sm-right
               span.title File Uploader：
             .col-md-10
-              u-uploader(name="uploader", :options="uploadOptions", v-model="files", error="欄位必填")
+              u-uploader(:options="uploadOptions", v-model="files", error="欄位必填")
           //- Button
           input.btn.btn-primary.mr-2(type="button", value="Submit")
           input.btn.btn-default(type="button", value="Reset")
