@@ -1,7 +1,8 @@
 <template lang="pug">
-  nav.u-pagination.d-flex.align-items-center(aria-label="Page navigation")
-    p.mb-0.mr-auto {{ totalRows.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') }} results
-    ul.pagination.mb-0
+  nav.u-pagination.d-flex.align-items-center.flex-wrap(aria-label="Page navigation")
+    p.mb-2.w-100.text-center.w-sm-auto.mb-sm-0.text-sm-left {{ totalRows.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') }} results
+    //- p.mb-0.mr-auto {{ totalRows.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') }} results
+    ul.pagination.mb-0.mx-auto.mr-sm-0
       li.page-item(:class="{ disabled: currentPage === 1 }")
         a.page-link(aria-label="Previous", @click.stop.prevent="setPage(currentPage - 1)")
           span(aria-hidden="true"): i.fa.fa-angle-left
@@ -10,7 +11,7 @@
       li.page-item(v-for="page in pageListWithMore", :class="{ active: page.active, disabled: page.disabled }", :key="page.value")
         span.page-link(v-if="page.active") {{ page.value }}
           span.sr-only (Current)
-        a.page-link(@click.stop.prevent="!page.disabled && setPage(page.value)", v-else) {{ page.value }}
+        a.page-link.d-none.d-sm-block(@click.stop.prevent="!page.disabled && setPage(page.value)", v-else) {{ page.value }}
       //- next button
       li.page-item(:class="{ disabled: currentPage == totalPage }")
         a.page-link(aria-label="Next", @click.stop.prevent="setPage(currentPage + 1)")
@@ -98,9 +99,10 @@
 </script>
 
 <style lang="scss" scoped>
-  .pagination {
-    box-shadow: 0 0 6px rgba(0, 0, 0, .1);
+  @import "../assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/breakpoints";
 
+  .pagination {
     .page-item:first-child {
       .page-link {
         border-left: none;
@@ -118,8 +120,17 @@
       border-bottom: none;
 
       .fa {
-        transform: scale(.8);
+        transform: translateY(-1px);
       }
+
+      @include media-breakpoint-down(xs) {
+        padding-top: .6rem;
+        padding-bottom: .6rem;
+      }
+    }
+
+    @include media-breakpoint-up(sm) {
+      box-shadow: 0 0 6px rgba(0, 0, 0, .1);
     }
   }
 </style>
