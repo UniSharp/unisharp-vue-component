@@ -1,7 +1,8 @@
 <template lang="pug">
   .u-input-btn(@click="click")
     .u-select
-      .u-select-current.form-control.placeholder 複數篩選
+      .u-select-current.form-control.placeholder
+        slot
 </template>
 
 <script>
