@@ -12,7 +12,8 @@
       :on-drop="drop",
       :on-total-progress="totalProgress",
       :on-queue-complete="queueCompleted",
-      :on-max-files="maxFilesReached"
+      :on-max-files="maxFilesReached",
+      :class="{ 'is-invalid': !!error }"
     )
       template(slot="clip-uploader-action", scope="params")
         slot(name="dz-message")
@@ -33,6 +34,7 @@
               .progress(v-if="file.status !== 'error' && file.status !== 'success'")
                 .progress-bar.bg-primary(role="progressbar", :style="{ width: file.progress + '%' }", :aria-valuenow="file.progress", aria-valuemin="0", aria-valuemax="100")
               p.u-uploader-file-status.mb-0 {{ file.status }}
+    .invalid-feedback(v-if="error") {{ error }}
 </template>
 
 <script>
@@ -75,6 +77,9 @@
           // Number of files to be uploaded in parallel.
           parallelUploads: 5
         })
+      },
+      error: {
+        type: String
       }
     },
     data () {
@@ -177,6 +182,20 @@
   .u-uploader {
     // padding-top: calc(#{$input-padding-y} + #{$input-btn-border-width});
     // padding-bottom: calc(#{$input-padding-y} + #{$input-btn-border-width});
+
+    .is-invalid {
+      .u-uploader-action {
+        border: 1px solid $form-feedback-invalid-color !important;
+
+        &:hover {
+          box-shadow: $btn-invalid-box-shadow;
+        }
+      }
+    }
+
+    .invalid-feedback {
+      display: block;
+    }
 
     .u-uploader-action {
       @include transition;

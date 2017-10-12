@@ -85,8 +85,7 @@
             label.col-md-2
               span.title File Uploader：
             .col-md-10
-              u-uploader.is-invalid(name="uploader", :options="uploadOptions", v-model="files")
-              .invalid-feedback 欄位必填
+              u-uploader(name="uploader", :options="uploadOptions", v-model="files", error="欄位必填")
           //- Button
           input.btn.btn-primary.mr-2(type="button", value="Submit")
           input.btn.btn-default(type="button", value="Reset")
