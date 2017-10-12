@@ -1,21 +1,24 @@
 <template lang="pug">
-  label.u-checkbox.custom-control.form-check-inline.custom-checkbox
-    input.custom-control-input(
-      type="checkbox",
-      :value="value",
-      :name="name",
-      :checked="isChecked",
-      :disabled="disabled",
-      :required="required",
-      ref="check",
-      @change="handleChange",
-      @focus="$emit('focus')",
-      @blur="$emit('blur')",
-      @click="$emit('click')"
-    )
-    span.custom-control-indicator
-    span.custom-control-description(v-if="$slots.default")
-      slot
+  .u-checkbox
+    label.custom-control.form-check-inline.custom-checkbox
+      input.custom-control-input(
+        :class="{ 'is-invalid': !!error }"
+        type="checkbox",
+        :value="value",
+        :name="name",
+        :checked="isChecked",
+        :disabled="disabled",
+        :required="required",
+        ref="check",
+        @change="handleChange",
+        @focus="$emit('focus')",
+        @blur="$emit('blur')",
+        @click="$emit('click')"
+      )
+      span.custom-control-indicator
+      span.custom-control-description(v-if="$slots.default")
+        slot
+    .invalid-feedback(v-if="error") {{ error }}
 </template>
 
 <script>
@@ -55,6 +58,13 @@
       },
       uncheckedValue: {
         default: false
+      },
+      error: {
+        type: String
+      },
+      groupError: {
+        type: String,
+        default: null
       }
     },
     methods: {
@@ -72,3 +82,19 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  @import "../assets/scss/variables";
+
+  .u-checkbox {
+    .is-invalid:not(:checked) {
+      + .custom-control-indicator {
+        background-color: $custom-control-indicator-bg;
+      }
+    }
+
+    .invalid-feedback {
+      display: block;
+    }
+  }
+</style>

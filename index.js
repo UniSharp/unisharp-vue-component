@@ -21,6 +21,7 @@ import UUploader from './components/Uploader'
 import UUserDropdown from './components/UserDropdown'
 import UWelcome from './components/Welcome'
 import UInput from './components/Input'
+import UCheckboxGroup from './components/CheckboxGroup'
 
 import VFocus from './directives/Focus'
 
@@ -47,7 +48,8 @@ let components = {
   UUploader,
   UUserDropdown,
   UWelcome,
-  UInput
+  UInput,
+  UCheckboxGroup
 }
 
 let directives = {

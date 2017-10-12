@@ -26,19 +26,14 @@
           //- Checkbox
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right Checkbox：
-            .col-md-10.form-inline
-              u-checkbox(v-model="check", value="yes")
+            .col-md-10
+              u-checkbox(v-model="check", value="yes", error="欄位必填")
                 | Option 1
           //- Checkboxes
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right Checkbox：
-            .col-md-10.form-inline
-              u-checkbox(v-model="checks", value="1")
-                | Option 1
-              u-checkbox(v-model="checks", value="2")
-                | Option 2
-              u-checkbox(v-model="checks", value="3")
-                | Option 3
+            .col-md-10
+              u-checkbox-group(v-model="checks", :options="foods", error="欄位必填")
           //- Switch
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right Switch：
@@ -98,8 +93,8 @@
   export default {
     data () {
       return {
-        check: 'yes',
-        checks: ['1', '2'],
+        check: null,
+        checks: [],
         files: [],
         form: {
           email: '',
@@ -110,7 +105,7 @@
           time: '2017-09-07 12:38:59',
           secret: 'S3CR3T',
           radio: {
-            value: 1
+            value: null
           }
         },
         foods: [
