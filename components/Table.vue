@@ -1,29 +1,30 @@
 <template lang="pug">
-  .u-table.table-responsive
+  div
     .loading.d-flex.align-items-center.justify-content-center(v-if="isLoading")
       i.fa.fa-spin.fa-refresh.fa-5x
-    table.mb-4.table.table-bordered.table-striped.text-center
-      thead(:class="{ 'float-grid': rows }")
-        tr
-          th(v-if="selection")
-            u-checkbox(@change="changeCheckAll", :checked="allChecked")
-          th(
-            :class="{ sortable }",
-            v-for="(value, key) in fields",
-            @click="sortColumn(key)"
-          )
-            | {{ value.label }}
-            i.fa.ml-2(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="sortable && order === key")
-            i.fa.ml-2(:class="{'fa-sort': true}", v-else-if="sortable")
-      tbody(:class="{ 'float-grid': rows }", :style="finalRows")
-        template(v-for="(item, i) in finalRows")
-          tr(:key="item.uIndex")
-            td(v-if="selection")
-              u-checkbox(v-model="checks", :value="item.uIndex")
-            td(v-for="(value, key) in fields")
-              slot(:index="i", :name="key", :value="item", :toggle="toggle(i)")
-                | {{ item[key] }}
-          slot(name="expand", :value="item", :index="i", :toggle="toggle(i)", v-if="!!toggles[i]")
+    .u-table.table-responsive
+      table.mb-4.table.table-bordered.table-striped.text-center
+        thead(:class="{ 'float-grid': rows }")
+          tr
+            th(v-if="selection")
+              u-checkbox(@change="changeCheckAll", :checked="allChecked")
+            th(
+              :class="{ sortable }",
+              v-for="(value, key) in fields",
+              @click="sortColumn(key)"
+            )
+              | {{ value.label }}
+              i.fa.ml-2(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="sortable && order === key")
+              i.fa.ml-2(:class="{'fa-sort': true}", v-else-if="sortable")
+        tbody(:class="{ 'float-grid': rows }", :style="finalRows")
+          template(v-for="(item, i) in finalRows")
+            tr(:key="item.uIndex")
+              td(v-if="selection")
+                u-checkbox(v-model="checks", :value="item.uIndex")
+              td(v-for="(value, key) in fields")
+                slot(:index="i", :name="key", :value="item", :toggle="toggle(i)")
+                  | {{ item[key] }}
+            slot(name="expand", :value="item", :index="i", :toggle="toggle(i)", v-if="!!toggles[i]")
 
     u-pagination(
       :total-rows="this.totalRows || filtered.length",
