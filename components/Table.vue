@@ -14,9 +14,8 @@
               @click="sortColumn(key)"
             )
               | {{ value.label }}
-              i.fa.ml-2(:class="{'fa-sort-down': !desc, 'fa-sort-up': desc}", v-if="sortable && order === key")
-              i.fa.ml-2(:class="{'fa-sort': true}", v-else-if="sortable")
-        tbody(:class="{ 'float-grid': rows }", :style="finalRows")
+              i.fa.ml-2(:class="sortIcon(key)", v-if="sortable")
+        tbody(:class="{ 'float-grid': rows }")
           template(v-for="(item, i) in finalRows")
             tr(:key="item.uIndex")
               td(v-if="selection")
@@ -166,6 +165,17 @@
       }
     },
     methods: {
+      sortIcon (key) {
+        if (this.order !== key) {
+          return 'fa-sort'
+        }
+
+        if (this.desc) {
+          return 'fa-sort-down'
+        }
+
+        return 'fa-sort-up'
+      },
       changeCheckAll (all) {
         let sets = new Set(this.checks)
         this.finalRows.forEach((item) => all ? sets.add(item.uIndex) : sets.delete(item.uIndex))
