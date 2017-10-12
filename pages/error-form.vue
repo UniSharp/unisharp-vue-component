@@ -69,20 +69,17 @@
             label.col-md-2
               span.title Tag Input (Selection)：
             .col-md-10
-              u-input-tag.is-invalid(v-model="selectedTags", placeholder="AddTag", :tags="tags", :limitTag="2")
-              .invalid-feedback 欄位必填
+              u-input-tag(v-model="selectedTags", placeholder="AddTag", :tags="tags", :limitTag="2", error="欄位必填")
           .form-group.row
             label.col-md-2
               span.title Tag Input (Can Scroll)：
             .col-md-10
-              u-input-tag.is-invalid(v-model="selectedTags3", placeholder="AddTag", :tags="tags", :maxTagsShow="5")
-              .invalid-feedback 欄位必填
+              u-input-tag(v-model="selectedTags3", placeholder="AddTag", :tags="tags", :maxTagsShow="5", error="欄位必填")
           .form-group.row
             label.col-md-2
               span.title Tag Input (Text Add)：
             .col-md-10
-              u-input-tag.is-invalid(v-model="selectedTags2", placeholder="AddTag", :tags.sync="tags", type="add", :limitTag="2", insertable)
-              .invalid-feedback 欄位必填
+              u-input-tag(v-model="selectedTags2", placeholder="AddTag", :tags.sync="tags", type="add", :limitTag="2", insertable, error="欄位必填")
           //- File Uploader
           .form-group.row
             label.col-md-2
