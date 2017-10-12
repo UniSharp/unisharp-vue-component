@@ -5,7 +5,7 @@
     .card
       .card-header Form Components
       .card-body
-        form.was-validated
+        form
           //- Label
           .form-group.row
             label.col-md-2 Label：
@@ -46,8 +46,7 @@
           .form-group.row
             label.col-md-2.col-form-label Date Time：
             .col-md-10
-              u-datetime.is-invalid(mode='datetime', v-model='form.time', @change='showTime')
-              .invalid-feedback 欄位必填
+              u-datetime.is-invalid(mode='datetime', v-model='form.time', @change='showTime', error="欄位必填")
           //- Textarea
           .form-group.row
             label.col-md-2.col-form-label Textarea：
@@ -67,11 +66,6 @@
             .col-md-10
               u-radio.is-invalid(name="food2", :options="foods", stacked="true", v-model="form.radio.value")
               .invalid-feedback 欄位必填
-          .form-group.row
-            label.col-md-2
-              span.title Radio Result：
-            .col-md-10
-              input(type="text", :value="showRadioText(form.radio.value)")
           //- Input Tag
           .form-group.row
             label.col-md-2
@@ -174,13 +168,6 @@
       },
       showSwitchValue (value) {
         debug(value)
-      },
-      showRadioText (value) {
-        return this.foods.find((food) => {
-          if (food.value === value) {
-            return food
-          }
-        }).text
       }
     },
     watch: {
