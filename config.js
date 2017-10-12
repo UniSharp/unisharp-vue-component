@@ -38,6 +38,9 @@ export default {
       title: '表單元件',
       to: '/form'
     }, {
+      title: '表單驗證',
+      to: '/error-form'
+    }, {
       title: '表格',
       to: '/table'
     }, {

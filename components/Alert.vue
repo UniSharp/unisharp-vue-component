@@ -1,5 +1,5 @@
 <template lang="pug">
-  .alert.alert-success(role="alert")
+  .alert(role="alert", :class="className")
     slot
       | {{message}}
 </template>
