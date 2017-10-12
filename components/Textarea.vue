@@ -1,13 +1,13 @@
 <template lang="pug">
   .u-textarea
-    textarea.form-control(:class="{ 'is-invalid': !!error }", rows="5") {{ content }}
+    textarea.form-control(:class="{ 'is-invalid': !!error }", rows="5", @input="$emit('input', $event.target.value)") {{ value }}
     .invalid-feedback(v-if="error") {{ error }}
 </template>
 
 <script>
   export default {
     props: {
-      content: {
+      value: {
         default: null
       },
       error: {
@@ -15,7 +15,8 @@
       }
     },
     model: {
-      prop: 'content'
+      prop: 'value',
+      event: 'input'
     }
   }
 </script>

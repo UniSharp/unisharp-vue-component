@@ -14,7 +14,7 @@
           .form-group.row
             label.col-md-2.col-form-label Email address：
             .col-md-10
-              u-input(type='email', v-model='form.email', required='', placeholder='Enter email', error="欄位必填")
+              u-input(type="email", v-model="form.email", placeholder="Enter email", error="欄位必填")
           //- Select
           .form-group.row
             label.col-md-2.col-form-label Select：
@@ -50,7 +50,7 @@
           .form-group.row
             label.col-md-2.col-form-label Textarea：
             .col-md-10
-             u-textarea(rows="5", v-model='form.time', error="欄位必填")
+             u-textarea(rows="5", v-model='form.email', error="欄位必填")
           //- Radio
           .form-group.row
             label.col-md-2
