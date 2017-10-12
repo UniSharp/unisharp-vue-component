@@ -5,7 +5,7 @@
     form.form-inline(slot="functions")
       form.form-inline.d-none.d-sm-flex(slot="functions")
         u-input-btn(@click.prevent.stop="$refs.TypeFilter.show()") 複數篩選
-        u-input-btn(@click.prevent.stop="$refs.TagFilter.show()") 篩選標籤
+        u-input-btn(@click.prevent.stop="$refs.TagFilter.show()") 標籤篩選
         u-select(v-model="age", placeholder="Age", :options="ages")
         u-input-tag
 
