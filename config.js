@@ -37,6 +37,9 @@ export default {
     }, {
       title: '表格',
       to: '/table'
+    }, {
+      title: 'Filter',
+      to: '/components/filter'
     }]
   }]
 }

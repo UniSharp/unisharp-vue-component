@@ -5,6 +5,7 @@ import UCheckbox from './components/Checkbox'
 import UDatetime from './components/Datetime'
 import UDropdown from './components/Dropdown'
 import UFace from './components/Face'
+import UInputBtn from './components/InputBtn'
 import UInputTag from './components/InputTag'
 import ULogin from './components/Login'
 import ULogo from './components/Logo'
@@ -30,6 +31,7 @@ let components = {
   UDatetime,
   UDropdown,
   UFace,
+  UInputBtn,
   UInputTag,
   ULogin,
   ULogo,
