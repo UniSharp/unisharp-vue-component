@@ -121,17 +121,22 @@
             hash: this.hash
           }
 
-          if (this.provider) {
-            if (this.provider.hasOwnProperty('then')) {
-              return this.provider(info).then(() => {
-                this.isLoading = false
-              })
-            }
-            this.isLoading = false
-            return Promise.resolve(this.provider(info))
+          let promise = null
+          switch (true) {
+            case !!this.provider && !!this.provider.then:
+              promise = this.provider(info)
+              break
+            case !!this.provider:
+              promise = Promise.resolve(this.provider(info))
+              break
+            default:
+              promise = Promise.resolve(this.items)
           }
-          this.isLoading = false
-          return Promise.resolve(this.items)
+
+          return promise.then(v => {
+            this.isLoading = false
+            return v
+          })
         },
         default: []
       }
