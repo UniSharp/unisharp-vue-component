@@ -50,8 +50,7 @@
           .form-group.row
             label.col-md-2.col-form-label Textarea：
             .col-md-10
-             textarea.form-control.is-invalid(rows="5")
-             .invalid-feedback 欄位必填
+             u-textarea(rows="5", v-model='form.time', error="欄位必填")
           //- Radio
           .form-group.row
             label.col-md-2
