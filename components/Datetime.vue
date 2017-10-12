@@ -1,6 +1,7 @@
 <template lang="pug">
   .u-datetime
-    input.form-control(:type="inputType", :value="rfcDateTime", @click='togglePicker')
+    input.form-control(:type="inputType", :value="rfcDateTime", @click='togglePicker', :class="{ 'is-invalid': !!error }")
+    .invalid-feedback(v-if="error") {{ error }}
     .overlay(v-if='showPicker', @click='togglePicker')
     .picker.bg-white(v-if='showPicker')
       .scroll(v-if='showScroll' ref='scroll')
@@ -57,6 +58,9 @@
       required: {
         type: Boolean,
         default: false
+      },
+      error: {
+        type: String
       }
     },
     data () {
