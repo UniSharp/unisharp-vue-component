@@ -1,0 +1,63 @@
+
+@if (((red($blue) * 299) + (green($blue) * 587) + (blue($blue) * 114)) / 1000 >= 150) {
+  $white: #111;
+}
+
+.u-select {
+  min-width: 10rem;
+  position: relative;
+
+  .u-select-filter {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: $input-color;
+
+    &::placeholder {
+      color: $input-placeholder-color;
+      opacity: 1;
+    }
+  }
+
+  .u-select-current {
+    @include transition;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $input-color;
+
+    &.placeholder {
+      color: $input-placeholder-color;
+    }
+
+    &:after {
+      @include transition;
+
+      content: "";
+      margin-right: -.5rem;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid $input-placeholder-color;
+    }
+  }
+
+  .u-select-options {
+    width: 100%;
+    overflow: auto;
+
+    .dropdown-item {
+      line-height: $line-height-base;
+    }
+  }
+
+  &.active .u-select-current, .u-select-current:hover {
+    background-color: $blue !important;
+    border-color: $blue !important;
+    color: $white;
+
+    &:after {
+      border-top-color: $white;
+    }
+  }
+}

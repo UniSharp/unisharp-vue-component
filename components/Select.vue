@@ -221,71 +221,11 @@
   @import "../assets/scss/variables";
   @import "node_modules/bootstrap/scss/mixins/transition";
 
-  $hover-bg: theme-color("primary");
-  $hover-fg: #fff;
   $max-items: 5;
 
-  @if (((red($hover-bg) * 299) + (green($hover-bg) * 587) + (blue($hover-bg) * 114)) / 1000 >= 150) {
-    $hover-fg: #111;
-  }
-
   .u-select {
-    min-width: 10rem;
-    position: relative;
-
-    .u-select-filter {
-      border: 0;
-      outline: 0;
-      background: transparent;
-      color: $input-color;
-
-      &::placeholder {
-        color: $input-placeholder-color;
-        opacity: 1;
-      }
-    }
-
-    .u-select-current {
-      @include transition;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: $input-color;
-
-      &.placeholder {
-        color: $input-placeholder-color;
-      }
-
-      &:after {
-        @include transition;
-
-        content: "";
-        margin-right: -.5rem;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid $input-placeholder-color;
-      }
-    }
-
     .u-select-options {
-      width: 100%;
       max-height: ($font-size-base * $line-height-base + $dropdown-item-padding-y * 2) * $max-items + $dropdown-padding-y * 2;
-      overflow: auto;
-
-      .dropdown-item {
-        line-height: $line-height-base;
-      }
-    }
-
-    &.active .u-select-current, .u-select-current:hover {
-      background-color: $hover-bg;
-      border-color: $hover-bg !important;
-      color: $hover-fg;
-
-      &:after {
-        border-top-color: $hover-fg;
-      }
     }
   }
 </style>
