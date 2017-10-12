@@ -108,6 +108,7 @@
     },
     asyncComputed: {
       pured: {
+        lazy: true,
         get () {
           this.isLoading = true
 
