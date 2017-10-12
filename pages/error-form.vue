@@ -14,8 +14,7 @@
           .form-group.row
             label.col-md-2.col-form-label Email address：
             .col-md-10
-              input.form-control.is-invalid(type='email', v-model='form.email', required='', placeholder='Enter email')
-              .invalid-feedback 欄位必填
+              u-input(type='email', v-model='form.email', required='', placeholder='Enter email', error="欄位必填")
           //- Select
           .form-group.row
             label.col-md-2.col-form-label Select：
