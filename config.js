@@ -13,6 +13,9 @@ export default {
       title: 'Buttons',
       to: '/guide/buttons'
     }, {
+      title: 'Badges',
+      to: '/guide/badges'
+    }, {
       title: 'Typography',
       to: '/guide/typography'
     }, {

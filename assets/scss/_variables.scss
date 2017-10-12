@@ -660,12 +660,12 @@ $card-bg: $gray-100;
 // Badges
 
 // $badge-color: $white;
-// $badge-font-size: 75%;
-// $badge-font-weight: $font-weight-bold;
-// $badge-padding-y: .25em;
-// $badge-padding-x: .4em;
+$badge-font-size: .813rem;
+$badge-font-weight: $font-weight-normal;
+$badge-padding-y: .35rem;
+$badge-padding-x: .7rem;
 
-// $badge-pill-padding-x: .6em;
+$badge-pill-padding-x: .8rem;
 // Use a higher than normal value to ensure completely rounded edges when
 // customizing padding or font-size on labels.
 // $badge-pill-border-radius: 10rem;
