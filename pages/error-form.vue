@@ -58,14 +58,12 @@
             label.col-md-2
               span.title Radio Inline：
             .col-md-10
-              u-radio.is-invalid(name="food1", :options="foods", v-model="form.radio.value")
-              .invalid-feedback 欄位必填
+              u-radio(name="food1", :options="foods", v-model="form.radio.value", error="欄位必填")
           .form-group.row
             label.col-md-2
               span.title Radio Stacked：
             .col-md-10
-              u-radio.is-invalid(name="food2", :options="foods", stacked="true", v-model="form.radio.value")
-              .invalid-feedback 欄位必填
+              u-radio(name="food2", :options="foods", stacked="true", v-model="form.radio.value", error="欄位必填")
           //- Input Tag
           .form-group.row
             label.col-md-2

@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-radio(:class="{ 'custom-controls-stacked': !!stacked || stacked === '' }")
-    label.custom-control.form-check-inline.custom-radio(:key="key", v-for="(option, key) in options")
+    label.custom-control.form-check-inline.custom-radio(:class="{ 'is-invalid': !!error }", :key="key", v-for="(option, key) in options")
       input.custom-control-input(
         type="radio",
         :id="id",
@@ -16,6 +16,7 @@
       )
       span.custom-control-indicator
       span.custom-control-description {{ option.text }}
+    .invalid-feedback(v-if="error") {{ error }}
 </template>
 
 <script>
@@ -42,6 +43,9 @@
       },
       stacked: {
         default: false
+      },
+      error: {
+        type: String
       }
     },
     model: {
@@ -50,3 +54,19 @@
     }
   }
 </script>
+
+<style lang="scss" scoped="">
+  @import "../assets/scss/variables";
+
+  .u-radio {
+    .is-invalid {
+      .custom-control-description {
+        color: $form-feedback-invalid-color !important;
+      }
+    }
+
+    .invalid-feedback {
+      display: block;
+    }
+  }
+</style>
