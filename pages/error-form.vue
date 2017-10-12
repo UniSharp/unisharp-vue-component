@@ -30,11 +30,11 @@
           .form-group.row
             label.col-md-2.col-form-label Checkbox：
             .col-md-10.form-inline
-              u-checkbox.is-invalid(v-model="checks", value="1")
+              u-checkbox(v-model="checks", value="1")
                 | Option 1
-              u-checkbox.is-invalid(v-model="checks", value="2")
+              u-checkbox(v-model="checks", value="2")
                 | Option 2
-              u-checkbox.is-invalid(v-model="checks", value="3")
+              u-checkbox(v-model="checks", value="3")
                 | Option 3
           //- Switch
           .form-group.row
@@ -45,7 +45,7 @@
           .form-group.row
             label.col-md-2.col-form-label Date Time：
             .col-md-10
-              u-datetime.is-invalid(mode='datetime', v-model='form.time', @change='showTime', error="欄位必填")
+              u-datetime(mode='datetime', v-model='form.time', @change='showTime', error="欄位必填")
           //- Textarea
           .form-group.row
             label.col-md-2.col-form-label Textarea：
