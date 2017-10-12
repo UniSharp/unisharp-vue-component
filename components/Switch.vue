@@ -73,8 +73,11 @@
     }
 
     &.is-invalid {
-      box-shadow: none;
-      border-color: #eb6886;
+      border-color: $form-feedback-invalid-color !important;
+
+      &:hover {
+        box-shadow: $btn-invalid-box-shadow;
+      }
 
       + .invalid-feedback {
         display: block;
