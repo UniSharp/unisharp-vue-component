@@ -53,7 +53,7 @@
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right Textarea：
             .col-md-10
-             u-input(rows="5", v-model='form.email', placeholder="Enter email", error="欄位必填")
+             u-input(type="textarea", :rows="5", v-model='form.email', placeholder="Enter email", error="欄位必填")
           //- Radio
           .form-group.row
             label.col-md-2.col-form-label.text-sm-right

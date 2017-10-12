@@ -5,7 +5,7 @@
       :rows="rows",
       :placeholder="placeholder",
       @input="$emit('input', $event.target.value)",
-      v-if="rows > 1"
+      v-if=" type === 'textarea' || rows > 1 "
     ) {{ value }}
     input.form-control(
       :class="{ 'is-invalid': !!error }",
