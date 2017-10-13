@@ -130,7 +130,7 @@
     }
 
     @include media-breakpoint-up(sm) {
-      box-shadow: 0 0 6px rgba(0, 0, 0, .1);
+      box-shadow: 0 0 6px rgba(0, 0, 0, .05);
     }
   }
 </style>
