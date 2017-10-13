@@ -1,16 +1,13 @@
 <template lang="pug">
-  .u-checkbox-group
+  .u-checkbox-group(:class="{ 'custom-controls-stacked': stacked }")
     u-checkbox(
       :key="key",
       v-for="(option, key) in options",
-      v-model="checks",
+      v-model="checked",
       :value="option.value",
-      @change="$emit('change', checks)",
       :error="error"
-    )
-      | {{ option.text }}
+    ) {{ option.text }}
     .invalid-feedback(v-if="error") {{ error }}
-
 </template>
 
 <script>
@@ -20,17 +17,30 @@
         type: Array,
         required: true
       },
+      stacked: {
+        type: Boolean
+      },
       error: {
         type: String
+      },
+      vModel: {
       }
     },
     model: {
-      prop: 'checked',
+      prop: 'vModel',
       event: 'change'
     },
     data () {
       return {
-        checks: []
+        checked: []
+      }
+    },
+    watch: {
+      vModel (value) {
+        this.checked = value
+      },
+      checked (value) {
+        this.$emit('change', value)
       }
     }
   }
@@ -48,7 +58,7 @@
   .u-checkbox-group {
     .u-checkbox {
       .invalid-feedback {
-        display: none;
+        display: none !important;
       }
     }
   }

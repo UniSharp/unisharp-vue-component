@@ -1,5 +1,5 @@
 <template lang="pug">
-  .u-checkbox
+  .u-checkbox.d-inline-flex.flex-column
     label.custom-control.form-check-inline.custom-checkbox
       input.custom-control-input(
         :class="{ 'is-invalid': !!error }"

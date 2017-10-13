@@ -25,8 +25,8 @@ export default {
       title: 'Modal',
       to: '/guide/modal'
     }, {
-      title: 'Card',
-      to: '/guide/card'
+      title: 'Form',
+      to: '/guide/form'
     }, {
       title: 'List',
       to: '/guide/list'

@@ -29,9 +29,9 @@
             .btn.btn-info.btn-square(@click.prevent="form.password = ''")
               i.fa.fa-eraser
         .form-group.row
-          label.col-sm-2.col-form-label.text-sm-right(for="select") Select:
+          label.col-sm-2.col-form-label.text-sm-right Select:
           .col-sm-10
-            u-select#select(v-model="form.selected", :options="options")
+            u-select(v-model="form.selected", :options="options")
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Radio:
           .col-sm-10
@@ -43,15 +43,15 @@
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Checkbox:
           .col-sm-10
-            u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
+            u-checkbox-group(v-model="form.checked", :options="options")
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Checkbox Stacked:
-          .col-sm-10.custom-controls-stacked
-            u-checkbox(v-model="form.checked", :key="key", :value="option.value", v-for="(option, key) in options") {{ option.text }}
+          .col-sm-10
+            u-checkbox-group(v-model="form.checked", :options="options", stacked)
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Input Tag:
           .col-sm-10
-            u-input-tag(v-model="form.checked", :tags="options", placeholder="Tags")
+            u-input-tag(v-model="form.checked", :tags="options", placeholder="Input Tag")
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Switch:
           .col-sm-10
@@ -70,14 +70,44 @@
         .card-actions
           button.btn.btn-info.btn-lg Cancel
           button.btn.btn-primary.btn-lg Submit
-    .card.w-100
-      h4.card-header Featured
+    form.card.w-100
+      h4.card-header Error Form
       .card-body
-        h4.card-title Special title treatment
-        p.card-text With supporting text below as a natural lead-in to additional content.
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right(for="error-name") Name:
+          .col-sm-10
+            u-input#error-name(v-model="form.name", placeholder="Name", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right(for="error-password") Password:
+          .col-sm-10
+            u-input#error-password(v-model="form.password", type="password", placeholder="Password", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right Select:
+          .col-sm-10
+            u-select(v-model="form.selected", :options="options", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right Radio:
+          .col-sm-10
+            u-radio(v-model="form.selected", :options="options", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right Checkbox:
+          .col-sm-10
+            u-checkbox-group(v-model="form.checked", :options="options", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right Input Tag:
+          .col-sm-10
+            u-input-tag(v-model="form.checked", :tags="options", placeholder="Input Tag", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right Switch:
+          .col-sm-10
+            u-switch(v-model="form.switch", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right Uploader:
+          .col-sm-10
+            u-uploader(v-model="form.files", error="Invalid value.")
         .card-actions
-          a.btn.btn-info.btn-lg Info Button
-          a.btn.btn-primary.btn-lg Primary Button
+          button.btn.btn-info.btn-lg Cancel
+          button.btn.btn-primary.btn-lg Submit
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .u-radio(:class="{ 'custom-controls-stacked': !!stacked || stacked === '' }")
+  .u-radio(:class="{ 'custom-controls-stacked': stacked }")
     label.custom-control.form-check-inline.custom-radio(:key="key", v-for="(option, key) in options")
       input.custom-control-input(
         :class="{ 'is-invalid': !!error }"
@@ -43,7 +43,7 @@
         default: false
       },
       stacked: {
-        default: false
+        type: Boolean
       },
       error: {
         type: String

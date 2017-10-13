@@ -180,9 +180,6 @@
   }
 
   .u-uploader {
-    // padding-top: calc(#{$input-padding-y} + #{$input-btn-border-width});
-    // padding-bottom: calc(#{$input-padding-y} + #{$input-btn-border-width});
-
     .is-invalid {
       .u-uploader-action {
         border: 1px solid $form-feedback-invalid-color !important;

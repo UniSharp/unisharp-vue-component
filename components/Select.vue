@@ -253,5 +253,9 @@
         }
       }
     }
+
+    .invalid-feedback {
+      display: block !important;
+    }
   }
 </style>

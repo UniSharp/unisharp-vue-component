@@ -8,6 +8,7 @@
       v-if=" type === 'textarea' || rows > 1 "
     ) {{ value }}
     input.form-control(
+      :id="id",
       :class="{ 'is-invalid': !!error }",
       :type="type",
       :value="value",
@@ -21,6 +22,9 @@
 <script>
   export default {
     props: {
+      id: {
+        type: String
+      },
       rows: {
         type: Number,
         default: 1
