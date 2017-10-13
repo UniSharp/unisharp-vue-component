@@ -26,6 +26,12 @@
   @import "../assets/scss/variables";
   @import "node_modules/bootstrap/scss/mixins/transition";
 
+  .u-user-dropdown {
+    button {
+      font-size: $font-size-sm;
+    }
+  }
+
   .u-user-toggle {
     @include transition;
 
