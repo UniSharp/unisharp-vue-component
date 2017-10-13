@@ -13,6 +13,8 @@
       :placeholder="placeholder",
       @keydown="onKeydown",
       @focus="$refs.dropdown.show()",
+      @compositionstart="handleComposition(isComposition = true)",
+      @compositionend="handleComposition(isComposition = false)"
     )
     .u-select-current.form-control(slot="toggle", :class="{ placeholder: current === placeholder }", v-else) {{ current }}
     .dropdown-menu.u-select-options(ref="menu")
@@ -121,6 +123,7 @@
     },
     data () {
       return {
+        isComposition: false,
         filter: '',
         hover: 0
       }
@@ -172,6 +175,11 @@
             break
 
           case 'CR':
+            // isComposition 表示是否在用輸入法打字
+            if (this.isComposition) {
+              return
+            }
+
             if (this.filteredOptions[this.hover]) {
               this.select(this.filteredOptions[this.hover].value)
             } else {
