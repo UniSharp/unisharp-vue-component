@@ -4,26 +4,29 @@ const Menu = require('../plugins/Menu').default
 describe('Menu', () => {
   describe('#normalize()', () => {
     it('Basic normalize.', () => {
-      assert.deepEqual([{ title: 'foo', to: '/foo' }], Menu.normalize([{ title: 'foo', to: '/foo' }]))
+      assert.deepEqual(
+        [{ title: 'foo', to: '/foo', matched: '/foo' }],
+        Menu.normalize([{ title: 'foo', to: '/foo' }])
+      )
     })
 
     it('Normalize with children', () => {
       assert.deepEqual(
-        [{ title: 'foo', to: '/foo' }, { title: 'bar', to: '/bar' }],
+        [{ title: 'foo', to: '/foo', matched: '/foo' }, { title: 'bar', to: '/bar', matched: '/bar' }],
         Menu.normalize([{ title: 'index', children: [{ title: 'foo', to: '/foo' }, { title: 'bar', to: '/bar' }] }])
       )
     })
 
     it('Normalize with active', () => {
       assert.deepEqual(
-        [{ title: 'index', to: '/foo' }, { title: 'index', to: '/bar' }],
-        Menu.normalize([{ title: 'index', active: ['/foo', '/bar'] }])
+        [{ title: 'index', to: '/', matched: '/' }, { title: 'index', to: '/', matched: '/foo' }, { title: 'index', to: '/', matched: '/bar' }],
+        Menu.normalize([{ title: 'index', to: '/', active: ['/foo', '/bar'] }])
       )
     })
 
     it('Normalize with not array', () => {
       assert.deepEqual(
-        [{ title: 'foo', to: '/foo' }],
+        [{ title: 'foo', to: '/foo', matched: '/foo' }],
         Menu.normalize({ title: 'foo', to: '/foo' })
       )
     })
@@ -31,20 +34,24 @@ describe('Menu', () => {
 
   describe('#getCurrent()', () => {
     it('Basic get current.', () => {
-      let expected = { title: 'foo', to: '/foo' }
-      let menu = new Menu([expected, { title: 'bar', to: '/bar' }])
+      let menu = new Menu([{ title: 'foo', to: '/foo' }, { title: 'bar', to: '/bar' }])
 
-      assert.deepEqual(expected, menu.getCurrent({ matched: [{ path: '/foo' }] }))
+      assert.deepEqual(
+        { title: 'foo', to: '/foo', matched: '/foo' },
+        menu.getCurrent({ matched: [{ path: '/foo' }] })
+      )
     })
 
     it('Get current with children.', () => {
-      let expected = { title: 'foo', to: '/foo' }
       let menu = new Menu([{
         title: 'index',
-        children: [expected, { title: 'bar', to: '/bar' }]
+        children: [{ title: 'foo', to: '/foo' }, { title: 'bar', to: '/bar' }]
       }])
 
-      assert.deepEqual(expected, menu.getCurrent({ matched: [{ path: '/foo' }] }))
+      assert.deepEqual(
+        { title: 'foo', to: '/foo', matched: '/foo' },
+        menu.getCurrent({ matched: [{ path: '/foo' }] })
+      )
     })
 
     it('Get current with active.', () => {
@@ -54,14 +61,19 @@ describe('Menu', () => {
         active: ['/foo', '/bar']
       }])
 
-      assert.deepEqual({ title: 'index', to: '/foo' }, menu.getCurrent({ matched: [{ path: '/foo' }] }))
+      assert.deepEqual(
+        { title: 'index', to: '/', matched: '/foo' },
+        menu.getCurrent({ matched: [{ path: '/foo' }] })
+      )
     })
 
     it('Get current with params.', () => {
-      let expected = { title: 'foo', to: '/foo/:id' }
-      let menu = new Menu([expected, { title: 'bar', to: '/bar/:id' }])
+      let menu = new Menu([{ title: 'foo', to: '/foo/:id' }, { title: 'bar', to: '/bar/:id' }])
 
-      assert.deepEqual(expected, menu.getCurrent({ matched: [{ path: '/foo/:id' }] }))
+      assert.deepEqual(
+        { title: 'foo', to: '/foo/:id', matched: '/foo/:id' },
+        menu.getCurrent({ matched: [{ path: '/foo/:id' }] })
+      )
     })
   })
 

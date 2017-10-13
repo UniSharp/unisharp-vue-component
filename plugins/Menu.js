@@ -6,11 +6,11 @@ class Menu {
   }
 
   getCurrent ($route) {
-    return _.find(Menu.normalize(this.menu), { to: $route.matched[0].path })
+    return _.find(Menu.normalize(this.menu), { matched: $route.matched[0].path })
   }
 
   static isActive (item, $route) {
-    return _.find(Menu.normalize(item), { to: $route.matched[0].path })
+    return _.find(Menu.normalize(item), { matched: $route.matched[0].path })
   }
 
   static normalize (menu) {
@@ -22,11 +22,11 @@ class Menu {
 
     menu.forEach(item => {
       if (item.to) {
-        result.push({ title: item.title, to: item.to })
+        result.push({ title: item.title, to: item.to, matched: item.to })
       }
 
       if (item.active) {
-        item.active.forEach(active => result.push({ title: item.title, to: active }))
+        item.active.forEach(active => result.push({ title: item.title, to: item.to, matched: active }))
       }
 
       if (item.children) {
