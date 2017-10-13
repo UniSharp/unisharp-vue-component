@@ -1,7 +1,5 @@
 <template lang="pug">
   u-admin
-    button.btn.btn-secondary.mb-4(@click.prevent) Button
-    button.btn.btn-primary.mb-4(@click.prevent) Button
     form.form-inline(slot="functions")
       form.form-inline.d-none.d-sm-flex(slot="functions")
         u-input-btn(@click.prevent.stop="$refs.TypeFilter.show()") 複數篩選
@@ -69,6 +67,12 @@
 
     .cancal-text {
       min-width: 90px;
+
+      a.text-link {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 </style>
