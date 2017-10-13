@@ -9,22 +9,19 @@
         u-select(v-model="age", placeholder="Age", :options="ages")
         u-input-tag
 
-    .filter-result.d-flex.justify-content-between.align-items-center
+    .filter-result.d-lg-flex.justify-content-between.align-items-center
       .tag-content
-        h6.d-inline-block.mr-2 篩選的內容：
-        a.badge.badge-pill.badge-primary.mr-2
+        h6.d-inline-block.m-2 篩選的內容：
+        a.badge.badge-pill.badge-primary.m-1.mr-2
           | 篩選內容
           i.fa.fa-times.pl-1(aria-hidden='true')
-        a.badge.badge-pill.badge-primary.mr-2
+        a.badge.badge-pill.badge-primary.m-1.mr-2
           | 篩選內容
           i.fa.fa-times.pl-1(aria-hidden='true')
-        a.badge.badge-pill.badge-primary.mr-2
+        a.badge.badge-pill.badge-primary.m-1.mr-2
           | 篩選內容
           i.fa.fa-times.pl-1(aria-hidden='true')
-        a.badge.badge-pill.badge-primary.mr-2
-          | 篩選內容
-          i.fa.fa-times.pl-1(aria-hidden='true')
-      .cancal-text
+      .cancal-text.text-right.m-2
         a.text-link
           i.fa.fa-times.pr-1(aria-hidden='true')
           | 全部取消
@@ -68,6 +65,10 @@
 
     h6 {
       margin: 0;
+    }
+
+    .cancal-text {
+      min-width: 90px;
     }
   }
 </style>
