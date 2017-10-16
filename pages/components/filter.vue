@@ -2,8 +2,7 @@
   u-admin
     form.form-inline(slot="functions")
       form.form-inline.d-none.d-sm-flex(slot="functions")
-        u-input-btn(@click.prevent.stop="$refs.TypeFilter.show()") 複數篩選
-        u-input-btn(@click.prevent.stop="$refs.TagFilter.show()") 標籤篩選
+        u-input-btn(@click.prevent.stop="$refs.TypeFilter.show()") 篩選內容
         u-select(v-model="age", placeholder="Age", :options="ages")
         u-input-tag
 
@@ -29,11 +28,7 @@
       button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") Confirm
       u-select.mb-2(v-model="age", placeholder="Age", :options="ages")
       u-select.mb-2(v-model="age", placeholder="Age", :options="ages")
-      u-select(v-model="age", placeholder="Age", :options="ages")
-
-    u-modal(ref="TagFilter")
-      span(slot="title") Tag Filter
-      button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") Confirm
+      u-select.mb-2(v-model="age", placeholder="Age", :options="ages")
       u-input-tag(v-model="form.checked", :tags="options", placeholder="Tags")
 
 </template>

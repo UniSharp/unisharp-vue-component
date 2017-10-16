@@ -3,6 +3,7 @@
     .u-select
       .u-select-current.form-control.placeholder
         slot
+        i.fa.fa-filter(aria-hidden='true')
 </template>
 
 <script>
@@ -26,6 +27,11 @@
         &:after {
           margin-right: 0;
           border: none;
+        }
+
+        .fa {
+          padding-left: 1.1rem;
+          font-size: .75rem;
         }
       }
     }
