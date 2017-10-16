@@ -1,7 +1,7 @@
 <template lang="pug">
   .u-input-tag
-    .form-control.d-flex.align-items-center(:class="{ 'is-invalid': !!error }")
-      .tags.d-flex
+    .form-control.d-flex.flex-wrap-reverse.align-items-center.pt-0(:class="{ 'is-invalid': !!error }")
+      .tags.d-flex.flex-wrap
         a.badge.badge-pill.badge-primary.d-flex.align-items-center.mr-2(
           :key="index",
           v-for="(s, index) in selected",
@@ -131,6 +131,10 @@
     .badge {
       cursor: pointer;
       font-size: 85%;
+    }
+
+    .badge, .u-select {
+      margin-top: $input-padding-y;
     }
   }
 </style>
