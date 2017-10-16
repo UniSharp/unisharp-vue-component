@@ -26,6 +26,9 @@ export default {
       title: 'Badges',
       to: '/components/badges'
     }, {
+      title: 'Card',
+      to: '/components/card'
+    }, {
       title: 'Filter',
       to: '/components/filter'
     }, {
@@ -35,7 +38,7 @@ export default {
       title: 'Modal',
       to: '/components/modal'
     }, {
-      title: 'pagination',
+      title: 'Pagination',
       to: '/components/pagination'
     }]
   }, {
@@ -43,7 +46,7 @@ export default {
     title: 'Example',
     children: [{
       title: 'list',
-      to: '/example/list'
+      to: '/example/List'
     }]
   }, {
     icon: 'folder-o',
