@@ -45,8 +45,8 @@ export default {
     icon: 'file-text-o',
     title: 'Example',
     children: [{
-      title: 'list',
-      to: '/example/List'
+      title: 'List',
+      to: '/example/list'
     }]
   }, {
     icon: 'folder-o',
