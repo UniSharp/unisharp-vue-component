@@ -10,42 +10,53 @@ export default {
       title: 'Colors',
       to: '/guide/colors'
     }, {
-      title: 'Buttons',
-      to: '/guide/buttons'
-    }, {
-      title: 'Badges',
-      to: '/guide/badges'
-    }, {
       title: 'Typography',
       to: '/guide/typography'
-    }, {
-      title: 'Alerts',
-      to: '/guide/alerts'
-    }, {
-      title: 'Modal',
-      to: '/guide/modal'
-    }, {
-      title: 'Form',
-      to: '/guide/form'
-    }, {
-      title: 'List',
-      to: '/guide/list'
     }]
   }, {
     icon: 'cubes',
     title: 'Components',
     children: [{
-      title: '表單元件',
-      to: '/form'
+      title: 'Alerts',
+      to: '/components/alerts'
     }, {
-      title: '表單驗證',
-      to: '/error-form'
+      title: 'Buttons',
+      to: '/components/buttons'
     }, {
-      title: '表格',
-      to: '/table'
+      title: 'Badges',
+      to: '/components/badges'
     }, {
       title: 'Filter',
       to: '/components/filter'
+    }, {
+      title: 'Form',
+      to: '/components/form'
+    }, {
+      title: 'Modal',
+      to: '/components/modal'
+    }, {
+      title: 'pagination',
+      to: '/components/pagination'
+    }]
+  }, {
+    icon: 'file-text-o',
+    title: 'Example',
+    children: [{
+      title: 'list',
+      to: '/example/list'
+    }]
+  }, {
+    icon: 'folder-o',
+    title: '待分類',
+    children: [{
+      title: '表單元件',
+      to: '/other/form'
+    }, {
+      title: '表單驗證',
+      to: '/other/error-form'
+    }, {
+      title: '表格',
+      to: '/other/table'
     }]
   }]
 }
