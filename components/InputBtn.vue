@@ -3,11 +3,14 @@
     .u-select
       .u-select-current.form-control.placeholder
         slot
-        i.fa.fa-filter(aria-hidden='true')
+        i.fa(v-if="appendIcon", :class="`fa-${appendIcon}`", aria-hidden="true")
 </template>
 
 <script>
   export default {
+    props: {
+      appendIcon: String
+    },
     methods: {
       click (e) {
         this.$emit('click', e)
