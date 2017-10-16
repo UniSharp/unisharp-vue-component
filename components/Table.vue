@@ -142,7 +142,7 @@
     },
     computed: {
       allChecked () {
-        return _.difference(this.finalRows.map(v => v.uIndex), this.checks).length === 0
+        return this.finalRows.length !== 0 && _.difference(this.finalRows.map(v => v.uIndex), this.checks).length === 0
       },
       indexed () {
         return this.pured.map((item, index) => {
