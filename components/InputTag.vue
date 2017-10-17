@@ -68,7 +68,7 @@
         }
 
         this.normalizedTags = this.normalize(this.tags).map(v => {
-          v.disabled = selected.length > this.limit || selected.includes(v.value)
+          v.disabled = selected.length >= this.limit || selected.includes(v.value)
           return v
         })
       }
