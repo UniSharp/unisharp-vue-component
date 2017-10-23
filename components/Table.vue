@@ -13,7 +13,8 @@
               v-for="(value, key) in fields",
               @click="sortColumn(key)"
             )
-              | {{ value.label }}
+              slot(:name="`head.${key}`", :label="value.label")
+                | {{ value.label }}
               i.fa.ml-2(:class="sortIcon(key)", v-if="sortable")
         tbody(:class="{ 'float-grid': rows }")
           template(v-for="(item, i) in finalRows")
