@@ -27,6 +27,7 @@
             slot(name="expand", :value="item", :index="i", :toggle="toggle(i)", v-if="!!toggles[i]")
 
     u-pagination(
+      v-if="!hidePagination",
       :total-rows="this.totalRows || filtered.length",
       :per-page="perPage",
       v-model="currentPage",
@@ -90,6 +91,10 @@
         default: false
       },
       sortable: {
+        type: Boolean,
+        default: false
+      },
+      hidePagination: {
         type: Boolean,
         default: false
       }
