@@ -58,9 +58,11 @@
     methods: {
       show () {
         this.shown = true
+        this.$emit('show')
       },
       hide () {
         this.shown = false
+        this.$emit('hide')
       },
       onEsc (e) {
         if (e.keyCode === 27) {
