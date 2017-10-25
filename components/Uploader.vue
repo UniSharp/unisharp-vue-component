@@ -25,7 +25,7 @@
       template(slot="clip-uploader-body", scope="props")
         ul.list-unstyled.u-uploader-body.mb-0.mt-3.mb-mt-0.col-md-6.px-0.pl-md-3(v-if="files.length")
           li.media.u-uploader-file(:key="key", v-for="(file, key) in files")
-            img.u-uploader-file-avatar.d-flex.mr-3(:src="file.dataUrl")
+            img.u-uploader-file-avatar.d-flex.mr-3(:src="file.dataUrl || require('../assets/img/upload-document.png')")
             .media-body
               p.mb-1.d-flex.align-items-center
                 span.u-uploader-file-name.font-weight-bold.mr-3 {{ file.name }}
@@ -33,7 +33,7 @@
                 i.u-uploader-file-remove.fa.fa-times.fa-lg(@click="remove(key)")
               .progress(v-if="file.status !== 'error' && file.status !== 'success'")
                 .progress-bar.bg-primary(role="progressbar", :style="{ width: file.progress + '%' }", :aria-valuenow="file.progress", aria-valuemin="0", aria-valuemax="100")
-              p.u-uploader-file-status.mb-0 {{ file.status }}
+              p.u-uploader-file-status.mb-0(:class="{ 'error-text': file.status === 'error' }") {{ file.status }}
     .invalid-feedback(v-if="error") {{ error }}
 </template>
 
@@ -192,6 +192,10 @@
 
     .invalid-feedback {
       display: block;
+    }
+
+    .error-text {
+      color: $form-feedback-invalid-color;
     }
 
     .u-uploader-action {
