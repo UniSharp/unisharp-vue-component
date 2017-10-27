@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-datetime
-    input.form-control(:type="inputType", :value="rfcDateTime", @click='togglePicker', :class="{ 'is-invalid': !!error }")
+    input.form-control(:type="inputType", :value="formattedTime", @click='togglePicker', :class="{ 'is-invalid': !!error }")
     .invalid-feedback(v-if="error") {{ error }}
     .overlay(v-if='showPicker', @click='togglePicker')
     .picker.bg-white(v-if='showPicker')
@@ -8,36 +8,32 @@
         ul.nav.nav-pills
           li.nav-item(v-for='(timeUnit, index) in scrollables[timeUnitName]')
             a.nav-link(
-              v-if='timeUnitName === "month"',
-              @click='setScrollableTimeUnit(index + 1)',
-              :class='{ selected: picker[timeUnitName] === index + 1 }'
-            ) {{ timeUnit }}
-            a.nav-link(
-              v-else,
               @click='setScrollableTimeUnit(index)',
-              :class='{ selected: picker[timeUnitName] === index }'
-            ) {{ index }}
+              :class='{ selected: picker.get(timeUnitName) === index }'
+            ) {{ timeUnitName === 'month' ? timeUnit : index }}
       .main(v-else)
         ul.nav.nav-pills(v-if='shouldPickDate')
-          li.nav-item: a.nav-link(@click='subMonth'): i.fa.fa-arrow-left
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ this.scrollables.month[picker.month - 1] }}
+          li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ picker.format('MMMM') }}
           li.nav-item: a.nav-link.text-center(@click='resetMonth'): i.fa.fa-calendar-o
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("year")') {{ picker.year }}
-          li.nav-item: a.nav-link(@click='addMonth'): i.fa.fa-arrow-right
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("year")') {{ picker.year() }}
+          li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right
           li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
-          li.nav-item(v-for='item in offsetDays'): a.nav-link.unclickable
-          li.nav-item(v-for='monthDay in monthDays'): a.nav-link(@click='setDate', :class="{ today: isToday(monthDay.date), selected: monthDay.selected }") {{ monthDay.date }}
+          li.nav-item(v-for='date in daysInMonth')
+            a.nav-link(@click='setDate', :class="{ today: isToday(date.date), selected: date.selected, unclickable: !date.date }") {{ date.date }}
         ul.nav.nav-pills.my-3(v-if='shouldPickTime')
           li.nav-item: a.nav-link.text-center(@click='resetMinute'): i.fa.fa-clock-o
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.hour }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.format('hh') }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ selected.minute }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ selected.minute() }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
 
 </template>
 
 <script>
   import moment from 'moment'
+  import _ from 'lodash'
+
   export default {
     model: {
       prop: 'value',
@@ -54,6 +50,10 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      format: {
+        type: String,
+        default: null
       },
       required: {
         type: Boolean,
@@ -75,63 +75,45 @@
         showPicker: false,
         showScroll: false,
         afterNoon: false,
-        selected: {},
-        picker: {}
+        pickerString: '',
+        selectedString: ''
       }
     },
     watch: {
-      selected: {
-        handler: function () {
-          this.updateSelectedDay()
-          this.afterNoon = this.selected.hour >= 12
-          this.$emit('change', this.datetime)
-        },
-        deep: true
-      },
-      picker: {
-        handler: function () {
-          this.updateSelectedDay()
-        },
-        deep: true
+      selected () {
+        this.$emit('change', moment(this.formattedTime).format(this.format))
       }
     },
     mounted () {
-      if (isNaN(Date.parse(this.value))) {
-        this.selected = this.clone(this.current)
-      } else {
-        let dateTime = moment(this.value)
-        this.selected = {
-          year: dateTime.format('Y'),
-          month: dateTime.format('M'),
-          day: dateTime.format('D'),
-          hour: dateTime.format('H'),
-          minute: dateTime.format('m')
-        }
-      }
-
-      this.picker = this.clone(this.selected)
-      this.picker.hour = this.selected.hour % this.scrollables.hour
+      this.selected = moment(this.value).isValid() ? moment() : moment(this.value)
+      this.picker = this.selected
     },
     computed: {
-      datetime () {
-        let selectable = []
-        if (this.shouldPickDate) {
-          selectable.push(
-            ('000' + this.selected.year).slice(-4) +
-            '-' + this.prependZero(this.selected.month) +
-            '-' + this.prependZero(this.selected.day)
-          )
+      moment () {
+        return moment
+      },
+      selected: {
+        get () {
+          return moment(this.selectedString)
+        },
+        set (value) {
+          this.selectedString = moment(value).format()
         }
-
-        if (this.shouldPickTime) {
-          selectable.push(
-            this.prependZero(this.selected.hour) +
-            ':' + this.prependZero(this.selected.minute) +
-            ':00'
-          )
+      },
+      picker: {
+        get () {
+          return moment(this.pickerString)
+        },
+        set (value) {
+          this.pickerString = moment(value).format()
         }
-
-        return selectable.join(' ')
+      },
+      formattedTime () {
+        return {
+          'date': this.selected.format('YYYY-MM-DD'),
+          'time': this.selected.format('hh:mm'),
+          'datetime': this.selected.format('YYYY-MM-DDThh:mm')
+        }[this.shouldPick]
       },
       current () {
         return {
@@ -146,26 +128,34 @@
         // return false
         return /Mobi/.test(navigator.userAgent)
       },
-      rfcDateTime () {
-        if (this.shouldPick === 'date' || this.shouldPick === 'time') {
-          return this.datetime
-        } else {
-          return this.datetime.replace(' ', 'T')
-        }
-      },
       weekdays () {
         return moment.weekdays()
-          .map(weekday => { return weekday.slice(0, 3) + '.' })
+          .map(weekday => { return `${weekday.slice(0, 3)}.` })
       },
-      monthDays () {
-        return this.getDaysWithinMonth(this.picker.year, this.picker.month)
-      },
-      offsetDays () {
-        let firstDay = this.monthDays[0]
-        return new Array(this.weekdays.indexOf(firstDay.weekday))
+      daysInMonth () {
+        // add empty day before first day in month
+        // Sun, Mon, Tue, Wed, Thu, Fri, Sat
+        //   _,   _,   _,   1,   2,   3,   4
+        return [
+          ..._.range(moment(this.picker).date(1).weekday()).map(() => {
+            return {
+              date: null,
+              weekday: null,
+              selected: false
+            }
+          }),
+          ..._.range(1, this.picker.daysInMonth() + 1).map(date => {
+            let itsDate = this.picker.clone().date(date)
+            return {
+              date,
+              weekday: itsDate.weekday(),
+              selected: itsDate.isSame(this.selected, 'day')
+            }
+          })
+        ]
       },
       isSelectedMonth () {
-        return this.picker.month === this.selected.month && this.picker.year === this.selected.year
+        return this.picker.isSame(this.selected, 'month')
       },
       shouldPick () {
         if (this.mode === 'time' || this.mode === 'date') {
@@ -191,81 +181,43 @@
     methods: {
       togglePicker () {
         if (!this.isMobile) {
-          if (!this.showPicker) {
-            this.picker.year = this.selected.year
-            this.picker.month = this.selected.month
-            this.showScroll = false
-          }
           this.showPicker = !this.showPicker
-        }
-      },
-      getDaysWithinMonth (year, month) {
-        let date = new Date(year, month - 1, 1)
-        let result = []
-        while (date.getMonth() === month - 1) {
-          let today = date.getDate()
-          result.push({
-            date: today,
-            weekday: this.weekdays[date.getDay()],
-            selected: this.isSelectedMonth && this.selected.day === today
-          })
-          date.setDate(today + 1)
-        }
-
-        return result
-      },
-      addMonth () {
-        if (this.picker.month === 12) {
-          this.picker.month = 1
-          this.picker.year++
-        } else {
-          this.picker.month++
-        }
-      },
-      subMonth () {
-        if (this.picker.month === 1) {
-          this.picker.month = 12
-          this.picker.year--
-        } else {
-          this.picker.month--
+          this.showScroll = !this.showPicker ? false : this.showScroll
         }
       },
       resetMonth () {
-        this.picker.month = this.current.month
-        this.picker.year = this.current.year
+        let current = moment()
+        this.selected = this.picker = this.picker.set({
+          'year': current.year(),
+          'month': current.month(),
+          'date': current.date()
+        })
       },
       resetMinute () {
-        this.selected.hour = moment().hour()
-        this.selected.minute = moment().minute()
-        this.picker.hour = this.selected.hour % this.scrollables.hour
-        this.picker.minute = this.selected.minute
+        let current = moment()
+        this.selected = this.picker = this.picker.set({
+          'hour': current.year(),
+          'minute': current.month()
+        })
       },
       setDate (e) {
-        this.selected.day = e.target.innerHTML
-        this.selected.month = this.picker.month
-        this.selected.year = this.picker.year
-        // this.showPicker = false
+        this.selected = this.picker.clone().date(e.target.innerHTML)
       },
       setScrollableTimeUnit (timeUnit) {
         if (this.timeUnitName === 'hour') {
-          this.selected.hour = parseInt(timeUnit) + (this.afterNoon + 0) * 12
-        } else if (this.timeUnitName === 'minute') {
-          this.selected.minute = timeUnit
+          this.picker = this.selected.hour(parseInt(timeUnit) + (this.afterNoon + 0) * 12)
         }
 
-        this.picker[this.timeUnitName] = timeUnit
+        this.picker = this.picker.set(this.timeUnitName, timeUnit)
+
+        if (['hour', 'minute'].includes(this.timeUnitName)) {
+          this.selected = this.picker
+        }
+
         this.showScroll = !this.showScroll
       },
       isToday (date) {
-        return (date === this.current.day &&
-          this.picker.month === this.current.month &&
-          this.picker.year === this.current.year)
-      },
-      updateSelectedDay () {
-        this.monthDays[this.selected.day - 1].selected = this.isSelectedMonth
-      },
-      prependZero (str) {
-        return ('00' + str).slice(-2)
+        return moment().isSame(this.picker.date(date), 'day')
       },
       toggleNoon () {
         this.afterNoon = !this.afterNoon
@@ -275,17 +227,14 @@
         this.timeUnitName = timeUnitName
         this.showScroll = !this.showScroll
         if (this.showScroll) {
-          this.$nextTick(function () {
+          this.$nextTick(() => {
             let container = this.$refs.scroll
             let scrollItems = this.scrollables[this.timeUnitName]
             let scrollLength = Array.isArray(scrollItems) ? scrollItems.length : scrollItems
             let offset = this.timeUnitName === 'month' ? 3.5 : 2.5
-            container.scrollTop = container.scrollHeight * (this.picker[this.timeUnitName] - offset) / scrollLength
+            container.scrollTop = container.scrollHeight * (this.picker.get(this.timeUnitName) - offset) / scrollLength
           })
         }
-      },
-      clone (value) {
-        return JSON.parse(JSON.stringify(value))
       }
     }
   }
