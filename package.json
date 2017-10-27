@@ -1,7 +1,7 @@
 {
-  "name": "uni-admin",
-  "description": "UniAdmin",
-  "version": "0.2.14",
+  "name": "@unisharp/vue-component",
+  "description": "Vue Bootstrap Component",
+  "version": "0.2.15",
   "keywords": [
     "vue",
     "bootstrap",
@@ -64,6 +64,14 @@
     "stylelint-processor-html": "^1.0.0",
     "stylelint-webpack-plugin": "^0.9.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unisharp/unisharp-vue-component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/unisharp/unisharp-vue-component/issues"
+  },
+  "homepage": "https://github.com/unisharp/unisharp-vue-component#readme",
   "config": {
     "nuxt": {
       "host": "0.0.0.0"
