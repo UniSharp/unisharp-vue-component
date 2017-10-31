@@ -25,7 +25,7 @@
           li.nav-item: a.nav-link.text-center(@click='resetMinute'): i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.format('hh') }}
           li.nav-item: a.nav-link.text-center(@click='resetMinute') :
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ selected.minute() }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.minute() }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
 
 </template>
@@ -74,7 +74,6 @@
         timeUnitName: '',
         showPicker: false,
         showScroll: false,
-        afterNoon: false,
         pickerString: '',
         selectedString: ''
       }
@@ -108,21 +107,30 @@
           this.pickerString = moment(value).format()
         }
       },
+      afterNoon: {
+        get () {
+          return this.picker.hour() > 12
+        },
+        set (value) {
+          let diff = 0
+          switch (true) {
+            case !value && this.picker.hour() > 11:
+              diff = -12
+              break
+            case value && this.picker.hour() < 12:
+              diff = 12
+              break
+          }
+
+          this.picker = this.picker.hour(this.picker.hour() + diff)
+        }
+      },
       formattedTime () {
         return {
           'date': this.selected.format('YYYY-MM-DD'),
-          'time': this.selected.format('hh:mm'),
-          'datetime': this.selected.format('YYYY-MM-DDThh:mm')
+          'time': this.selected.format('HH:mm'),
+          'datetime': this.selected.format('YYYY-MM-DDTHH:mm')
         }[this.shouldPick]
-      },
-      current () {
-        return {
-          year: moment().year(),
-          month: moment().month() + 1,
-          day: moment().date(),
-          hour: moment().hour(),
-          minute: moment().minute()
-        }
       },
       isMobile () {
         // return false
@@ -221,7 +229,7 @@
       },
       toggleNoon () {
         this.afterNoon = !this.afterNoon
-        this.selected.hour += this.afterNoon ? 12 : -12
+        this.selected = this.picker
       },
       toggleScroll (timeUnitName) {
         this.timeUnitName = timeUnitName
