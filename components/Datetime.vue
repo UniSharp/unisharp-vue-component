@@ -59,6 +59,10 @@
         type: Boolean,
         default: false
       },
+      nullable: {
+        type: Boolean,
+        default: false
+      },
       error: {
         type: String
       }
@@ -80,12 +84,16 @@
     },
     watch: {
       selected () {
-        this.$emit('change', moment(this.formattedTime).format(this.format))
+        if ((this.nullable || this.nullable === '') && !moment(this.value).isValid()) {
+          this.$emit('change', '')
+        } else {
+          this.$emit('change', moment(this.formattedTime).format(this.format))
+        }
       }
     },
     mounted () {
-      this.selected = moment(this.value).isValid() ? moment() : moment(this.value)
-      this.picker = this.selected
+      this.picker = moment(this.value).isValid() ? moment(this.value) : moment()
+      this.selected = this.nullable || this.nullable === '' ? '' : this.picker
     },
     computed: {
       moment () {

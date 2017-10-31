@@ -45,7 +45,7 @@
           .form-group.row
             label.col-md-2.col-form-label Date Time：
             .col-md-10
-              u-datetime(mode='datetime', v-model='form.time', @change='showTime')
+              u-datetime(mode='datetime', v-model='form.time', @change='showTime', nullable)
           //- Textarea
           .form-group.row
             label.col-md-2.col-form-label Textarea：
@@ -109,7 +109,7 @@
           food: null,
           fruit: null,
           checked: false,
-          time: '2017-09-07 12:38:59',
+          time: '',
           secret: 'S3CR3T',
           radio: {
             value: 1
