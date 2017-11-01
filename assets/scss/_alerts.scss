@@ -14,7 +14,7 @@
 }
 
 .alert-success {
-  background-color: rgba($green, .3);
+  background-color: $alert-success;
   border-color: none;
 
   &:before {
@@ -27,7 +27,7 @@
 }
 
 .alert-danger {
-  background-color: rgba($red, .15);
+  background-color: $alert-danger;
   border-color: none;
 
   &:before {
@@ -38,7 +38,7 @@
 }
 
 .alert-info {
-  background-color: rgba($white, .5);
+  background-color: $alert-info;
   border-color: rgba($black, .1);
 
   &:before {
