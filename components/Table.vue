@@ -1,7 +1,8 @@
 <template lang="pug">
   div
     .loading.d-flex.align-items-center.justify-content-center(v-if="isLoading")
-      i.fa.fa-spin.fa-refresh.fa-5x
+      .fa-box.d-flex.align-items-center.justify-content-center
+        i.fa.fa-spin.fa-refresh.fa-2x
     .u-table.table-responsive
       table.table.table-bordered.table-striped.text-center
         thead(:class="{ 'float-grid': rows }")
@@ -238,6 +239,18 @@
     // background-color: black;
     // opacity: .3;
     z-index: 3;
+
+    .fa-box {
+      width: 70px;
+      height: 70px;
+      background-color: #fff;
+      border-radius: 100px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+
+      i {
+        opacity: .8;
+      }
+    }
   }
 
   .float-grid {
