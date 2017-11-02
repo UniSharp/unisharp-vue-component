@@ -3,6 +3,7 @@
     textarea.form-control(
       :class="{ 'is-invalid': !!error }",
       :rows="rows",
+      :name="name",
       :placeholder="placeholder",
       @input="$emit('input', $event.target.value)",
       v-if=" type === 'textarea' || rows > 1 "
@@ -11,6 +12,7 @@
       :id="id",
       :class="{ 'is-invalid': !!error }",
       :type="type",
+      :name="name",
       :value="value",
       :placeholder="placeholder",
       @input="$emit('input', $event.target.value)",
@@ -36,6 +38,9 @@
       placeholder: String,
       value: String,
       error: {
+        type: String
+      },
+      name: {
         type: String
       }
     },
