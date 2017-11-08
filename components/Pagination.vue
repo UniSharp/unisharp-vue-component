@@ -48,6 +48,11 @@
     data () {
       return {}
     },
+    watch: {
+      perPage () {
+        this.$emit('update:currentPage', 1)
+      }
+    },
     computed: {
       totalPage () {
         return Math.ceil(this.totalRows / this.perPage)
