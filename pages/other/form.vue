@@ -72,7 +72,7 @@
             label.col-md-2
               span.title Tag Input (Selection)：
             .col-md-10
-              u-input-tag(v-model="selectedTags", placeholder="AddTag", :tags="tags", :limitTag="2")
+              u-input-tag(v-model="selectedTags", placeholder="AddTag", :tags="tags", :limit="2")
           .form-group.row
             label.col-md-2
               span.title Tag Input (Can Scroll)：
@@ -82,7 +82,7 @@
             label.col-md-2
               span.title Tag Input (Text Add)：
             .col-md-10
-              u-input-tag(v-model="selectedTags2", placeholder="AddTag", :tags.sync="tags", :limitTag="2", insertable)
+              u-input-tag(v-model="selectedTags2", placeholder="AddTag", :tags.sync="tags", :limit="2", insertable)
           //- File Uploader
           .form-group.row
             label.col-md-2
