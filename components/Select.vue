@@ -33,7 +33,7 @@
             ref="options"
           ) {{ option.text }}
         .u-select-options-wrapper(v-else)
-          a.dropdown-item
+          a.dropdown-item(@click.prevent.stop="selectEmpty")
             | {{ empty }}
     .invalid-feedback(v-if="error") {{ error }}
 </template>
@@ -145,6 +145,11 @@
         this.$refs.dropdown.hide()
         this.$emit('change', selected)
         this.cleanFilter()
+      },
+      selectEmpty () {
+        if (this.empty.indexOf('New Tag:') === 0) {
+          this.insert(this.filter)
+        }
       },
       insert (inserted) {
         this.$refs.dropdown.hide()
