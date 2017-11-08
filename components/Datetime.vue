@@ -84,7 +84,7 @@
     },
     watch: {
       selected () {
-        if ((this.nullable || this.nullable === '') && !moment(this.value).isValid()) {
+        if ((this.nullable || this.nullable === '') && !moment(this.selected).isValid()) {
           this.$emit('change', '')
         } else {
           this.$emit('change', moment(this.formattedTime).format(this.format))
