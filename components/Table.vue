@@ -30,7 +30,7 @@
       v-if="!hidePagination",
       :total-rows="this.totalRows || filtered.length",
       :per-page="perPage",
-      v-model="currentPage",
+      :currentPage.sync="currentPage",
       @input="this.cleanToggles"
     )
 </template>

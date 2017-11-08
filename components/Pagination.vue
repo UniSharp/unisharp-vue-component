@@ -32,7 +32,7 @@
         type: Number,
         default: 20
       },
-      value: {
+      currentPage: {
         type: Number,
         default: 1
       },
@@ -46,9 +46,7 @@
       }
     },
     data () {
-      return {
-        currentPage: this.value
-      }
+      return {}
     },
     computed: {
       totalPage () {
@@ -91,8 +89,7 @@
         if (page < 1 || page > this.totalPage) {
           return
         }
-        this.currentPage = page
-        this.$emit('input', this.currentPage)
+        this.$emit('update:currentPage', page)
       }
     }
   }
