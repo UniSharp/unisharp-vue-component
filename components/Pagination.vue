@@ -58,6 +58,8 @@
         return Math.ceil(this.totalRows / this.perPage)
       },
       pageList () {
+        this.$emit('update:currentPage', this.totalPage < this.currentPage ? 1 : this.currentPage)
+
         let half = Math.floor(_.min([this.limitPage, this.totalPage]) / 2)
         let start = this.currentPage - half
         let end = this.currentPage + half
