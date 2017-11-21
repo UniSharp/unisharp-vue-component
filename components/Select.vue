@@ -203,17 +203,13 @@
             this.$refs.dropdown.show()
             break
 
-          case 'BS':
-            this.filter = this.filter.slice(0, this.filter.length - 1)
-            this.$emit('keydown', e)
-            break
-
           case 'ESC':
             this.cleanFilter()
             this.$refs.dropdown.hide()
             break
 
           default:
+            this.$emit('keydown', e)
             return
         }
 
