@@ -61,5 +61,10 @@ export default {
       title: '表格',
       to: '/other/table'
     }]
+  }],
+  dropdownMenu: [{
+    icon: 'cog',
+    title: 'Change Password',
+    to: '/password'
   }]
 }

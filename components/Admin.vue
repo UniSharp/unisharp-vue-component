@@ -13,12 +13,12 @@
             slot(name="breadcrumb")
               u-breadcrumb
           u-user-dropdown.h-100.ml-auto
-            //- nuxt-link.dropdown-item
-              i.fa.fa-cog.mr-2(aria-hidden="true")
-              span 更改密碼
+            nuxt-link.dropdown-item(v-for="item in dropdownMenu", :to="item.to")
+              i.fa.mr-2(:class="`fa-${item.icon}`", aria-hidden="true")
+              span {{ item.title }}
             nuxt-link.dropdown-item(to="/logout")
               i.fa.fa-sign-out.mr-2(aria-hidden="true")
-              span 登出
+              span Logout
         header.px-4.bg-white.d-flex.align-items-center
           h1.mb-0.mr-auto {{ title || defaultTitle }}
           slot(name="functions")
@@ -42,6 +42,9 @@
         let current = menu.getCurrent(this.$route)
 
         return current ? current.title : config.index.title
+      },
+      dropdownMenu () {
+        return config.dropdownMenu
       }
     }
   }
