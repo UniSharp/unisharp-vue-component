@@ -66,5 +66,9 @@ export default {
     icon: 'cog',
     title: 'Change Password',
     to: '/password'
+  }, {
+    icon: 'sign-out',
+    title: 'Logout',
+    to: '/logout'
   }]
 }

@@ -13,12 +13,14 @@
             slot(name="breadcrumb")
               u-breadcrumb
           u-user-dropdown.h-100.ml-auto
-            nuxt-link.dropdown-item(v-for="item in dropdownMenu", :to="item.to")
-              i.fa.mr-2(:class="`fa-${item.icon}`", aria-hidden="true")
-              span {{ item.title }}
-            nuxt-link.dropdown-item(to="/logout")
-              i.fa.fa-sign-out.mr-2(aria-hidden="true")
-              span Logout
+            template(v-if="dropdownMenu")
+              nuxt-link.dropdown-item(v-for="item in dropdownMenu", :to="item.to")
+                i.fa.mr-2(:class="`fa-${item.icon}`", aria-hidden="true")
+                span {{ item.title }}
+            template(v-else)
+              nuxt-link.dropdown-item(to="/logout")
+                i.fa.fa-sign-out.mr-2(aria-hidden="true")
+                span 登出
         header.px-4.bg-white.d-flex.align-items-center
           h1.mb-0.mr-auto {{ title || defaultTitle }}
           slot(name="functions")
