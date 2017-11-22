@@ -14,7 +14,7 @@
               u-breadcrumb
           u-user-dropdown.h-100.ml-auto
             template(v-if="dropdownMenu")
-              nuxt-link.dropdown-item(v-for="item in dropdownMenu", :to="item.to")
+              nuxt-link.dropdown-item(v-for="(item, index) in dropdownMenu", :to="item.to", :key="index")
                 i.fa.mr-2(:class="`fa-${item.icon}`", aria-hidden="true")
                 span {{ item.title }}
             template(v-else)
