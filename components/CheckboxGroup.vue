@@ -32,7 +32,7 @@
     },
     data () {
       return {
-        checked: []
+        checked: this.vModel
       }
     },
     watch: {
