@@ -13,7 +13,7 @@
     computed: {
       username () {
         try {
-          return this.$store.state.user.getters.username || this.$store.state.user.data.name || 'User'
+          return this.$store.getters['user/username'] || this.$store.state.user.data.name || 'User'
         } catch (e) {
           return 'User'
         }
