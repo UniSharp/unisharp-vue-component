@@ -19,7 +19,8 @@
         :placeholder="placeholder",
         no-placeholder,
         filterable
-        :empty="search && (!!this.insertable || this.insertable === '') ? `New Tag: ${search}` : ''",
+        pinned-option-prefix="New Tag: ",
+        :pinned-option="search && (!!this.insertable || this.insertable === '') ? search : null",
         :disabled="tags.length < 1 && search.length < 1"
       )
       u-modal(ref="modal", size="sm")

@@ -23,7 +23,10 @@
         v-else
       ) {{ current }}
       .dropdown-menu.u-select-options(ref="menu")
-        .u-select-options-wrapper(v-if="filteredOptions.length")
+        .u-select-options-wrapper(v-if="pinnedOption")
+          a.dropdown-item(:class="{ hover: hover < 0 }", @click.prevent.stop="selectPinned")
+            | {{ pinnedOptionPrefix }}{{ pinnedOption }}
+        .u-select-options-wrapper
           a.dropdown-item(
             @mouseenter="hover = key",
             @click.prevent.stop="select(option.value)",
@@ -32,9 +35,6 @@
             :key="key",
             ref="options"
           ) {{ option.text }}
-        .u-select-options-wrapper(v-else)
-          a.dropdown-item(@click.prevent.stop="selectEmpty")
-            | {{ empty }}
     .invalid-feedback(v-if="error") {{ error }}
 </template>
 
@@ -67,9 +67,13 @@
       noPlaceholder: {
         type: Boolean
       },
-      empty: {
+      pinnedOption: {
+        type: [String, Object],
+        default: null
+      },
+      pinnedOptionPrefix: {
         type: String,
-        default: 'No Options'
+        default: ''
       },
       search: {
         type: String,
@@ -125,6 +129,9 @@
           options.unshift({ text: this.placeholder, value: null })
         }
 
+        if (this.pinnedOption) {
+          this.hover = -1
+        }
         return options
       },
       _: () => _
@@ -146,10 +153,8 @@
         this.$emit('change', selected)
         this.cleanFilter()
       },
-      selectEmpty () {
-        if (this.empty.indexOf('New Tag:') === 0) {
-          this.insert(this.filter)
-        }
+      selectPinned () {
+        this.insert(this.pinnedOption)
       },
       insert (inserted) {
         this.$refs.dropdown.hide()
