@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-datetime
-    input.form-control(:type="inputType", :value="formattedTime", @click='togglePicker', :class="{ 'is-invalid': !!error }")
+    input.form-control(:type="inputType", :value="formattedTime", @click='togglePicker', :class="{ 'is-invalid': !!error }", readonly)
     .invalid-feedback(v-if="error") {{ error }}
     .overlay(v-if='showPicker', @click='togglePicker')
     .picker.bg-white(v-if='showPicker')
