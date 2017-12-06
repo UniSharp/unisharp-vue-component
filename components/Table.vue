@@ -83,6 +83,10 @@
         type: Boolean,
         default: false
       },
+      primaryKey: {
+        type: String,
+        default: 'id'
+      },
       orderBy: {
         type: String
       },
@@ -151,8 +155,9 @@
         return this.finalRows.length !== 0 && _.difference(this.finalRows.map(v => v.uIndex), this.checks).length === 0
       },
       indexed () {
+        let shouldUseKey = _.map(this.pured, this.primaryKey).length === this.pured.length
         return this.pured.map((item, index) => {
-          item.uIndex = index
+          item.uIndex = shouldUseKey ? item[this.primaryKey] : index
           return item
         })
       },
