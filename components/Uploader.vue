@@ -2,6 +2,7 @@
   .u-uploader
     vue-clip.u-uploader-clip.row.mx-0(
       :id="id",
+      ref="clip",
       :name="name",
       :options="options",
       :on-init="init",
@@ -135,6 +136,13 @@
         this.$emit('upload')
       },
       remove (key) {
+        // gets dropzone to decrement max files
+        let file = this.files[key]
+        this.$refs.clip.removeFile(file)
+        // gets vue clip to remove the file from it's array
+        let index = this.$refs.clip.files.indexOf(file)
+        this.$refs.clip.files.splice(index, 1)
+
         this.$emit('removedFile', this.files[key])
         this.files.splice(key, 1)
       },
