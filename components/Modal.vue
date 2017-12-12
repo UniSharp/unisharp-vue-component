@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-modal
-    .modal(:class="{ open }")
+    .modal(:class="[open ? openClass : '']")
       transition(name="fade")
         .u-modal-backdrop(v-if="shown", @click="hide")
       transition(name="slide")
@@ -22,6 +22,10 @@
     props: {
       size: {
         type: String
+      },
+      openClass: {
+        type: String,
+        default: 'open'
       }
     },
     data () {
@@ -105,10 +109,19 @@
     background-color: rgba(0, 0, 0, .4);
   }
 
-  .modal.open {
-    display: flex;
-    align-items: center;
-    overflow-x: hidden;
-    overflow-y: auto;
+  .modal {
+    &.open {
+      display: flex;
+      align-items: center;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    &.open-flex-start {
+      display: flex;
+      align-items: flex-start;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
   }
 </style>
