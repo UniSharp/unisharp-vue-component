@@ -61,7 +61,7 @@
             label.col-md-2
               span.title Radio Stacked：
             .col-md-10
-              u-radio(name="food2", :options="foods", stacked="true", v-model="form.radio.value")
+              u-radio(name="food2", :options="foods", :stacked="true", v-model="form.radio.value")
           .form-group.row
             label.col-md-2
               span.title Radio Result：
