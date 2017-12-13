@@ -15,16 +15,16 @@
         ul.nav.nav-pills(v-if='shouldPickDate')
           li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ picker.format('MMMM') }}
-          li.nav-item: a.nav-link.text-center(@click='resetMonth'): i.fa.fa-calendar-o
+          li.nav-item: a.nav-link.text-center(@click='resetDate'): i.fa.fa-calendar-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("year")') {{ picker.year() }}
           li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right
           li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
           li.nav-item(v-for='date in daysInMonth')
             a.nav-link(@click='setDate', :class="{ today: isToday(date.date), selected: date.selected, unclickable: !date.date }") {{ date.date }}
         ul.nav.nav-pills.my-3(v-if='shouldPickTime')
-          li.nav-item: a.nav-link.text-center(@click='resetMinute'): i.fa.fa-clock-o
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.format('hh') }}
-          li.nav-item: a.nav-link.text-center(@click='resetMinute') :
+          li.nav-item: a.nav-link.text-center(@click='resetTime'): i.fa.fa-clock-o
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.format('h') }}
+          li.nav-item: a.nav-link.text-center(@click='resetTime') :
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.minute() }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
 
@@ -117,7 +117,7 @@
       },
       afterNoon: {
         get () {
-          return this.picker.hour() > 12
+          return this.selected.format('A') === 'PM'
         },
         set (value) {
           let diff = 0
@@ -201,7 +201,7 @@
           this.showScroll = !this.showPicker ? false : this.showScroll
         }
       },
-      resetMonth () {
+      resetDate () {
         let current = moment()
         this.selected = this.picker = this.picker.set({
           'year': current.year(),
@@ -209,11 +209,11 @@
           'date': current.date()
         })
       },
-      resetMinute () {
+      resetTime () {
         let current = moment()
         this.selected = this.picker = this.picker.set({
-          'hour': current.year(),
-          'minute': current.month()
+          'hour': current.hour(),
+          'minute': current.minute()
         })
       },
       setDate (e) {
@@ -221,7 +221,7 @@
       },
       setScrollableTimeUnit (timeUnit) {
         if (this.timeUnitName === 'hour') {
-          this.picker = this.selected.hour(parseInt(timeUnit) + (this.afterNoon + 0) * 12)
+          timeUnit += (this.afterNoon * 12)
         }
 
         this.picker = this.picker.set(this.timeUnitName, timeUnit)
