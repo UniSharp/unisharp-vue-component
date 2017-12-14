@@ -2,8 +2,8 @@
   .u-datetime
     input.form-control(:type="inputType", :value="formattedTime", @click='togglePicker', :class="{ 'is-invalid': !!error }", readonly)
     .invalid-feedback(v-if="error") {{ error }}
-    .overlay(v-if='showPicker', @click='togglePicker')
-    .picker.bg-white(v-if='showPicker')
+    .overlay(v-if='showPicker', @click='togglePicker', :class="{'overlay-gray': display === 'modal'}")
+    .picker.bg-white(v-if='showPicker', :class="{'position-center': display === 'modal'}")
       .scroll(v-if='showScroll' ref='scroll')
         ul.nav.nav-pills
           li.nav-item(v-for='(timeUnit, index) in scrollables[timeUnitName]')
@@ -46,6 +46,10 @@
       mode: {
         type: String,
         default: 'datetime'
+      },
+      display: {
+        type: String,
+        default: 'dropdown'
       },
       disabled: {
         type: Boolean,
@@ -287,12 +291,22 @@
     z-index: 998;
   }
 
+  .overlay.overlay-gray {
+    background-color: rgba(0, 0, 0, .5);
+  }
+
   .picker {
     position: absolute;
     top: $top-offset;
     width: calc(#{$button-width} * 7 + #{$border-width} * 2);
     z-index: $z-index;
     border: $border-width solid $gray-800;
+  }
+
+  .picker.position-center {
+    position: fixed;
+    top: calc(50vh - #{$height} * 10 / 2);
+    left: calc(50vw - #{$button-width} * 7 / 2);
   }
 
   .scroll {
