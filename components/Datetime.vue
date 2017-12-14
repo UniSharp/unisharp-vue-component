@@ -27,6 +27,9 @@
           li.nav-item: a.nav-link.text-center(@click='resetTime') :
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.minute() }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
+        ul.nav.nav-pills
+          li.nav-item.w-50: a.nav-link.w-100.text-center(@click='selected = null'): i.fa.fa-trash
+          li.nav-item.w-50: a.nav-link.w-100.text-center(@click='togglePicker'): i.fa.fa-check
 
 </template>
 

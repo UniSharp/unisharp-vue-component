@@ -109,7 +109,7 @@
           food: null,
           fruit: null,
           checked: false,
-          time: '',
+          time: null,
           secret: 'S3CR3T',
           radio: {
             value: 1
