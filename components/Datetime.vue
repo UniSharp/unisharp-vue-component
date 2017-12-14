@@ -265,6 +265,7 @@
 
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
+  @import "node_modules/bootstrap/scss/_functions";
 
   $height: 2.5rem;
   $button-width: 4.5rem;
@@ -341,8 +342,7 @@
 
     &.selected {
       background-color: $highlight-color;
-
-      @include color-yiq($highlight-color);
+      color: color-yiq($highlight-color);
     }
 
     &.scrollable {
