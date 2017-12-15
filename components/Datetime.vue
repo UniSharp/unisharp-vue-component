@@ -84,7 +84,11 @@
     watch: {
       selected () {
         if (moment(this.selected).isValid()) {
-          this.$emit('change', moment(this.selected).format('YYYY-MM-DD HH:mm:00'))
+          this.$emit('change', moment(this.selected).format({
+            'date': 'YYYY-MM-DD',
+            'time': 'HH:mm:00',
+            'datetime': 'YYYY-MM-DD HH:mm:00'
+          }[this.shouldPick]))
         } else {
           this.$emit('change', null)
         }
