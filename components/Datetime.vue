@@ -77,8 +77,8 @@
         timeUnitName: '',
         showPicker: false,
         showScroll: false,
-        pickerString: '',
-        selectedString: ''
+        pickerString: null,
+        selectedString: null
       }
     },
     watch: {
@@ -111,7 +111,11 @@
           return moment(this.selectedString)
         },
         set (value) {
-          this.selectedString = moment(value).format()
+          if (value === null) {
+            this.selectedString = null
+          } else {
+            this.selectedString = moment(value).format()
+          }
         }
       },
       picker: {
@@ -141,6 +145,9 @@
         }
       },
       valueForInput () {
+        if (this.selectedString === null) {
+          return null
+        }
         return this.selected.format({
           'date': 'YYYY-MM-DD',
           'time': 'HH:mm',
