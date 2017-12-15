@@ -58,15 +58,7 @@
         type: Boolean,
         default: false
       },
-      format: {
-        type: String,
-        default: null
-      },
       required: {
-        type: Boolean,
-        default: false
-      },
-      nullable: {
         type: Boolean,
         default: false
       },
@@ -91,16 +83,20 @@
     },
     watch: {
       selected () {
-        if ((this.nullable || this.nullable === '') && !moment(this.selected).isValid()) {
-          this.$emit('change', '')
+        if (moment(this.selected).isValid()) {
+          this.$emit('change', this.formattedTime)
         } else {
-          this.$emit('change', moment(this.formattedTime).format(this.format))
+          this.$emit('change', null)
         }
       }
     },
     mounted () {
-      this.picker = moment(this.value).isValid() ? moment(this.value) : moment()
-      this.selected = this.nullable || this.nullable === '' ? '' : this.picker
+      if (moment(this.value).isValid()) {
+        this.selected = this.picker = moment(this.value)
+      } else {
+        this.selected = null
+        this.picker = moment()
+      }
     },
     computed: {
       moment () {
