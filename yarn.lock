@@ -10,6 +10,12 @@
     mustache "^2.3.0"
     stack-trace "0.0.10"
 
+"@unisharp/vue-component-notification@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@unisharp/vue-component-notification/-/vue-component-notification-0.0.6.tgz#6fe5cf2c2080d1d684ec3c354f3d920988c954f9"
+  dependencies:
+    bootstrap v4.0.0-beta
+
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -5766,12 +5772,6 @@ uid-number@^0.0.6:
 ultron@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ultron/-/ultron-1.1.0.tgz#b07a2e6a541a815fc6a34ccd4533baec307ca864"
-
-uni-notification@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/uni-notification/-/uni-notification-0.0.1.tgz#b1f16691dce8264b04856ec1cdeff4bc161485c6"
-  dependencies:
-    bootstrap v4.0.0-beta
 
 uniq@^1.0.1:
   version "1.0.1"
