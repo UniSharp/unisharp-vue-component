@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-datetime
-    input.form-control(:type="inputType", :value="formattedTime", @click='togglePicker', :class="{ 'is-invalid': !!error }", readonly)
+    input.form-control(:type="inputType", :value="valueForInput", @click='togglePicker', :class="{ 'is-invalid': !!error }", readonly)
     .invalid-feedback(v-if="error") {{ error }}
     .overlay(v-if='showPicker', @click='togglePicker', :class="{'overlay-gray': display === 'modal'}")
     .picker.bg-white(v-if='showPicker', :class="{'position-center': display === 'modal'}")
@@ -84,7 +84,7 @@
     watch: {
       selected () {
         if (moment(this.selected).isValid()) {
-          this.$emit('change', this.formattedTime)
+          this.$emit('change', moment(this.selected).format('YYYY-MM-DD HH:mm:00'))
         } else {
           this.$emit('change', null)
         }
@@ -136,12 +136,12 @@
           this.picker = this.picker.hour(this.picker.hour() + diff)
         }
       },
-      formattedTime () {
-        return {
-          'date': this.selected.format('YYYY-MM-DD'),
-          'time': this.selected.format('HH:mm'),
-          'datetime': this.selected.format('YYYY-MM-DDTHH:mm')
-        }[this.shouldPick]
+      valueForInput () {
+        return this.selected.format({
+          'date': 'YYYY-MM-DD',
+          'time': 'HH:mm',
+          'datetime': 'YYYY-MM-DDTHH:mm'
+        }[this.shouldPick])
       },
       isMobile () {
         // return false
