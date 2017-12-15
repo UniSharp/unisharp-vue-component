@@ -1,6 +1,7 @@
 <template lang="pug">
   .u-datetime
-    input.form-control(:type="inputType", :value="valueForInput", @click='togglePicker', :class="{ 'is-invalid': !!error }", readonly)
+    input.form-control(v-if="isMobile", :type="inputType", :value="valueForInput", @change='updateSelectedValue', :class="{ 'is-invalid': !!error }")
+    input.form-control(v-else, :type="inputType", :value="valueForInput", @click='togglePicker', :class="{ 'is-invalid': !!error }", readonly)
     .invalid-feedback(v-if="error") {{ error }}
     .overlay(v-if='showPicker', @click='togglePicker', :class="{'overlay-gray': display === 'modal'}")
     .picker.bg-white(v-if='showPicker', :class="{'position-center': display === 'modal'}")
@@ -25,7 +26,7 @@
           li.nav-item: a.nav-link.text-center(@click='resetTime'): i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.format('h') }}
           li.nav-item: a.nav-link.text-center(@click='resetTime') :
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.minute() }}
+          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.format('mm') }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
         ul.nav.nav-pills
           li.nav-item.w-50: a.nav-link.w-100.text-center(@click='selected = null'): i.fa.fa-trash
@@ -155,7 +156,6 @@
         }[this.shouldPick])
       },
       isMobile () {
-        // return false
         return /Mobi/.test(navigator.userAgent)
       },
       weekdays () {
@@ -209,6 +209,9 @@
       }
     },
     methods: {
+      updateSelectedValue (e) {
+        this.selected = e.target.value
+      },
       togglePicker () {
         if (!this.isMobile) {
           this.showPicker = !this.showPicker
