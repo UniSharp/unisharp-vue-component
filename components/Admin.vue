@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import config from '~/config'
+  import config, { createMenu } from '~/config'
   import Menu from '../plugins/Menu'
 
   export default {
@@ -40,7 +40,7 @@
     },
     computed: {
       defaultTitle () {
-        let menu = new Menu(config.menu)
+        let menu = new Menu(createMenu(this.$store))
         let current = menu.getCurrent(this.$route)
 
         return current ? current.title : config.index.title

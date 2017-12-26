@@ -5,6 +5,22 @@ class Menu {
     this.menu = menu
   }
 
+  getVisible () {
+    return this.menu.filter(menu => {
+      if (menu.children) {
+        menu.children = menu.children.filter(child => {
+          if (child.show === undefined || !!child.show) {
+            return child
+          }
+        })
+      }
+
+      if (menu.show === undefined || !!menu.show) {
+        return menu
+      }
+    })
+  }
+
   getCurrent ($route) {
     return _.find(Menu.normalize(this.menu), { matched: $route.matched[0].path })
   }

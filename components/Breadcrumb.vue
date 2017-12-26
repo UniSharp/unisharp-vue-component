@@ -11,7 +11,7 @@
 
 <script>
   import _ from 'lodash'
-  import config from '~/config'
+  import config, { createMenu } from '~/config'
   import Menu from '../plugins/Menu'
 
   export default {
@@ -28,7 +28,7 @@
       _: () => _,
       defaultItems () {
         let items = [{ text: config.index.title, to: config.index.to }]
-        let menu = new Menu(config.menu)
+        let menu = new Menu(createMenu(this.$store))
         let current = menu.getCurrent(this.$route)
 
         if (current) {

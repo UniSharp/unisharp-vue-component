@@ -16,18 +16,18 @@
 
 <script>
   import _ from 'lodash'
-  import config from '~/config'
+  import { createMenu } from '~/config'
   import Menu from '../plugins/Menu'
 
   export default {
     data () {
       return {
-        active: -1
+        active: -1,
+        list: []
       }
     },
     computed: {
       _: () => _,
-      list: () => config.menu,
       Menu: () => Menu
     },
     methods: {
@@ -36,6 +36,8 @@
       }
     },
     created () {
+      this.list = new Menu(createMenu(this.$store)).getVisible()
+
       _.each(this.list, (item, i) => {
         if (Menu.isActive(item, this.$route)) {
           this.active = i

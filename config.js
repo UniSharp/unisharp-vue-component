@@ -1,11 +1,8 @@
-export default {
-  index: {
-    title: 'Blue Admin',
-    to: '/'
-  },
-  menu: [{
+export const createMenu = store => [
+  {
     icon: 'book',
     title: 'Style Guide',
+    show: true,
     children: [{
       title: 'Colors',
       to: '/guide/colors'
@@ -61,7 +58,14 @@ export default {
       title: '表格',
       to: '/other/table'
     }]
-  }],
+  }
+]
+
+export default {
+  index: {
+    title: 'Blue Admin',
+    to: '/'
+  },
   dropdownMenu: [{
     icon: 'cog',
     title: 'Change Password',
