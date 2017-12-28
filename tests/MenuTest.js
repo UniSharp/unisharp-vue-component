@@ -32,6 +32,27 @@ describe('Menu', () => {
     })
   })
 
+  describe('#getVisible', () => {
+    it('Get visible menu by show', () => {
+      let menu = new Menu([
+        { title: 'foo', show: true, to: '/foo' },
+        { title: 'bar', show: false, to: '/bar' },
+        { title: 'foo', to: '/bar' },
+        { title: 'foo', to: '/foo', children: [{ title: 'children', show: false, to: '/children' }] },
+        { title: 'bar', show: false, to: '/bar', children: [{ title: 'children', show: true, to: '/children' }] }
+      ])
+
+      assert.deepEqual(
+        [
+          { title: 'foo', show: true, to: '/foo' },
+          { title: 'foo', to: '/bar' },
+          { title: 'foo', to: '/foo', children: [] }
+        ],
+        menu.getVisible()
+      )
+    })
+  })
+
   describe('#getCurrent()', () => {
     it('Basic get current.', () => {
       let menu = new Menu([{ title: 'foo', to: '/foo' }, { title: 'bar', to: '/bar' }])
