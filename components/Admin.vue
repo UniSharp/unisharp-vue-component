@@ -60,7 +60,13 @@
     margin-left: -.35rem;
   }
 
+  .row {
+    flex-wrap: nowrap;
+  }
+
   .u-content {
+    flex: 0 0 auto;
+    width: calc(100% - #{$sidebar-width});
     height: 100vh;
 
     .u-sidebar-toggle {
