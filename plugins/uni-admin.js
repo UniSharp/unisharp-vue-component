@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import UniAdmin from '../'
-import VueQuillEditor from 'vue-quill-editor'
 import Notifications from '@unisharp/vue-component-notification'
 
 Vue.use(UniAdmin)
-Vue.use(VueQuillEditor)
 Vue.use(Notifications)
 
 export default ({ store }, inject) => {

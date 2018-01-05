@@ -19,9 +19,11 @@
 </style>
 
 <script>
-  import QuillEditor from 'vue-quill-editor'
+  import Vue from 'vue'
+  import VueQuillEditor from 'vue-quill-editor'
+
+  Vue.use(VueQuillEditor)
   export default {
-    components: { QuillEditor },
     mounted () {
       if (this.value || this.content) {
         this._content = this.value || this.content
