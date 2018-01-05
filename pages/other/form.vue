@@ -51,6 +51,11 @@
             label.col-md-2.col-form-label Textarea：
             .col-md-10
              textarea.form-control(rows="5")
+          //- Textarea
+          .form-group.row
+            label.col-md-2.col-form-label Editor：
+            .col-md-10
+              u-editor
           //- Radio
           .form-group.row
             label.col-md-2

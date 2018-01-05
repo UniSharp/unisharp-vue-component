@@ -2,8 +2,10 @@ import UAdmin from './components/Admin'
 import UAlert from './components/Alert'
 import UBreadcrumb from './components/Breadcrumb'
 import UCheckbox from './components/Checkbox'
+import UCheckboxGroup from './components/CheckboxGroup'
 import UDatetime from './components/Datetime'
 import UDropdown from './components/Dropdown'
+import UEditor from './components/Editor'
 import UFace from './components/Face'
 import UInputBtn from './components/InputBtn'
 import UInputTag from './components/InputTag'
@@ -21,7 +23,6 @@ import UUploader from './components/Uploader'
 import UUserDropdown from './components/UserDropdown'
 import UWelcome from './components/Welcome'
 import UInput from './components/Input'
-import UCheckboxGroup from './components/CheckboxGroup'
 
 import VFocus from './directives/Focus'
 
@@ -32,6 +33,7 @@ let components = {
   UCheckbox,
   UDatetime,
   UDropdown,
+  UEditor,
   UFace,
   UInputBtn,
   UInputTag,

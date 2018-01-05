@@ -52,6 +52,6 @@ module.exports = {
 
       config.resolve.alias['vue'] = 'vue/dist/vue.common'
     },
-    vendor: ['./']
+    vendor: ['./', 'vue-quill-editor']
   }
 }
