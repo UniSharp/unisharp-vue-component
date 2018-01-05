@@ -58,6 +58,7 @@
 
 .table-responsive {
   margin-bottom: $spacer;
+  overflow-y: auto;
 
   .table {
     margin-bottom: 0;
