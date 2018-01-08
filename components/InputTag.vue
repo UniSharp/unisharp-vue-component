@@ -72,6 +72,9 @@
           v.disabled = selected.length >= this.limit || selected.includes(v.value)
           return v
         })
+      },
+      tags (tags) {
+        this.normalizedTags = this.normalize(tags)
       }
     },
     data () {
