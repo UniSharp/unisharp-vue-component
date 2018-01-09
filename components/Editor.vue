@@ -1,12 +1,12 @@
 <template lang="pug">
   quill-editor(
     :content="content",
-    v-model="value",
+    v-model="_content",
     :options="options",
     @ready="onReady",
     @blur="(quill) => { this.$emit('blur', quill) }",
     @focus="(quill) => { this.$emit('focus', quill) }",
-    @input="(content) => { this.$emit('focus', content) }",
+    @input="(content) => { this.$emit('input', content) }",
     @change="(content) => { this.$emit('change', content) }",
     stacked
   )
