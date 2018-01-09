@@ -67,6 +67,10 @@
           label.col-sm-2.col-form-label.text-sm-right Uploader:
           .col-sm-10
             u-uploader(v-model="form.files")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right ImageUploader:
+          .col-sm-10
+            u-image-uploader(v-model="form.files")
         .card-actions
           button.btn.btn-info.btn-lg Cancel
           button.btn.btn-primary.btn-lg Submit
@@ -105,6 +109,10 @@
           label.col-sm-2.col-form-label.text-sm-right Uploader:
           .col-sm-10
             u-uploader(v-model="form.files", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right ImageUploader:
+          .col-sm-10
+            u-image-uploader(v-model="form.files", error="Invalid value.")
         .card-actions
           button.btn.btn-info.btn-lg Cancel
           button.btn.btn-primary.btn-lg Submit
