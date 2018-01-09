@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-uploader
-    vue-clip.u-uploader-clip.mx-0(
+    vue-clip.u-uploader-clip.row.mx-0(
       :id="id",
       ref="clip",
       :name="name",
@@ -18,16 +18,16 @@
     )
       template(slot="clip-uploader-action", scope="params")
         slot(name="dz-message")
-          .dz-message.u-uploader-action.btn.btn-info(role="alert", :class="{ dragging: params.dragging }", ref="action")
+          .dz-message.u-uploader-action.col-md-6(role="alert", :class="{ dragging: params.dragging }", ref="action")
             .u-uploader-action-icon(@click="$refs.action.click()")
               img.cloud(src="../assets/img/upload-cloud.png")
               img.arrow(src="../assets/img/upload-arrow.png")
-            p.text-center 上傳圖片
+            p.text-center Click or Drag and Drop files here
       template(slot="clip-uploader-body", scope="props")
-        ul.list-unstyled.u-uploader-body.mb-0.mt-4.mb-mt-0.px-0(v-if="files.length")
+        ul.list-unstyled.u-uploader-body.mb-0.mt-3.mb-mt-0.col-md-6.px-0.pl-md-3(v-if="files.length")
           li.media.u-uploader-file(:key="key", v-for="(file, key) in files")
             img.u-uploader-file-avatar.d-flex.mr-3(:src="file.dataUrl || require('../assets/img/upload-document.png')")
-            .media-body.mt-2
+            .media-body
               p.mb-1.d-flex.align-items-center
                 span.u-uploader-file-name.font-weight-bold.mr-3 {{ file.name }}
                 span.u-uploader-file-size.mr-auto {{ convertBytes(file.size) }}
@@ -210,14 +210,21 @@
       @include transition;
       @include border-radius($input-border-radius);
 
-      width: 12rem;
+      height: 20rem;
+      color: $input-color;
+      background-color: $input-bg;
+      border: 2px dashed $input-border-color;
+      cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
 
       .u-uploader-action-icon {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 4rem;
+        height: 4rem;
+        margin-top: -2rem;
+        margin-bottom: .5rem;
         opacity: .6;
         position: relative;
 
@@ -232,11 +239,12 @@
 
       p {
         margin: 0;
-        padding: 0 0 0 1rem;
-        font-size: 1rem;
+        font-size: 1.25rem;
       }
 
       &:hover, &.dragging {
+        border-color: $input-focus-border-color;
+
         .u-uploader-action-icon .arrow {
           animation: bounce 1s ease-in-out infinite;
         }
@@ -244,15 +252,22 @@
     }
 
     .u-uploader-body {
-      border-top: 1px solid $input-border-color;
+      max-height: 20rem;
+      overflow-y: auto;
 
       .u-uploader-file {
-        border-bottom: 1px solid $input-border-color;
-        padding: 1rem 0;
+        height: 3rem;
+
+        + .u-uploader-file {
+          border-top: 1px solid $input-border-color;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          height: calc(4rem + 1px);
+        }
 
         .u-uploader-file-avatar {
-          width: 4rem;
-          height: 4rem;
+          width: 3rem;
+          height: 3rem;
         }
 
         .u-uploader-file-remove {
