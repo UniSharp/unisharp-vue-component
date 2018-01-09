@@ -24,7 +24,7 @@
 
   Vue.use(VueQuillEditor)
   export default {
-    mounted () {
+    created () {
       if (this.value || this.content) {
         this._content = this.value || this.content
       }
