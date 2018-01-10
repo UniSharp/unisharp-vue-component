@@ -66,7 +66,6 @@
 
   .u-content {
     flex: 0 0 auto;
-    width: calc(100% - #{$sidebar-width});
     height: 100vh;
 
     .u-sidebar-toggle {
@@ -110,6 +109,10 @@
       main {
         min-height: calc(100vh - #{map-get($navbar-heights, 'sm') * 2.2});
       }
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: calc(100% - #{$sidebar-width});
     }
   }
 </style>
