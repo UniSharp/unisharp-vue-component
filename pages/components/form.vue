@@ -33,6 +33,10 @@
           .col-sm-10
             u-select(v-model="form.selected", :options="options")
         .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right Datetime Picker:
+          .col-sm-10
+            u-datetime(mode='datetime', v-model="form.date", :config="dateConfig", placeholder="西元年-月-日")
+        .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Radio:
           .col-sm-10
             u-radio(v-model="form.selected", :options="options")
@@ -89,6 +93,10 @@
           label.col-sm-2.col-form-label.text-sm-right Select:
           .col-sm-10
             u-select(v-model="form.selected", :options="options", error="Invalid value.")
+        .form-group.row
+          label.col-sm-2.col-form-label.text-sm-right Datedatetime Picker:
+          .col-sm-10
+            u-datetime(mode='datetime', v-model="form.date", :config="dateConfig", placeholder="西元年-月-日", error="Invalid value.")
         .form-group.row
           label.col-sm-2.col-form-label.text-sm-right Radio:
           .col-sm-10
@@ -150,10 +158,14 @@
           text: 'IX',
           value: 9
         }],
+        dateConfig: {
+          locale: 'zh-tw'
+        },
         form: {
           name: '',
           password: '',
           selected: 5,
+          date: null,
           checked: [2, 5, 8],
           switch: false,
           files: []

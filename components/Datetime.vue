@@ -14,14 +14,27 @@
             ) {{ timeUnitName === 'month' ? timeUnit : index }}
       .main(v-else)
         ul.nav.nav-pills(v-if='shouldPickDate')
-          li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ picker.format('MMMM') }}
-          li.nav-item: a.nav-link.text-center(@click='resetDate'): i.fa.fa-calendar-o
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("year")') {{ picker.year() }}
-          li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right
-          li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
-          li.nav-item(v-for='date in daysInMonth')
-            a.nav-link(@click='setDate', :class="{ today: isToday(date.date), selected: date.selected, unclickable: !date.date }") {{ date.date }}
+          ul.nav.nav-pills.justify-content-between
+            li.nav-item: a.nav-link.no-circle(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left.text-gray-700
+            //- li.nav-item: a.nav-link.text-center.no-circle(@click='resetDate'): i.fa.fa-calendar-o
+            .d-flex.align-items-center
+              li.nav-item: a.nav-link.scrollable.text-secondary.font-weight-bold(@click='toggleScroll("month")') {{ picker.format('MMMM') }}
+              li.nav-item: a.nav-link.scrollable.text-secondary.font-weight-bold.ml-2(@click='toggleScroll("year")') {{ picker.year() }}
+            li.nav-item: a.nav-link.no-circle(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right.text-gray-700
+          hr.mt-0
+          ul.nav.nav-pills.text-gray-600
+            li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
+          ul.nav.nav-pills.text-gray-600
+            li.nav-item(v-for='date in daysInMonth')
+              a.nav-link(@click='setDate', :class="{ today: isToday(date.date), selected: date.selected, unclickable: !date.date }") {{ date.date }}
+          //- li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left
+          //- li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ picker.format('MMMM') }}
+          //- li.nav-item: a.nav-link.text-center(@click='resetDate'): i.fa.fa-calendar-o
+          //- li.nav-item: a.nav-link.scrollable(@click='toggleScroll("year")') {{ picker.year() }}
+          //- li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right
+          //- li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
+          //- li.nav-item(v-for='date in daysInMonth')
+          //-   a.nav-link(@click='setDate', :class="{ today: isToday(date.date), selected: date.selected, unclickable: !date.date }") {{ date.date }}
         ul.nav.nav-pills.my-3(v-if='shouldPickTime')
           li.nav-item: a.nav-link.text-center(@click='resetTime'): i.fa.fa-clock-o
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.format('h') }}
@@ -65,9 +78,17 @@
       },
       error: {
         type: String
+      },
+      config: {
+        type: Object,
+        default: {
+          locale: 'en'
+        }
       }
     },
     data () {
+      moment.locale(this.config.locale)
+
       return {
         scrollables: {
           year: 3000,
