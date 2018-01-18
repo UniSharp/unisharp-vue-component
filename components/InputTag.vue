@@ -6,7 +6,7 @@
           :key="index",
           v-for="(s, index) in selected",
           @click.prevent.stop="remove(s)"
-        ) {{ _.find(normalize(tags), { value: s }).text }}
+        ) {{ _.find(normalizedTags, { value: s }).text }}
           i.fa.fa-times.ml-2
       u-select.col.p-0(
         v-model="select",
