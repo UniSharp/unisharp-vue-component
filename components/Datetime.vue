@@ -3,7 +3,7 @@
     input.form-control(v-if="isMobile", :type="inputType", :value="valueForInput", @change='updateSelectedValue', :class="{ 'is-invalid': !!error }")
     input.form-control(v-else, :type="inputType", :value="valueForInput", @click='togglePicker', :class="{ 'is-invalid': !!error }", readonly)
     .invalid-feedback(v-if="error") {{ error }}
-    .overlay(v-if='showPicker', @click='togglePicker', :class="{'overlay-gray': display === 'modal'}")
+    .overlay(v-if='showPicker', @click='togglePicker', :class="{'active': display === 'modal'}")
     .picker.bg-white(v-if='showPicker', :class="{'position-center': display === 'modal'}")
       .scroll(v-if='showScroll' ref='scroll')
         ul.nav.nav-pills
@@ -13,14 +13,13 @@
               :class='{ selected: picker.get(timeUnitName) === index }'
             ) {{ timeUnitName === 'month' ? timeUnit : index }}
       .main(v-else)
-        ul.nav.nav-pills(v-if='shouldPickDate')
-          ul.nav.nav-pills.justify-content-between
-            li.nav-item: a.nav-link.no-circle(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left.text-gray-700
-            //- li.nav-item: a.nav-link.text-center.no-circle(@click='resetDate'): i.fa.fa-calendar-o
-            .d-flex.align-items-center
-              li.nav-item: a.nav-link.scrollable.text-secondary.font-weight-bold(@click='toggleScroll("month")') {{ picker.format('MMMM') }}
-              li.nav-item: a.nav-link.scrollable.text-secondary.font-weight-bold.ml-2(@click='toggleScroll("year")') {{ picker.year() }}
-            li.nav-item: a.nav-link.no-circle(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right.text-gray-700
+        template(v-if='shouldPickDate')
+          ul.nav.nav-pills
+            li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left.text-gray-700
+            li.nav-item: a.nav-link.scrollable.text-secondary.font-weight-bold(@click='toggleScroll("month")') {{ scrollables.month[picker.month()] }}
+            li.nav-item: a.nav-link.text-center(@click='resetDate'): i.fa.fa-calendar-o
+            li.nav-item: a.nav-link.scrollable.text-secondary.font-weight-bold(@click='toggleScroll("year")') {{ picker.year() }}
+            li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right.text-gray-700
           hr.mt-0
           ul.nav.nav-pills.text-gray-600
             li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
@@ -42,7 +41,7 @@
           li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.format('mm') }}
           li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
         ul.nav.nav-pills
-          li.nav-item.w-50: a.nav-link.w-100.text-center(@click='selected = null'): i.fa.fa-trash
+          li.nav-item.w-50: a.nav-link.w-100.text-center(@click='selected = null'): i.fa.fa-refresh
           li.nav-item.w-50: a.nav-link.w-100.text-center(@click='togglePicker'): i.fa.fa-check
 
 </template>
@@ -81,18 +80,16 @@
       },
       config: {
         type: Object,
-        default: {
-          locale: 'en'
+        default: () => {
+          return {locale: 'en'}
         }
       }
     },
     data () {
-      moment.locale(this.config.locale)
-
       return {
         scrollables: {
           year: 3000,
-          month: moment.months(),
+          month: moment.localeData(this.config.locale).months(),
           hour: 12,
           minute: 60
         },
@@ -150,7 +147,7 @@
       },
       afterNoon: {
         get () {
-          return this.selected.format('A') === 'PM'
+          return this.selected.format('a') === 'pm'
         },
         set (value) {
           let diff = 0
@@ -177,11 +174,11 @@
         }[this.shouldPick])
       },
       isMobile () {
-        return /Mobi/.test(navigator.userAgent)
+        return false
+        // return /Mobi/.test(navigator.userAgent)
       },
       weekdays () {
-        return moment.weekdays()
-          .map(weekday => { return `${weekday.slice(0, 3)}.` })
+        return moment.localeData(this.config.locale).weekdaysShort()
       },
       daysInMonth () {
         // add empty day before first day in month
@@ -296,14 +293,8 @@
 
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
+  @import "../assets/scss/variables/datetime";
   @import "node_modules/bootstrap/scss/_functions";
-
-  $height: 2.5rem;
-  $button-width: 4.5rem;
-  $highlight-color: $gray-400;
-  $border-width: 2px;
-  $top-offset: 3rem;
-  $z-index: 999;
 
   input::-webkit-inner-spin-button,
   input::-webkit-calendar-picker-indicator,
@@ -326,7 +317,7 @@
     z-index: 998;
   }
 
-  .overlay.overlay-gray {
+  .overlay.active {
     background-color: rgba(0, 0, 0, .5);
   }
 
@@ -340,12 +331,12 @@
 
   .picker.position-center {
     position: fixed;
-    top: calc(50vh - #{$height} * 10 / 2);
+    top: calc(50vh - #{$button-height} * 10 / 2);
     left: calc(50vw - #{$button-width} * 7 / 2);
   }
 
   .scroll {
-    height: $height * 6;
+    height: $button-height * 6;
     overflow: scroll;
 
     & .nav-link {
@@ -357,13 +348,14 @@
     width: $button-width;
     text-align: center;
     border-radius: 0;
-    height: $height;
+    height: $button-height;
     display: flex;
     align-items: center;
     justify-content: center;
 
     &:hover:not(.unclickable) {
-      border: $border-width solid $highlight-color;
+      border: $border-width solid $background-selected-color;
+      color: $text-hover-color;
     }
 
     &.today, &.today:hover {
@@ -372,8 +364,12 @@
     }
 
     &.selected {
-      background-color: $highlight-color;
-      color: color-yiq($highlight-color);
+      background-color: $background-selected-color;
+      color: color-yiq($background-selected-color);
+
+      &:hover {
+        color: color-yiq($background-selected-color);
+      }
     }
 
     &.scrollable {
