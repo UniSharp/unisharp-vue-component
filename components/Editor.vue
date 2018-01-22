@@ -12,12 +12,6 @@
   )
 </template>
 
-<style lang="scss">
-  .ql-editor {
-    min-height: 16rem;
-  }
-</style>
-
 <script>
   import Vue from 'vue'
   import VueQuillEditor from 'vue-quill-editor'
