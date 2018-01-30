@@ -91,6 +91,11 @@
           //- File Uploader
           .form-group.row
             label.col-md-2
+              span.title Single File Uploader：
+            .col-md-10
+              u-single-uploader(changeFile="changeFile", acceptType=".jpg, .jpeg, .png")
+          .form-group.row
+            label.col-md-2
               span.title File Uploader：
             .col-md-10
               u-uploader(name="uploader", :options="uploadOptions", v-model="files")
@@ -177,6 +182,9 @@
             return food
           }
         }).text
+      },
+      changeFile (file) {
+        console.log(file)
       }
     },
     watch: {
