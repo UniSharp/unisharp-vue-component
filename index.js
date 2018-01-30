@@ -19,6 +19,7 @@ import USidebar from './components/Sidebar'
 import USidenav from './components/Sidenav'
 import USwitch from './components/Switch'
 import UTable from './components/Table'
+import USingleUploader from './components/SingleUploader'
 import UUploader from './components/Uploader'
 import UImageUploader from './components/ImageUploader'
 import UUserDropdown from './components/UserDropdown'
@@ -48,6 +49,7 @@ let components = {
   USidenav,
   USwitch,
   UTable,
+  USingleUploader,
   UUploader,
   UImageUploader,
   UUserDropdown,
