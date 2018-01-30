@@ -104,10 +104,10 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "~assets/scss/variables";
-  @import "~bootstrap/scss/mixins/hover";
-  @import "~bootstrap/scss/mixins/transition";
-  @import "~bootstrap/scss/mixins/box-shadow";
+  @import "../assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/hover";
+  @import "node_modules/bootstrap/scss/mixins/transition";
+  @import "node_modules/bootstrap/scss/mixins/box-shadow";
 
   .u-image-uploader {
     > * {
