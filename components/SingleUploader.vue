@@ -24,8 +24,9 @@
 <script>
   export default {
     props: {
-      image: {
-        default: ''
+      file: {
+        type: Object,
+        default: null
       },
       uploading: {
         default: false,
@@ -50,6 +51,9 @@
         fileName: null
       }
     },
+    created () {
+      this.setPreview(this.file)
+    },
     methods: {
       handleChange (e) {
         if (!e.target.files.length) {
@@ -58,16 +62,7 @@
 
         let file = e.target.files[0]
 
-        switch (file.type.split('/').shift()) {
-          case 'image':
-            this.handleImage(file)
-            break
-          case 'video':
-            this.handleVideo(file)
-            break
-          default:
-            break
-        }
+        this.setPreview(file)
 
         this.$emit('change', e.target.files[0])
 
@@ -80,20 +75,39 @@
         this.fileName = null
         this.fileClass = null
       },
-      handleImage (file) {
-        let reader = new FileReader()
-
-        reader.onload = e => { this.preview = e.target.result }
-
-        reader.readAsDataURL(file)
+      setPreview (file) {
+        switch (this.parseFileType(file)) {
+          case 'image':
+            this.setPreviewImage(file)
+            break
+          case 'video':
+            this.setPreviewVideo(file)
+            break
+          default:
+            break
+        }
       },
-      handleVideo (file) {
+      setPreviewImage (file) {
+        if (file instanceof File) {
+          let reader = new FileReader()
+
+          reader.onload = e => { this.preview = e.target.result }
+
+          reader.readAsDataURL(file)
+        } else {
+          this.preview = this.file.url_path
+        }
+      },
+      setPreviewVideo (file) {
         this.fileName = file.name
         this.fileClass = { 'fa-file-video-o': true }
+      },
+      parseFileType (file) {
+        if (file === null) {
+          return
+        }
+        return file.type.split('/').shift()
       }
-    },
-    created () {
-      this.preview = this.image
     },
     watch: {
       image: (value) => {
