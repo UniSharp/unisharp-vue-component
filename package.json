@@ -9,7 +9,8 @@
   ],
   "author": {
     "name": "UniSharp Ltd.",
-    "email": "unisharp-service@unisharp.com"
+    "email": "opensource@unisharp.com",
+    "url": "https://www.unisharp.com"
   },
   "license": "MIT",
   "sass": "assets/scss/uni-admin.scss",
