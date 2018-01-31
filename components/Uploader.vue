@@ -16,14 +16,14 @@
       :on-max-files="maxFilesReached",
       :class="{ 'is-invalid': !!error }"
     )
-      template(slot="clip-uploader-action", scope="params")
+      template(slot="clip-uploader-action", slot-scope="params")
         slot(name="dz-message")
           .dz-message.u-uploader-action.col-md-6(role="alert", :class="{ dragging: params.dragging }", ref="action")
             .u-uploader-action-icon(@click="$refs.action.click()")
               img.cloud(src="../assets/img/upload-cloud.png")
               img.arrow(src="../assets/img/upload-arrow.png")
             p.text-center Click or Drag and Drop files here
-      template(slot="clip-uploader-body", scope="props")
+      template(slot="clip-uploader-body", slot-scope="props")
         ul.list-unstyled.u-uploader-body.mb-0.mt-3.mb-mt-0.col-md-6.px-0.pl-md-3(v-if="files.length")
           li.media.u-uploader-file(:key="key", v-for="(file, key) in files")
             img.u-uploader-file-avatar.d-flex.mr-3(:src="file.dataUrl || require('../assets/img/upload-document.png')")

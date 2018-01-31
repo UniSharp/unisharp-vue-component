@@ -20,12 +20,12 @@
       selection,
       :provider="provider"
     )
-      template(slot="expand", scope="row")
+      template(slot="expand", slot-scope="row")
         tr
           td
           td(colspan="4")
             | hi
-      template(slot="operation", scope="row")
+      template(slot="operation", slot-scope="row")
         button.btn.btn-info.btn-sm.mr-1(type="button", @click.stop="row.toggle()")
           i.fa.fa-angle-down(aria-hidden="true").mr-2
           | 展開
