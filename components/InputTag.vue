@@ -6,7 +6,7 @@
           :key="index",
           v-for="(s, index) in selected",
           @click.prevent.stop="remove(s)"
-        ) {{ _.find(normalizedTags, { value: s }).text }}
+        ) {{ toText(s) }}
           i.fa.fa-times.ml-2
       u-select.col.p-0(
         v-model="select",
@@ -122,6 +122,10 @@
       },
       remove (value) {
         this.$emit('change', this.selected.filter(x => x !== value))
+      },
+      toText (value) {
+        let found = _.find(this.normalizedTags, { value })
+        return found ? found.text : null
       }
     }
   }
