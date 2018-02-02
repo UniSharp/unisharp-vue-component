@@ -10,7 +10,8 @@
       img.img-fluid.img-thumbnail(:src="preview")
     .d-flex.align-items-center(v-else-if="fileClass")
       i.fa.fa-2x(aria-hidden="true", :class="fileClass")
-      span.mr-3.ml-3 {{ fileName }}
+      a(:href="fileUrlPath", :download="fileName")
+        span.file.mr-3.ml-3 {{ fileName }}
       button.btn.btn-danger.btn-square(@click.prevent="handleRemove")
         i.fa.fa-times
     .placeholder.img-thumbnail(v-else)
@@ -25,7 +26,7 @@
   export default {
     props: {
       file: {
-        type: Object,
+        type: [Object, File],
         default: null
       },
       uploading: {
@@ -48,7 +49,16 @@
       return {
         preview: null,
         fileClass: null,
-        fileName: null
+        fileName: this.file ? this.file.name : ''
+      }
+    },
+    computed: {
+      fileUrlPath () {
+        if (this.file == null || this.file instanceof File) {
+          return
+        }
+
+        return this.file.url_path
       }
     },
     created () {
@@ -76,6 +86,10 @@
         this.fileClass = null
       },
       setPreview (file) {
+        if (file === null) {
+          return
+        }
+
         switch (this.parseFileType(file)) {
           case 'image':
             this.setPreviewImage(file)
@@ -84,6 +98,7 @@
             this.setPreviewVideo(file)
             break
           default:
+            this.setPreviewDefault(file)
             break
         }
       },
@@ -101,6 +116,10 @@
       setPreviewVideo (file) {
         this.fileName = file.name
         this.fileClass = { 'fa-file-video-o': true }
+      },
+      setPreviewDefault (file) {
+        this.fileName = file.name
+        this.fileClass = { 'fa-file': true }
       },
       parseFileType (file) {
         if (file === null) {
@@ -174,6 +193,10 @@
         right: 0;
         top: 0;
       }
+    }
+
+    a > .file {
+      color: black;
     }
   }
 </style>
