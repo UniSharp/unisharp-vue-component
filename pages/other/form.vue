@@ -51,7 +51,7 @@
             label.col-md-2.col-form-label Textarea：
             .col-md-10
              textarea.form-control(rows="5")
-          //- Textarea
+          //- Editor
           .form-group.row
             label.col-md-2.col-form-label Editor：
             .col-md-10

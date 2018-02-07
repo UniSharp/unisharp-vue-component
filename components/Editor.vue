@@ -1,15 +1,18 @@
 <template lang="pug">
-  quill-editor(
-    :content="content",
-    v-model="_content",
-    :options="options",
-    @ready="onReady",
-    @blur="(quill) => { this.$emit('blur', quill) }",
-    @focus="(quill) => { this.$emit('focus', quill) }",
-    @input="(content) => { this.$emit('input', content) }",
-    @change="(content) => { this.$emit('change', content) }",
-    stacked
-  )
+  .editor
+    quill-editor.form-control(
+      :class="{ 'is-invalid': !!error }",
+      :content="content",
+      v-model="_content",
+      :options="options",
+      @ready="onReady",
+      @blur="(quill) => { this.$emit('blur', quill) }",
+      @focus="(quill) => { this.$emit('focus', quill) }",
+      @input="(content) => { this.$emit('input', content) }",
+      @change="(content) => { this.$emit('change', content) }",
+      stacked
+    )
+    .invalid-feedback(v-if="error") {{ error }}
 </template>
 
 <script>
@@ -56,6 +59,7 @@
       }
     },
     props: {
+      error: String,
       content: String,
       value: String,
       disabled: Boolean,
@@ -71,3 +75,9 @@
 
   }
 </script>
+
+<style scoped>
+  .form-control {
+    padding: 0;
+  }
+</style>
