@@ -31,6 +31,10 @@
 <script>
   import config, { createMenu } from '~/config'
   import Menu from '../plugins/Menu'
+  import Vue from 'Vue'
+  import VueAsyncAsyncComputed from 'vue-async-computed'
+
+  Vue.use(VueAsyncAsyncComputed)
 
   export default {
     props: {
@@ -38,13 +42,15 @@
         type: String
       }
     },
-    computed: {
-      defaultTitle () {
-        let menu = new Menu(createMenu(this.$store))
+    asyncComputed: {
+      async asdefaultTitle () {
+        let menu = new Menu(await createMenu(this.$store))
         let current = menu.getCurrent(this.$route)
 
         return current ? current.title : config.index.title
-      },
+      }
+    },
+    computed: {
       dropdownMenu () {
         return config.dropdownMenu
       }

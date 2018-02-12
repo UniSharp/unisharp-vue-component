@@ -35,8 +35,8 @@
         return item.to === this.$route.path || _.indexOf(item.active, this.$route.path) !== -1
       }
     },
-    created () {
-      this.list = new Menu(createMenu(this.$store)).getVisible()
+    async created () {
+      this.list = new Menu(await createMenu(this.$store)).getVisible()
 
       _.each(this.list, (item, i) => {
         if (Menu.isActive(item, this.$route)) {

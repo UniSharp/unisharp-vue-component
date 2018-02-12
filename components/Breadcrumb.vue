@@ -6,29 +6,34 @@
         :key="index",
         :to="item.to"
       ) {{ item.text }}
-      span.breadcrumb-item.active {{ _.last((items || defaultItems).concat(appends)).text }}
+      span.breadcrumb-item.active(v-if="_.last((items || defaultItems).concat(appends))") {{ _.last((items || defaultItems).concat(appends)).text }}
 </template>
 
 <script>
   import _ from 'lodash'
   import config, { createMenu } from '~/config'
   import Menu from '../plugins/Menu'
+  import Vue from 'Vue'
+  import VueAsyncAsyncComputed from 'vue-async-computed'
+
+  Vue.use(VueAsyncAsyncComputed)
 
   export default {
     props: {
       items: {
-        type: Array
+        type: Array,
+        default: () => []
       },
       appends: {
         type: Array,
         default: () => []
       }
     },
-    computed: {
-      _: () => _,
-      defaultItems () {
+    asyncComputed: {
+      async defaultItems () {
+        console.log(typeof createMenu)
         let items = [{ text: config.index.title, to: config.index.to }]
-        let menu = new Menu(createMenu(this.$store))
+        let menu = new Menu(await createMenu(this.$store))
         let current = menu.getCurrent(this.$route)
 
         if (current) {
@@ -37,6 +42,9 @@
 
         return items
       }
+    },
+    computed: {
+      _: () => _
     }
   }
 </script>
