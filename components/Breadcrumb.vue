@@ -13,7 +13,7 @@
   import _ from 'lodash'
   import config, { createMenu } from '~/config'
   import Menu from '../plugins/Menu'
-  import Vue from 'Vue'
+  import Vue from 'vue'
   import VueAsyncAsyncComputed from 'vue-async-computed'
 
   Vue.use(VueAsyncAsyncComputed)
