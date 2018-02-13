@@ -31,7 +31,6 @@
     },
     asyncComputed: {
       async defaultItems () {
-        console.log(typeof createMenu)
         let items = [{ text: config.index.title, to: config.index.to }]
         let menu = new Menu(await createMenu(this.$store))
         let current = menu.getCurrent(this.$route)
