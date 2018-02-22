@@ -43,7 +43,7 @@
       }
     },
     asyncComputed: {
-      async asdefaultTitle () {
+      async defaultTitle () {
         let menu = new Menu(await createMenu(this.$store))
         let current = menu.getCurrent(this.$route)
 
