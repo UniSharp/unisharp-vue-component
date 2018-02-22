@@ -2,11 +2,11 @@
   .u-breadcrumb
     nav.breadcrumb
       nuxt-link.breadcrumb-item(
-        v-for="(item, index) in (items || defaultItems).concat(appends).slice(0, -1)",
+        v-for="(item, index) in breadcrumbs.concat(appends).slice(0, -1)",
         :key="index",
         :to="item.to"
       ) {{ item.text }}
-      span.breadcrumb-item.active(v-if="_.last((items || defaultItems).concat(appends))") {{ _.last((items || defaultItems).concat(appends)).text }}
+      span.breadcrumb-item.active(v-if="_.last(breadcrumbs.concat(appends))") {{ _.last(breadcrumbs.concat(appends)).text }}
 </template>
 
 <script>
@@ -21,8 +21,7 @@
   export default {
     props: {
       items: {
-        type: Array,
-        default: () => []
+        type: Array
       },
       appends: {
         type: Array,
@@ -30,20 +29,26 @@
       }
     },
     asyncComputed: {
-      async defaultItems () {
-        let items = [{ text: config.index.title, to: config.index.to }]
-        let menu = new Menu(await createMenu(this.$store))
-        let current = menu.getCurrent(this.$route)
+      defaultItems: {
+        default: [],
+        async get () {
+          let items = [{ text: config.index.title, to: config.index.to }]
+          let menu = new Menu(await createMenu(this.$store))
+          let current = menu.getCurrent(this.$route)
 
-        if (current) {
-          items.push({ text: current.title, to: current.to })
+          if (current) {
+            items.push({ text: current.title, to: current.to })
+          }
+
+          return items
         }
-
-        return items
       }
     },
     computed: {
-      _: () => _
+      _: () => _,
+      breadcrumbs () {
+        return this.items != null && this.items.length ? this.items : this.defaultItems
+      }
     }
   }
 </script>
