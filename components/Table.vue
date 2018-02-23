@@ -226,6 +226,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .u-table {
+    overflow-y: visible;
+  }
+
   .sortable {
     cursor: pointer;
   }

@@ -38,6 +38,8 @@
   @import "node_modules/bootstrap/scss/mixins/transition";
 
   .u-dropdown {
+    position: relative;
+
     .dropdown-menu.fade-enter-active, .dropdown-menu.fade-leave-active {
       @include transition($transition-fade);
 
