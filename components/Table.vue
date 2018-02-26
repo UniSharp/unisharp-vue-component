@@ -3,7 +3,7 @@
     .loading.d-flex.align-items-center.justify-content-center(v-if="isLoading")
       .fa-box.d-flex.align-items-center.justify-content-center
         i.fa.fa-spin.fa-refresh.fa-2x
-    .u-table.table-responsive
+    .table-responsive.u-table
       table.table.table-bordered.table-striped.text-center
         thead(:class="{ 'float-grid': rows }")
           tr
