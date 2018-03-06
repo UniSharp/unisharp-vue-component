@@ -66,7 +66,7 @@
     margin-left: -.35rem;
   }
 
-  .row {
+  .u-admin > .row {
     flex-wrap: nowrap;
   }
 
