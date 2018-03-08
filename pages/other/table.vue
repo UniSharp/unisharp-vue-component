@@ -15,7 +15,6 @@
       :fields="fields",
       :per-page="perPage",
       :totalRows="totalRows",
-      :sortable="true",
       order-by="last_name"
       selection,
       :provider="provider"
@@ -88,7 +87,8 @@
             width: '30%'
           },
           age: {
-            label: 'Person age'
+            label: 'Person age',
+            sortable: true
           },
           operation: {
             label: '操作'

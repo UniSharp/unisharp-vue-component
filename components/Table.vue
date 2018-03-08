@@ -10,13 +10,13 @@
             th(v-if="selection")
               u-checkbox(@change="changeCheckAll", :checked="allChecked")
             th(
-              :class="{ sortable }",
+              :class="{ sortable: true }",
               v-for="(value, key) in fields",
-              @click="sortColumn(key)"
+              @click="sortColumn(key, value)"
             )
               slot(:name="`head.${key}`", :label="value.label")
                 | {{ value.label }}
-              i.fa.ml-2(:class="sortIcon(key)", v-if="sortable")
+              i.fa.ml-2(:class="sortIcon(key)", v-if="isFieldSortable(value)")
         tbody(:class="{ 'float-grid': rows }")
           template(v-for="(item, i) in finalRows")
             tr(:key="item.uIndex")
@@ -177,6 +177,9 @@
       }
     },
     methods: {
+      isFieldSortable (field) {
+        return this.sortable || field.sortable
+      },
       sortIcon (key) {
         if (this.order !== key) {
           return 'fa-sort'
@@ -199,8 +202,8 @@
           return checked.includes(item.uIndex)
         })
       },
-      sortColumn (key) {
-        if (this.sortable) {
+      sortColumn (key, field) {
+        if (this.sortable || this.isFieldSortable(field)) {
           this.order = key
           this.desc = !this.desc
         }
