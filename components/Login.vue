@@ -45,11 +45,11 @@
 
     footer
       p.mb-1 BACKEND - Content Management System
-      p.mb-0
+      p.mb-0(v-if="powerBy.isShow")
         span Made with&nbsp;
         i.fa.fa-heart
         span &nbsp;by&nbsp;
-        a(href="http://www.unisharp.com", target="_blank") UniSharp
+        a(:href="powerBy.href", target="_blank") {{ powerBy.title }} 
 </template>
 
 <script>
@@ -68,6 +68,14 @@
       loading: {
         type: Boolean,
         default: false
+      },
+      powerBy: {
+        type: Object,
+        default: {
+          isShow: true,
+          href: 'http://www.unisharp.com',
+          title: 'UniSharp'
+        }
       }
     },
     data () {

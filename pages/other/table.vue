@@ -71,7 +71,7 @@
   export default {
     computed: {
       ages () {
-        return items.map(v => v.age)
+        return items.map(v => v.age + '-------------------------')
       }
     },
     data () {

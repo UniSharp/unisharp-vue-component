@@ -1,5 +1,5 @@
 <template lang="pug">
-  u-login(@submit="onSubmit", :errors="errors", :loading="loading")
+  u-login(@submit="onSubmit", :errors="errors", :loading="loading", :powerBy="powerBy")
 </template>
 
 <script>
