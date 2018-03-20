@@ -5,7 +5,7 @@
     .invalid-feedback(v-if="error") {{ error }}
     .overlay(v-if='showPicker', @click='togglePicker', :class="{'active': display === 'modal'}")
     .picker.bg-white(v-if='showPicker', :class="{'position-center': display === 'modal'}")
-      .scroll(v-if='showScroll' ref='scroll')
+      .scroll(v-if='scrollIsShown' ref='scroll')
         ul.nav.nav-pills
           li.nav-item(v-for='(timeUnit, index) in scrollables[timeUnitName]')
             a.nav-link(
@@ -14,35 +14,26 @@
             ) {{ timeUnitName === 'month' ? timeUnit : index }}
       .main(v-else)
         template(v-if='shouldPickDate')
-          ul.nav.nav-pills
-            li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left.text-gray-700
-            li.nav-item: a.nav-link.scrollable.text-secondary.font-weight-bold(@click='toggleScroll("month")') {{ scrollables.month[picker.month()] }}
-            li.nav-item: a.nav-link.text-center(@click='resetDate'): i.fa.fa-calendar-o
-            li.nav-item: a.nav-link.scrollable.text-secondary.font-weight-bold(@click='toggleScroll("year")') {{ picker.year() }}
-            li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right.text-gray-700
-          hr.mt-0
-          ul.nav.nav-pills.text-gray-600
+          ul.nav.nav-pills.title-nav
+            li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left
+            li.nav-item.scrollable: a.nav-link.font-weight-bold(@click='showScroll("month")') {{ scrollables.month[picker.month()] }}
+            li.nav-item: a.nav-link(@click='resetDate'): i.fa.fa-calendar-o
+            li.nav-item.scrollable: a.nav-link.font-weight-bold(@click='showScroll("year")') {{ picker.year() }}
+            li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right
+          ul.nav.nav-pills.mt-2
             li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
-          ul.nav.nav-pills.text-gray-600
-            li.nav-item(v-for='date in daysInMonth')
-              a.nav-link(@click='setDate', :class="{ today: isToday(date.date), selected: date.selected, unclickable: !date.date }") {{ date.date }}
-          //- li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left
-          //- li.nav-item: a.nav-link.scrollable(@click='toggleScroll("month")') {{ picker.format('MMMM') }}
-          //- li.nav-item: a.nav-link.text-center(@click='resetDate'): i.fa.fa-calendar-o
-          //- li.nav-item: a.nav-link.scrollable(@click='toggleScroll("year")') {{ picker.year() }}
-          //- li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right
-          //- li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
-          //- li.nav-item(v-for='date in daysInMonth')
-          //-   a.nav-link(@click='setDate', :class="{ today: isToday(date.date), selected: date.selected, unclickable: !date.date }") {{ date.date }}
+          ul.nav.nav-pills.days-list
+            li.nav-item(@click='setDate(day.date)', v-for='day in daysInMonth')
+              a.nav-link(:class="{ today: isToday(day.date), selected: day.selected, unclickable: !day.date }") {{ day.date }}
         ul.nav.nav-pills.my-3(v-if='shouldPickTime')
-          li.nav-item: a.nav-link.text-center(@click='resetTime'): i.fa.fa-clock-o
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("hour")') {{ picker.format('h') }}
-          li.nav-item: a.nav-link.text-center(@click='resetTime') :
-          li.nav-item: a.nav-link.scrollable(@click='toggleScroll("minute")') {{ picker.format('mm') }}
-          li.nav-item: a.nav-link.text-center(@click='toggleNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
+          li.nav-item: a.nav-link(@click='resetTime'): i.fa.fa-clock-o
+          li.nav-item.scrollable: a.nav-link(@click='showScroll("hour")') {{ picker.format('h') }}
+          li.nav-item: a.nav-link(@click='resetTime') :
+          li.nav-item.scrollable: a.nav-link(@click='showScroll("minute")') {{ picker.format('mm') }}
+          li.nav-item: a.nav-link(@click='afterNoon = !afterNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
         ul.nav.nav-pills
-          li.nav-item.w-50: a.nav-link.w-100.text-center(@click='selected = null'): i.fa.fa-refresh
-          li.nav-item.w-50: a.nav-link.w-100.text-center(@click='togglePicker'): i.fa.fa-check
+          li.nav-item.w-50: a.nav-link.text-danger(@click='selected = null'): i.fa.fa-refresh
+          li.nav-item.w-50: a.nav-link.text-success(@click='togglePicker'): i.fa.fa-check
 
 </template>
 
@@ -95,7 +86,7 @@
         },
         timeUnitName: '',
         showPicker: false,
-        showScroll: false,
+        scrollIsShown: false,
         pickerString: null,
         selectedString: null
       }
@@ -142,7 +133,11 @@
           return moment(this.pickerString)
         },
         set (value) {
-          this.pickerString = moment(value).format()
+          if (value === null) {
+            this.pickerString = null
+          } else {
+            this.pickerString = moment(value).format()
+          }
         }
       },
       afterNoon: {
@@ -150,17 +145,7 @@
           return this.selected.format('a') === 'pm'
         },
         set (value) {
-          let diff = 0
-          switch (true) {
-            case !value && this.picker.hour() > 11:
-              diff = -12
-              break
-            case value && this.picker.hour() < 12:
-              diff = 12
-              break
-          }
-
-          this.picker = this.picker.hour(this.picker.hour() + diff)
+          this.picker = this.selected = this.selected.hour(this.selected.hour() + [12, -12][+this.afterNoon])
         }
       },
       valueForInput () {
@@ -174,8 +159,7 @@
         }[this.shouldPick])
       },
       isMobile () {
-        return false
-        // return /Mobi/.test(navigator.userAgent)
+        return /Mobi/.test(navigator.userAgent)
       },
       weekdays () {
         return moment.localeData(this.config.locale).weekdaysShort()
@@ -202,11 +186,8 @@
           })
         ]
       },
-      isSelectedMonth () {
-        return this.picker.isSame(this.selected, 'month')
-      },
       shouldPick () {
-        if (this.mode === 'time' || this.mode === 'date') {
+        if (['date', 'time'].includes(this.mode)) {
           return this.mode
         } else {
           return 'datetime'
@@ -233,7 +214,7 @@
       togglePicker () {
         if (!this.isMobile) {
           this.showPicker = !this.showPicker
-          this.showScroll = !this.showPicker ? false : this.showScroll
+          this.scrollIsShown = this.showPicker ? this.scrollIsShown : false
         }
       },
       resetDate () {
@@ -251,8 +232,8 @@
           'minute': current.minute()
         })
       },
-      setDate (e) {
-        this.selected = this.picker.clone().date(e.target.innerHTML)
+      setDate (date) {
+        this.selected = this.picker = this.picker.set({ date })
       },
       setScrollableTimeUnit (timeUnit) {
         if (this.timeUnitName === 'hour') {
@@ -262,30 +243,24 @@
         this.picker = this.picker.set(this.timeUnitName, timeUnit)
 
         if (['hour', 'minute'].includes(this.timeUnitName)) {
-          this.selected = this.picker
+          this.selected = this.selected.set(this.timeUnitName, timeUnit)
         }
 
-        this.showScroll = !this.showScroll
+        this.scrollIsShown = false
       },
       isToday (date) {
         return moment().isSame(this.picker.date(date), 'day')
       },
-      toggleNoon () {
-        this.afterNoon = !this.afterNoon
-        this.selected = this.picker
-      },
-      toggleScroll (timeUnitName) {
+      showScroll (timeUnitName) {
         this.timeUnitName = timeUnitName
-        this.showScroll = !this.showScroll
-        if (this.showScroll) {
-          this.$nextTick(() => {
-            let container = this.$refs.scroll
-            let scrollItems = this.scrollables[this.timeUnitName]
-            let scrollLength = Array.isArray(scrollItems) ? scrollItems.length : scrollItems
-            let offset = this.timeUnitName === 'month' ? 3.5 : 2.5
-            container.scrollTop = container.scrollHeight * (this.picker.get(this.timeUnitName) - offset) / scrollLength
-          })
-        }
+        this.scrollIsShown = true
+        this.$nextTick(() => {
+          let container = this.$refs.scroll
+          let scrollItems = this.scrollables[this.timeUnitName]
+          let scrollLength = Array.isArray(scrollItems) ? scrollItems.length : scrollItems
+          let offset = this.timeUnitName === 'month' ? 3.5 : 2.5
+          container.scrollTop = container.scrollHeight * (this.picker.get(this.timeUnitName) - offset) / scrollLength
+        })
       }
     }
   }
@@ -320,6 +295,10 @@
 
   .u-datetime {
     position: relative;
+
+    input.form-control {
+      background-color: $gray-200;
+    }
   }
 
   .overlay {
@@ -354,19 +333,28 @@
     height: $button-height * 6;
     overflow: scroll;
 
-    & .nav-link {
+    & li.nav-item {
       width: $button-width * 7;
     }
   }
 
-  .nav-link {
+  ul.title-nav {
+    background-color: $gray-500;
+    color: white;
+  }
+
+  li.nav-item {
     width: $button-width;
-    text-align: center;
-    border-radius: 0;
-    height: $button-height;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    cursor: pointer;
+
+    &.scrollable {
+      width: $button-width * 2;
+    }
+  }
+
+  ul.days-list .nav-link {
+    width: $button-height;
+    border-radius: $button-height;
 
     &:hover:not(.unclickable) {
       border: $border-width solid $background-selected-color;
@@ -380,15 +368,22 @@
 
     &.selected {
       background-color: $background-selected-color;
-      color: color-yiq($background-selected-color);
+      color: $text-selected-color;
 
       &:hover {
-        color: color-yiq($background-selected-color);
+        color: $text-selected-color;
       }
     }
+  }
 
-    &.scrollable {
-      width: $button-width * 2;
-    }
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+    height: $button-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
   }
 </style>
