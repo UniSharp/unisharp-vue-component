@@ -271,7 +271,6 @@
 
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
-  @import "node_modules/bootstrap/scss/_functions";
 
   // Button size
   $button-height: 2.5rem;
@@ -323,7 +322,9 @@
     top: $top-offset;
     width: calc(#{$button-width} * 7 + #{$border-width} * 2);
     z-index: $z-index;
-    border: $border-width solid $gray-800;
+    box-shadow: 0 0 .5rem $gray-500;
+    // border: 1px solid $gray-800;
+    // border-radius: .25rem;
   }
 
   .picker.position-center {
@@ -342,7 +343,7 @@
   }
 
   ul.title-nav {
-    background-color: $gray-500;
+    background-color: $gray-800;
     color: white;
   }
 
