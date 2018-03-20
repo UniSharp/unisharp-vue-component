@@ -293,8 +293,23 @@
 
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
-  @import "../assets/scss/variables/datetime";
   @import "node_modules/bootstrap/scss/_functions";
+
+  // Button size
+  $button-height: 2.5rem;
+  $button-width: 3.5rem;
+
+  // Color
+  $background-selected-color: $blue;
+  $text-selected-color: white;
+  $text-hover-color: black;
+
+  // Position
+  $top-offset: 3rem;
+  $z-index: 999;
+
+  // Other
+  $border-width: 2px;
 
   input::-webkit-inner-spin-button,
   input::-webkit-calendar-picker-indicator,
