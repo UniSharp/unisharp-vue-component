@@ -43,9 +43,21 @@
               u-switch(name='switch', v-model='form.checked', @change='showSwitchValue')
           //- Date Time Picker
           .form-group.row
-            label.col-md-2.col-form-label Date Time：
+            label.col-md-2.col-form-label Date Time (dropdown)：
             .col-md-10
-              u-datetime(mode='datetime', v-model='form.time', display='modal', @change='showTime')
+              u-datetime(v-model='form.time', @change='showTime')
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (popup)：
+            .col-md-10
+              u-datetime(v-model='form.time', display='modal', @change='showTime')
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (date only)：
+            .col-md-10
+              u-datetime(mode='date', v-model='form.time', @change='showTime')
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (time only)：
+            .col-md-10
+              u-datetime(mode='time', v-model='form.time', @change='showTime')
           //- Textarea
           .form-group.row
             label.col-md-2.col-form-label Textarea：
