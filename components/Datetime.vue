@@ -21,10 +21,10 @@
             li.nav-item.scrollable: a.nav-link.font-weight-bold(@click='showScroll("year")') {{ picker.year() }}
             li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right
           ul.nav.nav-pills.mt-2
-            li.nav-item(v-for='weekday in weekdays'): a.nav-link.unclickable {{ weekday }}
+            li.nav-item.unclickable(v-for='weekday in weekdays'): a.nav-link {{ weekday }}
           ul.nav.nav-pills.days-list
-            li.nav-item(@click='setDate(day.date)', v-for='day in daysInMonth')
-              a.nav-link(:class="{ today: isToday(day.date), selected: day.selected, unclickable: !day.date }") {{ day.date }}
+            li.nav-item(@click='setDate(day.date)', v-for='day in daysInMonth', :class="{ unclickable: !day.date }")
+              a.nav-link(:class="{ today: isToday(day.date), selected: day.selected }") {{ day.date }}
         ul.nav.nav-pills.my-3(v-if='shouldPickTime')
           li.nav-item: a.nav-link(@click='resetTime'): i.fa.fa-clock-o
           li.nav-item.scrollable: a.nav-link(@click='showScroll("hour")') {{ picker.format('h') }}
@@ -33,7 +33,7 @@
           li.nav-item: a.nav-link(@click='afterNoon = !afterNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
         ul.nav.nav-pills
           li.nav-item.w-50: a.nav-link.text-danger(@click='selected = null'): i.fa.fa-refresh
-          li.nav-item.w-50: a.nav-link.text-success(@click='togglePicker'): i.fa.fa-check
+          li.nav-item.w-50: a.nav-link.text-primary(@click='togglePicker'): i.fa.fa-check
 
 </template>
 
@@ -233,6 +233,9 @@
         })
       },
       setDate (date) {
+        if (!date) {
+          return
+        }
         this.selected = this.picker = this.picker.set({ date })
       },
       setScrollableTimeUnit (timeUnit) {
@@ -352,26 +355,32 @@
     }
   }
 
-  ul.days-list .nav-link {
-    width: $button-height;
-    border-radius: $button-height;
-
-    &:hover:not(.unclickable) {
+  ul.days-list {
+    li.nav-item:hover:not(.unclickable) a.nav-link {
       border: $border-width solid $background-selected-color;
       color: $text-hover-color;
-    }
 
-    &.today, &.today:hover {
-      font-weight: bold;
-      text-decoration: underline;
-    }
-
-    &.selected {
-      background-color: $background-selected-color;
-      color: $text-selected-color;
-
-      &:hover {
+      &.selected {
         color: $text-selected-color;
+      }
+    }
+
+    .nav-link {
+      width: $button-height;
+      border-radius: $button-height;
+
+      &.today, &.today:hover {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+
+      &.selected {
+        background-color: $background-selected-color;
+        color: $text-selected-color;
+
+        &:hover {
+          color: $text-selected-color;
+        }
       }
     }
   }
