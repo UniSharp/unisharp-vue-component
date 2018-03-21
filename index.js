@@ -25,6 +25,7 @@ import UImageUploader from './components/ImageUploader'
 import UUserDropdown from './components/UserDropdown'
 import UWelcome from './components/Welcome'
 import UInput from './components/Input'
+import UCenter from './components/Center'
 
 import VFocus from './directives/Focus'
 
@@ -55,7 +56,8 @@ let components = {
   UUserDropdown,
   UWelcome,
   UInput,
-  UCheckboxGroup
+  UCheckboxGroup,
+  UCenter
 }
 
 let directives = {

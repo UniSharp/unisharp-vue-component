@@ -10,6 +10,14 @@
         errors: {
           username: null,
           password: null
+        },
+        powerBy: {
+          type: Object,
+          default: {
+            isShow: true,
+            href: 'http://www.unisharp.com',
+            title: 'UniSharp'
+          }
         }
       }
     },
