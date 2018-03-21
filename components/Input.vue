@@ -36,7 +36,7 @@
         default: 'text'
       },
       placeholder: String,
-      value: String,
+      value: null,
       error: {
         type: String
       },
