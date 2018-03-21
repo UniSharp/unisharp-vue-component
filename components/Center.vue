@@ -19,7 +19,15 @@
 <script>
   export default {
     props: {
-      powerBy: null
+      powerBy: {
+        type: Object,
+        default: {
+          isShow: true,
+          href: 'http://www.unisharp.com',
+          title: 'UniSharp'
+        }
+      }
+
     },
     data () {
       return {
