@@ -27,7 +27,10 @@ module.exports = {
   css: [
     { src: '~/assets/scss/uni-admin.scss', lang: 'scss' }
   ],
-  plugins: ['~/plugins/uni-admin'],
+  plugins: [
+    '~/plugins/uni-admin',
+    '~/plugins/vue-markdown'
+  ],
   /*
   ** Build configuration
   */
