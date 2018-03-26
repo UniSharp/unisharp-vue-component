@@ -5,6 +5,14 @@
       a.badge.badge-pill.badge-primary Primary
       a.badge.badge-pill.badge-danger Danger
       a.badge.badge-pill.badge-info Info
+
+      pre.
+        ```
+        a.badge.badge-pill.badge-primary Primary
+        a.badge.badge-pill.badge-danger Danger
+        a.badge.badge-pill.badge-info Info
+        ```
+
       h4.mt-5 With icon
       a.badge.badge-pill.badge-primary
         | Primary
@@ -15,6 +23,19 @@
       a.badge.badge-pill.badge-info
         | Info
         i.fa.fa-times.pl-1(aria-hidden='true')
+
+      pre.
+        ```
+        a.badge.badge-pill.badge-primary
+          | Primary
+          i.fa.fa-times.pl-1(aria-hidden='true')
+        a.badge.badge-pill.badge-danger
+          | Danger
+          i.fa.fa-times.pl-1(aria-hidden='true')
+        a.badge.badge-pill.badge-info
+          | Info
+          i.fa.fa-times.pl-1(aria-hidden='true')
+        ```
 </template>
 
 <script>

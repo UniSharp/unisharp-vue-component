@@ -26,6 +26,14 @@
           p 用於操作層級較低的功能
         .col-7.align-self-center
           button.btn.btn-info(type="button") Info
+
+      pre.
+        ```
+        button.btn.btn-primary(type="button") Primary
+        button.btn.btn-secondary(type="button") Secondary
+        button.btn.btn-danger(type="button") Danger
+        button.btn.btn-info(type="button") Info
+        ```
     section
       h2 Size
       .row
