@@ -42,6 +42,30 @@
         button.btn.btn-primary(slot="actions", @click.stop.prevent="$refs.modal.hide()") Confirm
         u-select.mb-3(v-model="age", placeholder="Filter", :options="ages")
         input.form-control(v-model="filterText", type="text", placeholder="Search", aria-label="Search")
+    pre
+      code.
+        ```
+        <template>
+        u-table(
+          :fields="fields",
+          :items="items"
+        )
+        </template>
+
+        <scripts>
+        export default {
+          data () {
+            return {
+              items: [
+                { id: 1, age: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
+                { id: 2, age: 2, first_name: 'Larsen', last_name: 'Shaw' }
+              ]
+            }
+          }
+        }
+        </scripts>
+        ```
+
 </template>
 
 <script>
