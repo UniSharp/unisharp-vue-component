@@ -32,6 +32,24 @@ export const createMenu = store => [
       title: 'Form',
       to: '/components/form'
     }, {
+      title: 'Checkbox Radio',
+      to: '/components/checkbox-radio'
+    }, {
+      title: 'Select',
+      to: '/components/select'
+    }, {
+      title: 'Input',
+      to: '/components/input'
+    }, {
+      title: 'Input Tag',
+      to: '/components/input-tag'
+    }, {
+      title: 'File Uploader',
+      to: '/components/file-uploader'
+    }, {
+      title: 'DateTime Picker',
+      to: '/components/datetime-picker'
+    }, {
       title: 'Modal',
       to: '/components/modal'
     }, {
@@ -40,10 +58,10 @@ export const createMenu = store => [
     }]
   }, {
     icon: 'file-text-o',
-    title: 'Example',
+    title: 'Table',
     children: [{
       title: 'List',
-      to: '/example/list'
+      to: '/table/list'
     }]
   }, {
     icon: 'folder-o',
