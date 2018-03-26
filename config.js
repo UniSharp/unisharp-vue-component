@@ -47,16 +47,16 @@ export const createMenu = store => [
     }]
   }, {
     icon: 'folder-o',
-    title: '待分類',
+    title: 'ShowCase',
     children: [{
       title: '表單元件',
-      to: '/other/form'
+      to: '/showcase/form'
     }, {
       title: '表單驗證',
-      to: '/other/error-form'
+      to: '/showcase/error-form'
     }, {
       title: '表格',
-      to: '/other/table'
+      to: '/showcase/table'
     }]
   }
 ]
