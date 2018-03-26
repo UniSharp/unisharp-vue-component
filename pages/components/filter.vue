@@ -4,7 +4,7 @@
       form.form-inline.d-none.d-sm-flex(slot="functions")
         u-input-btn(@click.prevent.stop="$refs.TypeFilter.show()", append-icon="filter") 篩選內容
         u-select(v-model="age", placeholder="Age", :options="ages")
-        u-input-tag
+      u-input-tag(v-model="form.checked", :tags="options", placeholder="Tags")
 
     .filter-result.d-lg-flex.justify-content-between.align-items-center
       .tag-content
