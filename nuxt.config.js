@@ -31,6 +31,9 @@ module.exports = {
   /*
   ** Build configuration
   */
+  router: {
+    base: process.env.TRAVIS === 'true' ? '/unisharp-vue-component/' : '/'
+  },
   build: {
     /*
     ** Run ESLINT and STYLELINT on save
