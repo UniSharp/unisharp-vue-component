@@ -58,10 +58,12 @@
       },
       powerBy: {
         type: Object,
-        default: {
-          isShow: true,
-          href: 'http://www.unisharp.com',
-          title: 'UniSharp'
+        default () {
+          return {
+            isShow: true,
+            href: 'http://www.unisharp.com',
+            title: 'UniSharp'
+          }
         }
       }
     },
