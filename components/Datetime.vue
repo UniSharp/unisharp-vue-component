@@ -1,40 +1,36 @@
 <template lang="pug">
   .u-datetime
-    input.form-control(v-if="isMobile", :type="inputType", :value="valueForInput", @change='updateSelectedValue', :class="{ 'is-invalid': !!error }")
-    input.form-control(v-else, :type="inputType", :value="valueForInput", @click='togglePicker', :class="{ 'is-invalid': !!error }", readonly)
+    input.form-control(v-if="isMobile", :type="inputType", :value="valueForInput", @change="updateSelectedValue", :class="{ 'is-invalid': !!error }")
+    input.form-control(v-else, :type="inputType", :value="valueForInput", @click="togglePicker", :class="{ 'is-invalid': !!error }", readonly)
     .invalid-feedback(v-if="error") {{ error }}
-    .overlay(v-if='showPicker', @click='togglePicker', :class="{'active': display === 'modal'}")
-    .picker.bg-white(v-if='showPicker', :class="{'position-center': display === 'modal'}")
-      .scroll(v-if='scrollIsShown' ref='scroll')
+    .overlay(v-if="showPicker", @click="togglePicker", :class="{'active': display === 'modal'}")
+    .picker.bg-white(v-if="showPicker", :class="{'position-center': display === 'modal'}")
+      .scroll(v-if="scrollIsShown", ref="scroll")
         ul.nav.nav-pills
-          li.nav-item(v-for='(timeUnit, index) in scrollables[timeUnitName]')
-            a.nav-link(
-              @click='setScrollableTimeUnit(index)',
-              :class='{ selected: picker.get(timeUnitName) === index }'
-            ) {{ timeUnitName === 'month' ? timeUnit : index }}
+          li.nav-item(v-for="(timeUnit, index) in scrollables[timeUnitName]")
+            a.nav-link(@click="setScrollableTimeUnit(index)", :class="{ selected: picker.get(timeUnitName) === index }") {{ timeUnitName === "month" ? timeUnit : index }}
       .main(v-else)
-        template(v-if='shouldPickDate')
+        template(v-if="shouldPickDate")
           ul.nav.nav-pills.title-nav
             li.nav-item: a.nav-link(@click="picker = picker.subtract(1, 'month')"): i.fa.fa-arrow-left
-            li.nav-item.scrollable: a.nav-link.font-weight-bold(@click='showScroll("month")') {{ scrollables.month[picker.month()] }}
-            li.nav-item: a.nav-link(@click='resetDate'): i.fa.fa-calendar-o
-            li.nav-item.scrollable: a.nav-link.font-weight-bold(@click='showScroll("year")') {{ picker.year() }}
+            li.nav-item.scrollable: a.nav-link.font-weight-bold(@click="showScroll('month')") {{ scrollables.month[picker.month()] }}
+            li.nav-item: a.nav-link(@click="resetDate"): i.fa.fa-calendar-o
+            li.nav-item.scrollable: a.nav-link.font-weight-bold(@click="showScroll('year')") {{ picker.year() }}
             li.nav-item: a.nav-link(@click="picker = picker.add(1, 'month')"): i.fa.fa-arrow-right
           ul.nav.nav-pills.mt-2
-            li.nav-item.unclickable(v-for='weekday in weekdays'): a.nav-link {{ weekday }}
+            li.nav-item.unclickable(v-for="weekday in weekdays"): a.nav-link {{ weekday }}
           ul.nav.nav-pills.days-list
-            li.nav-item(@click='setDate(day.date)', v-for='day in daysInMonth', :class="{ unclickable: !day.date }")
+            li.nav-item(@click="setDate(day.date)", v-for="day in daysInMonth", :class="{ unclickable: !day.date }")
               a.nav-link(:class="{ today: isToday(day.date), selected: day.selected }") {{ day.date }}
-        ul.nav.nav-pills.my-3(v-if='shouldPickTime')
-          li.nav-item: a.nav-link(@click='resetTime'): i.fa.fa-clock-o
-          li.nav-item.scrollable: a.nav-link(@click='showScroll("hour")') {{ picker.format('h') }}
-          li.nav-item: a.nav-link(@click='resetTime') :
-          li.nav-item.scrollable: a.nav-link(@click='showScroll("minute")') {{ picker.format('mm') }}
-          li.nav-item: a.nav-link(@click='afterNoon = !afterNoon') {{ afterNoon ? 'P.M.' : 'A.M.' }}
+        ul.nav.nav-pills.my-3(v-if="shouldPickTime")
+          li.nav-item: a.nav-link(@click="resetTime"): i.fa.fa-clock-o
+          li.nav-item.scrollable: a.nav-link(@click="showScroll('hour')") {{ picker.format("h") }}
+          li.nav-item: a.nav-link(@click="resetTime") :
+          li.nav-item.scrollable: a.nav-link(@click="showScroll('minute')") {{ picker.format("mm") }}
+          li.nav-item: a.nav-link(@click="afterNoon = !afterNoon") {{ afterNoon ? "P.M." : "A.M." }}
         ul.nav.nav-pills
-          li.nav-item.w-50: a.nav-link.text-danger(@click='selected = null'): i.fa.fa-refresh
-          li.nav-item.w-50: a.nav-link.text-primary(@click='togglePicker'): i.fa.fa-check
-
+          li.nav-item.w-50: a.nav-link.text-danger(@click="selected = null"): i.fa.fa-refresh
+          li.nav-item.w-50: a.nav-link.text-primary(@click="togglePicker"): i.fa.fa-check
 </template>
 
 <script>
