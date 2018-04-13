@@ -1,7 +1,10 @@
 <template lang="pug">
   .u-datetime
-    input.form-control(v-if="isMobile", :type="inputType", :value="valueForInput", @change="updateSelectedValue", :class="{ 'is-invalid': !!error }")
-    input.form-control(v-else, :type="inputType", :value="valueForInput", @click="togglePicker", :class="{ 'is-invalid': !!error }", readonly)
+    input.form-control.mobilePicker(v-if="isMobile", :type="inputType", :value="valueForInput", @change="updateSelectedValue", :class="{ 'is-invalid': !!error }", ref="mobilePicker")
+    .form-control.desktopPicker(@click="togglePicker", :class="{ 'is-invalid': !!error }")
+      i.fa.fa-calendar
+      span.ml-3.text-truncate {{ valueForInput && moment(valueForInput).isValid() ? moment(valueForInput).format('Y-MM-DD hh:mm') : placeholder }}
+      i.ml-auto.fa.fa-angle-down
     .invalid-feedback(v-if="error") {{ error }}
     .overlay(v-if="showPicker", @click="togglePicker", :class="{'active': display === 'modal'}")
     .picker.bg-white(v-if="showPicker", :class="{'position-center': display === 'modal'}")
@@ -63,6 +66,9 @@
         default: false
       },
       error: {
+        type: String
+      },
+      placeholder: {
         type: String
       },
       config: {
@@ -211,6 +217,8 @@
         if (!this.isMobile) {
           this.showPicker = !this.showPicker
           this.scrollIsShown = this.showPicker ? this.scrollIsShown : false
+        } else {
+          this.$refs.mobilePicker.click()
         }
       },
       resetDate () {
@@ -294,8 +302,22 @@
   .u-datetime {
     position: relative;
 
-    input.form-control {
+    .form-control {
       background-color: $gray-200;
+    }
+
+    .mobilePicker {
+      opacity: 0;
+      position: absolute;
+    }
+
+    .desktopPicker {
+      display: flex;
+      align-items: center;
+
+      .text-truncate {
+        max-width: calc(100% - 2rem);
+      }
     }
   }
 
