@@ -27,6 +27,8 @@
                   | {{ item[key] }}
             slot(name="expand", :value="item", :index="i", :toggle="toggle(i)", v-if="!!toggles[i]")
 
+    slot(v-if="!totalRows", name="empty")
+
     u-pagination(
       v-if="!hidePagination",
       :total-rows="this.totalRows || filtered.length",
