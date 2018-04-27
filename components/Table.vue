@@ -4,7 +4,7 @@
       .fa-box.d-flex.align-items-center.justify-content-center
         i.fa.fa-spin.fa-refresh.fa-2x
     .table-responsive.u-table
-      table.table.table-bordered.table-striped.text-center
+      table.table.table-bordered.table-striped.table-hover.text-center
         thead(:class="{ 'float-grid': rows }")
           tr
             th(v-if="selection")
