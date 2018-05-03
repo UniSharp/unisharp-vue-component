@@ -1,7 +1,7 @@
 {
   "name": "@unisharp/vue-component",
   "description": "Vue Bootstrap Components",
-  "version": "0.4.19",
+  "version": "0.4.20",
   "keywords": [
     "vue",
     "bootstrap",
@@ -21,6 +21,7 @@
     "loading",
     "mixins",
     "plugins",
+    "store",
     "index.js"
   ],
   "scripts": {
