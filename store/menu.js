@@ -29,5 +29,10 @@ export const actions = {
 
     let menu = _.cloneDeep(state.menu)
     return menu.getVisible()
+  },
+
+  async forceUpdate ({dispatch, commit}) {
+    commit('setMenu', null)
+    dispatch('getMenu')
   }
 }
