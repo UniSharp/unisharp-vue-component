@@ -29,8 +29,7 @@
 </template>
 
 <script>
-  import config, { createMenu } from '~/config'
-  import Menu from '../plugins/Menu'
+  import config from '~/config'
   import Vue from 'vue'
   import VueAsyncAsyncComputed from 'vue-async-computed'
 
@@ -44,7 +43,7 @@
     },
     asyncComputed: {
       async defaultTitle () {
-        let menu = new Menu(await createMenu(this.$store))
+        let menu = await this.$store.dispatch('menu/getMenu')
         let current = menu.getCurrent(this.$route)
 
         return current ? current.title : config.index.title

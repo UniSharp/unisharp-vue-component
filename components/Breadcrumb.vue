@@ -11,8 +11,7 @@
 
 <script>
   import _ from 'lodash'
-  import config, { createMenu } from '~/config'
-  import Menu from '../plugins/Menu'
+  import config from '~/config'
   import Vue from 'vue'
   import VueAsyncAsyncComputed from 'vue-async-computed'
 
@@ -33,7 +32,7 @@
         default: [],
         async get () {
           let items = [{ text: config.index.title, to: config.index.to }]
-          let menu = new Menu(await createMenu(this.$store))
+          let menu = this.$store.dispatch('menu/getMenu')
           let current = menu.getCurrent(this.$route)
 
           if (current) {

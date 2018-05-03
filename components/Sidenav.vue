@@ -16,7 +16,6 @@
 
 <script>
   import _ from 'lodash'
-  import { createMenu } from '~/config'
   import Menu from '../plugins/Menu'
 
   export default {
@@ -36,8 +35,7 @@
       }
     },
     async created () {
-      this.list = new Menu(await createMenu(this.$store)).getVisible()
-
+      this.list = await this.$store.dispatch('menu/getVisible')
       _.each(this.list, (item, i) => {
         if (Menu.isActive(item, this.$route)) {
           this.active = i
