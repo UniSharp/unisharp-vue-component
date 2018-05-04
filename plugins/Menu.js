@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { createMenu } from '~/config'
 
 class Menu {
   constructor (menu) {
@@ -23,6 +24,14 @@ class Menu {
 
   getCurrent ($route) {
     return _.find(Menu.normalize(this.menu), { matched: $route.matched[0].path })
+  }
+
+  static async singleton (store) {
+    if (!Menu.instance) {
+      Menu.instance = await new Menu(await createMenu(store))
+    }
+
+    return Menu.instance
   }
 
   static isActive (item, $route) {

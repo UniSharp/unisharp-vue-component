@@ -12,6 +12,7 @@
 <script>
   import _ from 'lodash'
   import config from '~/config'
+  import Menu from '~/plugins/Menu'
   import Vue from 'vue'
   import VueAsyncAsyncComputed from 'vue-async-computed'
 
@@ -32,7 +33,7 @@
         default: [],
         async get () {
           let items = [{ text: config.index.title, to: config.index.to }]
-          let menu = this.$store.dispatch('menu/getMenu')
+          let menu = await Menu.singleton(this.$store)
           let current = menu.getCurrent(this.$route)
 
           if (current) {

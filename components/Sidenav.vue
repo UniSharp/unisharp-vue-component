@@ -35,7 +35,7 @@
       }
     },
     async created () {
-      this.list = await this.$store.dispatch('menu/getVisible')
+      this.list = (await Menu.singleton(this.$store)).getVisible()
       _.each(this.list, (item, i) => {
         if (Menu.isActive(item, this.$route)) {
           this.active = i
