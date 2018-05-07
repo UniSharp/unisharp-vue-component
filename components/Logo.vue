@@ -1,8 +1,9 @@
 <template lang="pug">
   nuxt-link.u-logo.d-flex.align-items-center.justify-content-center(:to="to")
-    .logo
+    img(:src="logo", v-if="logo")
+    .logo(v-else)
     .text.d-flex.flex-column.justify-content-center
-      h1 BACKEND
+      h1 {{ title }}
 </template>
 
 <script>
@@ -13,6 +14,12 @@
       to: {
         type: String,
         default: () => config.index.to
+      }
+    },
+    data () {
+      return {
+        logo: (config.logo && config.logo.image) ? config.logo.image : null,
+        title: (config.logo && config.logo.title) ? config.logo.title : 'BACKEND'
       }
     }
   }
@@ -32,6 +39,10 @@
     &:hover {
       text-decoration: none;
     }
+  }
+
+  img {
+    height: 2rem;
   }
 
   .logo {
