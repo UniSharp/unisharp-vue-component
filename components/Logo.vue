@@ -3,7 +3,7 @@
     img(:src="logo", v-if="logo")
     .logo(v-else)
     .text.d-flex.flex-column.justify-content-center
-      h1 {{ title }}
+      h1(v-if="title") {{ title }}
 </template>
 
 <script>
@@ -19,7 +19,7 @@
     data () {
       return {
         logo: (config.logo && config.logo.image) ? config.logo.image : null,
-        title: (config.logo && config.logo.title) ? config.logo.title : 'BACKEND'
+        title: config.logo ? config.logo.title : 'BACKEND'
       }
     }
   }
