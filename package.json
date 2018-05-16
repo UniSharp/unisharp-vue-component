@@ -1,7 +1,7 @@
 {
   "name": "@unisharp/vue-component",
   "description": "Vue Bootstrap Components",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "keywords": [
     "vue",
     "bootstrap",
@@ -33,7 +33,7 @@
     "test": "mocha tests --require babel-register"
   },
   "dependencies": {
-    "@unisharp/vue-component-notification": "^0.0.6",
+    "@unisharp/vue-component-notification": "^0.0.8",
     "axios": "^0.16.2",
     "axios-mock-adapter": "^1.9.0",
     "bootstrap": "v4.0.0-beta",

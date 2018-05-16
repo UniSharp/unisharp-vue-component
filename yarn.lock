@@ -10,9 +10,9 @@
     mustache "^2.3.0"
     stack-trace "0.0.10"
 
-"@unisharp/vue-component-notification@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@unisharp/vue-component-notification/-/vue-component-notification-0.0.6.tgz#6fe5cf2c2080d1d684ec3c354f3d920988c954f9"
+"@unisharp/vue-component-notification@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@unisharp/vue-component-notification/-/vue-component-notification-0.0.8.tgz#c1923346f60780ba1cb134c81fe79e0cf60e83da"
   dependencies:
     bootstrap v4.0.0-beta
 
