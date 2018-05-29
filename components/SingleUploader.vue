@@ -5,14 +5,14 @@
         i.fa.fa-spinner.fa-spin.fa-5x
         h6.mb-0 上傳中...
     .img(v-else-if="preview")
-      button.btn.btn-danger.btn-square(@click.prevent="handleRemove")
+      button.btn.btn-danger.btn-square(type="button", @click.prevent="handleRemove")
         i.fa.fa-times
       img.img-fluid.img-thumbnail(:src="preview")
     .d-flex.align-items-center(v-else-if="fileClass")
       i.fa.fa-2x(aria-hidden="true", :class="fileClass")
       a(:href="fileUrlPath", :download="fileName")
         span.file.mr-3.ml-3 {{ fileName }}
-      button.btn.btn-danger.btn-square(@click.prevent="handleRemove")
+      button.btn.btn-danger.btn-square(type="button", @click.prevent="handleRemove")
         i.fa.fa-times
     .placeholder.img-thumbnail(v-else)
       .handle(@click="() => $refs.file.click()")
