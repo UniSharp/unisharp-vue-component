@@ -3,7 +3,7 @@
     input.form-control.mobilePicker(v-if="isMobile", :type="inputType", :value="valueForInput", @change="updateSelectedValue", :class="{ 'is-invalid': !!error }", ref="mobilePicker")
     .form-control.desktopPicker(@click="togglePicker", :class="{ 'is-invalid': !!error }")
       i.fa.fa-calendar
-      span.ml-3.text-truncate {{ valueForInput && moment(valueForInput).isValid() ? moment(valueForInput).format('Y-MM-DD hh:mm') : placeholder }}
+      span.ml-3.text-truncate {{ valueForDisplay || placeholder }}
       i.ml-auto.fa.fa-angle-down
     .invalid-feedback(v-if="error") {{ error }}
     .overlay(v-if="showPicker", @click="togglePicker", :class="{'active': display === 'modal'}")
@@ -160,6 +160,16 @@
           'datetime': 'YYYY-MM-DDTHH:mm'
         }[this.shouldPick])
       },
+      valueForDisplay () {
+        if (this.selectedString === null) {
+          return null
+        }
+        return this.selected.format({
+          'date': 'YYYY-MM-DD',
+          'time': 'HH:mm',
+          'datetime': 'YYYY-MM-DD HH:mm'
+        }[this.shouldPick])
+      },
       isMobile () {
         return /Mobi/.test(navigator.userAgent)
       },
@@ -250,6 +260,7 @@
         this.picker = this.picker.set(this.timeUnitName, timeUnit)
 
         if (['hour', 'minute'].includes(this.timeUnitName)) {
+          this.selected = this.selected.isValid() ? this.selected : moment()
           this.selected = this.selected.set(this.timeUnitName, timeUnit)
         }
 
