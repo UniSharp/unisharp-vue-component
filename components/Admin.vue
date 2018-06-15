@@ -21,10 +21,10 @@
               nuxt-link.dropdown-item(to="/logout")
                 i.fa.fa-sign-out.mr-2(aria-hidden="true")
                 span 登出
-        header.px-4.bg-white.d-flex.align-items-center
+        header.px-4.bg-white.d-flex.align-items-center(:class="{ hide: scrollTop > 50 }")
           h1.mb-0.mr-auto {{ title || defaultTitle }}
           slot(name="functions")
-        main.p-4
+        main.p-4(ref="main")
           slot
 </template>
 
@@ -42,6 +42,12 @@
         type: String
       }
     },
+    data () {
+      return {
+        listener: null,
+        scrollTop: 0
+      }
+    },
     asyncComputed: {
       async defaultTitle () {
         let menu = await Menu.singleton(this.$store)
@@ -54,12 +60,22 @@
       dropdownMenu () {
         return config.dropdownMenu
       }
+    },
+    mounted () {
+      this.$nextTick(() => {
+        this.listener = () => { this.scrollTop = this.$refs.main.scrollTop }
+        this.$refs.main.addEventListener('scroll', this.listener)
+      })
+    },
+    destoryed () {
+      this.$refs.main.removeEventListener('scroll', this.listener)
     }
   }
 </script>
 
 <style lang="scss" scoped>
   @import "../assets/scss/variables";
+  @import "node_modules/bootstrap/scss/mixins/transition";
   @import "node_modules/bootstrap/scss/mixins/breakpoints";
 
   .u-logo {
@@ -86,8 +102,11 @@
     }
 
     header {
+      @include transition;
+
       z-index: 10;
       flex: 0 0 map-get($navbar-heights, 'xs') * 1.2;
+      overflow: hidden;
 
       h1 {
         font-weight: 400;
@@ -95,6 +114,10 @@
       }
 
       box-shadow: 0 2px 12px rgba(0, 0, 0, .1);
+
+      &.hide {
+        flex: 0 0 0;
+      }
     }
 
     main {
