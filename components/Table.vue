@@ -10,7 +10,7 @@
             th(v-if="selection")
               u-checkbox(@change="changeCheckAll", :checked="allChecked")
             th(
-              :class="{ sortable: true }",
+              :class="{ sortable: sortable }",
               v-for="(value, key) in fields",
               @click="sortColumn(key, value)"
             )
