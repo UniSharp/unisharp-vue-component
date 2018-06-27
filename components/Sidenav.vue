@@ -39,8 +39,6 @@
       _.each(this.list, (item, i) => {
         if (Menu.isActive(item, this.$route)) {
           this.active = i
-
-          return false
         }
       })
     }

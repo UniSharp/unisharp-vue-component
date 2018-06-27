@@ -35,7 +35,7 @@ class Menu {
   }
 
   static isActive (item, $route) {
-    return _.find(Menu.normalize(item), { matched: $route.matched[0].path })
+    return _.find(Menu.normalize(item), { matched: $route.matched[0].path }) || _.find(Menu.normalize(item), { matched: $route.fullPath })
   }
 
   static normalize (menu) {
