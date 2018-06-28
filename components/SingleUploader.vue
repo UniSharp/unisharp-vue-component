@@ -29,6 +29,14 @@
         type: [Object, File],
         default: null
       },
+      imagePath: {
+        type: String,
+        default: null
+      },
+      type: {
+        type: String,
+        default: null
+      },
       uploading: {
         default: false,
         type: Boolean
@@ -42,12 +50,12 @@
       },
       acceptType: {
         type: String,
-        default: '.jpg, .jpeg, .png'
+        default: null
       }
     },
     data () {
       return {
-        preview: null,
+        preview: this.imagePath,
         fileClass: null,
         fileName: this.file ? this.file.name : ''
       }
@@ -58,7 +66,7 @@
           return
         }
 
-        return this.file.url_path
+        return this.file.path
       }
     },
     created () {
@@ -102,6 +110,17 @@
             break
         }
       },
+      parseFileType (file) {
+        if (file === null) {
+          return
+        }
+
+        if (file instanceof File) {
+          return file.type.split('/').shift()
+        }
+
+        return this.type
+      },
       setPreviewImage (file) {
         if (file instanceof File) {
           let reader = new FileReader()
@@ -109,8 +128,6 @@
           reader.onload = e => { this.preview = e.target.result }
 
           reader.readAsDataURL(file)
-        } else {
-          this.preview = this.file.url_path
         }
       },
       setPreviewVideo (file) {
@@ -120,17 +137,6 @@
       setPreviewDefault (file) {
         this.fileName = file.name
         this.fileClass = { 'fa-file': true }
-      },
-      parseFileType (file) {
-        if (file === null) {
-          return
-        }
-        return file.type.split('/').shift()
-      }
-    },
-    watch: {
-      image: (value) => {
-        this.preview = value
       }
     }
   }
