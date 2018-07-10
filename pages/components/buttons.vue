@@ -26,14 +26,17 @@
           p 用於操作層級較低的功能
         .col-7.align-self-center
           button.btn.btn-info(type="button") Info
+      .row
+        md.form-control.
+          ```
+          button.btn.btn-primary(type="button") Primary
 
-      pre.
-        ```
-        button.btn.btn-primary(type="button") Primary
-        button.btn.btn-secondary(type="button") Secondary
-        button.btn.btn-danger(type="button") Danger
-        button.btn.btn-info(type="button") Info
-        ```
+          button.btn.btn-secondary(type="button") Secondary
+
+          button.btn.btn-danger(type="button") Danger
+
+          button.btn.btn-info(type="button") Info
+          ```
     section
       h2 Size
       .row
@@ -63,6 +66,15 @@
           button.btn.btn-secondary.btn-lg(type="button") Secondary
           button.btn.btn-danger.btn-lg(type="button") Danger
           button.btn.btn-info.btn-lg(type="button") Info
+      .row
+        md.form-control.
+          ```
+          button.btn.btn-primary(type="button") Medium
+
+          button.btn.btn-primary.btn-sm(type="button") Small
+
+          button.btn.btn-primary.btn-lg(type="button") Large
+          ```
     section
       h2 Square
       .row
@@ -70,21 +82,26 @@
           h5 Medium
         .col-7.align-self-center
           button.btn.btn-primary.btn-square(type="button")
-            i.fa.fa-plus(aria-hidden='true')
+            i.fa.fa-plus(aria-hidden="true")
           button.btn.btn-danger.btn-square(type="button")
-            i.fa.fa-minus(aria-hidden='true')
+            i.fa.fa-minus(aria-hidden="true")
           button.btn.btn-info.btn-square(type="button")
-            i.fa.fa-plus(aria-hidden='true')
+            i.fa.fa-plus(aria-hidden="true")
       .row
         .col-5
           h5 Small
         .col-7.align-self-center
           button.btn.btn-primary.btn-sm.btn-square(type="button")
-            i.fa.fa-plus(aria-hidden='true')
+            i.fa.fa-plus(aria-hidden="true")
           button.btn.btn-danger.btn-sm.btn-square(type="button")
-            i.fa.fa-minus(aria-hidden='true')
+            i.fa.fa-minus(aria-hidden="true")
           button.btn.btn-info.btn-sm.btn-square(type="button")
-            i.fa.fa-plus(aria-hidden='true')
+            i.fa.fa-plus(aria-hidden="true")
+      .row
+        md.form-control.
+          ```
+          button.btn.btn-primary.btn-square(type="button") Square
+          ```
 </template>
 
 <script>

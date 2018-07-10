@@ -6,14 +6,14 @@
       a.badge.badge-pill.badge-danger Danger
       a.badge.badge-pill.badge-info Info
 
-      pre.
+      md.form-control.my-4.
         ```
         a.badge.badge-pill.badge-primary Primary
         a.badge.badge-pill.badge-danger Danger
         a.badge.badge-pill.badge-info Info
         ```
 
-      h4.mt-5 With icon
+      h4 With icon
       a.badge.badge-pill.badge-primary
         | Primary
         i.fa.fa-times.pl-1(aria-hidden='true')
@@ -24,7 +24,7 @@
         | Info
         i.fa.fa-times.pl-1(aria-hidden='true')
 
-      pre.
+      md.form-control.my-4.
         ```
         a.badge.badge-pill.badge-primary
           | Primary

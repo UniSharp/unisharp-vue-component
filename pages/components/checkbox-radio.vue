@@ -6,33 +6,27 @@
           label.col-sm-2.col-form-label.text-sm-right Checkbox:
           .col-sm-10
             u-checkbox-group(v-model="form.checked", :options="options")
-        md.
+        md.form-control.
           ```
-          <template lang="pug">
+          template.
             u-checkbox(v-model="check", value="yes")
             | Option 1
-          </template>
-          <script>
+
+          script.
             export default {
               data () {
                 return {
                   form: {
                     checked: true
                   },
-                  options: [{
-                    text: 'I',
-                    value: 1
-                  }, {
-                    text: 'II',
-                    value: 2
-                  }, {
-                    text: 'III',
-                    value: 3
-                  }]
+                  options: [
+                    { text: 'I', value: 1 },
+                    { text: 'II', value: 2 },
+                    { text: 'III', value: 3}
+                  ]
                 }
               }
             }
-          </script>
           ```
 </template>
 <script>

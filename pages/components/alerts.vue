@@ -11,7 +11,7 @@
         | This is a info alert with&nbsp;
         a.alert-link an example link
 
-      pre.
+      md.form-control.
         ```
         .alert.alert-success(role="alert")
           | This is a success alert with&nbsp;
