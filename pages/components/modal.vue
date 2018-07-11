@@ -2,7 +2,7 @@
   u-admin
     button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modal.show()") Launch Modal
 
-    md.pt-3.
+    md.form-control.my-3.
       ```
       button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modal.show()") Launch Modal
 
@@ -19,7 +19,7 @@
 
     button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modalSm.show()") Launch Small Modal
 
-    md.pt-3.
+    md.form-control.my-3.
       ```
       button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modalSm.show()") Launch Small Modal
 
@@ -36,7 +36,7 @@
 
     button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modalLg.show()") Launch Large Modal
 
-    md.pt-3.
+    md.form-control.my-3.
       ```
       button.btn.btn-primary(type="button", @click.prevent.stop="$refs.modalLg.show()") Launch Large Modal
 
