@@ -13,12 +13,12 @@
 
       h2 Textarea
 
-      u-input(type="textarea", rows="10", placeholder="Enter description here")
+      u-input(type="textarea", :rows="10", placeholder="Enter description here")
 
       md.form-control.my-3.
         ```
         template.
-          u-input(type="textarea", rows="10", placeholder="Enter description here")
+          u-input(type="textarea", :rows="10", placeholder="Enter description here")
         ```
 
       h2 Property
