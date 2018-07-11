@@ -1,126 +1,125 @@
 <template lang="pug">
   u-admin
-    form.card.w-100
-      .card-body
-        h2 Basic use
+    .card.w-100: .card-body
+      h2 Basic use
 
-        u-select(v-model="form.selected", :options="options", :selected="form.selected")
+      u-select(v-model="form.selected", :options="options", :selected="form.selected")
 
-        .my-2
-          | Support two format for options, one is:
-          br
-          code.
-            [{ text: 'I', value: 1 }, { text: 'II', value: 2 }, { text: 'III', value: 3 }]
-          br
-          | another is:
-          br
-          code.
-            ['I', 'II', 'III'] or {'I', 'II', 'III'}
+      .my-2
+        | Support two format for options, one is:
+        br
+        code.
+          [{ text: 'I', value: 1 }, { text: 'II', value: 2 }, { text: 'III', value: 3 }]
+        br
+        | another is:
+        br
+        code.
+          ['I', 'II', 'III'] or {'I', 'II', 'III'}
 
-        md.form-control.my-3.
-          ```
-          template.
-            u-select(v-model="form.selected", :options="options")
+      md.form-control.my-3.
+        ```
+        template.
+          u-select(v-model="form.selected", :options="options")
 
-          script.
-            export default {
-              data () {
-                return {
-                  form: {
-                      selected: 2
-                    },
-                  options: [
-                    { text: 'I', value: 1 },
-                    { text: 'II', value: 2 },
-                    { text: 'III', value: 3 }
-                  ]
-                }
+        script.
+          export default {
+            data () {
+              return {
+                form: {
+                    selected: 2
+                  },
+                options: [
+                  { text: 'I', value: 1 },
+                  { text: 'II', value: 2 },
+                  { text: 'III', value: 3 }
+                ]
               }
-           }
-          ```
-        md.form-control.my-3.
-          ```
-          template.
-            u-select(v-model="form.selected", :options="options")
+            }
+         }
+        ```
+      md.form-control.my-3.
+        ```
+        template.
+          u-select(v-model="form.selected", :options="options")
 
-          script.
-            export default {
-              data () {
-                return {
-                  form: {
-                      selected: 'II'
-                    },
-                  options: ['I', 'II', 'III']
-                }
+        script.
+          export default {
+            data () {
+              return {
+                form: {
+                    selected: 'II'
+                  },
+                options: ['I', 'II', 'III']
               }
-           }
-          ```
+            }
+         }
+        ```
 
-        h2 Placeholder
+      h2 Placeholder
 
-        .my-2 Default
-        u-select(:options="options", selected="")
-        .my-2 Customize placeholder
-        u-select(:options="options", selected="", placeholder="客製預設選項")
-        .my-2 No placeholder
-        u-select(:options="options", selected="", :noPlaceholder="true")
+      .my-2 Default
+      u-select(:options="options", selected="")
+      .my-2 Customize placeholder
+      u-select(:options="options", selected="", placeholder="客製預設選項")
+      .my-2 No placeholder
+      u-select(:options="options", selected="", :noPlaceholder="true")
 
-        md.form-control.my-3.
-          ```
-          template.
-            u-select(:options="options", selected="")
-            u-select(:options="options", placeholder="客製預設選項")
-            u-select(:options="options", selected="", :noPlaceholder="true")
+      md.form-control.my-3.
+        ```
+        template.
+          u-select(:options="options", selected="")
+          u-select(:options="options", placeholder="客製預設選項")
+          u-select(:options="options", selected="", :noPlaceholder="true")
 
-          script.
-            export default {
-              data () {
-                return {
-                  options: [
-                    { text: 'I', value: 1 },
-                    { text: 'II', value: 2 },
-                    { text: 'III', value: 3 }
-                  ]
-                }
+        script.
+          export default {
+            data () {
+              return {
+                options: [
+                  { text: 'I', value: 1 },
+                  { text: 'II', value: 2 },
+                  { text: 'III', value: 3 }
+                ]
               }
-           }
-          ```
-        h2 Filter
+            }
+         }
+        ```
+      h2 Filter
 
-        .my-5 To be continued ...
+      .my-5 To be continued ...
 
-        h2 Search
+      h2 Search
 
-        .my-5 To be continued ...
+      .my-5 To be continued ...
 
-        h2 Disabled
+      h2 Disabled
 
-        .my-2 Disabled
-        u-select(:options="options", selected="", disabled)
+      .my-2 Disabled
+      u-select(:options="options", selected="", disabled)
 
-        md.form-control.my-3.
-          ```
-          template.
-            u-select(:options="options", selected="", disabled)
+      md.form-control.my-3.
+        ```
+        template.
+          u-select(:options="options", selected="", disabled)
 
-          script.
-            export default {
-              data () {
-                return {
-                  options: [
-                    { text: 'I', value: 1 },
-                    { text: 'II', value: 2 },
-                    { text: 'III', value: 3 }
-                  ]
-                }
+        script.
+          export default {
+            data () {
+              return {
+                options: [
+                  { text: 'I', value: 1 },
+                  { text: 'II', value: 2 },
+                  { text: 'III', value: 3 }
+                ]
               }
-           }
-          ```
+            }
+         }
+        ```
 
-        h2 Property
-        u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
-        h2 Event
-        u-table(:fields="eventFields", :items="events", :hidePagination="true")
+      h2 Property
+      u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
+      h2 Event
+      u-table(:fields="eventFields", :items="events", :hidePagination="true")
 </template>
 <script>
   export default {
