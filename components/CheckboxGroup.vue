@@ -18,7 +18,8 @@
         required: true
       },
       stacked: {
-        type: Boolean
+        type: Boolean,
+        default: false
       },
       error: {
         type: String
