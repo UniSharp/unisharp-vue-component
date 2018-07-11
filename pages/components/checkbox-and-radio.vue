@@ -2,117 +2,124 @@
   u-admin
     form.card.w-100
       .card-body
-        h2 Checkbox
-        .form-group
+        section
+          h2 Checkbox
+
           u-checkbox(v-model="form.enabled", :value="true") Checked
           u-checkbox(v-model="form.enabled", :value="false") Not Checked
           u-checkbox(v-model="form.enabled", :value="false", disabled) Disabled
           u-checkbox(v-model="form.enabled", :value="true", disabled) Checked & Disabled
-        md.form-control.my-3.
-          ```
-          template.
-            u-checkbox(v-model="form.enabled", :value="true") Checked
-            u-checkbox(v-model="form.enabled", :value="false") Not Checked
-            u-checkbox(v-model="form.enabled", :value="false", disabled) Disabled
-            u-checkbox(v-model="form.enabled", :value="true", disabled) Checked & Disabled
 
-          script.
-            export default {
-              data () {
-                return {
-                  form: {
-                    enabled: true
+          md.form-control.my-3.
+            ```
+            template.
+              u-checkbox(v-model="form.enabled", :value="true") Checked
+              u-checkbox(v-model="form.enabled", :value="false") Not Checked
+              u-checkbox(v-model="form.enabled", :value="false", disabled) Disabled
+              u-checkbox(v-model="form.enabled", :value="true", disabled) Checked & Disabled
+
+            script.
+              export default {
+                data () {
+                  return {
+                    form: {
+                      enabled: true
+                    }
                   }
                 }
               }
-            }
-          ```
-        h4 Property
-        u-table(:fields="propertyFields", :items="checkboxProperty", :hidePagination="true")
-        h4 Event
-        u-table(:fields="eventFields", :items="checkboxEvent", :hidePagination="true")
+            ```
+          h4 Property
+          u-table(:fields="propertyFields", :items="checkboxProperties", :hidePagination="true")
+          h4 Event
+          u-table(:fields="eventFields", :items="checkboxEvents", :hidePagination="true")
 
-        h2 Checkbox Group
-        .form-group
+        section
+          h2 Checkbox Group
+
           | By default, checkbox group display in vertical
           u-checkbox-group(v-model="form.checked", :options="options")
           | If setting stacked property to be true, checkbox group will append .custom-controls-stacked class and display in inline
           u-checkbox-group(v-model="form.checked", :options="options", :stacked="true")
-        md.form-control.my-3.
-          ```
-          template.
-            u-checkbox-group(v-model="form.checked", :options="options")
-            u-checkbox-group(v-model="form.checked", :options="options", :stacked="true")
 
-          script.
-            export default {
-              data () {
-                return {
-                  form: {
-                    checked: 1
-                  },
-                  options: [
-                    { text: 'I', value: 1 },
-                    { text: 'II', value: 2 },
-                    { text: 'III', value: 3 }
-                  ]
+          md.form-control.my-3.
+            ```
+            template.
+              u-checkbox-group(v-model="form.checked", :options="options")
+              u-checkbox-group(v-model="form.checked", :options="options", :stacked="true")
+
+            script.
+              export default {
+                data () {
+                  return {
+                    form: {
+                      checked: 1
+                    },
+                    options: [
+                      { text: 'I', value: 1 },
+                      { text: 'II', value: 2 },
+                      { text: 'III', value: 3 }
+                    ]
+                  }
                 }
               }
-            }
-          ```
-        h4 Property
-        u-table(:fields="propertyFields", :items="checkboxGroupProperty", :hidePagination="true")
-        h4 Event
-        u-table(:fields="eventFields", :items="checkboxGroupEvent", :hidePagination="true")
+            ```
+          h4 Property
+          u-table(:fields="propertyFields", :items="checkboxGroupProperties", :hidePagination="true")
+          h4 Event
+          u-table(:fields="eventFields", :items="checkboxGroupEvents", :hidePagination="true")
 
-        h2 Radio
-        .form-group.d-flex
+        section
+          h2 Radio
+
           u-radio(:options="[{text: 'Checked', value: true}]", name="single1", :value="true")
           u-radio(:options="[{text: 'Not Checked', value: false}]", name="single2", :value="true")
           u-radio(:options="[{text: 'Disabled', value: false}]", name="single3", :value="true", disabled)
           u-radio(:options="[{text: 'Checked & Disabled', value: true}]", name="single4", :value="true", disabled)
 
-        md.form-control.my-3.
-          ```
-          template.
-            u-radio(:options="[{text: 'Checked', value: true}]", name="single1", :value="true")
-            u-radio(:options="[{text: 'Not Checked', value: false}]", name="single2", :value="true")
-            u-radio(:options="[{text: 'Disabled', value: false}]", name="single3", :value="true", disabled)
-            u-radio(:options="[{text: 'Checked & Disabled', value: true}]", name="single4", :value="true", disabled)
-          ```
-        h2 Radios
-        .form-group
+          md.form-control.my-3.
+            ```
+            template.
+              u-radio(:options="[{text: 'Checked', value: true}]", name="single1", :value="true")
+              u-radio(:options="[{text: 'Not Checked', value: false}]", name="single2", :value="true")
+              u-radio(:options="[{text: 'Disabled', value: false}]", name="single3", :value="true", disabled)
+              u-radio(:options="[{text: 'Checked & Disabled', value: true}]", name="single4", :value="true", disabled)
+            ```
+
+        section
+          h2 Radios
+
           | By default, radios display in vertical
           u-radio(v-model="form.checked", :options="options", name="group1")
           | If setting stacked property to be true, radios will append .custom-controls-stacked class and display in inline
           u-radio(v-model="form.checked", :options="options", name="group2", :stacked="true")
 
-        md.form-control.my-3.
-          ```
-          template.
-            u-radio(v-model="form.checked", :options="options", name="group1")
-            u-radio(v-model="form.checked", :options="options", name="group2", :stacked="true")
+          md.form-control.my-3.
+            ```
+            template.
+              u-radio(v-model="form.checked", :options="options", name="group1")
+              u-radio(v-model="form.checked", :options="options", name="group2", :stacked="true")
 
-          script.
-            export default {
-              data () {
-                return {
-                  form: {
-                    checked: 1
-                  },
-                  options: [
-                    { text: 'I', value: 1 },
-                    { text: 'II', value: 2 },
-                    { text: 'III', value: 3 }
-                  ]
+            script.
+              export default {
+                data () {
+                  return {
+                    form: {
+                      checked: 1
+                    },
+                    options: [
+                      { text: 'I', value: 1 },
+                      { text: 'II', value: 2 },
+                      { text: 'III', value: 3 }
+                    ]
+                  }
                 }
               }
-            }
-          ```
-        h4 Property
-        u-table(:fields="propertyFields", :items="radioProperty", :hidePagination="true")
-        h4 Event
-        u-table(:fields="eventFields", :items="radioEvent", :hidePagination="true")
+            ```
+          h4 Property
+          u-table(:fields="propertyFields", :items="radioProperty", :hidePagination="true")
+          h4 Event
+          u-table(:fields="eventFields", :items="radioEvents", :hidePagination="true")
 </template>
 <script>
   export default {
@@ -155,25 +162,25 @@
             label: 'Description'
           }
         },
-        checkboxProperty: [
+        checkboxProperties: [
           { property: 'name', type: 'String', default_value: 'false', required: '', description: '' },
           { property: 'value', type: 'Any', default_value: 'true', required: '', description: '' },
           { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: '' },
           { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: '' },
           { property: 'error', type: 'String', default_value: '', required: '', description: '' }
         ],
-        checkboxEvent: [
+        checkboxEvents: [
           { event: 'change', arguments: '', description: '' },
           { event: 'focus', arguments: '', description: '' },
           { event: 'blur', arguments: '', description: '' },
           { event: 'click', arguments: '', description: '' }
         ],
-        checkboxGroupProperty: [
+        checkboxGroupProperties: [
           { property: 'options', type: 'Array', default_value: '', required: 'true', description: '[{ text: \'displayname\', value: \'key\' }]' },
           { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: '' },
           { property: 'error', type: 'String', default_value: '', required: '', description: '' }
         ],
-        checkboxGroupEvent: [
+        checkboxGroupEvents: [
           { event: 'change', arguments: '', description: '' }
         ],
         radioProperty: [
@@ -185,7 +192,7 @@
           { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: '' },
           { property: 'error', type: 'String', default_value: '', required: '', description: '' }
         ],
-        radioEvent: [
+        radioEvents: [
           { event: 'change', arguments: '', description: '' },
           { event: 'focus', arguments: '', description: '' },
           { event: 'blur', arguments: '', description: '' },
