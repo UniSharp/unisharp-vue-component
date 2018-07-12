@@ -84,13 +84,6 @@
             }
          }
         ```
-      h2 Filter
-
-      .my-5 To be continued ...
-
-      h2 Search
-
-      .my-5 To be continued ...
 
       h2 Disabled
 
@@ -133,9 +126,6 @@
           { text: 'II', value: 2 },
           { text: 'III', value: 3 }
         ],
-        pinnedOption: [],
-        pinnedOptionPrefix: '',
-        search: '',
         propertyFields: {
           property: {
             label: 'Property'

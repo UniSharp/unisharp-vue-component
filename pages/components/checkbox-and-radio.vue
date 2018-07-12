@@ -71,10 +71,11 @@
       section
         h2 Radio
 
-        u-radio(:options="[{text: 'Checked', value: true}]", name="single1", :value="true")
-        u-radio(:options="[{text: 'Not Checked', value: false}]", name="single2", :value="true")
-        u-radio(:options="[{text: 'Disabled', value: false}]", name="single3", :value="true", disabled)
-        u-radio(:options="[{text: 'Checked & Disabled', value: true}]", name="single4", :value="true", disabled)
+        .d-flex
+          u-radio(:options="[{text: 'Checked', value: true}]", name="single1", :value="true")
+          u-radio(:options="[{text: 'Not Checked', value: false}]", name="single2", :value="true")
+          u-radio(:options="[{text: 'Disabled', value: false}]", name="single3", :value="true", disabled)
+          u-radio(:options="[{text: 'Checked & Disabled', value: true}]", name="single4", :value="true", disabled)
 
         md.form-control.my-3.
           ```
