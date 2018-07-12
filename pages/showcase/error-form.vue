@@ -1,92 +1,95 @@
 <template lang="pug">
   u-admin
     .section
-      u-alert(type='danger') 失敗
+      u-alert(type="danger") 失敗
     .card
       .card-header Form Components
       .card-body
         form
-          //- Label
-          .form-group.row
-            label.col-md-2.col-md-2.col-form-label.text-sm-right Label：
-            .col-md-10.form-control-static I'm label text.
           //- Input
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right Email address：
+            label.col-md-2.col-form-label Input：
             .col-md-10
-              u-input(type="email", v-model="form.email", placeholder="Enter email", error="欄位必填")
-          //- Select
-          .form-group.row
-            label.col-md-2.col-form-label.text-sm-right Select：
-            .col-sm-10.col-md-4.mb-3.mb-md-0
-              u-select(v-model="form.food", :options="foods", error="欄位必填")
-            label.col-md-2.col-form-label.text-sm-right Select：
-            .col-sm-10.col-md-4.mb-3.mb-md-0
-              u-select(v-model="form.food", :options="foods", error="欄位必填")
-          //- Checkbox
-          .form-group.row
-            label.col-md-2.col-form-label.text-sm-right Checkbox：
-            .col-md-10
-              u-checkbox(v-model="check", value="yes", error="欄位必填")
-                | Option 1
-          //- Checkboxes
-          .form-group.row
-            label.col-md-2.col-form-label.text-sm-right Checkbox：
-            .col-md-10
-              u-checkbox-group(v-model="checks", :options="foods", error="欄位必填")
-          //- Switch
-          .form-group.row
-            label.col-md-2.col-form-label.text-sm-right Switch：
-            .col-md-10
-              u-switch(v-model='form.checked', @change='showSwitchValue', error="欄位必填")
-          //- Date Time Picker
-          .form-group.row
-            label.col-md-2.col-form-label.text-sm-right Date Time：
-            .col-md-10
-              u-datetime(mode='datetime', v-model='form.time', @change='showTime', error="欄位必填")
+              u-input(v-model="form.email", type="email", placeholder="Enter email", :error="error")
           //- Textarea
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right Textarea：
+            label.col-md-2.col-form-label Textarea：
             .col-md-10
-             u-input(type="textarea", :rows="5", v-model='form.email', placeholder="Enter email", error="欄位必填")
-          //- Editor
+              u-input(v-model="form.textarea", type="textarea", :rows="5", placeholder="Say something here ...", :error="error")
+          //- Select
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right Editor：
+            label.col-md-2.col-form-label Select：
             .col-md-10
-              u-editor(error="欄位必填")
+              u-select(v-model="form.selected", :options="foods", @change="showValue", :error="error")
+          //- Checkbox
+          .form-group.row
+            label.col-md-2.col-form-label Checkbox：
+            .col-md-10.form-inline
+              u-checkbox(v-model="form.check", :value="true", @change="showValue", :error="error")
+                | Enable
+          //- Checkbox Group
+          .form-group.row
+            label.col-md-2.col-form-label Checkbox：
+            .col-md-10.form-inline
+              u-checkbox-group(v-model="form.checks", :options="foods", @change="showValue", :error="error")
           //- Radio
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right
-              span.title Radio Inline：
+            label.col-md-2.col-form-label Radio Inline：
             .col-md-10
-              u-radio(:options="foods", v-model="form.radio.value", error="欄位必填")
+              u-radio(name="group1", :options="foods", v-model="form.radio", @change="showValue", :error="error")
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right
-              span.title Radio Stacked：
+            label.col-md-2.col-form-label Radio Stacked：
             .col-md-10
-              u-radio(:options="foods", stacked="true", v-model="form.radio.value", error="欄位必填")
+              u-radio(name="group2", :options="foods", :stacked="true", v-model="form.radio", @change="showValue", :error="error")
+          //- Switch
+          .form-group.row
+            label.col-md-2.col-form-label Switch：
+            .col-md-10
+              u-switch(name="switch", v-model="form.sw", @change="showValue", :error="error")
+          //- Date Time Picker
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (dropdown)：
+            .col-md-10
+              u-datetime(v-model="form.dropdownTime", @change="showValue", :error="error")
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (popup)：
+            .col-md-10
+              u-datetime(v-model="form.popupTime", display="modal", @change="showValue", :error="error")
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (date only)：
+            .col-md-10
+              u-datetime(v-model="form.date", mode="date", @change="showValue", :error="error")
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (time only)：
+            .col-md-10
+              u-datetime(v-model="form.time", mode="time", @change="showValue", :error="error")
+          //- Editor
+          .form-group.row
+            label.col-md-2.col-form-label Editor：
+            .col-md-10
+              u-editor(v-model="form.editor", @change="showValue", :error="error")
           //- Input Tag
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right
-              span.title Tag Input (Selection)：
+            label.col-md-2.col-form-label Tag Input (Selection)：
             .col-md-10
-              u-input-tag(v-model="selectedTags", placeholder="AddTag", :tags="tags", :limitTag="2", error="欄位必填")
+              u-input-tag(v-model="form.selectedTags", placeholder="AddTag", :tags="tags", :limit="2", @change="showValue", :error="error")
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right
-              span.title Tag Input (Can Scroll)：
+            label.col-md-2.col-form-label Tag Input (Can Scroll)：
             .col-md-10
-              u-input-tag(v-model="selectedTags3", placeholder="AddTag", :tags="tags", :maxTagsShow="5", error="欄位必填")
+              u-input-tag(v-model="form.selectedTags2", placeholder="AddTag", :tags="tags", :maxTagsShow="5", @change="showValue", :error="error")
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right
-              span.title Tag Input (Text Add)：
+            label.col-md-2.col-form-label Tag Input (Text Add)：
             .col-md-10
-              u-input-tag(v-model="selectedTags2", placeholder="AddTag", :tags.sync="tags", type="add", :limitTag="2", insertable, error="欄位必填")
+              u-input-tag(v-model="form.selectedTags3", placeholder="AddTag", :tags.sync="tags", :limit="2", insertable, @change="showValue", :error="error")
           //- File Uploader
           .form-group.row
-            label.col-md-2.col-form-label.text-sm-right
-              span.title File Uploader：
+            label.col-md-2.col-form-label Single File Uploader：
             .col-md-10
-              u-uploader(:options="uploadOptions", v-model="files", error="欄位必填")
+              u-single-uploader(type="image", :image-path="form.file", acceptType=".jpg, .jpeg, .png", @change="changeFile", :error="error")
+          .form-group.row
+            label.col-md-2.col-form-label File Uploader：
+            .col-md-10
+              u-uploader(name="uploader", :options="uploadOptions", v-model="form.files", @change="showValue", :error="error")
           //- Button
           input.btn.btn-primary.mr-2(type="button", value="Submit")
           input.btn.btn-default(type="button", value="Reset")
@@ -98,35 +101,31 @@
   export default {
     data () {
       return {
-        check: null,
-        checks: [],
-        files: [],
+        error: '欄位必填',
         form: {
-          email: '',
-          name: '',
-          food: null,
-          fruit: null,
-          checked: false,
-          time: '2017-09-07 12:38:59',
-          secret: 'S3CR3T',
-          radio: {
-            value: null
-          }
+          email: null,
+          textarea: null,
+          selected: null,
+          check: true,
+          checks: [],
+          radio: 1,
+          sw: false,
+          dropdownTime: null,
+          popupTime: null,
+          date: null,
+          time: null,
+          editor: null,
+          selectedTags: [],
+          selectedTags2: [],
+          selectedTags3: [],
+          file: null,
+          files: []
         },
         foods: [
           { text: 'Carrots', value: 1 },
           { text: 'Beans', value: 2 },
           { text: 'Corn', value: 3 }
         ],
-        foods2: {
-          1: 'Carrots',
-          2: 'Beans',
-          3: 'Corn'
-        },
-        fruits: ['orange', 'apple', 'banana', 'peach'],
-        selectedTags: [],
-        selectedTags2: [],
-        selectedTags3: [],
         tags: ['Done', 'Doing', 'Doc', 'Reopen', 'Complete', 'Blocked', 'Teach', 'Depend', 'Error', 'Success'],
         // Refference: http://www.dropzonejs.com/#config-url
         uploadOptions: {
@@ -134,10 +133,10 @@
           method: 'post',
           paramName: 'files',
           uploadMultiple: true,
-          // acceptedFiles: {
-          //   extensions: ['image/*'],
-          //   message: 'You are uploading an invalid file'
-          // },
+          acceptedFiles: {
+            extensions: ['image/*'],
+            message: 'You are uploading an invalid file'
+          },
           autoProcessQueue: false,
           headers: {},
           maxFiles: {
@@ -155,31 +154,13 @@
       }
     },
     methods: {
-      showTime () {
-        debug(this.form.time)
+      changeFile (file) {
+        this.form.file = file
+
+        this.showValue(file)
       },
-      onSubmit (e) {
-        alert(JSON.stringify(this.form))
-      },
-      showSwitchValue (value) {
+      showValue (value) {
         debug(value)
-      }
-    },
-    watch: {
-      check (val) {
-        debug(val)
-      },
-      checks (val) {
-        debug(val)
-      },
-      files (files) {
-        debug(files)
-      },
-      selectedTags (tags) {
-        debug(tags)
-      },
-      selectedTags2 (tags) {
-        debug(tags)
       }
     }
   }

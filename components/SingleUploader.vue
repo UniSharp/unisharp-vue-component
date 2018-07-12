@@ -14,7 +14,7 @@
         span.file.mr-3.ml-3 {{ fileName }}
       button.btn.btn-danger.btn-square(type="button", @click.prevent="handleRemove")
         i.fa.fa-times
-    .placeholder.img-thumbnail(v-else)
+    .placeholder.img-thumbnail(v-else, :class="{ 'is-invalid': error }")
       .handle(@click="() => $refs.file.click()")
         i.fa.fa-cloud-upload.fa-4x
         h6.mb-0.pt-3 {{ uploadMessage }}
@@ -165,6 +165,10 @@
       background-color: $input-bg;
       color: $input-placeholder-color;
       border: 2px dashed $input-border-color;
+
+      &.is-invalid {
+        border: 1px solid $red !important;
+      }
     }
 
     .placeholder {
