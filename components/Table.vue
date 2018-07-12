@@ -19,7 +19,7 @@
               i.fa.ml-2(:class="sortIcon(key)", v-if="isFieldSortable(value)")
         tbody(:class="{ 'float-grid': rows }")
           template(v-for="(item, i) in finalRows")
-            tr(:key="item.uIndex")
+            tr(:key="item.uIndex", :class="{ 'expand': !!toggles[i] }")
               td(v-if="selection")
                 u-checkbox(v-model="checks", :value="item.uIndex")
               td(v-for="(value, key) in fields")

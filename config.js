@@ -57,20 +57,23 @@ export const createMenu = store => [
     icon: 'file-text-o',
     title: 'Table',
     children: [{
-      title: 'List',
-      to: '/table/list'
+      title: 'Basic',
+      to: '/table/basic'
+    }, {
+      title: 'Advance',
+      to: '/table/advance'
     }]
   }, {
     icon: 'folder-o',
     title: 'ShowCase',
     children: [{
-      title: '表單元件',
+      title: 'Form',
       to: '/showcase/form'
     }, {
-      title: '表單驗證',
+      title: 'Error Form',
       to: '/showcase/error-form'
     }, {
-      title: '表格',
+      title: 'Table',
       to: '/showcase/table'
     }]
   }
