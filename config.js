@@ -29,9 +29,6 @@ export const createMenu = store => [
       title: 'Filter',
       to: '/components/filter'
     }, {
-      title: 'Form',
-      to: '/components/form'
-    }, {
       title: 'Checkbox And Radio',
       to: '/components/checkbox-and-radio'
     }, {

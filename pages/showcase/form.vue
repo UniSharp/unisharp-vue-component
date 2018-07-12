@@ -1,119 +1,98 @@
 <template lang="pug">
   u-admin
     .section
-      u-alert(type='success') 成功
+      u-alert(type="success") 成功
     .card
       .card-header Form Components
       .card-body
-        form
-          //- Label
-          .form-group.row
-            label.col-md-2 Label：
-            .col-md-10.form-control-static I'm label text.
+        form(@submit="onSubmit")
           //- Input
           .form-group.row
-            label.col-md-2.col-form-label Email address：
+            label.col-md-2.col-form-label Input：
             .col-md-10
-              input.form-control(type='email', v-model='form.email', required='', placeholder='Enter email')
-          //- Select
-          .form-group.row
-            label.col-md-2.col-form-label Select：
-            .col-md-10
-              u-select(v-model="form.food", :options="foods")
-          //- Checkbox
-          .form-group.row
-            label.col-md-2.col-form-label Checkbox：
-            .col-md-10.form-inline
-              u-checkbox(v-model="check", value="yes")
-                | Option 1
-          //- Checkboxes
-          .form-group.row
-            label.col-md-2.col-form-label Checkbox：
-            .col-md-10.form-inline
-              u-checkbox(v-model="checks", value="1")
-                | Option 1
-              u-checkbox(v-model="checks", value="2")
-                | Option 2
-              u-checkbox(v-model="checks", value="3")
-                | Option 3
-          //- Switch
-          .form-group.row
-            label.col-md-2.col-form-label Switch：
-            .col-md-10
-              u-switch(name='switch', v-model='form.checked', @change='showSwitchValue')
-          //- Date Time Picker
-          .form-group.row
-            label.col-md-2.col-form-label Date Time (dropdown)：
-            .col-md-10
-              u-datetime(v-model='form.time', @change='showTime')
-          .form-group.row
-            label.col-md-2.col-form-label Date Time (popup)：
-            .col-md-10
-              u-datetime(v-model='form.time', display='modal', @change='showTime')
-          .form-group.row
-            label.col-md-2.col-form-label Date Time (date only)：
-            .col-md-10
-              u-datetime(mode='date', v-model='form.time', @change='showTime')
-          .form-group.row
-            label.col-md-2.col-form-label Date Time (time only)：
-            .col-md-10
-              u-datetime(mode='time', v-model='form.time', @change='showTime')
+              u-input(v-model="form.email", type="email", placeholder="Enter email")
           //- Textarea
           .form-group.row
             label.col-md-2.col-form-label Textarea：
             .col-md-10
-             textarea.form-control(rows="5")
+              u-input(v-model="form.textarea", type="textarea", :rows="5", placeholder="Say something here ...")
+          //- Select
+          .form-group.row
+            label.col-md-2.col-form-label Select：
+            .col-md-10
+              u-select(v-model="form.selected", :options="foods", @change="showValue")
+          //- Checkbox
+          .form-group.row
+            label.col-md-2.col-form-label Checkbox：
+            .col-md-10.form-inline
+              u-checkbox(v-model="form.check", :value="true", @change="showValue")
+                | Enable
+          //- Checkbox Group
+          .form-group.row
+            label.col-md-2.col-form-label Checkbox：
+            .col-md-10.form-inline
+              u-checkbox-group(v-model="form.checks", :options="foods", @change="showValue")
+          //- Radio
+          .form-group.row
+            label.col-md-2.col-form-label Radio Inline：
+            .col-md-10
+              u-radio(name="group1", :options="foods", v-model="form.radio", @change="showValue")
+          .form-group.row
+            label.col-md-2.col-form-label Radio Stacked：
+            .col-md-10
+              u-radio(name="group2", :options="foods", :stacked="true", v-model="form.radio", @change="showValue")
+          //- Switch
+          .form-group.row
+            label.col-md-2.col-form-label Switch：
+            .col-md-10
+              u-switch(name="switch", v-model="form.sw", @change="showValue")
+          //- Date Time Picker
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (dropdown)：
+            .col-md-10
+              u-datetime(v-model="form.dropdownTime", @change="showValue")
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (popup)：
+            .col-md-10
+              u-datetime(v-model="form.popupTime", display="modal", @change="showValue")
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (date only)：
+            .col-md-10
+              u-datetime(v-model="form.date", mode="date", @change="showValue")
+          .form-group.row
+            label.col-md-2.col-form-label Date Time (time only)：
+            .col-md-10
+              u-datetime(v-model="form.time", mode="time", @change="showValue")
           //- Editor
           .form-group.row
             label.col-md-2.col-form-label Editor：
             .col-md-10
-              u-editor
-          //- Radio
-          .form-group.row
-            label.col-md-2
-              span.title Radio Inline：
-            .col-md-10
-              u-radio(name="food1", :options="foods", v-model="form.radio.value")
-          .form-group.row
-            label.col-md-2
-              span.title Radio Stacked：
-            .col-md-10
-              u-radio(name="food2", :options="foods", :stacked="true", v-model="form.radio.value")
-          .form-group.row
-            label.col-md-2
-              span.title Radio Result：
-            .col-md-10
-              input(type="text", :value="showRadioText(form.radio.value)")
+              u-editor(v-model="form.editor", @change="showValue")
           //- Input Tag
           .form-group.row
-            label.col-md-2
-              span.title Tag Input (Selection)：
+            label.col-md-2.col-form-label Tag Input (Selection)：
             .col-md-10
-              u-input-tag(v-model="selectedTags", placeholder="AddTag", :tags="tags", :limit="2")
+              u-input-tag(v-model="form.selectedTags", placeholder="AddTag", :tags="tags", :limit="2", @change="showValue")
           .form-group.row
-            label.col-md-2
-              span.title Tag Input (Can Scroll)：
+            label.col-md-2.col-form-label Tag Input (Can Scroll)：
             .col-md-10
-              u-input-tag(v-model="selectedTags3", placeholder="AddTag", :tags="tags", :maxTagsShow="5")
+              u-input-tag(v-model="form.selectedTags2", placeholder="AddTag", :tags="tags", :maxTagsShow="5", @change="showValue")
           .form-group.row
-            label.col-md-2
-              span.title Tag Input (Text Add)：
+            label.col-md-2.col-form-label Tag Input (Text Add)：
             .col-md-10
-              u-input-tag(v-model="selectedTags2", placeholder="AddTag", :tags.sync="tags", :limit="2", insertable)
+              u-input-tag(v-model="form.selectedTags3", placeholder="AddTag", :tags.sync="tags", :limit="2", insertable, @change="showValue")
           //- File Uploader
           .form-group.row
-            label.col-md-2
-              span.title Single File Uploader：
+            label.col-md-2.col-form-label Single File Uploader：
             .col-md-10
-              u-single-uploader(changeFile="changeFile", acceptType=".jpg, .jpeg, .png")
+              u-single-uploader(type="image", :image-path="form.file", acceptType=".jpg, .jpeg, .png", @change="changeFile")
           .form-group.row
-            label.col-md-2
-              span.title File Uploader：
+            label.col-md-2.col-form-label File Uploader：
             .col-md-10
-              u-uploader(name="uploader", :options="uploadOptions", v-model="files")
+              u-uploader(name="uploader", :options="uploadOptions", v-model="form.files", @change="showValue")
           //- Button
-          input.btn.btn-primary.mr-2(type="button", value="Submit")
-          input.btn.btn-default(type="button", value="Reset")
+          input.btn.btn-primary.mr-2(type="submit", value="Submit")
+          input.btn.btn-default(type="button", value="Reset", @click="onReset")
   </template>
 
 <script>
@@ -122,35 +101,12 @@
   export default {
     data () {
       return {
-        check: 'yes',
-        checks: ['1', '2'],
-        files: [],
-        form: {
-          email: '',
-          name: '',
-          food: null,
-          fruit: null,
-          checked: false,
-          time: null,
-          secret: 'S3CR3T',
-          radio: {
-            value: 1
-          }
-        },
+        form: this.initForm(),
         foods: [
           { text: 'Carrots', value: 1 },
           { text: 'Beans', value: 2 },
           { text: 'Corn', value: 3 }
         ],
-        foods2: {
-          1: 'Carrots',
-          2: 'Beans',
-          3: 'Corn'
-        },
-        fruits: ['orange', 'apple', 'banana', 'peach'],
-        selectedTags: [],
-        selectedTags2: [],
-        selectedTags3: [],
         tags: ['Done', 'Doing', 'Doc', 'Reopen', 'Complete', 'Blocked', 'Teach', 'Depend', 'Error', 'Success'],
         // Refference: http://www.dropzonejs.com/#config-url
         uploadOptions: {
@@ -158,10 +114,10 @@
           method: 'post',
           paramName: 'files',
           uploadMultiple: true,
-          // acceptedFiles: {
-          //   extensions: ['image/*'],
-          //   message: 'You are uploading an invalid file'
-          // },
+          acceptedFiles: {
+            extensions: ['image/*'],
+            message: 'You are uploading an invalid file'
+          },
           autoProcessQueue: false,
           headers: {},
           maxFiles: {
@@ -179,41 +135,47 @@
       }
     },
     methods: {
-      showTime () {
-        debug(this.form.time)
-      },
-      onSubmit (e) {
-        alert(JSON.stringify(this.form))
-      },
-      showSwitchValue (value) {
-        debug(value)
-      },
-      showRadioText (value) {
-        return this.foods.find((food) => {
-          if (food.value === value) {
-            return food
-          }
-        }).text
+      initForm () {
+        return {
+          email: null,
+          textarea: null,
+          selected: null,
+          check: true,
+          checks: [],
+          radio: 1,
+          sw: false,
+          dropdownTime: null,
+          popupTime: null,
+          date: null,
+          time: null,
+          editor: null,
+          selectedTags: [],
+          selectedTags2: [],
+          selectedTags3: [],
+          file: null,
+          files: []
+        }
       },
       changeFile (file) {
-        console.log(file)
-      }
-    },
-    watch: {
-      check (val) {
-        debug(val)
+        this.form.file = file
+
+        this.showValue(file)
       },
-      checks (val) {
-        debug(val)
+      showValue (value) {
+        debug(value)
       },
-      files (files) {
-        debug(files)
+      onSubmit (e) {
+        e.preventDefault()
+
+        debug(this.form)
+
+        console.log(this.form)
+
+        alert('submit success')
       },
-      selectedTags (tags) {
-        debug(tags)
-      },
-      selectedTags2 (tags) {
-        debug(tags)
+      onReset (e) {
+        console.log(this.initForm())
+        this.form = this.initForm()
       }
     }
   }
