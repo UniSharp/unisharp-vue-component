@@ -3,7 +3,7 @@
     quill-editor.form-control(
       :class="{ 'is-invalid': !!error }",
       :content="content",
-      v-model="_content",
+      v-model="contentValue",
       :options="options",
       @ready="onReady",
       @blur="(quill) => { this.$emit('blur', quill) }",
@@ -23,7 +23,7 @@
   export default {
     created () {
       if (this.value || this.content) {
-        this._content = this.value || this.content
+        this.contentValue = this.value || this.content
       }
     },
     methods: {
@@ -55,7 +55,7 @@
     },
     data () {
       return {
-        _content: ''
+        contentValue: ''
       }
     },
     props: {
@@ -72,7 +72,6 @@
         }
       }
     }
-
   }
 </script>
 
