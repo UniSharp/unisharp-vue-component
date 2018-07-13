@@ -68,7 +68,7 @@
         ```
         template.
           u-select(:options="options", selected="")
-          u-select(:options="options", placeholder="客製預設選項")
+          u-select(:options="options", selected="", placeholder="客製預設選項")
           u-select(:options="options", selected="", :noPlaceholder="true")
 
         script.

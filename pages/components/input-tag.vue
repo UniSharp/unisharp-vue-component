@@ -3,20 +3,20 @@
     .card.w-100: .card-body
 
       .my-2 Basic use
-      u-input-tag(v-model="form.selectedTags1", :tags="tags", placeholder="AddTag")
+      u-input-tag(v-model="form.selectedTags1", placeholder="AddTag", :tags="tags")
       .my-2 Set limit property to limit at most selected size
-      u-input-tag(v-model="form.selectedTags2", :tags="tags", :limit="2", placeholder="AddTag")
+      u-input-tag(v-model="form.selectedTags2", placeholder="AddTag", :tags="tags", :limit="2")
       .my-2 Enable insertable property to add additional tag ( Enter any text on input box )
-      u-input-tag(v-model="form.selectedTags3", :tags.sync="tags", :insertable="true", placeholder="AddTag")
+      u-input-tag(v-model="form.selectedTags3", placeholder="AddTag", :tags.sync="tags", :insertable="true")
 
       md.form-control.my-3.
         ```
         template.
-          u-input-tag(v-model="form.selectedTags1", :tags="tags", placeholder="AddTag")
+          u-input-tag(v-model="form.selectedTags1", placeholder="AddTag", :tags="tags")
 
-          u-input-tag(v-model="form.selectedTags2", :tags="tags", :limit="2", placeholder="AddTag")
+          u-input-tag(v-model="form.selectedTags2", placeholder="AddTag", :tags="tags", :limit="2")
 
-          u-input-tag(v-model="form.selectedTags3", :tags.sync="tags", :insertable="true", placeholder="AddTag")
+          u-input-tag(v-model="form.selectedTags3", placeholder="AddTag", :tags.sync="tags", :insertable="true")
 
         script.
           export default {

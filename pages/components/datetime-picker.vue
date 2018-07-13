@@ -14,7 +14,9 @@
         ```
         template.
           u-datetime(v-model="empty")
+
           u-datetime(v-model="empty", placeholder="YYYY-MM-DD HH:mm")
+
           u-datetime(v-model="form.datetime")
 
         script.
@@ -41,6 +43,7 @@
         ```
         template.
           u-datetime(v-model="form.datetime", mode="date")
+
           u-datetime(v-model="form.datetime", mode="time")
 
         script.

@@ -13,8 +13,11 @@
           ```
           template.
             u-checkbox(v-model="form.enabled", :value="true") Checked
+
             u-checkbox(v-model="form.enabled", :value="false") Not Checked
+
             u-checkbox(v-model="form.enabled", :value="false", disabled) Disabled
+
             u-checkbox(v-model="form.enabled", :value="true", disabled) Checked & Disabled
 
           script.
@@ -45,6 +48,7 @@
           ```
           template.
             u-checkbox-group(v-model="form.checked", :options="options")
+
             u-checkbox-group(v-model="form.checked", :options="options", :stacked="true")
 
           script.
@@ -72,18 +76,21 @@
         h2 Radio
 
         .d-flex
-          u-radio(:options="[{text: 'Checked', value: true}]", name="single1", :value="true")
-          u-radio(:options="[{text: 'Not Checked', value: false}]", name="single2", :value="true")
-          u-radio(:options="[{text: 'Disabled', value: false}]", name="single3", :value="true", disabled)
-          u-radio(:options="[{text: 'Checked & Disabled', value: true}]", name="single4", :value="true", disabled)
+          u-radio(name="single1", :value="true", :options="[{text: 'Checked', value: true}]")
+          u-radio(name="single2", :value="true", :options="[{text: 'Not Checked', value: false}]")
+          u-radio(name="single3", :value="true", :options="[{text: 'Disabled', value: false}]", disabled)
+          u-radio(name="single4", :value="true", :options="[{text: 'Checked & Disabled', value: true}]", disabled)
 
         md.form-control.my-3.
           ```
           template.
-            u-radio(:options="[{text: 'Checked', value: true}]", name="single1", :value="true")
-            u-radio(:options="[{text: 'Not Checked', value: false}]", name="single2", :value="true")
-            u-radio(:options="[{text: 'Disabled', value: false}]", name="single3", :value="true", disabled)
-            u-radio(:options="[{text: 'Checked & Disabled', value: true}]", name="single4", :value="true", disabled)
+            u-radio(name="single1", :value="true", :options="[{text: 'Checked', value: true}]")
+
+            u-radio(name="single2", :value="true", :options="[{text: 'Not Checked', value: false}]")
+
+            u-radio(name="single3", :value="true", :options="[{text: 'Disabled', value: false}]", disabled)
+
+            u-radio(name="single4", :value="true", :options="[{text: 'Checked & Disabled', value: true}]", disabled)
           ```
 
       section
@@ -98,6 +105,7 @@
           ```
           template.
             u-radio(v-model="form.checked", :options="options", name="group1")
+
             u-radio(v-model="form.checked", :options="options", name="group2", :stacked="true")
 
           script.

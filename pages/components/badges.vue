@@ -9,7 +9,9 @@
       md.form-control.my-4.
         ```
         a.badge.badge-pill.badge-primary Primary
+
         a.badge.badge-pill.badge-danger Danger
+
         a.badge.badge-pill.badge-info Info
         ```
 
@@ -29,9 +31,11 @@
         a.badge.badge-pill.badge-primary
           | Primary
           i.fa.fa-times.pl-1(aria-hidden='true')
+
         a.badge.badge-pill.badge-danger
           | Danger
           i.fa.fa-times.pl-1(aria-hidden='true')
+
         a.badge.badge-pill.badge-info
           | Info
           i.fa.fa-times.pl-1(aria-hidden='true')

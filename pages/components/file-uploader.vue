@@ -3,28 +3,12 @@
     .card.w-100: .card-body
       h2 Single File Uploader
 
-      .my-2 Basic use
+      .my-2 Basic use. Provide change to handle file changed
       u-single-uploader(@change="changeFile")
-      .my-2
-        | Custom upload message (default message is "Click to Upload File"),
-        br
-        | and also allow specific types of upload, for example ".jpg, .jpeg, .png"
-      u-single-uploader(upload-message="上傳檔案", accept-type=".jpg, .jpeg, .png", @change="changeFile")
-      .my-2 Uploading effect
-      u-single-uploader(@change="changeFile", :uploading="true")
-      .my-2 Set existing file. Allow image, video and other types, and only image will preview.
-      u-single-uploader(type="image", image-path="https://picsum.photos/308/228/", @change="changeFile")
-
       md.form-control.my-3.
         ```
         template.
           u-single-uploader(@change="changeFile")
-
-          u-single-uploader(upload-message="上傳檔案", accept-type=".jpg, .jpeg, .png", @change="changeFile")
-
-          u-single-uploader(@change="changeFile", :uploading="true")
-
-          u-single-uploader(type="image", image-path="https://picsum.photos/308/228/", @change="changeFile")
 
         script.
           export default {
@@ -42,6 +26,34 @@
               }
             }
           }
+        ```
+
+      .my-2 Custom upload message (default message is "Click to Upload File")
+      u-single-uploader(upload-message="上傳檔案")
+      md.form-control.my-3.
+        ```
+        u-single-uploader(upload-message="上傳檔案")
+        ```
+
+      .my-2 Allow specific types of upload, for example ".jpg, .jpeg, .png"
+      u-single-uploader(accept-type=".jpg, .jpeg, .png")
+      md.form-control.my-3.
+        ```
+        u-single-uploader(accept-type=".jpg, .jpeg, .png")
+        ```
+
+      .my-2 Uploading effect
+      u-single-uploader(:uploading="true")
+      md.form-control.my-3.
+        ```
+        u-single-uploader(:uploading="true")
+        ```
+
+      .my-2 Set existing file. Allow image, video and other types, and only image will preview.
+      u-single-uploader(type="image", image-path="https://picsum.photos/308/228/")
+      md.form-control.my-3.
+        ```
+        u-single-uploader(type="image", image-path="https://picsum.photos/308/228/")
         ```
 
       h4 Property
