@@ -70,17 +70,17 @@
               u-editor(v-model="form.editor", @change="showValue")
           //- Input Tag
           .form-group.row
-            label.col-md-2.col-form-label Tag Input (Selection)：
+            label.col-md-2.col-form-label Tag Input：
             .col-md-10
-              u-input-tag(v-model="form.selectedTags", placeholder="AddTag", :tags="tags", :limit="2", @change="showValue")
+              u-input-tag(v-model="form.selectedTags", placeholder="AddTag", :tags="tags", @change="showValue")
           .form-group.row
-            label.col-md-2.col-form-label Tag Input (Can Scroll)：
+            label.col-md-2.col-form-label Tag Input (Has Limit)：
             .col-md-10
-              u-input-tag(v-model="form.selectedTags2", placeholder="AddTag", :tags="tags", :maxTagsShow="5", @change="showValue")
+              u-input-tag(v-model="form.selectedTags2", placeholder="AddTag", :tags="tags", :limit="2",  @change="showValue")
           .form-group.row
             label.col-md-2.col-form-label Tag Input (Text Add)：
             .col-md-10
-              u-input-tag(v-model="form.selectedTags3", placeholder="AddTag", :tags.sync="tags", :limit="2", insertable, @change="showValue")
+              u-input-tag(v-model="form.selectedTags3", placeholder="AddTag", :tags.sync="tags", :insertable="true", @change="showValue")
           //- File Uploader
           .form-group.row
             label.col-md-2.col-form-label Single File Uploader：
