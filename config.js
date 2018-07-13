@@ -26,9 +26,6 @@ export const createMenu = store => [
       title: 'Card',
       to: '/components/card'
     }, {
-      title: 'Filter',
-      to: '/components/filter'
-    }, {
       title: 'Checkbox And Radio',
       to: '/components/checkbox-and-radio'
     }, {
@@ -75,6 +72,9 @@ export const createMenu = store => [
     }, {
       title: 'Table',
       to: '/showcase/table'
+    }, {
+      title: 'Filter',
+      to: '/showcase/filter'
     }]
   }
 ]
