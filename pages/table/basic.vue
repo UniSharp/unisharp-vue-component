@@ -1,112 +1,90 @@
 <template lang="pug">
   u-admin
-    u-table(:fields="fields", :items="items", :hidePagination="true")
+    .card.w-100: .card-body
+      h4 Basic use without pagination
 
-    md.form-control.my-3.
-      ```
-      template.
-        u-table(:fields="fields", :items="items", :hidePagination="true")
+      u-table(:fields="fields", :items="items", :hidePagination="true")
 
-      script.
-        export default {
-          data () {
-            return {
-              fields: {
-                last_name: {
-                  label: 'Last name'
+      md.form-control.my-3.
+        ```
+        template.
+          u-table(:fields="fields", :items="items", :hidePagination="true")
+
+        script.
+          export default {
+            data () {
+              return {
+                fields: {
+                  first_name: {
+                    label: 'First Name'
+                  },
+                  last_name: {
+                    label: 'Last name'
+                  },
+                  level: {
+                    label: 'Department Level'
+                  }
                 },
-                first_name: {
-                  label: 'First Name'
-                },
-                level: {
-                  label: 'Department Level'
-                },
-                operation: {
-                  label: 'Operation'
-                }
-              },
-              items: [
-                { id: 1, level: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
-                { id: 2, level: 1, first_name: 'Larsen', last_name: 'Shaw' },
-                { id: 3, level: 1, first_name: 'Geneva', last_name: 'Wilson' },
-                { id: 4, level: 2, first_name: 'Jami', last_name: 'Carney' },
-                { id: 5, level: 3, first_name: 'Essie', last_name: 'Dunlap' }
-              ]
+                items: [
+                  { id: 1, first_name: 'Dickerson', last_name: 'Macdonald', level: 1 },
+                  { id: 2, first_name: 'Larsen', last_name: 'Shaw', level: 1 },
+                  { id: 3, first_name: 'Geneva', last_name: 'Wilson', level: 1 },
+                  { id: 4, first_name: 'Jami', last_name: 'Carney', level: 2 },
+                  { id: 5, first_name: 'Essie', last_name: 'Dunlap', level: 3 }
+                ]
+              }
             }
           }
-        }
-      ```
+        ```
+      h4 Basic use with pagination
 
-    u-table(
-      :fields="fields",
-      :items="items",
-      :per-page="perPage",
-      :totalRows="totalRows",
-    )
-      template(slot="operation", slot-scope="row")
-        button.btn.btn-info.btn-sm.mr-1(type="button", @click.stop="row.toggle()")
-          i.fa.fa-angle-left(aria-hidden="true").mr-2
-        button.btn.btn-danger.btn-sm.mr-1(type="button", @click.stop="remove(row.value.id)")
-          i.fa.fa-trash(aria-hidden="true").mr-2
-          | Remove
-        button.btn.btn-primary.btn-sm(type="button", @click.stop="showClickButton(row.value.age)")
-          i.fa.fa-pencil(aria-hidden="true").mr-2
-          | Edit
+      u-table(:fields="fields", :items="items", :per-page="perPage", :totalRows="totalRows")
 
-    md.form-control.my-3.
-      ```
-      template.
-        u-table(:fields="fields", :items="items", :per-page="perPage", :totalRows="totalRows")
-          template(slot="operation", slot-scope="row")
-            button.btn.btn-info.btn-sm.mr-1(type="button", @click.stop="row.toggle()")
-              i.fa.fa-angle-left(aria-hidden="true").mr-2
-            button.btn.btn-danger.btn-sm.mr-1(type="button", @click.stop="remove(row.value.id)")
-              i.fa.fa-trash(aria-hidden="true").mr-2
-              | Remove
-            button.btn.btn-primary.btn-sm(type="button", @click.stop="showClickButton(row.value.age)")
-              i.fa.fa-pencil(aria-hidden="true").mr-2
-              | Edit
+      md.form-control.my-3.
+        ```
+        template.
+          u-table(:fields="fields", :items="items", :per-page="perPage", :totalRows="totalRows")
 
-      script.
-        export default {
-          data () {
-            return {
-              fields: {
-                last_name: {
-                  label: 'Last name'
+        script.
+          export default {
+            data () {
+              return {
+                fields: {
+                  first_name: {
+                    label: 'First Name'
+                  },
+                  last_name: {
+                    label: 'Last name'
+                  },
+                  level: {
+                    label: 'Department Level'
+                  }
                 },
-                first_name: {
-                  label: 'First Name'
-                },
-                level: {
-                  label: 'Department Level'
-                },
-                operation: {
-                  label: 'Operation'
-                }
-              },
-              items: [
-                { id: 1, level: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
-                { id: 2, level: 1, first_name: 'Larsen', last_name: 'Shaw' },
-                { id: 3, level: 1, first_name: 'Geneva', last_name: 'Wilson' },
-                { id: 4, level: 2, first_name: 'Jami', last_name: 'Carney' },
-                { id: 5, level: 3, first_name: 'Essie', last_name: 'Dunlap' }
-              ],
-              perPage: 5,
-              totalRows: 100
+                items: [
+                  { id: 1, first_name: 'Dickerson', last_name: 'Macdonald', level: 1 },
+                  { id: 2, first_name: 'Larsen', last_name: 'Shaw', level: 1 },
+                  { id: 3, first_name: 'Geneva', last_name: 'Wilson', level: 1 },
+                  { id: 4, first_name: 'Jami', last_name: 'Carney', level: 2 },
+                  { id: 5, first_name: 'Essie', last_name: 'Dunlap', level: 3 }
+                ],
+                perPage: 5,
+                totalRows: 100
+              }
             }
           }
-        }
-      ```
+        ```
+
+      h4 Property
+      u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
 </template>
 
 <script>
   let items = [
-    { id: 1, level: 1, first_name: 'Dickerson', last_name: 'Macdonald' },
-    { id: 2, level: 1, first_name: 'Larsen', last_name: 'Shaw' },
-    { id: 3, level: 1, first_name: 'Geneva', last_name: 'Wilson' },
-    { id: 4, level: 2, first_name: 'Jami', last_name: 'Carney' },
-    { id: 5, level: 3, first_name: 'Essie', last_name: 'Dunlap' }
+    { id: 1, first_name: 'Dickerson', last_name: 'Macdonald', level: 1 },
+    { id: 2, first_name: 'Larsen', last_name: 'Shaw', level: 1 },
+    { id: 3, first_name: 'Geneva', last_name: 'Wilson', level: 1 },
+    { id: 4, first_name: 'Jami', last_name: 'Carney', level: 2 },
+    { id: 5, first_name: 'Essie', last_name: 'Dunlap', level: 3 }
   ]
 
   export default {
@@ -120,22 +98,63 @@
         filter: null,
         keyword: null,
         fields: {
-          last_name: {
-            label: 'Last name'
-          },
           first_name: {
             label: 'First Name'
           },
+          last_name: {
+            label: 'Last name'
+          },
           level: {
             label: 'Department Level'
-          },
-          operation: {
-            label: 'Operation'
           }
         },
         items: items,
         perPage: 5,
-        totalRows: 100
+        totalRows: 100,
+        propertyFields: {
+          property: {
+            label: 'Property'
+          },
+          type: {
+            label: 'Type'
+          },
+          default_value: {
+            label: 'Default Value'
+          },
+          required: {
+            label: 'Required'
+          },
+          description: {
+            label: 'Description'
+          }
+        },
+        properties: [
+          { property: 'items', type: 'Array', default_value: '[]', required: '', description: 'Table content' },
+          { property: 'provider', type: 'Func', default_value: 'null', required: '', description: 'Table content by provider function return' },
+          { property: 'fields', type: 'Object', default_value: 'null', required: '', description: 'Table Header' },
+          { property: 'perPage', type: 'Number', default_value: 'null', required: '', description: 'The count of per page data' },
+          { property: 'totalRows', type: 'Number', default_value: 'null', required: '', description: 'Total count of result data' },
+          { property: 'hidePagination', type: 'Boolean', default_value: 'false', required: '', description: 'Hide pagination feature' }
+        ]
+      }
+    },
+    computed: {
+      sortableFields () {
+        return {
+          first_name: {
+            label: 'First Name'
+          },
+          last_name: {
+            label: 'Last name'
+          },
+          level: {
+            label: 'Department Level',
+            sortable: true
+          },
+          operation: {
+            label: 'Operation'
+          }
+        }
       }
     }
   }
