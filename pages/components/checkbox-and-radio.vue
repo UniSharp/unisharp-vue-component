@@ -171,40 +171,40 @@
           }
         },
         checkboxProperties: [
-          { property: 'name', type: 'String', default_value: 'false', required: '', description: '' },
-          { property: 'value', type: 'Any', default_value: 'true', required: '', description: '' },
-          { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'error', type: 'String', default_value: '', required: '', description: '' }
+          { property: 'name', type: 'String', default_value: 'false', required: '', description: 'The name attribute of checkbox' },
+          { property: 'value', type: 'Any', default_value: 'true', required: '', description: 'Checkbox value' },
+          { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: 'The disabled attribute of checkbox' },
+          { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: 'The required attribute of checkbox' },
+          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
         checkboxEvents: [
-          { event: 'change', arguments: '', description: '' },
-          { event: 'focus', arguments: '', description: '' },
-          { event: 'blur', arguments: '', description: '' },
-          { event: 'click', arguments: '', description: '' }
+          { event: 'change', arguments: 'Checked value of checkbox, and the type according to the option value', description: 'Get current value when the checkbox is toggled' },
+          { event: 'focus', arguments: '(same as change event)', description: 'Get current value when the checkbox is focused' },
+          { event: 'blur', arguments: '(same as change event)', description: 'Get current value when the checkbox is blurred' },
+          { event: 'click', arguments: '(same as change event)', description: 'Get current value when the checkbox is clicked' }
         ],
         checkboxGroupProperties: [
-          { property: 'options', type: 'Array', default_value: '', required: 'true', description: '[{ text: \'displayname\', value: \'key\' }]' },
-          { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'error', type: 'String', default_value: '', required: '', description: '' }
+          { property: 'options', type: 'Array', default_value: '', required: 'true', description: 'The options of checkboxes, and format is [{ text: \'displayname\', value: \'key\' }]' },
+          { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: 'The arrangement of options' },
+          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
         checkboxGroupEvents: [
-          { event: 'change', arguments: '', description: '' }
+          { event: 'change', arguments: 'Checked value of checkbox(es). When bound to multiple checkboxes, value will be an array.', description: 'Get current value when the checkbox is toggled' }
         ],
         radioProperty: [
-          { property: 'options', type: 'Array', default_value: '', required: 'true', description: '[{ text: \'displayname\', value: \'key\' }]' },
-          { property: 'name', type: 'String', default_value: 'null', required: '', description: '' },
-          { property: 'value', type: 'Any', default_value: 'null', required: '', description: '' },
-          { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'error', type: 'String', default_value: '', required: '', description: '' }
+          { property: 'options', type: 'Array', default_value: '', required: 'true', description: 'The options of radios, and format is [{ text: \'displayname\', value: \'key\' }]' },
+          { property: 'name', type: 'String', default_value: 'null', required: '', description: 'Group name of radios' },
+          { property: 'value', type: 'Any', default_value: 'null', required: '', description: 'Radio value' },
+          { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: 'The disabled attribute of radio' },
+          { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: 'The required attribute of radio' },
+          { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: 'The arrangement of options' },
+          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
         radioEvents: [
-          { event: 'change', arguments: '', description: '' },
-          { event: 'focus', arguments: '', description: '' },
-          { event: 'blur', arguments: '', description: '' },
-          { event: 'click', arguments: '', description: '' }
+          { event: 'change', arguments: 'Checked value of radio, and the type according to the option value', description: 'Get checked radio value when target radio is checked' },
+          { event: 'focus', arguments: '(same as change event)', description: 'Get checked radio value when target radio is focused' },
+          { event: 'blur', arguments: '(same as change event)', description: 'Get checked radio value when target radio is blurred' },
+          { event: 'click', arguments: '(same as change event)', description: 'Get checked radio value when target radio is click' }
         ]
       }
     }

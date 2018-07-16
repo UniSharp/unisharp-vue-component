@@ -1,7 +1,7 @@
 <template lang="pug">
   u-admin
     .card.w-100: .card-body
-      h2 Input
+      h4 Input
 
       u-input(type="text", name="email", placeholder="Enter email")
 
@@ -11,7 +11,7 @@
           u-input(type="text", name="email", placeholder="Enter email")
         ```
 
-      h2 Textarea
+      h4 Textarea
 
       u-input(type="textarea", :rows="10", placeholder="Enter description here")
 
@@ -21,9 +21,9 @@
           u-input(type="textarea", :rows="10", placeholder="Enter description here")
         ```
 
-      h2 Property
+      h4 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
-      h2 Event
+      h4 Event
       u-table(:fields="eventFields", :items="events", :hidePagination="true")
 </template>
 <script>
@@ -59,14 +59,14 @@
           }
         },
         properties: [
-          { property: 'type', type: 'String', default_value: 'text', required: '', description: '' },
-          { property: 'name', type: 'String', default_value: '', required: '', description: '' },
-          { property: 'placeholder', type: 'String', default_value: '', required: '', description: '' },
-          { property: 'rows', type: 'Number', default_value: '1', required: '', description: '' },
-          { property: 'error', type: 'String', default_value: '', required: '', description: '' }
+          { property: 'type', type: 'String', default_value: 'text', required: '', description: 'The attribute type of input, or switch to textarea' },
+          { property: 'name', type: 'String', default_value: '', required: '', description: 'The attribute name of input / textarea' },
+          { property: 'placeholder', type: 'String', default_value: '', required: '', description: 'Input / Textarea hint text' },
+          { property: 'rows', type: 'Number', default_value: '1', required: '', description: 'The number of textarea visible lines' },
+          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
         events: [
-          { event: 'input', arguments: '', description: '' }
+          { event: 'input', arguments: 'String', description: 'Get value when input entered' }
         ]
       }
     }

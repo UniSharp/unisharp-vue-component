@@ -1,7 +1,7 @@
 <template lang="pug">
   u-admin
     .card.w-100: .card-body
-      h2 Basic use
+      h4 Basic use
 
       u-select(v-model="form.selected", :options="options", :selected="form.selected")
 
@@ -55,7 +55,7 @@
          }
         ```
 
-      h2 Placeholder
+      h4 Placeholder
 
       .my-2 Default
       u-select(:options="options", selected="")
@@ -85,7 +85,7 @@
          }
         ```
 
-      h2 Disabled
+      h4 Disabled
 
       .my-2 Disabled
       u-select(:options="options", selected="", disabled)
@@ -109,9 +109,9 @@
          }
         ```
 
-      h2 Property
+      h4 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
-      h2 Event
+      h4 Event
       u-table(:fields="eventFields", :items="events", :hidePagination="true")
 </template>
 <script>
@@ -155,21 +155,21 @@
           }
         },
         properties: [
-          { property: 'options', type: '[Array, Object]', default_value: '', required: 'true', description: 'Support two format for options: key-value or only value array/object' },
-          { property: 'selected', type: 'Any', default_value: '', required: 'true', description: '' },
-          { property: 'filterable', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'placeholder', type: 'String', default_value: '請選擇', required: '', description: '' },
-          { property: 'noPlaceholder', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'pinnedOption', type: '[Array, Object]', default_value: 'null', required: '', description: '' },
-          { property: 'pinnedOptionPrefix', type: 'String', default_value: '', required: '', description: '' },
-          { property: 'search', type: 'String', default_value: '', required: '', description: '' },
-          { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'error', type: 'String', default_value: '', required: '', description: '' }
+          { property: 'options', type: '[Array, Object]', default_value: '', required: 'true', description: 'The options of select. Support two format for options: key-value or only value array/object' },
+          { property: 'selected', type: 'Any', default_value: '', required: 'true', description: 'The selected attribute of select option' },
+          { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: 'Disabled select dropdown' },
+          { property: 'placeholder', type: 'String', default_value: '請選擇', required: '', description: 'The placeholder and empty option hint text' },
+          { property: 'noPlaceholder', type: 'Boolean', default_value: 'false', required: '', description: 'Remove empty option' },
+          { property: 'filterable', type: 'Boolean', default_value: 'false', required: '', description: 'Enable for InputTag component to filter selected tags' },
+          { property: 'pinnedOption', type: '[Array, Object]', default_value: 'null', required: '', description: 'Dropdown sub menu options' },
+          { property: 'pinnedOptionPrefix', type: 'String', default_value: '', required: '', description: 'Dropdown sub menu prefix text of options' },
+          { property: 'search', type: 'String', default_value: '', required: '', description: 'Last selected tag text for search to filter tags' },
+          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
         events: [
-          { event: 'change', arguments: '', description: '' },
-          { event: 'update:search', arguments: '', description: '' },
-          { event: 'insert', arguments: '', description: '' }
+          { event: 'change', arguments: 'Array. Get value of selected options', description: 'Get selected value when option is selected' },
+          { event: 'update:search', arguments: 'Array', description: 'Get filtered and selected tags when search finished' },
+          { event: 'insert', arguments: 'String. Get text of inserted tag', description: 'Get inserted tag when tag inserted' }
         ]
       }
     }

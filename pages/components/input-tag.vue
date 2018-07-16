@@ -77,17 +77,17 @@
           }
         },
         properties: [
-          { property: 'tags', type: 'Array', default_value: '', required: 'true', description: '' },
-          { property: 'selected', type: 'Array', default_value: '', required: 'true', description: '' },
-          { property: 'insertable', type: 'Boolean', default_value: 'null', required: '', description: '' },
-          { property: 'placeholder', type: 'String', default_value: '', required: '', description: '' },
-          { property: 'limit', type: 'Number', default_value: '', required: '', description: '' },
-          { property: 'limitMessage', type: 'String', default_value: 'Maximum tags exceeded.', required: '', description: '' },
-          { property: 'error', type: 'String', default_value: '', required: '', description: '' }
+          { property: 'tags', type: 'Array', default_value: '', required: 'true', description: 'The tags waiting to be selected' },
+          { property: 'selected', type: 'Array', default_value: '', required: 'true', description: 'Selected tag' },
+          { property: 'insertable', type: 'Boolean', default_value: 'null', required: '', description: 'Enable to allow new tag inserting' },
+          { property: 'placeholder', type: 'String', default_value: '', required: '', description: 'Hint text' },
+          { property: 'limit', type: 'Number', default_value: '', required: '', description: 'Limit the number of tag to be selected' },
+          { property: 'limitMessage', type: 'String', default_value: 'Maximum tags exceeded.', required: '', description: 'The warning text of overrun size tags' },
+          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
         events: [
-          { event: 'change', arguments: '', description: '' },
-          { event: 'update:tags', arguments: '', description: '' }
+          { event: 'change', arguments: 'Array. Get text of inserted / selected tags', description: 'Get value when tag inserted / selected' },
+          { event: 'update:tags', arguments: 'Array', description: 'Get value when tag inserted' }
         ]
       }
     }

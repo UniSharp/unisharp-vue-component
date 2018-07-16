@@ -5,9 +5,9 @@
     md.form-control.my-3.
       u-pagination(:totalRows="12345", :perPage="500", :limitPage="3", :currentPage="3")
 
-    h2 Property
+    h4 Property
     u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
-    h2 Event
+    h4 Event
     u-table(:fields="eventFields", :items="events", :hidePagination="true")
 </template>
 
@@ -44,13 +44,13 @@
           }
         },
         properties: [
-          { property: 'totalRows', type: 'Number', default_value: '20', required: '', description: '' },
-          { property: 'perPage', type: 'Number', default_value: '20', required: '', description: '' },
-          { property: 'currentPage', type: 'Number', default_value: '1', required: '', description: '' },
-          { property: 'limitPage', type: 'Number', default_value: '5', required: '', description: '' }
+          { property: 'totalRows', type: 'Number', default_value: '20', required: '', description: 'Total count of result data' },
+          { property: 'perPage', type: 'Number', default_value: '20', required: '', description: 'The count of per page data' },
+          { property: 'currentPage', type: 'Number', default_value: '1', required: '', description: 'Current page' },
+          { property: 'limitPage', type: 'Number', default_value: '5', required: '', description: 'The number of pages is displayed, and out of number pages will be displayed in "..."' }
         ],
         events: [
-          { event: 'update:currentPage', arguments: '', description: '' }
+          { event: 'update:currentPage', arguments: 'Number', description: 'Get value when page switched' }
         ]
       }
     }

@@ -1,7 +1,7 @@
 <template lang="pug">
   u-admin
     .card.w-100: .card-body
-      h2 Datetime(Default)
+      h4 Datetime(Default)
 
       .my-2 Set empty datetime
       u-datetime(v-model="empty")
@@ -32,7 +32,7 @@
           }
         ```
 
-      h2 Mode
+      h4 Mode
 
       .my-2 Date
       u-datetime(v-model="form.datetime", mode="date")
@@ -58,9 +58,9 @@
           }
         ```
 
-      h2 Config
+      h4 Config
 
-      h4 Locale
+      li Locale
       .my-2
         span Support locales, and get more detail in&nbsp;
         nuxt-link(to="https://momentjs.com/docs/#/i18n/") moment.js&nbsp;
@@ -87,7 +87,7 @@
             }
           }
         ```
-      h2 Modal
+      h4 Modal
 
       .my-2 Display in modal
       u-datetime(v-model="form.datetime", display="modal")
@@ -109,9 +109,9 @@
           }
         ```
 
-      h2 Property
+      h4 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
-      h2 Event
+      h4 Event
       u-table(:fields="eventFields", :items="events", :hidePagination="true")
 </template>
 <script>
@@ -156,16 +156,14 @@
           }
         },
         properties: [
-          { property: 'mode', type: 'String', default_value: 'datetime', required: '', description: '' },
-          { property: 'display', type: 'String', default_value: 'dropdown', required: '', description: '' },
-          { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: '' },
-          { property: 'placeholder', type: 'String', default_value: '', required: '', description: '' },
-          { property: 'config', type: 'Object', default_value: '{{locale: \'en\'}}', required: '', description: '' },
-          { property: 'error', type: 'String', default_value: '', required: '', description: '' }
+          { property: 'mode', type: 'String', default_value: 'datetime', required: '', description: 'Display formats of date, time or datetime' },
+          { property: 'display', type: 'String', default_value: 'dropdown', required: '', description: 'Display options of dropdown or modal' },
+          { property: 'placeholder', type: 'String', default_value: '', required: '', description: 'Hint text' },
+          { property: 'config', type: 'Object', default_value: '{{locale: \'en\'}}', required: '', description: 'See Momentjs document (https://momentjs.com/docs/#/i18n/)' },
+          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
         events: [
-          { event: 'change', arguments: '', description: '' }
+          { event: 'change', arguments: 'String', description: 'Get current value when selected value is changed' }
         ]
       }
     }
