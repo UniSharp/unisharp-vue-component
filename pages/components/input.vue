@@ -63,7 +63,8 @@
           { property: 'name', type: 'String', default_value: '', required: '', description: 'The attribute name of input / textarea' },
           { property: 'placeholder', type: 'String', default_value: '', required: '', description: 'Input / Textarea hint text' },
           { property: 'rows', type: 'Number', default_value: '1', required: '', description: 'The number of textarea visible lines' },
-          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
+          { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' },
+          { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: 'Disable the Input / Textarea' }
         ],
         events: [
           { event: 'input', arguments: 'String', description: 'Get value when input entered' }

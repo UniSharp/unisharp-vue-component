@@ -5,6 +5,7 @@
       :rows="rows",
       :name="name",
       :placeholder="placeholder",
+      :disabled="disabled",
       @input="$emit('input', $event.target.value)",
       v-if=" type === 'textarea' || rows > 1 "
     ) {{ value }}
@@ -15,6 +16,7 @@
       :name="name",
       :value="value",
       :placeholder="placeholder",
+      :disabled="disabled",
       @input="$emit('input', $event.target.value)",
       v-else
     )
@@ -42,6 +44,10 @@
       },
       name: {
         type: String
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     },
     model: {
