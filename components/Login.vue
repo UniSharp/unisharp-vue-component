@@ -41,6 +41,7 @@
 
 <script>
   import config from '~/config'
+  import Menu from '../plugins/Menu'
 
   export default {
     props: {
@@ -79,6 +80,9 @@
       onSubmit () {
         this.$emit('submit', this.form)
       }
+    },
+    async created () {
+      await Menu.clearMenu()
     }
   }
 </script>

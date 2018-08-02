@@ -4,14 +4,14 @@
     .row
       u-sidebar.col.p-0(ref="sidebar")
         u-logo(slot="header")
-        u-sidenav
+        u-sidenav(:list="menu")
       .u-content.col.p-0.d-flex.flex-column
         .navbar.px-4.py-0
           .u-sidebar-toggle.text-light.px-2.mr-3.d-lg-none(@click.prevent="$refs.sidebar.show")
            i.fa.fa-bars
           .d-none.d-sm-block
             slot(name="breadcrumb")
-              u-breadcrumb
+              u-breadcrumb(:current="current")
           u-user-dropdown.h-100.ml-auto
             template(v-if="dropdownMenu")
               nuxt-link.dropdown-item(v-for="(item, index) in dropdownMenu", :to="item.to", :key="index")
@@ -42,12 +42,20 @@
         type: String
       }
     },
+    data () {
+      return {
+        menu: [],
+        current: {}
+      }
+    },
+    async created () {
+      let menu = await Menu.singleton(this.$store)
+      this.menu = menu.getVisible()
+      this.current = menu.getCurrent(this.$route)
+    },
     asyncComputed: {
       async defaultTitle () {
-        let menu = await Menu.singleton(this.$store)
-        let current = menu.getCurrent(this.$route)
-
-        return current ? current.title : config.index.title
+        return this.current ? this.current.title : config.index.title
       }
     },
     computed: {

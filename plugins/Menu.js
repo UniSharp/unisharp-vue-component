@@ -34,6 +34,10 @@ class Menu {
     return Menu.instance
   }
 
+  static async clearMenu () {
+    Menu.instance = undefined
+  }
+
   static isActive (item, $route) {
     return _.find(Menu.normalize(item), { matched: $route.matched[0].path }) || _.find(Menu.normalize(item), { matched: $route.fullPath })
   }

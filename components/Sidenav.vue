@@ -19,10 +19,14 @@
   import Menu from '../plugins/Menu'
 
   export default {
+    props: {
+      list: {
+        type: [Array, Object]
+      }
+    },
     data () {
       return {
-        active: -1,
-        list: []
+        active: -1
       }
     },
     computed: {
@@ -34,8 +38,7 @@
         return item.to === this.$route.path || _.indexOf(item.active, this.$route.path) !== -1
       }
     },
-    async created () {
-      this.list = (await Menu.singleton(this.$store)).getVisible()
+    created () {
       _.each(this.list, (item, i) => {
         if (Menu.isActive(item, this.$route)) {
           this.active = i

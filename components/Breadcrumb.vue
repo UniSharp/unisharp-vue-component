@@ -12,7 +12,6 @@
 <script>
   import _ from 'lodash'
   import config from '~/config'
-  import Menu from '../plugins/Menu'
   import Vue from 'vue'
   import VueAsyncAsyncComputed from 'vue-async-computed'
 
@@ -26,6 +25,10 @@
       appends: {
         type: Array,
         default: () => []
+      },
+      current: {
+        type: Object,
+        default: () => {}
       }
     },
     asyncComputed: {
@@ -33,11 +36,9 @@
         default: [],
         async get () {
           let items = [{ text: config.index.title, to: config.index.to }]
-          let menu = await Menu.singleton(this.$store)
-          let current = menu.getCurrent(this.$route)
 
-          if (current) {
-            items.push({ text: current.title, to: current.to })
+          if (this.current) {
+            items.push({ text: this.current.title, to: this.current.to })
           }
 
           return items
