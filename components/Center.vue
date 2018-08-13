@@ -8,7 +8,6 @@
       slot
 
     footer
-      p.mb-1 BACKEND - Content Management System
       p.mb-0(v-if="powerBy.isShow")
         span Made with&nbsp;
         i.fa.fa-heart
