@@ -38,12 +38,14 @@
         return item.to === this.$route.path || _.indexOf(item.active, this.$route.path) !== -1
       }
     },
-    created () {
-      _.each(this.list, (item, i) => {
-        if (Menu.isActive(item, this.$route)) {
-          this.active = i
-        }
-      })
+    watch: {
+      list (list) {
+        _.each(this.list, (item, i) => {
+          if (Menu.isActive(item, this.$route)) {
+            this.active = i
+          }
+        })
+      }
     }
   }
 </script>
