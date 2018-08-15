@@ -4,21 +4,19 @@
       section
         h2 Checkbox
 
-        u-checkbox(v-model="form.enabled", :value="true") Checked
-        u-checkbox(v-model="form.enabled", :value="false") Not Checked
-        u-checkbox(v-model="form.enabled", :value="false", disabled) Disabled
-        u-checkbox(v-model="form.enabled", :value="true", disabled) Checked & Disabled
+        u-checkbox(v-model="form.enabled") Checked
+        small.d-block.my-2 value of form.enabled: {{ form.enabled }}
+        u-checkbox(v-model="form.enabled", disabled) Disabled
+        u-checkbox(v-model="form.enabled", disabled) Checked & Disabled
 
         md.form-control.my-3.
           ```
           template.
-            u-checkbox(v-model="form.enabled", :value="true") Checked
+            u-checkbox(v-model="form.enabled") Checked
 
-            u-checkbox(v-model="form.enabled", :value="false") Not Checked
+            u-checkbox(v-model="form.enabled", disabled) Disabled
 
-            u-checkbox(v-model="form.enabled", :value="false", disabled) Disabled
-
-            u-checkbox(v-model="form.enabled", :value="true", disabled) Checked & Disabled
+            u-checkbox(v-model="form.enabled", disabled) Checked & Disabled
 
           script.
             export default {
@@ -39,10 +37,18 @@
       section
         h2 Checkbox Group
 
+        small.d-block.my-2
+          | selected values:
+          |  [
+          template(v-for="(selected, index) in selectedCheckboxGroup")
+            template(v-if="index !== 0") ,&nbsp;
+            | '{{ selected }}'
+          | ]
+
         | By default, checkbox group display in vertical
-        u-checkbox-group(v-model="form.checked", :options="options")
+        u-checkbox-group(v-model="selectedCheckboxGroup", :options="options")
         | If setting stacked property to be true, checkbox group will append .custom-controls-stacked class and display in inline
-        u-checkbox-group(v-model="form.checked", :options="options", :stacked="true")
+        u-checkbox-group(v-model="selectedCheckboxGroup", :options="options", :stacked="true")
 
         md.form-control.my-3.
           ```
@@ -134,9 +140,10 @@
     data () {
       return {
         form: {
-          enabled: true,
+          enabled: false,
           checked: 1
         },
+        selectedCheckboxGroup: [1],
         options: [
           { text: 'I', value: 1 },
           { text: 'II', value: 2 },

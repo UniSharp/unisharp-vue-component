@@ -3,11 +3,11 @@
     u-checkbox(
       :key="key",
       v-for="(option, key) in options",
-      v-model="checked",
-      :value="option.value",
+      :selected="selected && selected.indexOf(option.value) > -1",
+      @change="(thisIsSelected) => updateSelected(thisIsSelected, option)"
       :error="error"
     ) {{ option.text }}
-    .invalid-feedback(v-if="error") {{ error }}
+    .invalid-feedback.d-block(v-if="error") {{ error }}
 </template>
 
 <script>
@@ -24,36 +24,28 @@
       error: {
         type: String
       },
-      vModel: {
+      selected: {
+        type: Array
       }
     },
     model: {
-      prop: 'vModel',
+      prop: 'selected',
       event: 'change'
     },
-    data () {
-      return {
-        checked: this.vModel
-      }
-    },
-    watch: {
-      vModel (value) {
-        this.checked = value
-      },
-      checked (value) {
-        this.$emit('change', value)
+    methods: {
+      updateSelected (thisIsSelected, option) {
+        let newSelectedValue = this.selected
+        if (thisIsSelected) {
+          newSelectedValue.push(option.value)
+          newSelectedValue = [...new Set(newSelectedValue)]
+        } else {
+          newSelectedValue = newSelectedValue.filter(selectedOption => selectedOption !== option.value)
+        }
+        this.$emit('change', newSelectedValue)
       }
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .u-checkbox-group {
-    .invalid-feedback {
-      display: block;
-    }
-  }
-</style>
 
 <style lang="scss">
   .u-checkbox-group {
