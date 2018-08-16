@@ -3,133 +3,105 @@
     .card.w-100: .card-body
       section
         h2 Checkbox
+        u-value-printer(:value="form.enabled")
 
         u-checkbox(v-model="form.enabled") Checked
-        small.d-block.my-2 value of form.enabled: {{ form.enabled }}
         u-checkbox(v-model="form.enabled", disabled) Disabled
-        u-checkbox(v-model="form.enabled", disabled) Checked & Disabled
 
-        md.form-control.my-3.
-          ```
-          template.
-            u-checkbox(v-model="form.enabled") Checked
+        u-code-viewer
+          template(slot="template").
+            u-checkbox(v-model="form.checked") Checked
 
-            u-checkbox(v-model="form.enabled", disabled) Disabled
-
-            u-checkbox(v-model="form.enabled", disabled) Checked & Disabled
-
-          script.
-            export default {
-              data () {
-                return {
-                  form: {
-                    enabled: true
-                  }
+            u-checkbox(v-model="form.checked", disabled) Disabled
+          template(slot="script").
+            data () {
+              return {
+                form: {
+                  checked: true
                 }
               }
             }
-          ```
-        h4 Property
-        u-table(:fields="propertyFields", :items="checkboxProperties", :hidePagination="true")
-        h4 Event
-        u-table(:fields="eventFields", :items="checkboxEvents", :hidePagination="true")
+        h4 Properties
+        ul
+          li(v-for="property in checkboxProperties") {{ property.property }} [{{ property.type }}]
+        h4 Events
+        ul
+          li(v-for="eventName in checkboxEvents") {{ eventName }}
 
       section
         h2 Checkbox Group
+        u-value-printer(:value="selectedCheckboxGroup")
 
-        small.d-block.my-2
-          | selected values:
-          |  [
-          template(v-for="(selected, index) in selectedCheckboxGroup")
-            template(v-if="index !== 0") ,&nbsp;
-            | '{{ selected }}'
-          | ]
-
-        | By default, checkbox group display in vertical
+        h4 Inline display
         u-checkbox-group(v-model="selectedCheckboxGroup", :options="options")
-        | If setting stacked property to be true, checkbox group will append .custom-controls-stacked class and display in inline
+
+        h4.mt-3 Stacked display
         u-checkbox-group(v-model="selectedCheckboxGroup", :options="options", :stacked="true")
 
-        md.form-control.my-3.
-          ```
-          template.
+        u-code-viewer
+          template(slot="template").
             u-checkbox-group(v-model="form.checked", :options="options")
 
             u-checkbox-group(v-model="form.checked", :options="options", :stacked="true")
-
-          script.
-            export default {
-              data () {
-                return {
-                  form: {
-                    checked: 1
-                  },
-                  options: [
-                    { text: 'I', value: 1 },
-                    { text: 'II', value: 2 },
-                    { text: 'III', value: 3 }
-                  ]
-                }
+          template(slot="script").
+            data () {
+              return {
+                form: {
+                  checked: [1]
+                },
+                options: [
+                  { text: 'I', value: 1 },
+                  { text: 'II', value: 2 },
+                  { text: 'III', value: 3 }
+                ]
               }
             }
-          ```
-        h4 Property
-        u-table(:fields="propertyFields", :items="checkboxGroupProperties", :hidePagination="true")
-        h4 Event
-        u-table(:fields="eventFields", :items="checkboxGroupEvents", :hidePagination="true")
+        h4 Properties
+        ul
+          li(v-for="property in checkboxGroupProperties") {{ property.property }} [{{ property.type }}]
+        h4 Events
+        ul
+          li(v-for="event in checkboxGroupEvents") {{ event.event }}
 
       section
-        h2 Radio
+        h2 Single Radio
 
-        .d-flex
-          u-radio(name="single1", :value="true", :options="[{text: 'Checked', value: true}]")
-          u-radio(name="single2", :value="true", :options="[{text: 'Not Checked', value: false}]")
-          u-radio(name="single3", :value="true", :options="[{text: 'Disabled', value: false}]", disabled)
-          u-radio(name="single4", :value="true", :options="[{text: 'Checked & Disabled', value: true}]", disabled)
+        u-radio(name="single1") Checked
+        u-radio(name="single2", disabled) Disabled
 
-        md.form-control.my-3.
-          ```
-          template.
-            u-radio(name="single1", :value="true", :options="[{text: 'Checked', value: true}]")
+        u-code-viewer
+          template(slot="template").
+            u-radio(name="single1") Checked
 
-            u-radio(name="single2", :value="true", :options="[{text: 'Not Checked', value: false}]")
-
-            u-radio(name="single3", :value="true", :options="[{text: 'Disabled', value: false}]", disabled)
-
-            u-radio(name="single4", :value="true", :options="[{text: 'Checked & Disabled', value: true}]", disabled)
-          ```
-
+            u-radio(name="single2", disabled) Disabled
       section
-        h2 Radios
+        h2 Radio Group
+        u-value-printer(:value="form.checked")
 
-        | By default, radios display in vertical
-        u-radio(v-model="form.checked", :options="options", name="group1")
-        | If setting stacked property to be true, radios will append .custom-controls-stacked class and display in inline
-        u-radio(v-model="form.checked", :options="options", name="group2", :stacked="true")
+        h4 Inline display
+        u-radio-group(v-model="form.checked", :options="options", @change="showValue")
 
-        md.form-control.my-3.
-          ```
-          template.
-            u-radio(v-model="form.checked", :options="options", name="group1")
+        h4.mt-3 Stacked display
+        u-radio-group(v-model="form.checked", :options="options", @change="showValue", :stacked="true")
 
-            u-radio(v-model="form.checked", :options="options", name="group2", :stacked="true")
+        u-code-viewer
+          template(slot="template").
+            u-radio-group(v-model="form.checked", :options="options")
 
-          script.
-            export default {
-              data () {
-                return {
-                  form: {
-                    checked: 1
-                  },
-                  options: [
-                    { text: 'I', value: 1 },
-                    { text: 'II', value: 2 },
-                    { text: 'III', value: 3 }
-                  ]
-                }
+            u-radio-group(v-model="form.checked", :options="options", :stacked="true")
+          template(slot="script").
+            data () {
+              return {
+                form: {
+                  checked: 1
+                },
+                options: [
+                  { text: 'I', value: 1 },
+                  { text: 'II', value: 2 },
+                  { text: 'III', value: 3 }
+                ]
               }
             }
-          ```
         h4 Property
         u-table(:fields="propertyFields", :items="radioProperty", :hidePagination="true")
         h4 Event
@@ -140,7 +112,7 @@
     data () {
       return {
         form: {
-          enabled: false,
+          enabled: true,
           checked: 1
         },
         selectedCheckboxGroup: [1],
@@ -178,18 +150,12 @@
           }
         },
         checkboxProperties: [
-          { property: 'name', type: 'String', default_value: 'false', required: '', description: 'The name attribute of checkbox' },
-          { property: 'value', type: 'Any', default_value: 'true', required: '', description: 'Checkbox value' },
+          { property: 'selected', type: 'Boolean', default_value: 'false', required: '', description: 'Checkbox is checked or not' },
           { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: 'The disabled attribute of checkbox' },
           { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: 'The required attribute of checkbox' },
           { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
-        checkboxEvents: [
-          { event: 'change', arguments: 'Checked value of checkbox, and the type according to the option value', description: 'Get current value when the checkbox is toggled' },
-          { event: 'focus', arguments: '(same as change event)', description: 'Get current value when the checkbox is focused' },
-          { event: 'blur', arguments: '(same as change event)', description: 'Get current value when the checkbox is blurred' },
-          { event: 'click', arguments: '(same as change event)', description: 'Get current value when the checkbox is clicked' }
-        ],
+        checkboxEvents: [ 'change', 'focus', 'blur', 'click' ],
         checkboxGroupProperties: [
           { property: 'options', type: 'Array', default_value: '', required: 'true', description: 'The options of checkboxes, and format is [{ text: \'displayname\', value: \'key\' }]' },
           { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: 'The arrangement of options' },

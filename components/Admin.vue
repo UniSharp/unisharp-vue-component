@@ -129,4 +129,22 @@
       width: calc(100% - #{$sidebar-width});
     }
   }
+
+  section + section {
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+</style>
+
+<style lang="scss">
+  @import "../assets/scss/variables";
+
+  .u-checkbox,.u-radio {
+    .is-invalid:not(:checked) {
+      + .custom-control-indicator {
+        background-color: $custom-control-indicator-bg;
+      }
+    }
+  }
 </style>

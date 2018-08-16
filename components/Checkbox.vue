@@ -1,11 +1,10 @@
 <template lang="pug">
-  .u-checkbox.d-inline-flex.flex-column
+  .u-checkbox.d-inline-block
     label.custom-control.form-check-inline.custom-checkbox
       input.custom-control-input(
         :class="{ 'is-invalid': !!error }"
         type="checkbox",
         :disabled="disabled",
-        :required="required",
         ref="check",
         :checked="selected",
         @change="$emit('change', !selected)",
@@ -32,24 +31,9 @@
       disabled: {
         default: false
       },
-      required: {
-        default: false
-      },
       error: {
         type: String
       }
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  @import "../assets/scss/variables";
-
-  .u-checkbox {
-    .is-invalid:not(:checked) {
-      + .custom-control-indicator {
-        background-color: $custom-control-indicator-bg;
-      }
-    }
-  }
-</style>
