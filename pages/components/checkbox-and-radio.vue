@@ -22,11 +22,9 @@
               }
             }
         h4 Properties
-        ul
-          li(v-for="property in checkboxProperties") {{ property.property }} [{{ property.type }}]
+        ul: li(v-for="property in checkboxProperties") {{ property.property }} [{{ property.type }}]
         h4 Events
-        ul
-          li(v-for="eventName in checkboxEvents") {{ eventName }}
+        ul: li(v-for="eventName in checkboxEvents") {{ eventName }}
 
       section
         h2 Checkbox Group
@@ -57,11 +55,9 @@
               }
             }
         h4 Properties
-        ul
-          li(v-for="property in checkboxGroupProperties") {{ property.property }} [{{ property.type }}]
+        ul: li(v-for="property in checkboxGroupProperties") {{ property.property }} [{{ property.type }}]
         h4 Events
-        ul
-          li(v-for="event in checkboxGroupEvents") {{ event.event }}
+        ul: li(v-for="event in checkboxGroupEvents") {{ event.event }}
 
       section
         h2 Single Radio
@@ -102,10 +98,10 @@
                 ]
               }
             }
-        h4 Property
-        u-table(:fields="propertyFields", :items="radioProperty", :hidePagination="true")
-        h4 Event
-        u-table(:fields="eventFields", :items="radioEvents", :hidePagination="true")
+        h4 Properties
+        ul: li(v-for="property in radioGroupProperty") {{ property.property }} [{{ property.type }}]
+        h4 Events
+        ul: li(v-for="event in radioEvents") {{ event.event }}
 </template>
 <script>
   export default {
@@ -152,11 +148,11 @@
         checkboxProperties: [
           { property: 'selected', type: 'Boolean', default_value: 'false', required: '', description: 'Checkbox is checked or not' },
           { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: 'The disabled attribute of checkbox' },
-          { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: 'The required attribute of checkbox' },
           { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
         checkboxEvents: [ 'change', 'focus', 'blur', 'click' ],
         checkboxGroupProperties: [
+          { property: 'selected', type: 'Array', default_value: '', required: 'false', description: 'Values of selected options' },
           { property: 'options', type: 'Array', default_value: '', required: 'true', description: 'The options of checkboxes, and format is [{ text: \'displayname\', value: \'key\' }]' },
           { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: 'The arrangement of options' },
           { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
@@ -164,12 +160,10 @@
         checkboxGroupEvents: [
           { event: 'change', arguments: 'Checked value of checkbox(es). When bound to multiple checkboxes, value will be an array.', description: 'Get current value when the checkbox is toggled' }
         ],
-        radioProperty: [
+        radioGroupProperty: [
+          { property: 'selected', type: 'any', default_value: '', required: 'false', description: 'Value of selected options' },
           { property: 'options', type: 'Array', default_value: '', required: 'true', description: 'The options of radios, and format is [{ text: \'displayname\', value: \'key\' }]' },
-          { property: 'name', type: 'String', default_value: 'null', required: '', description: 'Group name of radios' },
-          { property: 'value', type: 'Any', default_value: 'null', required: '', description: 'Radio value' },
           { property: 'disabled', type: 'Boolean', default_value: 'false', required: '', description: 'The disabled attribute of radio' },
-          { property: 'required', type: 'Boolean', default_value: 'false', required: '', description: 'The required attribute of radio' },
           { property: 'stacked', type: 'Boolean', default_value: 'false', required: '', description: 'The arrangement of options' },
           { property: 'error', type: 'String', default_value: '', required: '', description: 'Error text value' }
         ],
