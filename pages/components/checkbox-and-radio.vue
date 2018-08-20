@@ -75,10 +75,10 @@
         u-value-printer(:value="form.checked")
 
         h5 Inline display
-        u-radio-group(v-model="form.checked", :options="options", @change="showValue")
+        u-radio-group(v-model="form.checked", :options="options")
 
         h5.mt-3 Stacked display
-        u-radio-group(v-model="form.checked", :options="options", @change="showValue", :stacked="true")
+        u-radio-group(v-model="form.checked", :options="options", :stacked="true")
 
         u-code-viewer
           template(slot="template").
