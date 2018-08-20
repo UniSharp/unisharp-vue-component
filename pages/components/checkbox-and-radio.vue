@@ -2,7 +2,7 @@
   u-admin
     .card.w-100: .card-body
       section
-        h4 Checkbox
+        h4 Single Checkbox
         u-value-printer(:value="form.enabled")
 
         u-checkbox(v-model="form.enabled") Checked

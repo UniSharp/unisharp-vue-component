@@ -3,28 +3,28 @@
     section
       h2 Type
       .row
-        .col-5
+        .col-sm-5
           h5 Primary
           p 用於操作層級較高的功能
-        .col-7.align-self-center
+        .col-sm-7.align-self-center.py-3
           button.btn.btn-primary(type="button") Primary
       .row
-        .col-5
+        .col-sm-5
           h5 Secondary
           p 用於「儲存」、「完成」等 call to action，一個頁面只能出現一個
-        .col-7.align-self-center
+        .col-sm-7.align-self-center.py-3
           button.btn.btn-secondary(type="button") Secondary
       .row
-        .col-5
+        .col-sm-5
           h5 Danger
           p 用於操作不可逆的功能（例：刪除）
-        .col-7.align-self-center
+        .col-sm-7.align-self-center.py-3
           button.btn.btn-danger(type="button") Danger
       .row
-        .col-5
+        .col-sm-5
           h5 Info
           p 用於操作層級較低的功能
-        .col-7.align-self-center
+        .col-sm-7.align-self-center.py-3
           button.btn.btn-info(type="button") Info
       .row: .col-12
         u-code-viewer
@@ -39,32 +39,32 @@
     section
       h2 Size
       .row
-        .col-5
+        .col-sm-5
           h5 Medium
           p 放置於表格或列表上方時使用
-        .col-7.align-self-center
-          button.btn.btn-primary(type="button") Primary
-          button.btn.btn-secondary(type="button") Secondary
-          button.btn.btn-danger(type="button") Danger
-          button.btn.btn-info(type="button") Info
+        .col-sm-7.align-self-center
+          button.m-2.btn.btn-primary(type="button") Primary
+          button.m-2.btn.btn-secondary(type="button") Secondary
+          button.m-2.btn.btn-danger(type="button") Danger
+          button.m-2.btn.btn-info(type="button") Info
       .row
-        .col-5
+        .col-sm-5
           h5 Small
           p 放置於表格或列表內時使用
-        .col-7.align-self-center
-          button.btn.btn-primary.btn-sm(type="button") Primary
-          button.btn.btn-secondary.btn-sm(type="button") Secondary
-          button.btn.btn-danger.btn-sm(type="button") Danger
-          button.btn.btn-info.btn-sm(type="button") Info
+        .col-sm-7.align-self-center
+          button.m-2.btn.btn-primary.btn-sm(type="button") Primary
+          button.m-2.btn.btn-secondary.btn-sm(type="button") Secondary
+          button.m-2.btn.btn-danger.btn-sm(type="button") Danger
+          button.m-2.btn.btn-info.btn-sm(type="button") Info
       .row
-        .col-5
+        .col-sm-5
           h5 Large
           p 放置於卡片或表單下方時使用
-        .col-7.align-self-center
-          button.btn.btn-primary.btn-lg(type="button") Primary
-          button.btn.btn-secondary.btn-lg(type="button") Secondary
-          button.btn.btn-danger.btn-lg(type="button") Danger
-          button.btn.btn-info.btn-lg(type="button") Info
+        .col-sm-7.align-self-center
+          button.m-2.btn.btn-primary.btn-lg(type="button") Primary
+          button.m-2.btn.btn-secondary.btn-lg(type="button") Secondary
+          button.m-2.btn.btn-danger.btn-lg(type="button") Danger
+          button.m-2.btn.btn-info.btn-lg(type="button") Info
       .row: .col-12
         u-code-viewer
           template(slot="template").
@@ -76,9 +76,9 @@
     section
       h2 Square
       .row
-        .col-5
+        .col-sm-5
           h5 Medium
-        .col-7.align-self-center
+        .col-sm-7.align-self-center
           button.btn.btn-primary.btn-square(type="button")
             i.fa.fa-plus(aria-hidden="true")
           button.btn.btn-danger.btn-square(type="button")
@@ -86,9 +86,9 @@
           button.btn.btn-info.btn-square(type="button")
             i.fa.fa-plus(aria-hidden="true")
       .row
-        .col-5
+        .col-sm-5
           h5 Small
-        .col-7.align-self-center
+        .col-sm-7.align-self-center
           button.btn.btn-primary.btn-sm.btn-square(type="button")
             i.fa.fa-plus(aria-hidden="true")
           button.btn.btn-danger.btn-sm.btn-square(type="button")
@@ -126,9 +126,5 @@
         margin: 0;
       }
     }
-  }
-
-  section .btn + .btn {
-    margin-left: 1rem;
   }
 </style>
