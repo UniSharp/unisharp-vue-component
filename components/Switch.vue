@@ -1,11 +1,15 @@
 <template lang="pug">
   .u-switch
     .switch(@click="toggleValue", :class="{ disabled: !!disabled || disabled === '', 'is-invalid': !!error }")
-      input.d-none(type="checkbox", :value="value", :checked="checked")
+      input.d-none(type="checkbox", :checked="checked")
       .u-switch-control(:class="{ off: !checked }")
-        .u-switch-control-on {{ onText }}
-        .u-switch-control-toggle
-        .u-switch-control-off {{ offText }}
+        .u-switch-control-on
+          slot(name="on", v-if="$slots.on")
+          span(v-else) ON
+        .u-switch-control-toggle.border-right.border-left
+        .u-switch-control-off
+          slot(name="off", v-if="$slots.off")
+          span(v-else) OFF
     .invalid-feedback(v-if="error") {{ error }}
 </template>
 
@@ -19,20 +23,8 @@
       checked: {
         required: true
       },
-      value: {
-        default: true
-      },
       disabled: {
         default: false
-      },
-      required: {
-        default: false
-      },
-      onText: {
-        default: 'ON'
-      },
-      offText: {
-        default: 'OFF'
       },
       error: {
         type: String
@@ -112,15 +104,10 @@
     .u-switch-control-on {
       $bg-color: theme-color("primary");
 
-      @include color-yiq($bg-color);
+      // @include color-yiq($bg-color);
       @include border-left-radius(calc(#{$input-border-radius} - #{$input-btn-border-width}));
 
       background-color: $bg-color;
-    }
-
-    .u-switch-control-toggle {
-      border-left: $input-btn-border-width solid $input-border-color;
-      border-right: $input-btn-border-width solid $input-border-color;
     }
   }
 </style>

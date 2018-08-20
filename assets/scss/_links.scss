@@ -19,7 +19,7 @@ a {
 @each $color, $value in $theme-colors {
   a:not([href]):not([tabindex]).btn-#{$color} {
     &, &:hover {
-      @include color-yiq($value);
+      // @include color-yiq($value);
 
       text-decoration: none;
     }
@@ -36,12 +36,12 @@ a {
   }
 
   a:not([href]):not([tabindex]).badge-#{$color} {
-    @include color-yiq($value);
+    // @include color-yiq($value);
 
     background-color: $value;
 
     @include hover-focus {
-      @include color-yiq($value);
+      // @include color-yiq($value);
 
       text-decoration: none;
       background-color: darken($value, 10%);

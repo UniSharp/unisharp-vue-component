@@ -16,12 +16,10 @@
         code.
           ['I', 'II', 'III'] or {'I', 'II', 'III'}
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-select(v-model="form.selected", :options="options")
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -36,13 +34,10 @@
               }
             }
          }
-        ```
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-select(v-model="form.selected", :options="options")
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -53,8 +48,6 @@
               }
             }
          }
-        ```
-
       h4 Placeholder
 
       .my-2 Default
@@ -64,14 +57,12 @@
       .my-2 No placeholder
       u-select(:options="options", selected="", :noPlaceholder="true")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-select(:options="options", selected="")
           u-select(:options="options", selected="", placeholder="客製預設選項")
           u-select(:options="options", selected="", :noPlaceholder="true")
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -83,19 +74,15 @@
               }
             }
          }
-        ```
-
       h4 Disabled
 
       .my-2 Disabled
       u-select(:options="options", selected="", disabled)
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-select(:options="options", selected="", disabled)
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -107,8 +94,6 @@
               }
             }
          }
-        ```
-
       h4 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
       h4 Event

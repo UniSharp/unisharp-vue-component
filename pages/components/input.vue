@@ -5,22 +5,16 @@
 
       u-input(type="text", name="email", placeholder="Enter email")
 
-      md.form-control.my-3.
-        ```
-        template.
-          u-input(type="text", name="email", placeholder="Enter email")
-        ```
-
+      u-code-viewer
+        template(slot="template").
+            u-input(type="text", name="email", placeholder="Enter email")
       h4 Textarea
 
       u-input(type="textarea", :rows="10", placeholder="Enter description here")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-input(type="textarea", :rows="10", placeholder="Enter description here")
-        ```
-
       h4 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
       h4 Event

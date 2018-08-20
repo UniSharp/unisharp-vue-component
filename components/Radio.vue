@@ -1,6 +1,6 @@
 <template lang="pug">
   .u-radio.d-inline-block
-    label.custom-control.form-check-inline.custom-radio
+    .custom-control.form-check-inline.custom-radio(@click="$emit('change', true)")
       input.custom-control-input(
         :class="{ 'is-invalid': !!error }"
         type="radio",
@@ -12,8 +12,8 @@
         @blur="$emit('blur')",
         @click="$emit('click')"
       )
-      span.custom-control-indicator
-      span.custom-control-description(v-if="$slots.default")
+      //- span.custom-control-indicator
+      label.custom-control-label(v-if="$slots.default")
         slot
     .invalid-feedback.d-block(v-if="error") {{ error }}
 </template>
@@ -25,7 +25,7 @@
         default: null
       },
       selected: {
-        default: null
+        default: false
       },
       disabled: {
         default: false
@@ -35,7 +35,7 @@
       }
     },
     model: {
-      prop: 'value',
+      prop: 'selected',
       event: 'change'
     }
   }

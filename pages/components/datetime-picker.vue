@@ -10,16 +10,14 @@
       .my-2 Give datetime as default value
       u-datetime(v-model="form.datetime")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-datetime(v-model="empty")
 
           u-datetime(v-model="empty", placeholder="YYYY-MM-DD HH:mm")
 
           u-datetime(v-model="form.datetime")
-
-        script.
+        template(slot="script").
           import moment from 'moment'
 
           export default {
@@ -30,8 +28,6 @@
               }
             }
           }
-        ```
-
       h4 Mode
 
       .my-2 Date
@@ -39,14 +35,12 @@
       .my-2 Time
       u-datetime(v-model="form.datetime", mode="time")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-datetime(v-model="form.datetime", mode="date")
 
           u-datetime(v-model="form.datetime", mode="time")
-
-        script.
+        template(slot="script").
           import moment from 'moment'
 
           export default {
@@ -56,24 +50,20 @@
               }
             }
           }
-        ```
-
       h4 Config
 
       li Locale
       .my-2
         span Support locales, and get more detail in&nbsp;
-        nuxt-link(to="https://momentjs.com/docs/#/i18n/") moment.js&nbsp;
-        span document. 'en' as a default
+        a.text-primary(target="_blank", href="https://momentjs.com/docs/#/i18n/") moment.js
+        span &nbsp;document. 'en' as a default
 
       u-datetime(v-model="form.datetime", :config="config")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-datetime(v-model="form.datetime", :config="config")
-
-        script.
+        template(slot="script").
           import moment from 'moment'
 
           export default {
@@ -86,18 +76,15 @@
               }
             }
           }
-        ```
       h4 Modal
 
       .my-2 Display in modal
       u-datetime(v-model="form.datetime", display="modal")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-datetime(v-model="form.datetime", display="modal")
-
-        script.
+        template(slot="script").
           import moment from 'moment'
 
           export default {
@@ -107,8 +94,6 @@
               }
             }
           }
-        ```
-
       h4 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
       h4 Event

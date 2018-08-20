@@ -17,11 +17,11 @@ export const createMenu = store => [
       title: 'Alerts',
       to: '/components/alerts'
     }, {
-      title: 'Buttons',
-      to: '/components/buttons'
-    }, {
       title: 'Badges',
       to: '/components/badges'
+    }, {
+      title: 'Buttons',
+      to: '/components/buttons'
     }, {
       title: 'Card',
       to: '/components/card'
@@ -29,8 +29,11 @@ export const createMenu = store => [
       title: 'Checkbox And Radio',
       to: '/components/checkbox-and-radio'
     }, {
-      title: 'Select',
-      to: '/components/select'
+      title: 'DateTime Picker',
+      to: '/components/datetime-picker'
+    }, {
+      title: 'File Uploader',
+      to: '/components/file-uploader'
     }, {
       title: 'Input',
       to: '/components/input'
@@ -38,17 +41,17 @@ export const createMenu = store => [
       title: 'Input Tag',
       to: '/components/input-tag'
     }, {
-      title: 'File Uploader',
-      to: '/components/file-uploader'
-    }, {
-      title: 'DateTime Picker',
-      to: '/components/datetime-picker'
-    }, {
       title: 'Modal',
       to: '/components/modal'
     }, {
       title: 'Pagination',
       to: '/components/pagination'
+    }, {
+      title: 'Select',
+      to: '/components/select'
+    }, {
+      title: 'Switch',
+      to: '/components/switch'
     }]
   }, {
     icon: 'file-text-o',

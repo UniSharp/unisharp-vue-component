@@ -1,19 +1,19 @@
 <template lang="pug">
   .u-checkbox.d-inline-block
-    label.custom-control.form-check-inline.custom-checkbox
+    .custom-control.form-check-inline.custom-checkbox(@click="$emit('change', !selected)")
       input.custom-control-input(
         :class="{ 'is-invalid': !!error }"
         type="checkbox",
-        :disabled="disabled",
         ref="check",
         :checked="selected",
+        :disabled="disabled",
         @change="$emit('change', !selected)",
         @focus="$emit('focus')",
         @blur="$emit('blur')",
         @click="$emit('click')"
       )
-      span.custom-control-indicator(:class="{ 'is-invalid': !!error }")
-      span.custom-control-description(v-if="$slots.default")
+      //- span.custom-control-indicator(:class="{ 'is-invalid': !!error }")
+      label.custom-control-label(v-if="$slots.default")
         slot
     .invalid-feedback.d-block(v-if="error") {{ error }}
 </template>

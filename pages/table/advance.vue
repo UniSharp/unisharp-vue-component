@@ -12,9 +12,8 @@
             i.fa.fa-pencil(aria-hidden="true").mr-2
             | Edit
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-table(:fields="fields", :items="items", :per-page="perPage", :total-rows="totalRows")
             template(slot="operation", slot-scope="row")
               button.btn.btn-info.btn-sm.mr-1(type="button", @click.stop="row.toggle()")
@@ -25,8 +24,7 @@
               button.btn.btn-primary.btn-sm(type="button", @click.stop="showClickButton(row.value.age)")
                 i.fa.fa-pencil(aria-hidden="true").mr-2
                 | Edit
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -56,8 +54,6 @@
               }
             }
           }
-        ```
-
       h2 Expand
 
       u-table(:fields="fields", :items="items", :per-page="perPage", :total-rows="totalRows")
@@ -76,9 +72,8 @@
             i.fa.fa-pencil(aria-hidden="true").mr-2
             | Edit
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-table(:fields="fields", :items="items", :per-page="perPage", :total-rows="totalRows")
             template(slot="expand", slot-scope="row")
               tr
@@ -94,8 +89,7 @@
               button.btn.btn-primary.btn-sm(type="button", @click.stop="showClickButton(row.value.age)")
                 i.fa.fa-pencil(aria-hidden="true").mr-2
                 | Edit
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -125,8 +119,6 @@
               }
             }
           }
-        ```
-
       h2 Sorting column
 
       h4 All column sortable
@@ -154,12 +146,10 @@
         :order-desc="true"
       )
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-table(:fields="fields", :items="items", :per-page="perPage", :total-rows="totalRows", order-by="last_name")
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -187,8 +177,6 @@
               }
             }
           }
-        ```
-
       h2 Selection
 
       u-table(
@@ -199,12 +187,10 @@
         selection
       )
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-table(:fields="fields", :items="items", :per-page="perPage", :total-rows="totalRows", selection)
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -232,8 +218,6 @@
               }
             }
           }
-        ```
-
       h2 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
 </template>

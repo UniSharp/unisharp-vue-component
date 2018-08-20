@@ -2,9 +2,9 @@
   u-admin
     u-pagination(:totalRows="12345", :perPage="500", :limitPage="3", :currentPage="3")
 
-    md.form-control.my-3.
-      u-pagination(:totalRows="12345", :perPage="500", :limitPage="3", :currentPage="3")
-
+    u-code-viewer
+      template(slot="template").
+        u-pagination(:totalRows="12345", :perPage="500", :limitPage="3", :currentPage="3")
     h4 Property
     u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
     h4 Event

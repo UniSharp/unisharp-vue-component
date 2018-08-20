@@ -26,17 +26,16 @@
           p 用於操作層級較低的功能
         .col-7.align-self-center
           button.btn.btn-info(type="button") Info
-      .row
-        md.form-control.
-          ```
-          button.btn.btn-primary(type="button") Primary
+      .row: .col-12
+        u-code-viewer
+          template(slot="template").
+            button.btn.btn-primary(type="button") Primary
 
-          button.btn.btn-secondary(type="button") Secondary
+            button.btn.btn-secondary(type="button") Secondary
 
-          button.btn.btn-danger(type="button") Danger
+            button.btn.btn-danger(type="button") Danger
 
-          button.btn.btn-info(type="button") Info
-          ```
+            button.btn.btn-info(type="button") Info
     section
       h2 Size
       .row
@@ -66,15 +65,14 @@
           button.btn.btn-secondary.btn-lg(type="button") Secondary
           button.btn.btn-danger.btn-lg(type="button") Danger
           button.btn.btn-info.btn-lg(type="button") Info
-      .row
-        md.form-control.
-          ```
-          button.btn.btn-primary(type="button") Medium
+      .row: .col-12
+        u-code-viewer
+          template(slot="template").
+            button.btn.btn-primary(type="button") Medium
 
-          button.btn.btn-primary.btn-sm(type="button") Small
+            button.btn.btn-primary.btn-sm(type="button") Small
 
-          button.btn.btn-primary.btn-lg(type="button") Large
-          ```
+            button.btn.btn-primary.btn-lg(type="button") Large
     section
       h2 Square
       .row
@@ -97,11 +95,10 @@
             i.fa.fa-minus(aria-hidden="true")
           button.btn.btn-info.btn-sm.btn-square(type="button")
             i.fa.fa-plus(aria-hidden="true")
-      .row
-        md.form-control.
-          ```
-          button.btn.btn-primary.btn-square(type="button") Square
-          ```
+      .row: .col-12
+        u-code-viewer
+          template(slot="template").
+            button.btn.btn-primary.btn-square(type="button") Square
 </template>
 
 <script>

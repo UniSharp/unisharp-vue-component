@@ -2,7 +2,7 @@
   u-admin
     .card.w-100: .card-body
       section
-        h2 Checkbox
+        h4 Checkbox
         u-value-printer(:value="form.enabled")
 
         u-checkbox(v-model="form.enabled") Checked
@@ -21,19 +21,19 @@
                 }
               }
             }
-        h4 Properties
+        h5 Properties
         ul: li(v-for="property in checkboxProperties") {{ property.property }} [{{ property.type }}]
-        h4 Events
+        h5 Events
         ul: li(v-for="eventName in checkboxEvents") {{ eventName }}
 
       section
-        h2 Checkbox Group
+        h4 Checkbox Group
         u-value-printer(:value="selectedCheckboxGroup")
 
-        h4 Inline display
+        h5 Inline display
         u-checkbox-group(v-model="selectedCheckboxGroup", :options="options")
 
-        h4.mt-3 Stacked display
+        h5.mt-3 Stacked display
         u-checkbox-group(v-model="selectedCheckboxGroup", :options="options", :stacked="true")
 
         u-code-viewer
@@ -54,13 +54,13 @@
                 ]
               }
             }
-        h4 Properties
+        h5 Properties
         ul: li(v-for="property in checkboxGroupProperties") {{ property.property }} [{{ property.type }}]
-        h4 Events
+        h5 Events
         ul: li(v-for="event in checkboxGroupEvents") {{ event.event }}
 
       section
-        h2 Single Radio
+        h4 Single Radio
 
         u-radio(name="single1") Checked
         u-radio(name="single2", disabled) Disabled
@@ -71,13 +71,13 @@
 
             u-radio(name="single2", disabled) Disabled
       section
-        h2 Radio Group
+        h4 Radio Group
         u-value-printer(:value="form.checked")
 
-        h4 Inline display
+        h5 Inline display
         u-radio-group(v-model="form.checked", :options="options", @change="showValue")
 
-        h4.mt-3 Stacked display
+        h5.mt-3 Stacked display
         u-radio-group(v-model="form.checked", :options="options", @change="showValue", :stacked="true")
 
         u-code-viewer
@@ -98,9 +98,9 @@
                 ]
               }
             }
-        h4 Properties
+        h5 Properties
         ul: li(v-for="property in radioGroupProperty") {{ property.property }} [{{ property.type }}]
-        h4 Events
+        h5 Events
         ul: li(v-for="event in radioEvents") {{ event.event }}
 </template>
 <script>

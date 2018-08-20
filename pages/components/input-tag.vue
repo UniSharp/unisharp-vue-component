@@ -9,16 +9,14 @@
       .my-2 Enable insertable property to add additional tag ( Enter any text on input box )
       u-input-tag(v-model="form.selectedTags3", placeholder="AddTag", :tags.sync="tags", :insertable="true")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-input-tag(v-model="form.selectedTags1", placeholder="AddTag", :tags="tags")
 
           u-input-tag(v-model="form.selectedTags2", placeholder="AddTag", :tags="tags", :limit="2")
 
           u-input-tag(v-model="form.selectedTags3", placeholder="AddTag", :tags.sync="tags", :insertable="true")
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -31,8 +29,6 @@
               }
             }
           }
-        ```
-
       h4 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
       h4 Event

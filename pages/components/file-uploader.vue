@@ -5,12 +5,10 @@
 
       .my-2 Basic use. Provide change to handle file changed
       u-single-uploader(@change="changeFile")
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-single-uploader(@change="changeFile")
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -26,36 +24,26 @@
               }
             }
           }
-        ```
-
       .my-2 Custom upload message (default message is "Click to Upload File")
       u-single-uploader(upload-message="上傳檔案")
-      md.form-control.my-3.
-        ```
-        u-single-uploader(upload-message="上傳檔案")
-        ```
-
+      u-code-viewer
+        template(slot="template").
+          u-single-uploader(upload-message="上傳檔案")
       .my-2 Allow specific types of upload, for example ".jpg, .jpeg, .png"
       u-single-uploader(accept-type=".jpg, .jpeg, .png")
-      md.form-control.my-3.
-        ```
-        u-single-uploader(accept-type=".jpg, .jpeg, .png")
-        ```
-
+      u-code-viewer
+        template(slot="template").
+          u-single-uploader(accept-type=".jpg, .jpeg, .png")
       .my-2 Uploading effect
       u-single-uploader(:uploading="true")
-      md.form-control.my-3.
-        ```
-        u-single-uploader(:uploading="true")
-        ```
-
+      u-code-viewer
+        template(slot="template").
+          u-single-uploader(:uploading="true")
       .my-2 Set existing file. Allow image, video and other types, and only image will preview.
       u-single-uploader(type="image", image-path="https://picsum.photos/308/228/")
-      md.form-control.my-3.
-        ```
-        u-single-uploader(type="image", image-path="https://picsum.photos/308/228/")
-        ```
-
+      u-code-viewer
+        template(slot="template").
+          u-single-uploader(type="image", image-path="https://picsum.photos/308/228/")
       h4 Property
       u-table(:fields="propertyFields", :items="singleUploaderProperties", :hidePagination="true")
       h4 Event
@@ -68,12 +56,10 @@
         | There is no way to show existing files when component init
       u-uploader(v-model="form.files", @change="changeFiles")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-uploader(v-model="form.files", @change="changeFiles")
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -89,8 +75,6 @@
               }
             }
           }
-        ```
-
       h4 Property
       u-table(:fields="propertyFields", :items="uploaderProperties", :hidePagination="true")
       h4 Event

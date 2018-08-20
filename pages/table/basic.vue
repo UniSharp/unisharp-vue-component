@@ -5,12 +5,10 @@
 
       u-table(:fields="fields", :items="items", :hidePagination="true")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-table(:fields="fields", :items="items", :hidePagination="true")
-
-        script.
+        template(slot="scirpt").
           export default {
             data () {
               return {
@@ -35,17 +33,14 @@
               }
             }
           }
-        ```
       h4 Basic use with pagination
 
       u-table(:fields="fields", :items="items", :per-page="perPage", :totalRows="totalRows")
 
-      md.form-control.my-3.
-        ```
-        template.
+      u-code-viewer
+        template(slot="template").
           u-table(:fields="fields", :items="items", :per-page="perPage", :totalRows="totalRows")
-
-        script.
+        template(slot="script").
           export default {
             data () {
               return {
@@ -72,8 +67,6 @@
               }
             }
           }
-        ```
-
       h4 Property
       u-table(:fields="propertyFields", :items="properties", :hidePagination="true")
 </template>
