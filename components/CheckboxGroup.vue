@@ -6,6 +6,7 @@
       :selected="selected && selected.indexOf(option.value) > -1",
       @change="(thisIsSelected) => updateSelected(thisIsSelected, option)"
       :error="error"
+      :disabled="disabled"
     ) {{ option.text }}
     .invalid-feedback.d-block(v-if="error") {{ error }}
 </template>
@@ -27,6 +28,7 @@
       selected: {
         type: Array
       }
+      disabled: false
     },
     model: {
       prop: 'selected',
