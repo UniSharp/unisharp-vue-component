@@ -29,7 +29,7 @@
                 | Enable
           //- Checkbox Group
           .form-group.row
-            label.col-md-2.col-form-label Checkbox：
+            label.col-md-2.col-form-label Checkbox Group：
             .col-md-10.form-inline
               u-checkbox-group(v-model="form.checks", :options="foods", @change="showValue")
           //- Radio

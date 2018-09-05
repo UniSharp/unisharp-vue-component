@@ -4,8 +4,8 @@
       :key="key",
       v-for="(option, key) in options",
       :selected="selected && selected.indexOf(option.value) > -1",
-      @change="(thisIsSelected) => updateSelected(thisIsSelected, option)"
-      :error="error"
+      @change="(thisIsSelected) => updateSelected(thisIsSelected, option)",
+      :error="error",
       :disabled="disabled"
     ) {{ option.text }}
     .invalid-feedback.d-block(v-if="error") {{ error }}
@@ -27,7 +27,7 @@
       },
       selected: {
         type: Array
-      }
+      },
       disabled: false
     },
     model: {
